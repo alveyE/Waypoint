@@ -8,20 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C7219E025E003FF5DB /* AppDelegate.swift */; };
-		D1AE58CA219E025E003FF5DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C9219E025E003FF5DB /* ViewController.swift */; };
+		D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C9219E025E003FF5DB /* MapViewController.swift */; };
 		D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AE58CB219E025E003FF5DB /* Main.storyboard */; };
 		D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1AE58CE219E0262003FF5DB /* Assets.xcassets */; };
 		D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AE58D0219E0262003FF5DB /* LaunchScreen.storyboard */; };
+		D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58D9219E0F5C003FF5DB /* NoteView.swift */; };
+		D1AE58DC219E5183003FF5DB /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58DB219E5183003FF5DB /* Note.swift */; };
+		D1AE58DE219E5639003FF5DB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58DD219E5639003FF5DB /* User.swift */; };
+		D1AE58E0219E5A49003FF5DB /* NoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58DF219E5A49003FF5DB /* NoteManager.swift */; };
+		D1AE58E2219E6C39003FF5DB /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E1219E6C39003FF5DB /* ARViewController.swift */; };
+		D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */; };
+		D1AE58E6219F8D27003FF5DB /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E5219F8D27003FF5DB /* Server.swift */; };
+		D1AE58F021ACE350003FF5DB /* newyork.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D1AE58EF21ACE34F003FF5DB /* newyork.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D1AE58C4219E025E003FF5DB /* Bulletin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bulletin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AE58C7219E025E003FF5DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D1AE58C9219E025E003FF5DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D1AE58C9219E025E003FF5DB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D1AE58CC219E025E003FF5DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D1AE58CE219E0262003FF5DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D1AE58D1219E0262003FF5DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D1AE58D3219E0262003FF5DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1AE58D9219E0F5C003FF5DB /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
+		D1AE58DB219E5183003FF5DB /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		D1AE58DD219E5639003FF5DB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D1AE58DF219E5A49003FF5DB /* NoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManager.swift; sourceTree = "<group>"; };
+		D1AE58E1219E6C39003FF5DB /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
+		D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
+		D1AE58E5219F8D27003FF5DB /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		D1AE58EF21ACE34F003FF5DB /* newyork.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = newyork.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +71,19 @@
 			isa = PBXGroup;
 			children = (
 				D1AE58C7219E025E003FF5DB /* AppDelegate.swift */,
-				D1AE58C9219E025E003FF5DB /* ViewController.swift */,
+				D1AE58C9219E025E003FF5DB /* MapViewController.swift */,
 				D1AE58CB219E025E003FF5DB /* Main.storyboard */,
 				D1AE58CE219E0262003FF5DB /* Assets.xcassets */,
 				D1AE58D0219E0262003FF5DB /* LaunchScreen.storyboard */,
 				D1AE58D3219E0262003FF5DB /* Info.plist */,
+				D1AE58DF219E5A49003FF5DB /* NoteManager.swift */,
+				D1AE58EF21ACE34F003FF5DB /* newyork.jpeg */,
+				D1AE58D9219E0F5C003FF5DB /* NoteView.swift */,
+				D1AE58DB219E5183003FF5DB /* Note.swift */,
+				D1AE58DD219E5639003FF5DB /* User.swift */,
+				D1AE58E1219E6C39003FF5DB /* ARViewController.swift */,
+				D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */,
+				D1AE58E5219F8D27003FF5DB /* Server.swift */,
 			);
 			path = Bulletin;
 			sourceTree = "<group>";
@@ -125,6 +149,7 @@
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
 				D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */,
+				D1AE58F021ACE350003FF5DB /* newyork.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +160,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1AE58CA219E025E003FF5DB /* ViewController.swift in Sources */,
+				D1AE58E2219E6C39003FF5DB /* ARViewController.swift in Sources */,
+				D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */,
+				D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */,
 				D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */,
+				D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */,
+				D1AE58E0219E5A49003FF5DB /* NoteManager.swift in Sources */,
+				D1AE58DE219E5639003FF5DB /* User.swift in Sources */,
+				D1AE58E6219F8D27003FF5DB /* Server.swift in Sources */,
+				D1AE58DC219E5183003FF5DB /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

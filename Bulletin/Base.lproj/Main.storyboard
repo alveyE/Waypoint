@@ -1,24 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n0K-SW-KVl">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Item 2-->
+        <scene sceneID="zpY-jk-lMd">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="lGb-1Q-gSi" customClass="ARViewController" customModule="Bulletin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Oni-Ix-npp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UWd-HM-Pzh">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </arscnView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="IEb-7Z-GOA"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="v5g-AQ-QAg"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FrG-dX-8jm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-300" y="-34.632683658170919"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="a93-Aa-rPD">
+            <objects>
+                <viewController id="XRD-5r-4JA" customClass="CreateNoteViewController" customModule="Bulletin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ffe-dt-6xy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vAk-0S-f7o" customClass="NoteView" customModule="Bulletin" customModuleProvider="target">
+                                <rect key="frame" x="61" y="68" width="253" height="183"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaB-GW-RWL">
+                                <rect key="frame" x="132" y="450" width="111" height="45"/>
+                                <color key="backgroundColor" red="1" green="0.87000711679999998" blue="0.29756866830000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Make Note"/>
+                                <connections>
+                                    <action selector="makeNoteTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="Gct-q6-RDC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="TaB-GW-RWL" firstAttribute="top" secondItem="y8b-iA-yyE" secondAttribute="top" constant="430" id="EIy-fT-M4C"/>
+                            <constraint firstItem="y8b-iA-yyE" firstAttribute="trailing" secondItem="TaB-GW-RWL" secondAttribute="trailing" constant="132" id="gkr-KY-ZFH"/>
+                            <constraint firstItem="y8b-iA-yyE" firstAttribute="bottom" secondItem="TaB-GW-RWL" secondAttribute="bottom" constant="123" id="kz3-aO-aAE"/>
+                            <constraint firstItem="TaB-GW-RWL" firstAttribute="leading" secondItem="y8b-iA-yyE" secondAttribute="leading" constant="132" id="trX-ha-7C2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="y8b-iA-yyE"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="NfJ-E4-mCE"/>
+                    <connections>
+                        <outlet property="mainView" destination="Ffe-dt-6xy" id="SZO-FE-C7O"/>
+                        <outlet property="makeNote" destination="TaB-GW-RWL" id="9Qg-UX-VbF"/>
+                        <outlet property="noteView" destination="vAk-0S-f7o" id="ih9-O6-Chy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xwp-bk-Etc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-266.39999999999998" y="690.40479760119945"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="6J3-Jz-N6V">
+            <objects>
+                <viewController id="Kuo-ij-o0E" customClass="MapViewController" customModule="Bulletin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yxh-hQ-S40">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="LgW-eA-R6b"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="Lqa-ER-R75"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tl9-3Q-x8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-159.19999999999999" y="-714.69265367316348"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="35D-4J-Q0d">
+            <objects>
+                <tabBarController id="n0K-SW-KVl" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="L0g-ra-VFM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Kuo-ij-o0E" kind="relationship" relationship="viewControllers" id="72G-HX-cJH"/>
+                        <segue destination="lGb-1Q-gSi" kind="relationship" relationship="viewControllers" id="FY7-Ma-Rm4"/>
+                        <segue destination="XRD-5r-4JA" kind="relationship" relationship="viewControllers" id="0H2-lh-AuF"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CuJ-Oq-83I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1250" y="-366"/>
         </scene>
     </scenes>
 </document>
