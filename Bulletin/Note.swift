@@ -8,42 +8,65 @@
 
 import Foundation
 
-public struct Note {
+public struct Note : Decodable{
+    
+    
+    
     
     var text: String?
     var images: [String]
-    var link: (text: String?, url: String)?
+    var linkText: String?
+    var linkURL: String?
     var AREnabled = false
     let creator: User
     var timeLeft: Int?
-    let location: (latitude: Double, longitude: Double)
+    let latitude: Double
+    let longitude: Double
     
     
     
     enum Catagory{
         case info, emergency, safety, helpful
     }
-
+    
     init(text: String?,images: [String],link: (text: String?, url: String)?,AREnabled: Bool,creator: User, timeLeft: Int, location: (latitude: Double, longitude: Double)){
         self.text = text
         self.images = images
-        self.link = link
+        if link != nil {
+        linkText = link?.text
+        linkURL = link?.url
+        }else {
+            linkText = nil
+            linkURL = nil
+        }
         self.AREnabled = AREnabled
         self.creator = creator
         self.timeLeft = timeLeft
-        self.location = location
+        latitude = location.latitude
+        longitude = location.longitude
     }
     
-    init(){
-        text = nil
-        images = []
-        link = nil
-        creator = User(username: "",password: "",id: 0)
-        timeLeft = nil
-        location = (0,0)
+        init(){
+            text = nil
+            images = []
+            linkText = nil
+            linkURL = nil
+            creator = User(username: "",password: "",id: 0)
+            timeLeft = nil
+            latitude = 0
+            longitude = 0
     }
+    
+    
+    
+    
+   
     
     
     
     
 }
+
+
+
+

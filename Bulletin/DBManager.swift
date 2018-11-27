@@ -8,16 +8,12 @@
 
 import Foundation
 
-struct DBNoteData : Decodable {
-    var noteID : Int
-    var noteLatitude : Double
-    var noteLongitude : Double
-    var noteContent : String
-    var noteCreationDate : String
-    var noteCreationTime : String
-}
 
-class DecodeData {
+class DatabaseFetcher {
+    
+    
+    var noteData = [Note]()
+    
     
     init(){
         
@@ -36,7 +32,7 @@ class DecodeData {
             }
             
             do {
-                let noteData = try JSONDecoder().decode([DBNoteData].self, from: data)
+                 self.noteData = try JSONDecoder().decode([Note].self, from: data)
                 // do something w note data
                 
             } catch _ {
@@ -47,5 +43,10 @@ class DecodeData {
             }.resume()
         
     }
+    
+    public func getNote(at index: Int) -> Note{
+        return noteData[index]
+    }
+    
 }
 

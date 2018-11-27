@@ -22,7 +22,7 @@ struct NoteManager {
         
         // Get amount of Notes from server (for now it will keep all info on device)
         for note in Server.notes {
-            noteLocations.append(note.location)
+            noteLocations.append((note.latitude, note.longitude))
         }
         
         
@@ -30,7 +30,8 @@ struct NoteManager {
     
     
     public func loadNote(at index: Int) -> Note{
-        return Server.notes[index]
+        let database = DatabaseFetcher()
+        return database.getNote(at: index)
     }
     
     
