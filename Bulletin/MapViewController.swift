@@ -130,12 +130,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         print("Error \(error)")
     }
     
+//
+//          CARS THIS THE FUNCTION FOR TAPPING ON ANNOTATIONS
+//
+//
+//         WHERE IT SAYS add Note qualities to NoteView thats where note stuff happens
+    
+    
+//
+//
+//
+//
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
       
         if let coordinates = view.annotation?.coordinate {
             let noteManager = NoteManager()
             for index in noteManager.noteLocations.indices {
                 if coordinates.latitude == noteManager.noteLocations[index].latitude, coordinates.longitude == noteManager.noteLocations[index].longitude {
+                    
+                    
+                    //THIS LOADED NOTE needs to be the note from server CHECK NOTE MANAGER to see how its doin it rn
                      let loadedNote = noteManager.loadNote(at: index)
                    
                     //Add Note qualities to NoteView
@@ -149,11 +163,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                             note.addImage(downloadedImage)
                         }
                     }
-                    if let link = loadedNote.link {
-                        if let linkText = link.text {
-                            note.addLink(text: linkText, url: link.url)
+                    if let link = loadedNote.linkURL {
+                        if let linkText = loadedNote.linkText {
+                            note.addLink(text: linkText, url: link)
                         }else{
-                            note.addLink(text: link.url, url: link.url)
+                            note.addLink(text: link, url: link)
                         }
                     }
                     
