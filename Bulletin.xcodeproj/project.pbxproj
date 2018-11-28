@@ -20,7 +20,6 @@
 		D1AE58E2219E6C39003FF5DB /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E1219E6C39003FF5DB /* ARViewController.swift */; };
 		D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */; };
 		D1AE58E6219F8D27003FF5DB /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E5219F8D27003FF5DB /* Server.swift */; };
-		D1AE58F021ACE350003FF5DB /* newyork.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D1AE58EF21ACE34F003FF5DB /* newyork.jpeg */; };
 		D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58F321ADD967003FF5DB /* NoteCreator.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +39,6 @@
 		D1AE58E1219E6C39003FF5DB /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
 		D1AE58E5219F8D27003FF5DB /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
-		D1AE58EF21ACE34F003FF5DB /* newyork.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = newyork.jpeg; sourceTree = "<group>"; };
 		D1AE58F321ADD967003FF5DB /* NoteCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCreator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,7 +79,6 @@
 				D1AE58D0219E0262003FF5DB /* LaunchScreen.storyboard */,
 				D1AE58D3219E0262003FF5DB /* Info.plist */,
 				D1AE58DF219E5A49003FF5DB /* NoteManager.swift */,
-				D1AE58EF21ACE34F003FF5DB /* newyork.jpeg */,
 				D1AE58D9219E0F5C003FF5DB /* NoteView.swift */,
 				D1AE58DB219E5183003FF5DB /* Note.swift */,
 				D1AE58DD219E5639003FF5DB /* User.swift */,
@@ -155,7 +152,6 @@
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
 				D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */,
-				D1AE58F021ACE350003FF5DB /* newyork.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 import Foundation
 
 
-class DBManager {
+class DBManager  {
     
     
     var noteData = [Note]()
@@ -69,7 +69,7 @@ class DBManager {
         
         
     }
-    
+    //fugure out how to send to the server
     func uploadPin(_ note : Note) {
         
         let DBurl = "our database url"
