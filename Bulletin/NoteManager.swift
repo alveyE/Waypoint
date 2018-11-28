@@ -24,15 +24,15 @@ struct NoteManager {
         for note in Server.notes {
             noteLocations.append((note.latitude, note.longitude))
         }
-        
+        Server.notes.append(Note(title: "", text: "Wow!", images: [], link: nil, AREnabled: false, creator: User(username: "", password: "", id: 0), timeLeft: nil, location: (latitude: 40, longitude: -73)))
         
     }
     
     
     public func loadNote(at index: Int) -> Note{
-        let database = NoteContentFetcher()
-        return database.getNote(at: index)
-    
+        let database = DBManager()
+       return database.getNote(at: index)
+        
        // return Server.notes[index]
     }
     
