@@ -9,7 +9,7 @@
 import Foundation
 
 
-class NoteContentFetcher {
+class DBManager {
     
     let DBurl = "legendtitans.org"
     var noteData = [Note]()
@@ -53,7 +53,15 @@ class NoteContentFetcher {
             
     }
     
-    //In to works
+    
+    func PinLocationFetcher() {
+        
+            
+            let DBurl = "our database url"
+            
+    }
+    
+    //In the works
     func fetchPinLocation(){
         
         
