@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Note : Decodable{
+public struct Note : Codable{
     
     
     
