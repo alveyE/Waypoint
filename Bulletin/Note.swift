@@ -12,7 +12,7 @@ public struct Note : Decodable{
     
     
     
-    
+    var title: String
     var text: String?
     var images: [String]
     var linkText: String?
@@ -29,7 +29,8 @@ public struct Note : Decodable{
         case info, emergency, safety, helpful
     }
     
-    init(text: String?,images: [String],link: (text: String?, url: String)?,AREnabled: Bool,creator: User, timeLeft: Int, location: (latitude: Double, longitude: Double)){
+    init(title: String, text: String?,images: [String],link: (text: String?, url: String)?,AREnabled: Bool,creator: User, timeLeft: Int?, location: (latitude: Double, longitude: Double)){
+        self.title = title
         self.text = text
         self.images = images
         if link != nil {
@@ -47,6 +48,7 @@ public struct Note : Decodable{
     }
     
         init(){
+            title = ""
             text = nil
             images = []
             linkText = nil

@@ -14,6 +14,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate {
     var locationManager:CLLocationManager!
     var currentLocation = CLLocation(latitude: 0, longitude: 0)
     
+    lazy var noteMaker = NoteCreator(creator: User(username: "", password: "", id: 0), latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
     
     @IBOutlet var mainView: UIView! {
         didSet{
@@ -37,9 +38,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func makeNoteTouched(_ sender: UIButton) {
         let ethanAlvey = User(username: "Ethan", password: "", id: 1)
-    
-        let noteToAdd = Note(text: noteView.textContent.text, images: [], link: nil, AREnabled: false, creator: ethanAlvey, timeLeft: 24, location: (currentLocation.coordinate.latitude,currentLocation.coordinate.longitude))
-        Server.notes.append(noteToAdd)
+        
     }
     
     
