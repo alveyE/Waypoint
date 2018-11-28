@@ -57,7 +57,6 @@ class DBManager {
     func PinLocationFetcher() {
         
             
-            let DBurl = "our database url"
             
     }
     
