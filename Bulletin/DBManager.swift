@@ -13,7 +13,7 @@ class NoteContentFetcher {
     
     
     var noteData = [Note]()
-    var createdNoteUpload = Note
+    var createdNoteUpload = Note()
     
     
     init(){
