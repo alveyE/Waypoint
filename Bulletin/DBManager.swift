@@ -13,7 +13,7 @@ class NoteContentFetcher {
     
     
     var noteData = [Note]()
-    var createdNoteUpload = Note
+    var createdNoteUpload = Note()
     
     
     init(){
@@ -72,18 +72,19 @@ class NoteContentFetcher {
         
     }
     
-    func uploadPin(_ note : Note) -> Bool {
+    func uploadPin(_ note : Note) {
         
         let DBurl = "our database url"
         
         guard let url = URL(string: DBurl) else {
+        return
         }
         
         URLSession.shared.dataTask(with: url){ (data, response, err) in
             
             //check err
             
-            guard let data = data else {
+            guard data != nil else {
                 return
             }
             
@@ -92,7 +93,6 @@ class NoteContentFetcher {
                 encoder.outputFormatting = .prettyPrinted
                 let data = try encoder.encode(note)
                 print(String(data: data, encoding: .utf8)!)
-
                 // do something w note data
                 
             } catch _ {
@@ -101,7 +101,6 @@ class NoteContentFetcher {
             
             
             }.resume()
-        
     }
     
     
