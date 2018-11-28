@@ -13,13 +13,6 @@ class NoteView: UIView {
     var width: CGFloat = 0
     var height: CGFloat = 0
     
-//    public var noteColor = #colorLiteral(red: 1, green: 0.9390159597, blue: 0.5017074679, alpha: 1) {
-//        didSet{
-//            setNeedsDisplay()
-//            setNeedsLayout()
-//        }
-//    }
-//    public var foldColor = #colorLiteral(red: 1, green: 0.8700071168, blue: 0.2975686683, alpha: 1)
     public var noteColor = #colorLiteral(red: 1, green: 0.9230569365, blue: 0.3114053169, alpha: 1) {
         didSet{
             setNeedsDisplay()
@@ -60,7 +53,7 @@ class NoteView: UIView {
 
     
     
-    lazy var textContent = UITextView(frame: CGRect(x: width/2 - (width*3/5)/2 , y: width/10, width: width * 3/5, height: height * 2/5))
+    
     
     override func draw(_ rect: CGRect) {
         // Drawing code
@@ -96,6 +89,12 @@ class NoteView: UIView {
         foldColor.setFill()
         triangleFold.fill()
         titleBar.fill()
+        
+        
+        var yPosition = width/10
+        if text != "" {
+         let textContent = UITextView(frame: CGRect(x: width/2 - (width*3/5)/2 , y: yPosition, width: width * 3/5, height: height * 2/5))
+        
         textContent.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         textContent.font = UIFont(name: "Marker Felt", size: 30)
         textContent.textAlignment = .center
@@ -106,14 +105,16 @@ class NoteView: UIView {
         }else{
         textContent.text = text
         }
-        print(textContent.text)
         textContent.textColor = textColor
         
         addSubview(textContent)
+        yPosition += textContent.frame.height + height/25
+        }
         for img in imageDisplay {
-            let displayedImage = UIImageView(frame: CGRect(x: width/2 - (img.size.width/2), y: textContent.frame.maxY + height/25, width: img.size.width, height: img.size.height))
+            let displayedImage = UIImageView(frame: CGRect(x: width/2 - (img.size.width/2), y: yPosition, width: img.size.width, height: img.size.height))
             displayedImage.image = img
             addSubview(displayedImage)
+            yPosition += displayedImage.frame.height + height/25
         }
         
     }
@@ -125,7 +126,7 @@ class NoteView: UIView {
     
     
     public func setText(to text: String){
-        textContent.text = text
+        self.text = text
     }
     
     public func addImage(_ imageAdding: UIImage){
