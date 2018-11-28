@@ -63,11 +63,12 @@ class NoteView: UIView {
         
 //        Making square missing bottom right triangle
         let outlinePath = UIBezierPath()
-        outlinePath.move(to: CGPoint(x: width, y: height))
+        outlinePath.move(to: CGPoint(x: width, y: 0))
         outlinePath.addLine(to: CGPoint(x: 0, y: 0))
         outlinePath.addLine(to: CGPoint(x: 0, y: height))
-        outlinePath.addLine(to: CGPoint(x: width - width/8, y: height))
-        outlinePath.addLine(to: CGPoint(x: width, y: height - width/8))
+        outlinePath.addLine(to: CGPoint(x: width - (width/8), y: height))
+        outlinePath.addLine(to: CGPoint(x: width, y: height - (width/8)))
+        outlinePath.close()
         
         
         
