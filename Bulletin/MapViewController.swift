@@ -55,9 +55,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func createMapView()
     {
         
-        let testNote = Note(title: "New York", text: "", images: [], link: nil, AREnabled: false, creator: User(username: "Ethan", password: "", id: 1), timeLeft: 24, location: (latitude: 42.4318, longitude: -75.1225))
-     //   let testNote = Note(text: "Woohoo! New York!", images: [], link: nil, AREnabled: false, creator: User(username: "Ethan", password: "", id: 1), timeLeft: 24, location: (latitude: 42.4318, longitude: -75.1225))
-        Server.notes.append(testNote)
+        
         
         
         

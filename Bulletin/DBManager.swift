@@ -11,14 +11,13 @@ import Foundation
 
 class NoteContentFetcher {
     
-    
+    let DBurl = "legendtitans.org"
     var noteData = [Note]()
     var createdNoteUpload = Note()
     
     
     init(){
         
-        let DBurl = "legendtitans.org"
         
         guard let url = URL(string: DBurl) else {
             return
@@ -54,27 +53,24 @@ class NoteContentFetcher {
             
     }
     
-    
-    class PinLocationFetcher {
+    //In to works
+    func fetchPinLocation(){
         
-        init() {
-            
-            let DBurl = "our database url"
-            
+        
+        
             guard let url = URL(string: DBurl) else {
                 return
             }
             
             URLSession.shared.dataTask(with: url)
             
-        }
+        
         
         
     }
     
     func uploadPin(_ note : Note) {
         
-        let DBurl = "our database url"
         
         guard let url = URL(string: DBurl) else {
         return
