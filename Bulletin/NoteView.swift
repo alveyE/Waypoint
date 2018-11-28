@@ -13,12 +13,20 @@ class NoteView: UIView {
     var width: CGFloat = 0
     var height: CGFloat = 0
     
-    public var noteColor = #colorLiteral(red: 1, green: 0.8700071168, blue: 0.2975686683, alpha: 1) {
+//    public var noteColor = #colorLiteral(red: 1, green: 0.9390159597, blue: 0.5017074679, alpha: 1) {
+//        didSet{
+//            setNeedsDisplay()
+//            setNeedsLayout()
+//        }
+//    }
+//    public var foldColor = #colorLiteral(red: 1, green: 0.8700071168, blue: 0.2975686683, alpha: 1)
+    public var noteColor = #colorLiteral(red: 1, green: 0.9230569365, blue: 0.3114053169, alpha: 1) {
         didSet{
             setNeedsDisplay()
             setNeedsLayout()
         }
     }
+    public var foldColor = #colorLiteral(red: 1, green: 0.8495431358, blue: 0.1709763357, alpha: 1)
     public var textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1) {
         didSet{
             setNeedsDisplay()
@@ -62,19 +70,32 @@ class NoteView: UIView {
         
         
 //        Making square missing bottom right triangle
+        
+        let cornerCut = width/6
+        
         let outlinePath = UIBezierPath()
         outlinePath.move(to: CGPoint(x: width, y: 0))
         outlinePath.addLine(to: CGPoint(x: 0, y: 0))
         outlinePath.addLine(to: CGPoint(x: 0, y: height))
-        outlinePath.addLine(to: CGPoint(x: width - (width/8), y: height))
-        outlinePath.addLine(to: CGPoint(x: width, y: height - (width/8)))
+        outlinePath.addLine(to: CGPoint(x: width - cornerCut, y: height))
+        outlinePath.addLine(to: CGPoint(x: width, y: height - cornerCut))
         outlinePath.close()
         
         
+        let triangleFold = UIBezierPath()
+        triangleFold.move(to: CGPoint(x: width, y: height - cornerCut))
+        triangleFold.addLine(to: CGPoint(x: width - cornerCut, y: height))
+        triangleFold.addLine(to: CGPoint(x: width - cornerCut, y: height - cornerCut))
+        triangleFold.close()
+        
+        let titleBar = UIBezierPath(rect: CGRect(x: 0, y: 0, width: width, height: height * 9/48))
         
         
         noteColor.setFill()
         outlinePath.fill()
+        foldColor.setFill()
+        triangleFold.fill()
+        titleBar.fill()
         textContent.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         textContent.font = UIFont(name: "Marker Felt", size: 30)
         textContent.textAlignment = .center

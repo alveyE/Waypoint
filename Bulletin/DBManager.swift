@@ -17,7 +17,7 @@ class DatabaseFetcher {
     
     init(){
         
-        let DBurl = "our database url"
+        let DBurl = "legendtitans.org"
         
         guard let url = URL(string: DBurl) else {
             return
@@ -45,7 +45,12 @@ class DatabaseFetcher {
     }
     
     public func getNote(at index: Int) -> Note{
+        if noteData.indices.contains(index) {
         return noteData[index]
+        }else {
+            return Note()
+        }
+            
     }
     
 }

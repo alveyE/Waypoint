@@ -74,7 +74,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let mapHeight:CGFloat = view.frame.size.height
         mapView.frame = CGRect(x: leftMargin, y: topMargin, width: mapWidth, height: mapHeight)
         
-        note.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight * 3/5)
+        note.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight * 7/10)
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         //≥note.textContent.isEditable = false
         mapView.mapType = MKMapType.standard

@@ -30,10 +30,10 @@ struct NoteManager {
     
     
     public func loadNote(at index: Int) -> Note{
-//        let database = DatabaseFetcher()
-//        return database.getNote(at: index)
+        let database = DatabaseFetcher()
+        return database.getNote(at: index)
     
-        return Server.notes[index]
+       // return Server.notes[index]
     }
     
     
