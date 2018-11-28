@@ -11,14 +11,13 @@ import Foundation
 
 class DBManager  {
     
-    
+    let DBurl = "legendtitans.org"
     var noteData = [Note]()
     var createdNoteUpload = Note()
     
     
     init(){
         
-        let DBurl = "legendtitans.org"
         
         guard let url = URL(string: DBurl) else {
             return
@@ -58,13 +57,20 @@ class DBManager  {
     func PinLocationFetcher() {
         
             
-            let DBurl = "our database url"
             
+    }
+    
+    //In the works
+    func fetchPinLocation(){
+        
+        
+        
             guard let url = URL(string: DBurl) else {
                 return
             }
             
             URLSession.shared.dataTask(with: url)
+            
         
         
         
@@ -72,7 +78,6 @@ class DBManager  {
     //fugure out how to send to the server
     func uploadPin(_ note : Note) {
         
-        let DBurl = "our database url"
         
         guard let url = URL(string: DBurl) else {
         return
