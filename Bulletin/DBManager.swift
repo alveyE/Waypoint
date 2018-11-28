@@ -9,7 +9,7 @@
 import Foundation
 
 
-class NoteContentFetcher {
+class DBManager {
     
     
     var noteData = [Note]()
@@ -55,9 +55,8 @@ class NoteContentFetcher {
     }
     
     
-    class PinLocationFetcher {
+    func PinLocationFetcher() {
         
-        init() {
             
             let DBurl = "our database url"
             
@@ -66,8 +65,7 @@ class NoteContentFetcher {
             }
             
             URLSession.shared.dataTask(with: url)
-            
-        }
+        
         
         
     }
