@@ -9,10 +9,11 @@
 import Foundation
 
 
-class DatabaseFetcher {
+class NoteContentFetcher {
     
     
     var noteData = [Note]()
+    var createdNoteUpload = Note
     
     
     init(){
@@ -47,6 +48,58 @@ class DatabaseFetcher {
     public func getNote(at index: Int) -> Note{
         return noteData[index]
     }
+    
+    
+    class PinLocationFetcher {
+        
+        init() {
+            
+            let DBurl = "our database url"
+            
+            guard let url = URL(string: DBurl) else {
+                return
+            }
+            
+            URLSession.shared.dataTask(with: url)
+            
+        }
+        
+        
+    }
+    
+    func uploadPin(_ note : Note) -> Bool {
+        
+        let DBurl = "our database url"
+        
+        guard let url = URL(string: DBurl) else {
+        }
+        
+        URLSession.shared.dataTask(with: url){ (data, response, err) in
+            
+            //check err
+            
+            guard let data = data else {
+                return
+            }
+            
+            do {
+                let encoder = JSONEncoder()
+                encoder.outputFormatting = .prettyPrinted
+                let data = try encoder.encode(note)
+                print(String(data: data, encoding: .utf8)!)
+
+                // do something w note data
+                
+            } catch _ {
+                print("Error Serializing")
+            }
+            
+            
+            }.resume()
+        
+    }
+    
+    
     
 }
 
