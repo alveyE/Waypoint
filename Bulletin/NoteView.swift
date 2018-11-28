@@ -61,7 +61,16 @@ class NoteView: UIView {
         
         
         
-        let outlinePath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: width, height: height))
+//        Making square missing bottom right triangle
+        let outlinePath = UIBezierPath()
+        outlinePath.move(to: CGPoint(x: width, y: height))
+        outlinePath.addLine(to: CGPoint(x: 0, y: 0))
+        outlinePath.addLine(to: CGPoint(x: 0, y: height))
+        outlinePath.addLine(to: CGPoint(x: width - width/8, y: height))
+        outlinePath.addLine(to: CGPoint(x: width, y: height - width/8))
+        
+        
+        
         
         noteColor.setFill()
         outlinePath.fill()
@@ -100,6 +109,9 @@ class NoteView: UIView {
     public func addImage(_ imageAdding: UIImage){
         imageDisplay.append(imageAdding)
     }
+    
+    
+    
     
     public func addLink(text: String, url: String){
         
