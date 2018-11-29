@@ -52,7 +52,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.note.alpha = 0
         },completion: {_ in})
          //   note.textContent.isEditable = true
-            note.clearNote()     
+            note.clearNote()
         }
     }
     
