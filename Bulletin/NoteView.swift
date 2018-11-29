@@ -82,14 +82,24 @@ class NoteView: UIView {
         triangleFold.close()
         
         let titleBar = UIBezierPath(rect: CGRect(x: 0, y: 0, width: width, height: height * 9/48))
+        triangleFold.append(titleBar)
+        
         
         
         noteColor.setFill()
         outlinePath.fill()
-        foldColor.setFill()
-        triangleFold.fill()
-        titleBar.fill()
+
         
+        let triangleShape = CAShapeLayer()
+        
+        triangleShape.path = triangleFold.cgPath
+        triangleShape.fillColor = foldColor.cgColor
+        triangleShape.shadowColor = UIColor.black.cgColor
+        triangleShape.shadowOpacity = 0.5
+        triangleShape.shadowOffset = CGSize.zero
+        triangleShape.shadowRadius = 5
+        
+        layer.addSublayer(triangleShape)
         
         var yPosition = width/10
         if text != "" {
@@ -159,6 +169,11 @@ class NoteView: UIView {
         attributedText = nil
         imageDisplay = []
     }
+    
+    
+    
+    
+    
  
 
 }
@@ -168,6 +183,9 @@ extension CGPoint {
         return CGPoint(x: x+dx, y: y+dy)
     }
 }
+
+
+
 
 
 extension NSMutableAttributedString {

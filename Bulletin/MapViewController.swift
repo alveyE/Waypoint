@@ -50,7 +50,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if note.alpha == 1 {
         UIView.transition(with: note, duration: 0.5, options: [.transitionCurlUp], animations: {
             self.note.alpha = 0
-            print("why tHiS haPpEnN")
         },completion: {_ in})
          //   note.textContent.isEditable = true
             note.clearNote()
