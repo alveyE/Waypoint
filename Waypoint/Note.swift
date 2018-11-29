@@ -13,6 +13,7 @@ public struct Note : Codable{
     
     
     var title: String
+    var timeStamp: String
     var text: String?
     var images: [String]
     var linkText: String?
@@ -45,6 +46,18 @@ public struct Note : Codable{
         self.timeLeft = timeLeft
         latitude = location.latitude
         longitude = location.longitude
+        
+        let date = Date()
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        let year = calendar.component(.year, from: date)
+        var hour = calendar.component(.hour, from: date)
+        if hour > 12 {
+            hour -= 12
+        }
+        let minutes = calendar.component(.minute, from: date)
+        timeStamp = "\(month)/\(day)/\(year) \(hour):\(minutes)"
     }
     
         init(){
@@ -57,6 +70,7 @@ public struct Note : Codable{
             timeLeft = nil
             latitude = 0
             longitude = 0
+            timeStamp = ""
     }
     
     
