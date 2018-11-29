@@ -1,6 +1,6 @@
 //
 //  CreateNoteViewController.swift
-//  Bulletin
+//  Waypoint
 //
 //  Created by Ethan Alvey on 11/16/18.
 //  Copyright © 2018 Ethan Alvey. All rights reserved.

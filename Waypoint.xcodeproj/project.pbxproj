@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510EFAE21ADAFE500243FA2 /* DBManager.swift */; };
+		D151E31F21AFA19600E2445B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D151E31E21AFA19600E2445B /* Default-568h@2x.png */; };
 		D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C7219E025E003FF5DB /* AppDelegate.swift */; };
 		D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C9219E025E003FF5DB /* MapViewController.swift */; };
 		D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AE58CB219E025E003FF5DB /* Main.storyboard */; };
@@ -25,7 +26,8 @@
 
 /* Begin PBXFileReference section */
 		C510EFAE21ADAFE500243FA2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
-		D1AE58C4219E025E003FF5DB /* Bulletin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bulletin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D151E31E21AFA19600E2445B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D1AE58C4219E025E003FF5DB /* Waypoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waypoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AE58C7219E025E003FF5DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1AE58C9219E025E003FF5DB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D1AE58CC219E025E003FF5DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,7 +58,8 @@
 		D1AE58BB219E025E003FF5DB = {
 			isa = PBXGroup;
 			children = (
-				D1AE58C6219E025E003FF5DB /* Bulletin */,
+				D151E31E21AFA19600E2445B /* Default-568h@2x.png */,
+				D1AE58C6219E025E003FF5DB /* Waypoint */,
 				D1AE58C5219E025E003FF5DB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,12 +67,12 @@
 		D1AE58C5219E025E003FF5DB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D1AE58C4219E025E003FF5DB /* Bulletin.app */,
+				D1AE58C4219E025E003FF5DB /* Waypoint.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D1AE58C6219E025E003FF5DB /* Bulletin */ = {
+		D1AE58C6219E025E003FF5DB /* Waypoint */ = {
 			isa = PBXGroup;
 			children = (
 				D1AE58C7219E025E003FF5DB /* AppDelegate.swift */,
@@ -88,15 +91,15 @@
 				C510EFAE21ADAFE500243FA2 /* DBManager.swift */,
 				D1AE58F321ADD967003FF5DB /* NoteCreator.swift */,
 			);
-			path = Bulletin;
+			path = Waypoint;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D1AE58C3219E025E003FF5DB /* Bulletin */ = {
+		D1AE58C3219E025E003FF5DB /* Waypoint */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D1AE58D6219E0262003FF5DB /* Build configuration list for PBXNativeTarget "Bulletin" */;
+			buildConfigurationList = D1AE58D6219E0262003FF5DB /* Build configuration list for PBXNativeTarget "Waypoint" */;
 			buildPhases = (
 				D1AE58C0219E025E003FF5DB /* Sources */,
 				D1AE58C1219E025E003FF5DB /* Frameworks */,
@@ -106,9 +109,9 @@
 			);
 			dependencies = (
 			);
-			name = Bulletin;
+			name = Waypoint;
 			productName = Bulletin;
-			productReference = D1AE58C4219E025E003FF5DB /* Bulletin.app */;
+			productReference = D1AE58C4219E025E003FF5DB /* Waypoint.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -126,7 +129,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D1AE58BF219E025E003FF5DB /* Build configuration list for PBXProject "Bulletin" */;
+			buildConfigurationList = D1AE58BF219E025E003FF5DB /* Build configuration list for PBXProject "Waypoint" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -139,7 +142,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D1AE58C3219E025E003FF5DB /* Bulletin */,
+				D1AE58C3219E025E003FF5DB /* Waypoint */,
 			);
 		};
 /* End PBXProject section */
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
+				D151E31F21AFA19600E2445B /* Default-568h@2x.png in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
 				D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */,
 			);
@@ -320,7 +324,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XJ9977MMWP;
-				INFOPLIST_FILE = Bulletin/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Waypoint/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -338,7 +342,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XJ9977MMWP;
-				INFOPLIST_FILE = Bulletin/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Waypoint/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -353,7 +357,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D1AE58BF219E025E003FF5DB /* Build configuration list for PBXProject "Bulletin" */ = {
+		D1AE58BF219E025E003FF5DB /* Build configuration list for PBXProject "Waypoint" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D1AE58D4219E0262003FF5DB /* Debug */,
@@ -362,7 +366,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D1AE58D6219E0262003FF5DB /* Build configuration list for PBXNativeTarget "Bulletin" */ = {
+		D1AE58D6219E0262003FF5DB /* Build configuration list for PBXNativeTarget "Waypoint" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D1AE58D7219E0262003FF5DB /* Debug */,

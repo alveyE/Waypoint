@@ -1,6 +1,6 @@
 //
 //  DBManager.swift
-//  Bulletin
+//  Waypoint
 //
 //  Created by -Theory- on 11/27/18.
 //  Copyright © 2018 Ethan Alvey. All rights reserved.
