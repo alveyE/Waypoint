@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510EFAE21ADAFE500243FA2 /* DBManager.swift */; };
-		D151E31F21AFA19600E2445B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D151E31E21AFA19600E2445B /* Default-568h@2x.png */; };
 		D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C7219E025E003FF5DB /* AppDelegate.swift */; };
 		D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C9219E025E003FF5DB /* MapViewController.swift */; };
 		D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AE58CB219E025E003FF5DB /* Main.storyboard */; };
@@ -26,7 +25,6 @@
 
 /* Begin PBXFileReference section */
 		C510EFAE21ADAFE500243FA2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
-		D151E31E21AFA19600E2445B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D1AE58C4219E025E003FF5DB /* Waypoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waypoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AE58C7219E025E003FF5DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1AE58C9219E025E003FF5DB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -58,7 +56,6 @@
 		D1AE58BB219E025E003FF5DB = {
 			isa = PBXGroup;
 			children = (
-				D151E31E21AFA19600E2445B /* Default-568h@2x.png */,
 				D1AE58C6219E025E003FF5DB /* Waypoint */,
 				D1AE58C5219E025E003FF5DB /* Products */,
 			);
@@ -153,7 +150,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
-				D151E31F21AFA19600E2445B /* Default-568h@2x.png in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
 				D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */,
 			);
