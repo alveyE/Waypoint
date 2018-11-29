@@ -50,7 +50,7 @@ class NoteView: UIView {
             setNeedsLayout()
         }
     }
-
+    private var hasDrawn = false;
     
     
     
@@ -89,7 +89,7 @@ class NoteView: UIView {
         noteColor.setFill()
         outlinePath.fill()
 
-        
+        if !hasDrawn {
         let triangleShape = CAShapeLayer()
         
         triangleShape.path = triangleFold.cgPath
@@ -100,7 +100,7 @@ class NoteView: UIView {
         triangleShape.shadowRadius = 5
         
         layer.addSublayer(triangleShape)
-        
+        }
         var yPosition = width/10
         if text != "" {
          let textContent = UITextView(frame: CGRect(x: width/2 - (width*3/5)/2 , y: yPosition, width: width * 3/5, height: height * 2/5))
@@ -126,7 +126,7 @@ class NoteView: UIView {
             addSubview(displayedImage)
             yPosition += displayedImage.frame.height + height/25
         }
-        
+        hasDrawn = true
     }
     
     override func layoutSubviews() {
