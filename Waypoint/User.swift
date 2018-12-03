@@ -14,7 +14,7 @@ struct  User : Codable{
     var username: String
     var password: String
     var id: Int
-    var savedNotes = [Note]()
+    var savedNotes: [Note]?
     
     init(username: String, password: String, id: Int){
         self.username = username

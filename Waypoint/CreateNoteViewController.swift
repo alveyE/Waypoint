@@ -41,8 +41,9 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate {
         let testNote = Note(title: "New York", text: "New York yeet", images: [], link: nil, AREnabled: false, creator: ethanAlvey, timeLeft: 24, location: (latitude: 42.4318, longitude: -75.1225))
         
        let database = DBManager()
-    //    database.uploadPin(testNote)
-      print(database.noteOnServer)
+        database.downloadPin()
+    
+      
         
     }
     

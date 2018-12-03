@@ -15,7 +15,7 @@ public struct Note : Codable{
     var title: String
     var timeStamp: String
     var text: String?
-    var images: [String]
+    var images: [String]?
     var linkText: String?
     var linkURL: String?
     var AREnabled = false

@@ -11,41 +11,11 @@ import Foundation
 
 class DBManager  {
     
-    let DBurl = "https://waypoint-62326.firebaseio.com/notes/.json"
+    let DBurl = "https://waypoint-62326.firebaseio.com/notes/-LSprPMglgRHmGj8m4y2.json"
     var noteData = [Note]()
     var createdNoteUpload = Note()
     var noteOnServer = Note()
     
-    init(){
-        
-        
-        guard let url = URL(string: DBurl) else {
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url){ (data, response, err) in
-            
-            //check err
-            
-            guard let data = data else {
-                return
-            }
-            
-            do {
-                self.noteOnServer = try JSONDecoder().decode(Note.self, from: data)
-                
-                
-              //   self.noteData = try JSONDecoder().decode([Note].self, from: data)
-                // do something w note data
-                
-            } catch _ {
-                print("Error Serializing")
-            }
-            
-            
-            }.resume()
-        
-    }
     
     public func getNote(at index: Int) -> Note{
         if noteData.indices.contains(index) {
@@ -57,10 +27,37 @@ class DBManager  {
     }
     
     
-    func PinLocationFetcher() {
+    func downloadPin() {
+        guard let url = URL(string: DBurl) else {
+            return
+        }
         
+        URLSession.shared.dataTask(with: url){ (data, response, err) in
+            
+            //check err
+            if let error = err {
+                print("error: \(error)")
+            }
+            print("DATA IS \(data)")
+            guard let data = data else {
+                print("No data")
+                return
+            }
+            
+            do {
+                self.noteOnServer = try JSONDecoder().decode(Note.self, from: data)
+                
+                
+                //   self.noteData = try JSONDecoder().decode([Note].self, from: data)
+                // do something w note data
+                
+            } catch{
+                print("error \(error)")
+                print("Error Serializing")
+            }
             
             
+            }.resume()
     }
     
     //In the works
@@ -78,8 +75,7 @@ class DBManager  {
         
         
     }
-    //fugure out how to send to the server
-    //Must keep variable name as "note" this is how server api identifies the object and allows for optionals
+    
     func uploadPin(_ note : Note) {
         let databaseURL = "https://waypoint-62326.firebaseio.com/notes.json"
         guard let url = URL(string: databaseURL) else {

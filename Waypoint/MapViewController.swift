@@ -160,10 +160,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     if let displayText = loadedNote.text {
                         note.text = displayText
                     }
-                    for imgURL in loadedNote.images {
+                    if let notepics = loadedNote.images{
+                    for imgURL in notepics {
                         if let downloadedImage = noteManager.loadImage(withURL: imgURL){
                             note.addImage(downloadedImage)
                         }
+                    }
                     }
                     if let link = loadedNote.linkURL {
                         if let linkText = loadedNote.linkText {
