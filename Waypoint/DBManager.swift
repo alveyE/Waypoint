@@ -11,10 +11,10 @@ import Foundation
 
 class DBManager  {
     
-    let DBurl = "legendtitans.org"
+    let DBurl = "http://localhost:3000/note"
     var noteData = [Note]()
     var createdNoteUpload = Note()
-    
+    var noteOnServer = Note()
     
     init(){
         
@@ -32,7 +32,10 @@ class DBManager  {
             }
             
             do {
-                 self.noteData = try JSONDecoder().decode([Note].self, from: data)
+                self.noteOnServer = try JSONDecoder().decode(Note.self, from: data)
+                
+                
+              //   self.noteData = try JSONDecoder().decode([Note].self, from: data)
                 // do something w note data
                 
             } catch _ {
@@ -76,10 +79,23 @@ class DBManager  {
         
     }
     //fugure out how to send to the server
+    //Must keep variable name as "note" this is how server api identifies the object and allows for optionals
     func uploadPin(_ note : Note) {
-        
+        do {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        print("DATA DATA DATA")
+            let jsonData = try encoder.encode(note)
+            
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            print(jsonString)
+        print("DATA DATA DATA")
+        }catch {
+            
+        }
         
         guard let url = URL(string: DBurl) else {
+            print("URL EROOR URL ER")
         return
         }
         
@@ -88,6 +104,7 @@ class DBManager  {
             //check err
             
             guard data != nil else {
+                print("DATA == NIL ERROR")
                 return
             }
             
@@ -95,7 +112,9 @@ class DBManager  {
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .prettyPrinted
                 let data = try encoder.encode(note)
-                print(String(data: data, encoding: .utf8)!)
+                
+                // print(String(data: data, encoding: .utf8)!)
+                print("UPLOAD UPLOAD")
                 // do something w note data
                 
             } catch _ {

@@ -21,19 +21,26 @@ struct NoteManager {
     init(){
         
         // Get amount of Notes from server (for now it will keep all info on device)
-        for note in Server.notes {
+        notes.append(loadNote(at: 0))
+        print(notes)
+        for note in notes {
             noteLocations.append((note.latitude, note.longitude))
         }
-        Server.notes.append(Note(title: "", text: "Wow!", images: [], link: nil, AREnabled: false, creator: User(username: "", password: "", id: 0), timeLeft: nil, location: (latitude: 40, longitude: -73)))
+        
+        
+        
+        
+        
         
     }
     
     
     public func loadNote(at index: Int) -> Note{
         let database = DBManager()
-       return database.getNote(at: index)
+        return database.noteOnServer
+//       return database.getNote(at: index)
         
-       // return Server.notes[index]
+      //  return Server.notes[index]
     }
     
     
