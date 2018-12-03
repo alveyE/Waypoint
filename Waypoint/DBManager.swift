@@ -11,7 +11,7 @@ import Foundation
 
 class DBManager  {
     
-    let DBurl = "http://localhost:3000/note"
+    let DBurl = "https://waypoint-62326.firebaseio.com/notes/.json"
     var noteData = [Note]()
     var createdNoteUpload = Note()
     var noteOnServer = Note()
@@ -81,48 +81,33 @@ class DBManager  {
     //fugure out how to send to the server
     //Must keep variable name as "note" this is how server api identifies the object and allows for optionals
     func uploadPin(_ note : Note) {
-        do {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        print("DATA DATA DATA")
-            let jsonData = try encoder.encode(note)
-            
-            let jsonString = String(data: jsonData, encoding: .utf8)!
-            print(jsonString)
-        print("DATA DATA DATA")
-        }catch {
-            
-        }
-        
-        guard let url = URL(string: DBurl) else {
-            print("URL EROOR URL ER")
+        let databaseURL = "https://waypoint-62326.firebaseio.com/notes.json"
+        guard let url = URL(string: databaseURL) else {
+            print("Error: Could not initialize URL")
         return
         }
         
-        URLSession.shared.dataTask(with: url){ (data, response, err) in
-            
-            //check err
-            
-            guard data != nil else {
-                print("DATA == NIL ERROR")
-                return
-            }
-            
-            do {
+        do{
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .prettyPrinted
                 let data = try encoder.encode(note)
-                
-                // print(String(data: data, encoding: .utf8)!)
-                print("UPLOAD UPLOAD")
-                // do something w note data
-                
-            } catch _ {
-                print("Error Serializing")
-            }
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.httpBody = data
             
             
+            URLSession.shared.uploadTask(with: request, from: data) { data, response, error in
+                if let error = error {
+                    print ("error: \(error)")
+                    return
+                }
             }.resume()
+            
+            
+        }catch{
+            print("Error")
+        }
+        
     }
     
     
