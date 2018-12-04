@@ -7,7 +7,8 @@
 //
 
 import Foundation
-
+import Firebase
+import FirebaseDatabase
 
 class DBManager  {
     
@@ -15,7 +16,11 @@ class DBManager  {
     var noteData = [Note]()
     var createdNoteUpload = Note()
     var noteOnServer = Note()
-    
+    var ref: DatabaseReference!
+   
+    init(){
+        ref = Database.database().reference()
+    }
     
     public func getNote(at index: Int) -> Note{
         if noteData.indices.contains(index) {
@@ -27,13 +32,13 @@ class DBManager  {
     }
     
     
-    func downloadPin() {
+    func downloadPin() -> Note {
         guard let url = URL(string: DBurl) else {
-            return
+            return self.noteOnServer
         }
-        
+        print("BEGFORE JUR")
         URLSession.shared.dataTask(with: url){ (data, response, err) in
-            
+        print("AFTEF URL")
             //check err
             if let error = err {
                 print("error: \(error)")
@@ -46,8 +51,9 @@ class DBManager  {
             
             do {
                 self.noteOnServer = try JSONDecoder().decode(Note.self, from: data)
-                
-                
+                return
+                print(self.noteOnServer)
+                print("NOTE IS ABOVE")
                 //   self.noteData = try JSONDecoder().decode([Note].self, from: data)
                 // do something w note data
                 
@@ -58,6 +64,8 @@ class DBManager  {
             
             
             }.resume()
+        return self.noteOnServer
+
     }
     
     //In the works
@@ -76,36 +84,56 @@ class DBManager  {
         
     }
     
-    func uploadPin(_ note : Note) {
-        let databaseURL = "https://waypoint-62326.firebaseio.com/notes.json"
-        guard let url = URL(string: databaseURL) else {
-            print("Error: Could not initialize URL")
-        return
-        }
+    func upload(_ note : Note){
         
-        do{
-                let encoder = JSONEncoder()
-                encoder.outputFormatting = .prettyPrinted
-                let data = try encoder.encode(note)
-                var request = URLRequest(url: url)
-                request.httpMethod = "POST"
-                request.httpBody = data
-            
-            
-            URLSession.shared.uploadTask(with: request, from: data) { data, response, error in
-                if let error = error {
-                    print ("error: \(error)")
-                    return
-                }
-            }.resume()
-            
-            
-        }catch{
-            print("Error")
-        }
+        
         
     }
     
+    
+    
+//    func uploadPin(_ note : Note) {
+//        let databaseURL = "https://waypoint-62326.firebaseio.com/notes.json"
+//        guard let url = URL(string: databaseURL) else {
+//            print("Error: Could not initialize URL")
+//        return
+//        }
+//
+//        do{
+//                let encoder = JSONEncoder()
+//                encoder.outputFormatting = .prettyPrinted
+//                let data = try encoder.encode(note)
+//                var request = URLRequest(url: url)
+//                request.httpMethod = "POST"
+//                request.httpBody = data
+//
+//
+//            URLSession.shared.uploadTask(with: request, from: data) { data, response, error in
+//                if let error = error {
+//                    print ("error: \(error)")
+//                    return
+//                }
+//            }.resume()
+//
+//
+//        }catch{
+//            print("Error")
+//        }
+//
+//    }
+//
+    
+    func uploadPin(_ note : Note){
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        do{
+        let data = try encoder.encode(note)
+        self.ref.child("notes").setValue(data)
+        }catch{
+            print("error \(error)")
+        }
+        
+    }
     
     
     

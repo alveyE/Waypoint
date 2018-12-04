@@ -12,14 +12,24 @@ class NoteView: UIView {
     
     var width: CGFloat = 0
     var height: CGFloat = 0
-    
-    public var noteColor = #colorLiteral(red: 1, green: 0.9230569365, blue: 0.3114053169, alpha: 1) {
+    // public var noteColor = #colorLiteral(red: 1, green: 0.9230569365, blue: 0.3114053169, alpha: 1)
+//    public var noteColor = UIColor(red: 1, green: 0.9230569365, blue: 0.3114053169, alpha: 1){
+//        didSet{
+//            setNeedsDisplay()
+//            setNeedsLayout()
+//        }
+//    }
+    public var noteColor = #colorLiteral(red: 1, green: 0.9230569365, blue: 0.3114053169, alpha: 1){
         didSet{
             setNeedsDisplay()
             setNeedsLayout()
         }
     }
-    public var foldColor = #colorLiteral(red: 1, green: 0.8495431358, blue: 0.1709763357, alpha: 1)
+    //public var foldColor = #colorLiteral(red: 1, green: 0.8495431358, blue: 0.1709763357, alpha: 1)
+    
+    public var foldColor: UIColor {
+        return UIColor(red: noteColor.cgColor.components![0], green: noteColor.cgColor.components![1] - 0.0735138007, blue: noteColor.cgColor.components![2] - 0.1404289812, alpha: 1)
+    }
     public var textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1) {
         didSet{
             setNeedsDisplay()

@@ -21,6 +21,8 @@ struct NoteManager {
     init(){
         
         // Get amount of Notes from server (for now it will keep all info on device)
+        
+        
         notes.append(loadNote(at: 0))
         print(notes)
         for note in notes {
@@ -36,8 +38,10 @@ struct NoteManager {
     
     
     public func loadNote(at index: Int) -> Note{
+        
         let database = DBManager()
-        return database.noteOnServer
+        return database.downloadPin()
+        
 //       return database.getNote(at: index)
         
       //  return Server.notes[index]
