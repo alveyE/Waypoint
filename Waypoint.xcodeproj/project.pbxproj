@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13E6AFCA1F837775253FB43F /* Pods_Waypoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */; };
 		C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510EFAE21ADAFE500243FA2 /* DBManager.swift */; };
 		D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C7219E025E003FF5DB /* AppDelegate.swift */; };
 		D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C9219E025E003FF5DB /* MapViewController.swift */; };
@@ -21,9 +22,14 @@
 		D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */; };
 		D1AE58E6219F8D27003FF5DB /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E5219F8D27003FF5DB /* Server.swift */; };
 		D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58F321ADD967003FF5DB /* NoteCreator.swift */; };
+		D1B648FA21B6013700B74900 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1B648F921B6013700B74900 /* GoogleService-Info.plist */; };
+		D1B648FC21B6426400B74900 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D1B648FB21B6426400B74900 /* Podfile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E3CA3D7E73EB409C301FB8A /* Pods-Waypoint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Waypoint.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Waypoint/Pods-Waypoint.debug.xcconfig"; sourceTree = "<group>"; };
+		4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Waypoint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		80CA2E99CF4C2788871EB08E /* Pods-Waypoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Waypoint.release.xcconfig"; path = "Pods/Target Support Files/Pods-Waypoint/Pods-Waypoint.release.xcconfig"; sourceTree = "<group>"; };
 		C510EFAE21ADAFE500243FA2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		D1AE58C4219E025E003FF5DB /* Waypoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waypoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AE58C7219E025E003FF5DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +46,8 @@
 		D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
 		D1AE58E5219F8D27003FF5DB /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		D1AE58F321ADD967003FF5DB /* NoteCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCreator.swift; sourceTree = "<group>"; };
+		D1B648F921B6013700B74900 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D1B648FB21B6426400B74900 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,17 +55,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13E6AFCA1F837775253FB43F /* Pods_Waypoint.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C5D9FA0307799B82A1A030D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0E3CA3D7E73EB409C301FB8A /* Pods-Waypoint.debug.xcconfig */,
+				80CA2E99CF4C2788871EB08E /* Pods-Waypoint.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C71EE452532D2C4D63DDD1A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D1AE58BB219E025E003FF5DB = {
 			isa = PBXGroup;
 			children = (
+				D1B648FB21B6426400B74900 /* Podfile */,
 				D1AE58C6219E025E003FF5DB /* Waypoint */,
 				D1AE58C5219E025E003FF5DB /* Products */,
+				7C5D9FA0307799B82A1A030D /* Pods */,
+				C71EE452532D2C4D63DDD1A0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +107,7 @@
 				D1AE58CE219E0262003FF5DB /* Assets.xcassets */,
 				D1AE58D0219E0262003FF5DB /* LaunchScreen.storyboard */,
 				D1AE58D3219E0262003FF5DB /* Info.plist */,
+				D1B648F921B6013700B74900 /* GoogleService-Info.plist */,
 				D1AE58DF219E5A49003FF5DB /* NoteManager.swift */,
 				D1AE58D9219E0F5C003FF5DB /* NoteView.swift */,
 				D1AE58DB219E5183003FF5DB /* Note.swift */,
@@ -98,9 +128,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D1AE58D6219E0262003FF5DB /* Build configuration list for PBXNativeTarget "Waypoint" */;
 			buildPhases = (
+				4B6DAA5A5D5FE6236396B449 /* [CP] Check Pods Manifest.lock */,
 				D1AE58C0219E025E003FF5DB /* Sources */,
 				D1AE58C1219E025E003FF5DB /* Frameworks */,
 				D1AE58C2219E025E003FF5DB /* Resources */,
+				0AF0E903A62C90D943B8BA31 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -149,13 +181,64 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B648FC21B6426400B74900 /* Podfile in Resources */,
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
+				D1B648FA21B6013700B74900 /* GoogleService-Info.plist in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
 				D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0AF0E903A62C90D943B8BA31 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Waypoint/Pods-Waypoint-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Waypoint/Pods-Waypoint-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4B6DAA5A5D5FE6236396B449 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Waypoint-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D1AE58C0219E025E003FF5DB /* Sources */ = {
@@ -316,6 +399,7 @@
 		};
 		D1AE58D7219E0262003FF5DB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E3CA3D7E73EB409C301FB8A /* Pods-Waypoint.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -334,6 +418,7 @@
 		};
 		D1AE58D8219E0262003FF5DB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80CA2E99CF4C2788871EB08E /* Pods-Waypoint.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
