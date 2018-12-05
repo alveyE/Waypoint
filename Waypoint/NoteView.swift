@@ -139,7 +139,7 @@ class NoteView: UIView {
         titleText.text = title
         
         let timeText = UILabel(frame: CGRect(x: width/20, y: height * 13/96, width: width - width/10, height: height * 1/24))
-        var fontTime = UIFont(name: "Marker Felt", size: 15)
+        let fontTime = UIFont(name: "Marker Felt", size: 15)
         timeText.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: fontTime!)
         timeText.text = time
         
