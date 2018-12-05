@@ -17,7 +17,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var mapView:MKMapView!
     var note:NoteView!
     var ref: DatabaseReference!
-    
+    var locations = [(latitude: Double, longitude: Double)]()
     
     public static var notes = [Note]()
     public static var locations = [(latitude: Double, longitude: Double)]()
@@ -103,7 +103,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func updatePins(){
         // Add annotations
 
-        for location in PreservedDownloads.locations {
+        for location in locations {
             
             let waypoint = MKPointAnnotation()
             waypoint.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
@@ -203,9 +203,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
-    func fetchPinLocation() -> Bool{
+    func fetchPinLocation(){
         ref = Database.database().reference()
-        var addedData = false
         let query = ref.child("notes").queryOrderedByKey()
         query.observeSingleEvent(of: .value, with: { (snapshot) in
             for case let childSnapshot as DataSnapshot in snapshot.children {
@@ -217,10 +216,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     
                     if let latitude = lat, let longitude = long {
                         let coord = (latitude: latitude, longitude: longitude)
-                        if !PreservedDownloads.locations.contains(coord) {
+                        if !self.locations.contains(coord) {
                             
-                            PreservedDownloads.locations.append((latitude: latitude, longitude: longitude))
-                            addedData = true
+                            self.locations.append((latitude: latitude, longitude: longitude))
                             self.updatePins()
                         }
                     }
@@ -234,7 +232,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         
-        return addedData
         
         
     }
