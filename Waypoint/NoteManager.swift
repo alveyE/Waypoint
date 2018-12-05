@@ -23,8 +23,10 @@ struct NoteManager {
         // Get amount of Notes from server (for now it will keep all info on device)
         
         
-        notes.append(loadNote(at: 0))
-        print(notes)
+     //   notes.append(loadNote(at: 0))
+        for note in PreservedDownloads.notes {
+            notes.append(note)
+        }
         for note in notes {
             noteLocations.append((note.latitude, note.longitude))
         }
@@ -38,19 +40,10 @@ struct NoteManager {
     
     
     public func loadNote(at index: Int) -> Note{
-        
-        let database = DBManager()
-        return database.downloadPin()
-        
-//       return database.getNote(at: index)
-        
-      //  return Server.notes[index]
+        return Note()
     }
     
     
-    public func loadImage(withURL givenURL: String) -> UIImage?{
-        return Server.images[givenURL] ?? nil
-    }
     
     
 }

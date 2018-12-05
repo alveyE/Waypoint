@@ -20,10 +20,10 @@
 		D1AE58E0219E5A49003FF5DB /* NoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58DF219E5A49003FF5DB /* NoteManager.swift */; };
 		D1AE58E2219E6C39003FF5DB /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E1219E6C39003FF5DB /* ARViewController.swift */; };
 		D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */; };
-		D1AE58E6219F8D27003FF5DB /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E5219F8D27003FF5DB /* Server.swift */; };
 		D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58F321ADD967003FF5DB /* NoteCreator.swift */; };
 		D1B648FC21B6426400B74900 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D1B648FB21B6426400B74900 /* Podfile */; };
 		D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D35D2221B7118600272F76 /* GoogleService-Info.plist */; };
+		D1D35D2721B783A700272F76 /* PreservedDownloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D35D2621B783A700272F76 /* PreservedDownloads.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,10 +44,10 @@
 		D1AE58DF219E5A49003FF5DB /* NoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManager.swift; sourceTree = "<group>"; };
 		D1AE58E1219E6C39003FF5DB /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
-		D1AE58E5219F8D27003FF5DB /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		D1AE58F321ADD967003FF5DB /* NoteCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCreator.swift; sourceTree = "<group>"; };
 		D1B648FB21B6426400B74900 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D1D35D2221B7118600272F76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D1D35D2621B783A700272F76 /* PreservedDownloads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreservedDownloads.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,9 +114,9 @@
 				D1AE58DD219E5639003FF5DB /* User.swift */,
 				D1AE58E1219E6C39003FF5DB /* ARViewController.swift */,
 				D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */,
-				D1AE58E5219F8D27003FF5DB /* Server.swift */,
 				C510EFAE21ADAFE500243FA2 /* DBManager.swift */,
 				D1AE58F321ADD967003FF5DB /* NoteCreator.swift */,
+				D1D35D2621B783A700272F76 /* PreservedDownloads.swift */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -250,13 +250,13 @@
 				D1AE58E2219E6C39003FF5DB /* ARViewController.swift in Sources */,
 				D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */,
 				D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */,
+				D1D35D2721B783A700272F76 /* PreservedDownloads.swift in Sources */,
 				D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */,
 				D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */,
 				C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */,
 				D1AE58E0219E5A49003FF5DB /* NoteManager.swift in Sources */,
 				D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */,
 				D1AE58DE219E5639003FF5DB /* User.swift in Sources */,
-				D1AE58E6219F8D27003FF5DB /* Server.swift in Sources */,
 				D1AE58DC219E5183003FF5DB /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

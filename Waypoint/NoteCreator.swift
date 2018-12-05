@@ -30,20 +30,20 @@ struct NoteCreator{
     }
     
     
-    
-    public func writeNote(){
-        let noteToWrite: Note
-        if let noteLinkURL = linkURL {
-            let note = Note(title: title, text: text, images: images, link: (text: linkText, url: noteLinkURL), AREnabled: AREnabled, creator: creator, timeLeft: timeLeft, location: (latitude: latitude, longitude: longitude))
-            noteToWrite = note
-        }else{
-            let note = Note(title: title, text: text, images: images, link: nil, AREnabled: AREnabled, creator: creator, timeLeft: timeLeft, location: (latitude: latitude, longitude: longitude))
-            noteToWrite = note
-        }
-        //Write noteToWrite
-        Server.notes.append(noteToWrite)
-        
-    }
+//    
+//    public func writeNote(){
+//        let noteToWrite: Note
+//        if let noteLinkURL = linkURL {
+//            let note = Note(title: title, timeStamp: "", text: text, images: images, linkText: "", AREnabled: AREnabled, creator: creator, timeLeft: timeLeft, location: (latitude: latitude, longitude: longitude))
+//            noteToWrite = note
+//        }else{
+//            let note = Note(title: title, timeStamp: "", text: text, images: images, link: nil, AREnabled: AREnabled, creator: creator, timeLeft: timeLeft, location: (latitude: latitude, longitude: longitude))
+//            noteToWrite = note
+//        }
+//        //Write noteToWrite
+//        Server.notes.append(noteToWrite)
+//        
+//    }
 }
 
 

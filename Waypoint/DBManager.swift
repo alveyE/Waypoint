@@ -22,13 +22,32 @@ class DBManager  {
         ref = Database.database().reference()
     }
     
-    public func getNote(at index: Int) -> Note{
-        if noteData.indices.contains(index) {
-        return noteData[index]
-        }else {
-            return Note()
-        }
+    public func getNote(withID noteID: String){
+                
+        ref.child("notes").child(noteID).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            if let value = snapshot.value as? [String : Any] {
+                
+                let title = value["title"] as? String
+                let timeStamp = value["timeStamp"] as? String
+                let text = value["text"] as? String
+                let images = value["images"] as? [String]
+                let linkText = value["linkText"] as? String
+                let linkURL = value["linkURL"] as? String
+                let AREnabled = value["AREnabled"] as? Bool
+                let creator = value["creator"] as? User
+                let timeLeft = value["timeLeft"] as? Int
+                let latitude = value["latitude"] as? Double
+                let longitude = value["longitude"] as? Double
+                let note = Note(title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images ?? [], linkText: linkText, linkURL: linkURL, AREnabled: AREnabled ?? false, creator: creator ?? User(username: "", password: "", id: 0), timeLeft: timeLeft, location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
+                PreservedDownloads.notes.append(note)
+            }
             
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        
     }
     
     
@@ -36,7 +55,6 @@ class DBManager  {
         guard let url = URL(string: DBurl) else {
             return self.noteOnServer
         }
-        print("BEGFORE JUR")
         URLSession.shared.dataTask(with: url){ (data, response, err) in
         print("AFTEF URL")
             //check err
@@ -124,11 +142,13 @@ class DBManager  {
 //
     
     func uploadPin(_ note : Note){
+        
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         do{
-        let data = try encoder.encode(note)
-        self.ref.child("notes").setValue(data)
+        let dataJSON = try encoder.encode(note)
+        let data =  try JSONSerialization.jsonObject(with: dataJSON) as? [String : Any] ?? [:]
+        self.ref.child("notes").childByAutoId().setValue(data)
         }catch{
             print("error \(error)")
         }

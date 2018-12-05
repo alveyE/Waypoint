@@ -30,23 +30,19 @@ public struct Note : Codable{
         case info, emergency, safety, helpful
     }
     
-    init(title: String, text: String?,images: [String],link: (text: String?, url: String)?,AREnabled: Bool,creator: User, timeLeft: Int?, location: (latitude: Double, longitude: Double)){
+    init(title: String, timeStamp: String, text: String?,images: [String],linkText: String?, linkURL: String? ,AREnabled: Bool,creator: User, timeLeft: Int?, location: (latitude: Double, longitude: Double)){
         self.title = title
         self.text = text
         self.images = images
-        if link != nil {
-        linkText = link?.text
-        linkURL = link?.url
-        }else {
-            linkText = nil
-            linkURL = nil
-        }
+        self.linkText = linkText
+        self.linkURL = linkURL
         self.AREnabled = AREnabled
         self.creator = creator
         self.timeLeft = timeLeft
         latitude = location.latitude
         longitude = location.longitude
         
+        if timeStamp ==  "" {
         let date = Date()
         let calendar = Calendar.current
         let month = calendar.component(.month, from: date)
@@ -57,7 +53,10 @@ public struct Note : Codable{
             hour -= 12
         }
         let minutes = calendar.component(.minute, from: date)
-        timeStamp = "\(month)/\(day)/\(year) \(hour):\(minutes)"
+        self.timeStamp = "\(month)/\(day)/\(year) \(hour):\(minutes)"
+        }else {
+            self.timeStamp = timeStamp
+        }
     }
     
         init(){

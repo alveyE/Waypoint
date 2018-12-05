@@ -38,10 +38,12 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func makeNoteTouched(_ sender: UIButton) {
         let ethanAlvey = User(username: "Ethan", password: "", id: 1)
-        let testNote = Note(title: "New York", text: "New York yeet", images: [], link: nil, AREnabled: false, creator: ethanAlvey, timeLeft: 24, location: (latitude: 42.4318, longitude: -75.1225))
+        let testNote = Note(title: "New York", timeStamp: "", text: "New York yeet", images: [], linkText: nil, linkURL: nil, AREnabled: false, creator: ethanAlvey, timeLeft: 24, location: (latitude: 42.4318, longitude: -75.1225))
         
-       let database = DBManager()
-        database.downloadPin()
+        let database = DBManager()
+        database.getNote(withID: "-LSv3MkHeZP2AumAA1LT")
+        
+        
     
       
         
