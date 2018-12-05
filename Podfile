@@ -8,4 +8,5 @@ target 'Waypoint' do
   # Pods for Waypoint
 pod 'Firebase/Core'
 pod 'Firebase/Database'
+pod 'Firebase/Storage'
 end
