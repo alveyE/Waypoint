@@ -30,7 +30,7 @@ class NoteView: UIView {
     public var foldColor: UIColor {
         return UIColor(red: noteColor.cgColor.components![0], green: noteColor.cgColor.components![1] - 0.0735138007, blue: noteColor.cgColor.components![2] - 0.1404289812, alpha: 1)
     }
-    public var textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1) {
+    public var textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1) {
         didSet{
             setNeedsDisplay()
             setNeedsLayout()
