@@ -31,9 +31,7 @@ struct NoteManager {
 //            noteLocations.append((note.latitude, note.longitude))
 //        }
 //
-        for location in PreservedDownloads.locations {
-            noteLocations.append(location)
-        }
+        
         
         
         

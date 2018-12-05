@@ -17,7 +17,6 @@
 		D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58D9219E0F5C003FF5DB /* NoteView.swift */; };
 		D1AE58DC219E5183003FF5DB /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58DB219E5183003FF5DB /* Note.swift */; };
 		D1AE58DE219E5639003FF5DB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58DD219E5639003FF5DB /* User.swift */; };
-		D1AE58E0219E5A49003FF5DB /* NoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58DF219E5A49003FF5DB /* NoteManager.swift */; };
 		D1AE58E2219E6C39003FF5DB /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E1219E6C39003FF5DB /* ARViewController.swift */; };
 		D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */; };
 		D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58F321ADD967003FF5DB /* NoteCreator.swift */; };
@@ -40,7 +39,6 @@
 		D1AE58D9219E0F5C003FF5DB /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		D1AE58DB219E5183003FF5DB /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		D1AE58DD219E5639003FF5DB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		D1AE58DF219E5A49003FF5DB /* NoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManager.swift; sourceTree = "<group>"; };
 		D1AE58E1219E6C39003FF5DB /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
 		D1AE58F321ADD967003FF5DB /* NoteCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCreator.swift; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 				D1AE58D0219E0262003FF5DB /* LaunchScreen.storyboard */,
 				D1AE58D3219E0262003FF5DB /* Info.plist */,
 				D1D35D2221B7118600272F76 /* GoogleService-Info.plist */,
-				D1AE58DF219E5A49003FF5DB /* NoteManager.swift */,
 				D1AE58D9219E0F5C003FF5DB /* NoteView.swift */,
 				D1AE58DB219E5183003FF5DB /* Note.swift */,
 				D1AE58DD219E5639003FF5DB /* User.swift */,
@@ -250,7 +247,6 @@
 				D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */,
 				D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */,
 				C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */,
-				D1AE58E0219E5A49003FF5DB /* NoteManager.swift in Sources */,
 				D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */,
 				D1AE58DE219E5639003FF5DB /* User.swift in Sources */,
 				D1AE58DC219E5183003FF5DB /* Note.swift in Sources */,

@@ -38,10 +38,17 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func makeNoteTouched(_ sender: UIButton) {
         let ethanAlvey = User(username: "Ethan", password: "", id: 1)
-        let testNote = Note(title: "New York", timeStamp: "", text: "New York yeet", images: [], linkText: nil, linkURL: nil, AREnabled: false, creator: ethanAlvey, timeLeft: 24, location: (latitude: 42.4318, longitude: -75.1225))
+        let testNote = Note(title: "Georgia", timeStamp: "", text: "Gerorgia", images: [], linkText: nil, linkURL: nil, AREnabled: false, creator: ethanAlvey, timeLeft: 24, location: (latitude: 33.7152, longitude: -84.2552))
+        let testNote1 = Note(title: "Texas", timeStamp: "", text: "Texas", images: [], linkText: nil, linkURL: nil, AREnabled: false, creator: ethanAlvey, timeLeft: 24, location: (latitude: 32.3221, longitude: -99.2739))
+        let testNote2 = Note(title: "Brazil", timeStamp: "", text: "Brazil", images: [], linkText: nil, linkURL: nil, AREnabled: false, creator: ethanAlvey, timeLeft: 24, location: (latitude: -11.1418, longitude: -51.7604))
+        let testNote3 = Note(title: "Russia", timeStamp: "", text: "Russia", images: [], linkText: nil, linkURL: nil, AREnabled: false, creator: ethanAlvey, timeLeft: 24, location: (latitude: 63.4538, longitude: 113.4065))
+        
         
         let database = DBManager()
-        
+        database.uploadPin(testNote)
+        database.uploadPin(testNote1)
+        database.uploadPin(testNote2)
+        database.uploadPin(testNote3)
         
     
       
