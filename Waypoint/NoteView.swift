@@ -61,7 +61,7 @@ class NoteView: UIView {
         }
     }
     private var hasDrawn = false;
-    
+
     
     
     
@@ -178,6 +178,7 @@ class NoteView: UIView {
         link = ("","")
         attributedText = nil
         imageDisplay = []
+        subviews.forEach({ $0.removeFromSuperview() })
     }
     
     
