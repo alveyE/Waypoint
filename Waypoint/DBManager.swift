@@ -50,6 +50,21 @@ class DBManager  {
         
     }
     
+    func getNote(withLocation coord: (latitude: Double, longitude: Double)){
+        let latitudeQuery = ref.child("notes").queryEqual(toValue: coord.latitude)
+        
+        latitudeQuery.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            self.getNote(withID: snapshot.key)
+            
+            }){ (error) in
+                print(error.localizedDescription)
+        }
+        
+        
+        
+    }
+    
     
     func downloadPin() -> Note {
         guard let url = URL(string: DBurl) else {
