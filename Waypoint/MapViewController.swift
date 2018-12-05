@@ -19,7 +19,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var ref: DatabaseReference!
     
     
-
+    public static var notes = [Note]()
+    public static var locations = [(latitude: Double, longitude: Double)]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,11 +102,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func updatePins(){
         // Add annotations
-      //  let noteManager = NoteManager()
-        
-        
-        print("UPDATING PINS")
-        
+
         for location in PreservedDownloads.locations {
             
             let waypoint = MKPointAnnotation()
@@ -113,7 +110,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             mapView.removeAnnotation(waypoint)
             mapView.addAnnotation(waypoint)
-            print("ANNOTATION ADDED")
         }
 
     }
@@ -161,47 +157,50 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         if let coordinates = view.annotation?.coordinate, view.annotation?.title != "My Location" {
-            let noteManager = NoteManager()
-            for index in noteManager.noteLocations.indices {
-                if coordinates.latitude == noteManager.noteLocations[index].latitude, coordinates.longitude == noteManager.noteLocations[index].longitude {
+         
                     
                     
                     //THIS LOADED NOTE needs to be the note from server CHECK NOTE MANAGER to see how its doin it rn
-                     let loadedNote = noteManager.loadNote(at: index)
-                   
+                    
+                    getNote(withLocation: (latitude: coordinates.latitude, longitude: coordinates.longitude))
                     //Add Note qualities to NoteView
                     
                     
-                    if let displayText = loadedNote.text {
-                        note.text = displayText
-                    }
-                    if let notepics = loadedNote.images{
-                    for imgURL in notepics {
-//                        if let downloadedImage = noteManager.loadImage(withURL: imgURL){
-//                            note.addImage(downloadedImage)
-//                        }
-                    }
-                    }
-                    if let link = loadedNote.linkURL {
-                        if let linkText = loadedNote.linkText {
-                            note.addLink(text: linkText, url: link)
-                        }else{
-                            note.addLink(text: link, url: link)
-                        }
-                    }
                     
                     
-                }
-            }
+                
             
-            UIView.transition(with: note, duration: 0.5, options: [.transitionCurlDown], animations: {
-                self.note.alpha = 1
-            },completion: {_ in})
+            
+            
             //TODO: Make note textview non editable also do reverse in mapTapped()
-       
         }
+        
     }
     
+    func updateNoteView(_ loadedNote: Note){
+        note.clearNote()
+       
+        if let displayText = loadedNote.text {
+            note.text = displayText
+        }
+        if let notepics = loadedNote.images{
+            for imgURL in notepics {
+                //                        if let downloadedImage = noteManager.loadImage(withURL: imgURL){
+                //                            note.addImage(downloadedImage)
+                //                        }
+            }
+        }
+        if let link = loadedNote.linkURL {
+            if let linkText = loadedNote.linkText {
+                note.addLink(text: linkText, url: link)
+            }else{
+                note.addLink(text: link, url: link)
+            }
+        }
+        UIView.transition(with: note, duration: 0.5, options: [.transitionCurlDown], animations: {
+            self.note.alpha = 1
+        },completion: {_ in})
+    }
     
     
     func fetchPinLocation() -> Bool{
@@ -236,6 +235,55 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         return addedData
+        
+        
+    }
+    
+    
+    public func getNote(withID noteID: String){
+        ref = Database.database().reference()
+
+        ref.child("notes").child(noteID).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            if let value = snapshot.value as? [String : Any] {
+                
+                let title = value["title"] as? String
+                let timeStamp = value["timeStamp"] as? String
+                let text = value["text"] as? String
+                let images = value["images"] as? [String]
+                let linkText = value["linkText"] as? String
+                let linkURL = value["linkURL"] as? String
+                let AREnabled = value["AREnabled"] as? Bool
+                let creator = value["creator"] as? User
+                let timeLeft = value["timeLeft"] as? Int
+                let latitude = value["latitude"] as? Double
+                let longitude = value["longitude"] as? Double
+                let note = Note(title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images ?? [], linkText: linkText, linkURL: linkURL, AREnabled: AREnabled ?? false, creator: creator ?? User(username: "", password: "", id: 0), timeLeft: timeLeft, location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
+                self.updateNoteView(note)
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        
+    }
+    
+    func getNote(withLocation coord: (latitude: Double, longitude: Double)){
+        ref = Database.database().reference()
+
+        
+        ref.child("notes").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            for case let childSnapshot as DataSnapshot in snapshot.children {
+                let childKey = childSnapshot.key
+                let latitudeQuery = self.ref.child("notes").child(childKey).queryEqual(toValue: coord.latitude)
+            self.getNote(withID: childKey)
+            }
+        }){ (error) in
+            print(error.localizedDescription)
+        }
+        
         
         
     }
