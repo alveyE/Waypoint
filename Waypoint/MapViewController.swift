@@ -291,3 +291,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
 
 
+extension Array {
+    func contains(_ element: (latitude: Double, longitude: Double)) -> Bool{
+        
+        for elem in self {
+            if let coord = elem as? (latitude: Double, longitude: Double) {
+                if coord == element {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+}
+
+
