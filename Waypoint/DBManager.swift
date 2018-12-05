@@ -87,8 +87,8 @@ class DBManager  {
     }
     
     //In the works
-    func fetchPinLocation(){
-        
+    func fetchPinLocation() -> Bool{
+        var addedData = false
         let query = ref.child("notes").queryOrderedByKey()
         query.observeSingleEvent(of: .value, with: { (snapshot) in
             for case let childSnapshot as DataSnapshot in snapshot.children {
@@ -99,8 +99,12 @@ class DBManager  {
                 let long = childData["longitude"] as? Double
 
                 if let latitude = lat, let longitude = long {
-                    
+                let coord = (latitude: latitude, longitude: longitude)
+                    if !PreservedDownloads.locations.contains(coord) {
+                
                 PreservedDownloads.locations.append((latitude: latitude, longitude: longitude))
+                    addedData = true
+                    }
                 }
                 
                 }
@@ -110,8 +114,9 @@ class DBManager  {
             print(error.localizedDescription)
         }
         
-            
         
+            
+        return addedData
         
         
     }
@@ -124,36 +129,7 @@ class DBManager  {
     
     
     
-//    func uploadPin(_ note : Note) {
-//        let databaseURL = "https://waypoint-62326.firebaseio.com/notes.json"
-//        guard let url = URL(string: databaseURL) else {
-//            print("Error: Could not initialize URL")
-//        return
-//        }
-//
-//        do{
-//                let encoder = JSONEncoder()
-//                encoder.outputFormatting = .prettyPrinted
-//                let data = try encoder.encode(note)
-//                var request = URLRequest(url: url)
-//                request.httpMethod = "POST"
-//                request.httpBody = data
-//
-//
-//            URLSession.shared.uploadTask(with: request, from: data) { data, response, error in
-//                if let error = error {
-//                    print ("error: \(error)")
-//                    return
-//                }
-//            }.resume()
-//
-//
-//        }catch{
-//            print("Error")
-//        }
-//
-//    }
-//
+    
     
     func uploadPin(_ note : Note){
         
@@ -171,5 +147,20 @@ class DBManager  {
     
     
     
+}
+
+
+extension Array {
+    func contains(_ element: (latitude: Double, longitude: Double)) -> Bool{
+        
+        for elem in self {
+            if let coord = elem as? (latitude: Double, longitude: Double) {
+            if coord == element {
+                return true
+                }
+            }
+        }
+        return false
+    }
 }
 

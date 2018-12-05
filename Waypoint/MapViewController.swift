@@ -10,11 +10,11 @@ import UIKit
 import CoreLocation
 import MapKit
 
+
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     var locationManager:CLLocationManager!
     var mapView:MKMapView!
     var note:NoteView!
-    
 
     
     
@@ -22,8 +22,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let databaseLoader = DBManager()
-        databaseLoader.fetchPinLocation()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -36,6 +34,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewWillAppear(animated)
         
         // Create and Add MapView to our main view
+        let databaseLoader = DBManager()
+        databaseLoader.fetchPinLocation()
+        
         createMapView()
     }
     
@@ -48,7 +49,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @objc func mapTapped(){
         
-            note.endEditing(true)
+        note.endEditing(true)
         if note.alpha == 1 {
         UIView.transition(with: note, duration: 0.5, options: [.transitionCurlUp], animations: {
             self.note.alpha = 0
@@ -56,15 +57,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
          //   note.textContent.isEditable = true
             note.clearNote()
         }
+        
+       
     }
     
-    func createMapView()
-    {
-        
-        
-        
-        
-        
+    func createMapView() {
         
         mapView = MKMapView()
         mapView.delegate = self
@@ -89,16 +86,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.center = view.center
         mapView.contentMode = .scaleToFill
         
-        // Add annotations
-        let noteManager = NoteManager()
-        for location in noteManager.noteLocations {
-                let waypoint = MKPointAnnotation()
-                waypoint.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-            
-            
-                mapView.addAnnotation(waypoint)
-        }
-        
+        updatePins()
         
         
         
@@ -109,6 +97,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
       
         
        
+    }
+    
+    func updatePins(){
+        // Add annotations
+      //  let noteManager = NoteManager()
+        
+        
+        print("UPDATING PINS")
+        for location in PreservedDownloads.locations {
+            let waypoint = MKPointAnnotation()
+            waypoint.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+            
+            
+            mapView.addAnnotation(waypoint)
+            print("ANNOTATION ADDED")
+        }
+
     }
     
     func determineCurrentLocation()
@@ -122,15 +127,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             //locationManager.startUpdatingHeading()
             locationManager.startUpdatingLocation()
         }
+        
+
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        let userLocation: CLLocation = locations[0] as CLLocation
         
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
+        
         print("Error \(error)")
     }
     
@@ -147,6 +156,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 //
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
       
+        
+        
         if let coordinates = view.annotation?.coordinate {
             let noteManager = NoteManager()
             for index in noteManager.noteLocations.indices {
@@ -188,6 +199,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
        
         }
     }
+    
+    
+    
 
 
 }
