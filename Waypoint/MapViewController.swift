@@ -158,7 +158,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
       
         
         
-        if let coordinates = view.annotation?.coordinate {
+        if let coordinates = view.annotation?.coordinate, view.annotation?.title != "My Location" {
             let noteManager = NoteManager()
             for index in noteManager.noteLocations.indices {
                 if coordinates.latitude == noteManager.noteLocations[index].latitude, coordinates.longitude == noteManager.noteLocations[index].longitude {
