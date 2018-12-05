@@ -53,7 +53,7 @@ public struct Note : Codable{
             hour -= 12
         }
         let minutes = calendar.component(.minute, from: date)
-        self.timeStamp = "\(month)/\(day)/\(year) \(hour):\(minutes)"
+        self.timeStamp = "\(day)/\(month)/\(year) \(hour):\(minutes)"
         }else {
             self.timeStamp = timeStamp
         }

@@ -36,7 +36,19 @@ class NoteView: UIView {
             setNeedsLayout()
         }
     }
-    public var text = "Enter Text Here" {
+    public var text = "" {
+        didSet{
+            setNeedsDisplay()
+            setNeedsLayout()
+        }
+    }
+    public var title = "" {
+        didSet{
+            setNeedsDisplay()
+            setNeedsLayout()
+        }
+    }
+    public var time = "" {
         didSet{
             setNeedsDisplay()
             setNeedsLayout()
@@ -61,9 +73,14 @@ class NoteView: UIView {
         }
     }
     private var hasDrawn = false;
+    public var editable = false;
 
     
     
+    private lazy var yPosition = height * 10/48
+    lazy var titleText = UITextView(frame: CGRect(x: width/20, y: height/24, width: width, height: height * (7/48)))
+    
+    lazy var textContent = UITextView(frame: CGRect(x: width/2 - (width*3/5)/2 , y: yPosition, width: width * 3/5, height: height * 2/5))
     
     override func draw(_ rect: CGRect) {
         // Drawing code
@@ -111,12 +128,35 @@ class NoteView: UIView {
         
         layer.addSublayer(triangleShape)
         }
-        var yPosition = width/10
+        
+        
+        //Draw Note Elements
+        
+        var font = UIFont(name: "Marker Felt", size: 30)
+        font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font!)
+        titleText.font = font
+        titleText.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        titleText.text = title
+        
+        let timeText = UILabel(frame: CGRect(x: width/20, y: height * 13/96, width: width - width/10, height: height * 1/24))
+        var fontTime = UIFont(name: "Marker Felt", size: 15)
+        timeText.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: fontTime!)
+        timeText.text = time
+        
+        timeText.textColor = textColor
+        titleText.textColor = textColor
+        
+     
+        
+        addSubview(titleText)
+        addSubview(timeText)
+        
+        
         if text != "" {
-         let textContent = UITextView(frame: CGRect(x: width/2 - (width*3/5)/2 , y: yPosition, width: width * 3/5, height: height * 2/5))
+         
         
         textContent.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        textContent.font = UIFont(name: "Marker Felt", size: 30)
+        textContent.font = font
         textContent.textAlignment = .center
         
         
@@ -128,10 +168,21 @@ class NoteView: UIView {
         textContent.textColor = textColor
         
         addSubview(textContent)
+            if !editable {
+                textContent.allowsEditingTextAttributes = false
+                titleText.allowsEditingTextAttributes = false
+            }else {
+                textContent.allowsEditingTextAttributes = true
+                titleText.allowsEditingTextAttributes = true
+            }
         yPosition += textContent.frame.height + height/25
         }
         for img in imageDisplay {
-            let displayedImage = UIImageView(frame: CGRect(x: width/2 - (img.size.width/2), y: yPosition, width: img.size.width, height: img.size.height))
+            //let displayedImage = UIImageView(frame: CGRect(x: width/2 - (img.size.width/2), y: yPosition, width: img.size.width, height: img.size.height))
+            let spacing: CGFloat = 8
+            let adjustedWidth = width - width / spacing
+            
+            let displayedImage = UIImageView(frame: CGRect(x: width/(spacing * 2), y: yPosition, width: adjustedWidth, height: img.size.height * (adjustedWidth/img.size.width)))
             displayedImage.image = img
             addSubview(displayedImage)
             yPosition += displayedImage.frame.height + height/25
@@ -212,3 +263,7 @@ extension NSMutableAttributedString {
         return false
     }
 }
+
+
+
+

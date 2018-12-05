@@ -15,7 +15,13 @@ import FirebaseDatabase
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     var locationManager:CLLocationManager!
     var mapView:MKMapView!
-    var note:NoteView!
+    var note:NoteView! {
+        didSet {
+            let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(mapTapped))
+            swipeUp.direction = [.up]
+            note.addGestureRecognizer(swipeUp)
+        }
+    }
     var ref: DatabaseReference!
     var locations = [(latitude: Double, longitude: Double)]()
     
@@ -48,6 +54,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     @objc func mapTapped(){
+        
+        for ann in mapView.annotations {
+            mapView.deselectAnnotation(ann, animated: true)
+        }
 
         note.endEditing(true)
         if note.alpha == 1 {
@@ -77,6 +87,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         note.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight * 7/10)
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        
+        
         //≥note.textContent.isEditable = false
         mapView.mapType = MKMapType.standard
         mapView.isZoomEnabled = true
@@ -178,15 +190,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func updateNoteView(_ loadedNote: Note){
         note.clearNote()
-       
+        note.textContent.isEditable = true
+        note.titleText.isEditable = true
+
+        note.title = loadedNote.title
+        note.time = loadedNote.timeStamp
+        
+        
         if let displayText = loadedNote.text {
             note.text = displayText
         }
         if let notepics = loadedNote.images{
             for imgURL in notepics {
+                getImage(withURL: imgURL)
                 //                        if let downloadedImage = noteManager.loadImage(withURL: imgURL){
                 //                            note.addImage(downloadedImage)
                 //                        }
+                
+                
             }
         }
         if let link = loadedNote.linkURL {
@@ -199,6 +220,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         UIView.transition(with: note, duration: 0.5, options: [.transitionCurlDown], animations: {
             self.note.alpha = 1
         },completion: {_ in})
+        note.textContent.isEditable = false
+        note.titleText.isEditable = false
     }
     
     
@@ -271,8 +294,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         ref.child("notes").queryOrdered(byChild: "latitude").queryEqual(toValue: coord.latitude).observeSingleEvent(of: .value, with: { (snapshot) in
             
-            
-            
             for case let childSnapshot as DataSnapshot in snapshot.children {
                 
                 let childKey = childSnapshot.key
@@ -284,6 +305,45 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             print(error.localizedDescription)
         }
         
+        
+        
+    }
+    
+    
+    public func getImage(withURL url: String){
+        
+        let imageURL = URL(string: url)!
+        
+        // Creating a session object with the default configuration.
+        // You can read more about it here https://developer.apple.com/reference/foundation/urlsessionconfiguration
+        let session = URLSession(configuration: .default)
+        
+        // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
+        let downloadPicTask = session.dataTask(with: imageURL) { (data, response, error) in
+            // The download has finished.
+            if let e = error {
+                print("Error downloading cat picture: \(e)")
+            } else {
+                // No errors found.
+                // It would be weird if we didn't have a response, so check for that too.
+                if let res = response as? HTTPURLResponse {
+                    print("Downloaded cat picture with response code \(res.statusCode)")
+                    if let imageData = data {
+                        // Finally convert that Data into an image and do what you wish with it.
+                        if let image = UIImage(data: imageData) {
+                        self.note.addImage(image)
+                        }
+                        // Do something with your image.
+                    } else {
+                        print("Couldn't get image: Image is nil")
+                    }
+                } else {
+                    print("Couldn't get response code for some reason")
+                }
+            }
+        }
+        
+        downloadPicTask.resume()
         
         
     }
