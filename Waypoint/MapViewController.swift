@@ -48,7 +48,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     @objc func mapTapped(){
-        updatePins()
 
         note.endEditing(true)
         if note.alpha == 1 {
