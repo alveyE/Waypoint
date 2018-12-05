@@ -297,7 +297,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             for case let childSnapshot as DataSnapshot in snapshot.children {
                 
                 let childKey = childSnapshot.key
-                self.getNote(withID: childKey)
+                if childSnapshot.exists() {
+                let val = childSnapshot.value as? [String : Any] ?? [:]
+                let longitudeRetrieved = val["longitude"] as? Double
+                    if coord.longitude == longitudeRetrieved {
+                        self.getNote(withID: childKey)
+                    }
+                }
                
 
             }
