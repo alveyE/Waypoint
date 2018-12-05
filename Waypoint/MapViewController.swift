@@ -42,13 +42,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         determineCurrentLocation()
     }
     
     
     @objc func mapTapped(){
-        
+        updatePins()
+
         note.endEditing(true)
         if note.alpha == 1 {
         UIView.transition(with: note, duration: 0.5, options: [.transitionCurlUp], animations: {
@@ -105,11 +105,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         print("UPDATING PINS")
+        
         for location in PreservedDownloads.locations {
+            
             let waypoint = MKPointAnnotation()
             waypoint.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             
-            
+            mapView.removeAnnotation(waypoint)
             mapView.addAnnotation(waypoint)
             print("ANNOTATION ADDED")
         }
