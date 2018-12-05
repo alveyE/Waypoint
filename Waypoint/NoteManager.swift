@@ -24,13 +24,16 @@ struct NoteManager {
         
         
      //   notes.append(loadNote(at: 0))
-        for note in PreservedDownloads.notes {
-            notes.append(note)
+//        for note in PreservedDownloads.notes {
+//            notes.append(note)
+//        }
+//        for note in notes {
+//            noteLocations.append((note.latitude, note.longitude))
+//        }
+//
+        for location in PreservedDownloads.locations {
+            noteLocations.append(location)
         }
-        for note in notes {
-            noteLocations.append((note.latitude, note.longitude))
-        }
-        
         
         
         

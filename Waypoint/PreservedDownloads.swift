@@ -11,6 +11,7 @@ import Foundation
 
 struct PreservedDownloads {
     public static var notes = [Note]()
+    public static var locations = [(latitude: Double, longitude: Double)]()
     
     
 }

@@ -22,6 +22,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let databaseLoader = DBManager()
+        databaseLoader.fetchPinLocation()
         // Do any additional setup after loading the view, typically from a nib.
     }
     

@@ -89,13 +89,27 @@ class DBManager  {
     //In the works
     func fetchPinLocation(){
         
-        
-        
-            guard let url = URL(string: DBurl) else {
-                return
+        let query = ref.child("notes").queryOrderedByKey()
+        query.observeSingleEvent(of: .value, with: { (snapshot) in
+            for case let childSnapshot as DataSnapshot in snapshot.children {
+//                let key = childSnapshot.key
+                if let childData = childSnapshot.value as? [String : Any] {
+                
+                let lat = childData["latitude"] as? Double
+                let long = childData["longitude"] as? Double
+
+                if let latitude = lat, let longitude = long {
+                    
+                PreservedDownloads.locations.append((latitude: latitude, longitude: longitude))
+                }
+                
+                }
             }
             
-            URLSession.shared.dataTask(with: url)
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
             
         
         
