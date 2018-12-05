@@ -269,12 +269,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         ref = Database.database().reference()
 
         
-        ref.child("notes").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("notes").queryOrdered(byChild: "latitude").queryEqual(toValue: coord.latitude).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            
             
             for case let childSnapshot as DataSnapshot in snapshot.children {
+                
                 let childKey = childSnapshot.key
-                let latitudeQuery = self.ref.child("notes").child(childKey).queryEqual(toValue: coord.latitude)
-            self.getNote(withID: childKey)
+                self.getNote(withID: childKey)
+               
+
             }
         }){ (error) in
             print(error.localizedDescription)
