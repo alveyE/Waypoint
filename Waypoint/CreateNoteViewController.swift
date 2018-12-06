@@ -21,7 +21,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     var note:NoteView! {
         didSet{
             let tapped = UITapGestureRecognizer(target: self, action: #selector(disableKeyboard))
-          //  note.addGestureRecognizer(tapped)
+            note.addGestureRecognizer(tapped)
         }
     }
     
@@ -38,6 +38,8 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        determineCurrentLocation()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,9 +56,9 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     
     @IBAction func makeNoteTouched(_ sender: UIButton) {
         
-//        let picker = UIImagePickerController()
-//        picker.delegate = self
-//        present(picker, animated: true, completion: nil)
+        let picker = UIImagePickerController()
+        picker.delegate = self
+       present(picker, animated: true, completion: nil)
         
             
         
@@ -94,7 +96,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     }
     
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation: CLLocation = locations[0] as CLLocation
         currentLocation = userLocation
     }
@@ -131,21 +133,47 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     func uploadImage(_ image: UIImage?){
         let storage = Storage.storage()
         let storageRef = storage.reference()
-        let imageRef = storageRef.child("upload")
+        determineCurrentLocation()
+        
+        let date = Date()
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        let year = calendar.component(.year, from: date)
+        var hour = calendar.component(.hour, from: date)
+        if hour > 12 {
+            hour -= 12
+        }
+        let minutes = calendar.component(.minute, from: date)
+        let seconds = calendar.component(.second, from: date)
+        let nanoSeconds = calendar.component(.nanosecond, from: date)
+        let timeStamp = "\(day)\(month)\(year)\(hour):\(minutes)\(seconds)\(nanoSeconds)"
+        let locationString = "\(currentLocation.coordinate.latitude)\(currentLocation.coordinate.longitude)"
+        
+        let imageRef = storageRef.child("uploads").child(locationString).child(timeStamp)
         
         if let img = image, let data = img.jpegData(compressionQuality: 1){
             
-            let metaData = StorageMetadata()
-            metaData.contentType = "image/jpg"
-            imageRef.putData(data, metadata: metaData)
-            
+            let metaDataI = StorageMetadata()
+            metaDataI.contentType = "image/jpg"
+            imageRef.putData(data, metadata: metaDataI) { (metadata, error) in
+               
+                
                 imageRef.downloadURL { (url, error) in
                     guard let downloadURL = url else {
                         // Uh-oh, an error occurred!
+                        print("error getting download url \(String(describing: error))")
                         return
                     }
-                    print("GOT IT DD \(downloadURL)")
+
+                    let urlCreated = downloadURL.absoluteString
+                    
+                }
+                
+                
             }
+            
+            
             
         }
         
