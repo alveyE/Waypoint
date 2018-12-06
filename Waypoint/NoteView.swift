@@ -80,6 +80,8 @@ class NoteView: UIView {
     lazy var titleText = UITextView(frame: CGRect(x: width/20, y: height/24, width: width, height: height * (7/48)))
     
     lazy var textContent = UITextView(frame: CGRect(x: width/2 - (width*3/5)/2 , y: yPosition, width: width * 3/5, height: height * 2/5))
+      
+    
     
     override func draw(_ rect: CGRect) {
         // Drawing code
@@ -136,11 +138,13 @@ class NoteView: UIView {
         titleText.font = font
         titleText.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         titleText.text = title
+        print(titleText.text)
         
         let timeText = UILabel(frame: CGRect(x: width/20, y: height * 13/96, width: width - width/10, height: height * 1/24))
         let fontTime = UIFont(name: "Marker Felt", size: 15)
         timeText.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: fontTime!)
         timeText.text = time
+        
         
         timeText.textColor = textColor
         titleText.textColor = textColor
@@ -165,7 +169,7 @@ class NoteView: UIView {
         textContent.text = text
         }
         textContent.textColor = textColor
-        
+            
         addSubview(textContent)
            
         yPosition += textContent.frame.height + height/25

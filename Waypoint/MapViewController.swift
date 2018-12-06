@@ -209,7 +209,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         if let notepics = loadedNote.images{
             for imgURL in notepics {
-            //    getImage(withURL: imgURL)
+                getImage(withURL: imgURL)
                 loadImage(withPath: "upload.jpg")
                 //                        if let downloadedImage = noteManager.loadImage(withURL: imgURL){
                 //                            note.addImage(downloadedImage)

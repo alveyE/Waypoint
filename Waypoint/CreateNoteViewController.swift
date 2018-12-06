@@ -15,10 +15,13 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
 
     var locationManager:CLLocationManager!
     var currentLocation = CLLocation(latitude: 0, longitude: 0)
+
+
+    
     var note:NoteView! {
         didSet{
             let tapped = UITapGestureRecognizer(target: self, action: #selector(disableKeyboard))
-            note.addGestureRecognizer(tapped)
+          //  note.addGestureRecognizer(tapped)
         }
     }
     
@@ -39,19 +42,22 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        createNoteView()
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        createNoteView()
+
+    }
     @objc func disableKeyboard(){
         note.endEditing(true)
     }
     
     @IBAction func makeNoteTouched(_ sender: UIButton) {
         
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        present(picker, animated: true, completion: nil)
-            
+//        let picker = UIImagePickerController()
+//        picker.delegate = self
+//        present(picker, animated: true, completion: nil)
+        
             
         
     }
@@ -95,26 +101,30 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     
     private func createNoteView(){
         
+        
+        
+        
+        
+        
         note = NoteView()
+    
+        
+      
         
         let noteWidth:CGFloat = view.frame.size.width
         let noteHeight:CGFloat = view.frame.size.height
         note.frame = CGRect(x: 0, y: 0, width: noteWidth, height: noteHeight * 7/10)
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
 
-        view.addSubview(note)
-        note.clearNote()
-        note.textContent.isEditable = true
-        note.titleText.isEditable = true
         note.title = "Enter title"
-        print(note.title)
         note.text = "Enter text here"
+        
+        view.addSubview(note)
+     
+  
     }
     
-    private func updateNoteView(){
-        
-        
-    }
+
     
     
     
