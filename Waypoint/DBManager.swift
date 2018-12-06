@@ -10,11 +10,11 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 import FirebaseStorage
+import UIKit
 
 class DBManager  {
 
     var ref: DatabaseReference!
-    let storage = Storage.storage()
     init(){
         ref = Database.database().reference()
     }
@@ -38,10 +38,7 @@ class DBManager  {
     
     
    
-    func uploadImage(){
-       //  let storageRef = storage.reference()
-        
-    }
+    
     
     
     

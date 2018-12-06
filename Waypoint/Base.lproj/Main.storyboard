@@ -12,7 +12,7 @@
         <!--Item 2-->
         <scene sceneID="zpY-jk-lMd">
             <objects>
-                <viewController id="lGb-1Q-gSi" customClass="ARViewController" customModule="Bulletin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lGb-1Q-gSi" customClass="ARViewController" customModule="Waypoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oni-Ix-npp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,16 +34,11 @@
         <!--Item-->
         <scene sceneID="a93-Aa-rPD">
             <objects>
-                <viewController id="XRD-5r-4JA" customClass="CreateNoteViewController" customModule="Bulletin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XRD-5r-4JA" customClass="CreateNoteViewController" customModule="Waypoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ffe-dt-6xy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vAk-0S-f7o" customClass="NoteView" customModule="Bulletin" customModuleProvider="target">
-                                <rect key="frame" x="61" y="68" width="253" height="183"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaB-GW-RWL">
                                 <rect key="frame" x="132" y="450" width="111" height="45"/>
                                 <color key="backgroundColor" red="1" green="0.87000711679999998" blue="0.29756866830000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -53,7 +48,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.93901595968779694" blue="0.50170746787403364" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.79614361702127656" green="0.52697480122217755" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="TaB-GW-RWL" firstAttribute="top" secondItem="y8b-iA-yyE" secondAttribute="top" constant="430" id="EIy-fT-M4C"/>
                             <constraint firstItem="y8b-iA-yyE" firstAttribute="trailing" secondItem="TaB-GW-RWL" secondAttribute="trailing" constant="132" id="gkr-KY-ZFH"/>
@@ -66,7 +61,6 @@
                     <connections>
                         <outlet property="mainView" destination="Ffe-dt-6xy" id="SZO-FE-C7O"/>
                         <outlet property="makeNote" destination="TaB-GW-RWL" id="9Qg-UX-VbF"/>
-                        <outlet property="noteView" destination="vAk-0S-f7o" id="ih9-O6-Chy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xwp-bk-Etc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -76,7 +70,7 @@
         <!--Item 1-->
         <scene sceneID="6J3-Jz-N6V">
             <objects>
-                <viewController id="Kuo-ij-o0E" customClass="MapViewController" customModule="Bulletin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Kuo-ij-o0E" customClass="MapViewController" customModule="Waypoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yxh-hQ-S40">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -8,13 +8,16 @@
 
 import UIKit
 import CoreLocation
+import FirebaseStorage
 
-class CreateNoteViewController: UIViewController, CLLocationManagerDelegate {
+
+class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var locationManager:CLLocationManager!
     var currentLocation = CLLocation(latitude: 0, longitude: 0)
+    var note:NoteView!
     
-    lazy var noteMaker = NoteCreator(creator: User(username: "", password: "", id: 0), latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+    
     
     @IBOutlet var mainView: UIView! {
         didSet{
@@ -37,22 +40,29 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func makeNoteTouched(_ sender: UIButton) {
-        let ethanAlvey = User(username: "Ethan", password: "", id: 1)
-        let testNote = Note(title: "Georgia", timeStamp: "", text: "Gerorgia", images: [], linkText: nil, linkURL: nil, AREnabled: false, creator: ethanAlvey, timeLeft: 24, location: (latitude: 33.7152, longitude: -84.2552))
-        let testNote1 = Note(title: "Texas", timeStamp: "", text: "Texas", images: [], linkText: nil, linkURL: nil, AREnabled: false, creator: ethanAlvey, timeLeft: 24, location: (latitude: 32.3221, longitude: -99.2739))
-        let testNote2 = Note(title: "Brazil", timeStamp: "", text: "Brazil", images: [], linkText: nil, linkURL: nil, AREnabled: false, creator: ethanAlvey, timeLeft: 24, location: (latitude: -11.1418, longitude: -51.7604))
-        let testNote3 = Note(title: "Russia", timeStamp: "", text: "Russia", images: ["https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg"], linkText: nil, linkURL: nil, AREnabled: false, creator: ethanAlvey, timeLeft: 24, location: (latitude: 63.4538, longitude: 113.4065))
         
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
+            
+            
         
-        let database = DBManager()
-        database.uploadPin(testNote)
-        database.uploadPin(testNote1)
-        database.uploadPin(testNote2)
-        database.uploadPin(testNote3)
-        
+    }
     
-      
-        
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print("canceled picker")
+        dismiss(animated: true, completion: nil)
+    }
+    
+  
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+        guard let selectedImage = info[.originalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        uploadImage(selectedImage)
+        dismiss(animated: true, completion: nil)
     }
     
     
@@ -74,6 +84,32 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation: CLLocation = locations[0] as CLLocation
         currentLocation = userLocation
+    }
+    
+    private func createNoteView(){
+        let noteWidth:CGFloat = view.frame.size.width
+        let noteHeight:CGFloat = view.frame.size.height
+        note.frame = CGRect(x: 0, y: 0, width: noteWidth, height: noteHeight * 7/10)
+        note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        
+    }
+    
+    private func updateNoteView(){
+        
+        
+    }
+    
+    
+    
+    func uploadImage(_ image: UIImage){
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let imageRef = storageRef.child("images")
+        
+        if let data: Data = image.pngData() {
+            imageRef.putData(data, metadata: nil)
+        }
+        
     }
     
 
