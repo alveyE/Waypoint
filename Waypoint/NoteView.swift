@@ -73,7 +73,6 @@ class NoteView: UIView {
         }
     }
     private var hasDrawn = false;
-    public var editable = false;
 
     
     
@@ -168,13 +167,7 @@ class NoteView: UIView {
         textContent.textColor = textColor
         
         addSubview(textContent)
-            if !editable {
-                textContent.allowsEditingTextAttributes = false
-                titleText.allowsEditingTextAttributes = false
-            }else {
-                textContent.allowsEditingTextAttributes = true
-                titleText.allowsEditingTextAttributes = true
-            }
+           
         yPosition += textContent.frame.height + height/25
         }
         for img in imageDisplay {

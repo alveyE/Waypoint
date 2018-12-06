@@ -11,6 +11,7 @@ import CoreLocation
 import MapKit
 import Firebase
 import FirebaseDatabase
+import FirebaseUI
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     var locationManager:CLLocationManager!
@@ -88,8 +89,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         note.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight * 7/10)
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         
-        
-        //≥note.textContent.isEditable = false
         mapView.mapType = MKMapType.standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
@@ -188,6 +187,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        view.subviews.forEach({ $0.removeFromSuperview() })
+        
+        createMapView()
+        
+    }
+    
     func updateNoteView(_ loadedNote: Note){
         note.clearNote()
         note.textContent.isEditable = true
@@ -202,7 +209,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         if let notepics = loadedNote.images{
             for imgURL in notepics {
-                getImage(withURL: imgURL)
+            //    getImage(withURL: imgURL)
+                loadImage(withPath: "upload.jpg")
                 //                        if let downloadedImage = noteManager.loadImage(withURL: imgURL){
                 //                            note.addImage(downloadedImage)
                 //                        }
@@ -315,9 +323,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    func loadImage(withPath path: String){
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let reference = storageRef.child("images/stars.jpg")
+
+        let imageView: UIImageView = UIImageView()
+        let placeholderImage = UIImage(named: "placeholder.jpg")
+        
+        imageView.sd_setImage(with: reference, placeholderImage: placeholderImage)
+        if let imagePlain = imageView.image {
+        note.addImage(imagePlain)
+        }
+        
+    }
     
     public func getImage(withURL url: String){
-        
+        print("Getting image \(url)")
         let imageURL = URL(string: url)!
         
         // Creating a session object with the default configuration.

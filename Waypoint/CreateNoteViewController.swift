@@ -15,7 +15,12 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
 
     var locationManager:CLLocationManager!
     var currentLocation = CLLocation(latitude: 0, longitude: 0)
-    var note:NoteView!
+    var note:NoteView! {
+        didSet{
+            let tapped = UITapGestureRecognizer(target: self, action: #selector(disableKeyboard))
+            note.addGestureRecognizer(tapped)
+        }
+    }
     
     
     
@@ -27,16 +32,18 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     }
     @IBOutlet weak var makeNote: UIButton!
     
-    @IBOutlet weak var noteView: NoteView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        determineCurrentLocation()
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        createNoteView()
     }
     
     @objc func disableKeyboard(){
-        noteView.endEditing(true)
+        note.endEditing(true)
     }
     
     @IBAction func makeNoteTouched(_ sender: UIButton) {
@@ -87,11 +94,21 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     }
     
     private func createNoteView(){
+        
+        note = NoteView()
+        
         let noteWidth:CGFloat = view.frame.size.width
         let noteHeight:CGFloat = view.frame.size.height
         note.frame = CGRect(x: 0, y: 0, width: noteWidth, height: noteHeight * 7/10)
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        
+
+        view.addSubview(note)
+        note.clearNote()
+        note.textContent.isEditable = true
+        note.titleText.isEditable = true
+        note.title = "Enter title"
+        print(note.title)
+        note.text = "Enter text here"
     }
     
     private func updateNoteView(){
@@ -101,13 +118,25 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     
     
     
-    func uploadImage(_ image: UIImage){
+    func uploadImage(_ image: UIImage?){
         let storage = Storage.storage()
         let storageRef = storage.reference()
-        let imageRef = storageRef.child("images")
+        let imageRef = storageRef.child("upload")
         
-        if let data: Data = image.pngData() {
-            imageRef.putData(data, metadata: nil)
+        if let img = image, let data = img.jpegData(compressionQuality: 1){
+            
+            let metaData = StorageMetadata()
+            metaData.contentType = "image/jpg"
+            imageRef.putData(data, metadata: metaData)
+            
+                imageRef.downloadURL { (url, error) in
+                    guard let downloadURL = url else {
+                        // Uh-oh, an error occurred!
+                        return
+                    }
+                    print("GOT IT DD \(downloadURL)")
+            }
+            
         }
         
     }

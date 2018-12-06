@@ -39,20 +39,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaB-GW-RWL">
-                                <rect key="frame" x="132" y="450" width="111" height="45"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaB-GW-RWL">
+                                <rect key="frame" x="132" y="555" width="111" height="36"/>
                                 <color key="backgroundColor" red="1" green="0.87000711679999998" blue="0.29756866830000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Make Note"/>
                                 <connections>
                                     <action selector="makeNoteTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="Gct-q6-RDC"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wGc-4l-l1y">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.79614361702127656" green="0.52697480122217755" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="TaB-GW-RWL" firstAttribute="top" secondItem="y8b-iA-yyE" secondAttribute="top" constant="430" id="EIy-fT-M4C"/>
+                            <constraint firstItem="TaB-GW-RWL" firstAttribute="top" secondItem="y8b-iA-yyE" secondAttribute="top" constant="535" id="JDZ-kP-j5t"/>
                             <constraint firstItem="y8b-iA-yyE" firstAttribute="trailing" secondItem="TaB-GW-RWL" secondAttribute="trailing" constant="132" id="gkr-KY-ZFH"/>
-                            <constraint firstItem="y8b-iA-yyE" firstAttribute="bottom" secondItem="TaB-GW-RWL" secondAttribute="bottom" constant="123" id="kz3-aO-aAE"/>
                             <constraint firstItem="TaB-GW-RWL" firstAttribute="leading" secondItem="y8b-iA-yyE" secondAttribute="leading" constant="132" id="trX-ha-7C2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="y8b-iA-yyE"/>
