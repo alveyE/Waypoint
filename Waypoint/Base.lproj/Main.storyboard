@@ -33,32 +33,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaB-GW-RWL">
-                                <rect key="frame" x="132" y="555" width="111" height="36"/>
-                                <color key="backgroundColor" red="1" green="0.87000711679999998" blue="0.29756866830000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Make Note"/>
-                                <connections>
-                                    <action selector="makeNoteTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="Gct-q6-RDC"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wGc-4l-l1y">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="W3A-NN-ViM">
+                                <rect key="frame" x="73" y="569" width="228" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaB-GW-RWL">
+                                        <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
+                                        <color key="backgroundColor" red="1" green="0.87000711679999998" blue="0.29756866830000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Image"/>
+                                        <connections>
+                                            <action selector="chooseImageTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="Gct-q6-RDC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmo-3a-FOA">
+                                        <rect key="frame" x="86" y="0.0" width="56" height="30"/>
+                                        <color key="backgroundColor" red="1" green="0.87000711679999998" blue="0.29756866830000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Create"/>
+                                        <connections>
+                                            <action selector="createNoteTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="0yU-xq-jyt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xb-Lf-qen">
+                                        <rect key="frame" x="172" y="0.0" width="56" height="30"/>
+                                        <color key="backgroundColor" red="1" green="0.87000711679999998" blue="0.29756866830000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Set Link"/>
+                                        <connections>
+                                            <action selector="setLinkTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="dij-d2-I8k"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.79614361702127656" green="0.52697480122217755" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="TaB-GW-RWL" firstAttribute="top" secondItem="y8b-iA-yyE" secondAttribute="top" constant="535" id="JDZ-kP-j5t"/>
-                            <constraint firstItem="y8b-iA-yyE" firstAttribute="trailing" secondItem="TaB-GW-RWL" secondAttribute="trailing" constant="132" id="gkr-KY-ZFH"/>
-                            <constraint firstItem="TaB-GW-RWL" firstAttribute="leading" secondItem="y8b-iA-yyE" secondAttribute="leading" constant="132" id="trX-ha-7C2"/>
+                            <constraint firstItem="W3A-NN-ViM" firstAttribute="leading" secondItem="y8b-iA-yyE" secondAttribute="leading" constant="73" id="1Ow-0H-1mg"/>
+                            <constraint firstItem="y8b-iA-yyE" firstAttribute="trailing" secondItem="W3A-NN-ViM" secondAttribute="trailing" constant="74" id="YcF-JS-jIX"/>
+                            <constraint firstItem="W3A-NN-ViM" firstAttribute="top" secondItem="y8b-iA-yyE" secondAttribute="top" constant="549" id="iGD-2K-Mhg"/>
+                            <constraint firstItem="y8b-iA-yyE" firstAttribute="bottom" secondItem="W3A-NN-ViM" secondAttribute="bottom" constant="19" id="q9K-17-35e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="y8b-iA-yyE"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="NfJ-E4-mCE"/>
                     <connections>
+                        <outlet property="imageButton" destination="TaB-GW-RWL" id="9Qg-UX-VbF"/>
                         <outlet property="mainView" destination="Ffe-dt-6xy" id="SZO-FE-C7O"/>
-                        <outlet property="makeNote" destination="TaB-GW-RWL" id="9Qg-UX-VbF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xwp-bk-Etc" userLabel="First Responder" sceneMemberID="firstResponder"/>

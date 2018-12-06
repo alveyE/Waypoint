@@ -15,7 +15,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
 
     var locationManager:CLLocationManager!
     var currentLocation = CLLocation(latitude: 0, longitude: 0)
-
+    var noteCreator: NoteCreator!
 
     
     var note:NoteView! {
@@ -33,13 +33,13 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         mainView.addGestureRecognizer(tap)
         }
     }
-    @IBOutlet weak var makeNote: UIButton!
+    @IBOutlet weak var imageButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         determineCurrentLocation()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,7 +54,24 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         note.endEditing(true)
     }
     
-    @IBAction func makeNoteTouched(_ sender: UIButton) {
+    @IBAction func createNoteTouched(_ sender: UIButton) {
+    noteCreator = NoteCreator(creator: User(username: "",password: "",id: 0), latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+        if note.titleText.text != "" {
+            noteCreator.title = note.titleText.text
+        }
+        if note.textContent.text != "" {
+            noteCreator.text = note.textContent.text
+        }
+        noteCreator.writeNote()
+        self.tabBarController?.selectedIndex = 0
+        
+    }
+    @IBAction func setLinkTouched(_ sender: UIButton) {
+        
+        
+        
+    }
+    @IBAction func chooseImageTouched(_ sender: UIButton) {
         
         let picker = UIImagePickerController()
         picker.delegate = self
