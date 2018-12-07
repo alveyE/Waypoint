@@ -60,16 +60,10 @@ class NoteView: UIView {
             setNeedsLayout()
         }
     }
-    var imageDisplay: [UIImage] = [] {
-        didSet{
-            setNeedsDisplay()
-            setNeedsLayout()
-        }
-    }
     private var imageUrls: [String] = [] {
         didSet{
-       //     subviews.forEach({ $0.removeFromSuperview() })
-
+    
+            createImages()
             setNeedsDisplay()
             setNeedsLayout()
         }
@@ -92,7 +86,13 @@ class NoteView: UIView {
     lazy var titleText = createTitleText()
     private lazy var timeText = createTimeText()
     lazy var textContent = createTextContent()
-    private lazy var displayImages = createImages()
+  
+    private var displayImages = [UIImageView]() {
+        didSet{
+            setNeedsLayout()
+            setNeedsDisplay()
+        }
+    }
     
     private lazy var width: CGFloat = bounds.width
     private lazy var height: CGFloat = bounds.height
@@ -153,9 +153,8 @@ class NoteView: UIView {
         hasDrawn = true
     }
     
-    private func createImages() -> [UIImageView]{
+    private func createImages(){
         
-        var imageViews = [UIImageView]()
         
         for imgurl in imageUrls {
       
@@ -189,7 +188,8 @@ class NoteView: UIView {
                         let imageView = UIImageView(frame: CGRect(x: (self.width/2) - ((image.size.width * (adjustedHeight/image.size.height))/2), y: self.yPosition, width: image.size.width * (adjustedHeight/image.size.height), height: adjustedHeight))
                         
                         imageView.image = image
-                        imageViews.append(imageView)
+                        print("appending")
+                        self.displayImages.append(imageView)
 
                         self.yPosition += imageView.frame.height + self.height/25
                         
@@ -198,25 +198,22 @@ class NoteView: UIView {
                     }else {
                         let imageView = UIImageView(frame: CGRect(x: self.width/(spacing * 2), y: self.yPosition, width: adjustedWidth, height: image.size.height * (adjustedWidth/image.size.width)))
                         imageView.image = image
-                        imageViews.append(imageView)
+                        self.displayImages.append(imageView)
                         self.yPosition += imageView.frame.height + self.height/25
                         
+                        }
+                    
+                    
                     }
-                    
-                    
-                }
                 
-                
-                
-            }
+                    }
             
             
             
             
         }
         
-        
-        return imageViews
+    
         
     }
     
@@ -231,13 +228,10 @@ class NoteView: UIView {
         textContent = createTextContent()
         titleText = createTitleText()
         timeText = createTimeText()
-        displayImages = createImages()
-        
         
         addSubview(titleText)
         addSubview(timeText)
         addSubview(textContent)
-        print("adding image")
 
         for image in displayImages {
             addSubview(image)
@@ -293,11 +287,6 @@ class NoteView: UIView {
     }
     
     
-    
-    public func setText(to text: String){
-        self.text = text
-    }
-    
     public func addImage(withURL imageAdding: String){
         imageUrls.append(imageAdding)
     }
@@ -328,18 +317,11 @@ class NoteView: UIView {
         text = ""
         link = ("","")
         attributedText = nil
-        imageDisplay = []
+        displayImages = []
         imageUrls = []
      //   subviews.forEach({ $0.removeFromSuperview() })
     }
-    
-    func loadImage(withURL url: String){
-        
-        
-        
-        
-        
-    }
+
     
     
     
