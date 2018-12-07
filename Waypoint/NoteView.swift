@@ -104,7 +104,6 @@ class NoteView: UIView {
         // Drawing code
         width = bounds.width
         height = bounds.height
-        yPosition = height * 10/48
 
 
         
@@ -207,10 +206,6 @@ class NoteView: UIView {
                     }
                 
                     }
-            
-            
-            
-            
         }
         
     
@@ -219,12 +214,13 @@ class NoteView: UIView {
     
     private func clip(){
         clipsToBounds = true
-        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         subviews.forEach({ $0.removeFromSuperview() })
+        yPosition = height * 10/48
+
         textContent = createTextContent()
         titleText = createTitleText()
         timeText = createTimeText()
@@ -258,7 +254,7 @@ class NoteView: UIView {
             }
             textField.textColor = textColor
         }
-
+        yPosition += textField.frame.height + self.height/25
         return textField
     }
     
