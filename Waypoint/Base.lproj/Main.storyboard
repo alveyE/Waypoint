@@ -97,7 +97,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="LgW-eA-R6b"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="Lqa-ER-R75"/>
+                    <tabBarItem key="tabBarItem" title="" image="pin.png" landscapeImage="pin.png" largeContentSizeImage="pin.png" id="Lqa-ER-R75">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-13"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tl9-3Q-x8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -123,4 +125,7 @@
             <point key="canvasLocation" x="-1250" y="-366"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pin.png" width="30" height="30"/>
+    </resources>
 </document>

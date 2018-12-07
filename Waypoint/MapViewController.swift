@@ -120,6 +120,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let waypoint = MKPointAnnotation()
             waypoint.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             
+            
             mapView.removeAnnotation(waypoint)
             mapView.addAnnotation(waypoint)
         }

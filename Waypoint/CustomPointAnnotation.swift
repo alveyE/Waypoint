@@ -10,8 +10,7 @@ import UIKit
 import MapKit
 
 class CustomPointAnnotation: MKAnnotationView {
-
-    var pinCustomImageName:String!
+var pinCustomImageName:String!
    
 
 }
