@@ -82,8 +82,8 @@ class NoteView: UIView {
     }
     
     
-    private var hasDrawn = false;
-
+    private var hasDrawn = false
+    public var editable = true
     
     
     private lazy var yPosition = height * 10/48
@@ -106,7 +106,6 @@ class NoteView: UIView {
         height = bounds.height
         yPosition = height * 10/48
 
-        font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font!)
 
         
 //        Making square missing bottom right triangle
@@ -135,6 +134,9 @@ class NoteView: UIView {
 
         if !hasDrawn {
             clip()
+            font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font!)
+
+            
             
         let triangleShape = CAShapeLayer()
         
@@ -225,21 +227,32 @@ class NoteView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        subviews.forEach({ $0.removeFromSuperview() })
+        textContent = createTextContent()
+        titleText = createTitleText()
+        timeText = createTimeText()
+        displayImages = createImages()
         
-       
         
-        
-        
-        
-        
+        addSubview(titleText)
+        addSubview(timeText)
+        addSubview(textContent)
+        print("adding image")
+
+        for image in displayImages {
+            addSubview(image)
+        }
         
     }
     
     private func createTextContent() -> UITextView{
+        
         let textField = UITextView(frame: CGRect(x: width/2 - (width*3/5)/2 , y: yPosition, width: width * 3/5, height: height * 2/5))
+        textField.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        textField.isEditable = editable
+        
         
         if text != "" {
-            textField.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
             textField.font = font
             textField.textAlignment = .center
             
@@ -251,6 +264,7 @@ class NoteView: UIView {
             }
             textField.textColor = textColor
         }
+
         return textField
     }
     
@@ -269,7 +283,7 @@ class NoteView: UIView {
     
     private func createTitleText() -> UITextView {
         let titleTextView = UITextView(frame: CGRect(x: width/20, y: height/24, width: width, height: height * (7/48)))
-        
+        titleTextView.isEditable = editable
         titleTextView.font = font
         titleTextView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         titleTextView.text = title

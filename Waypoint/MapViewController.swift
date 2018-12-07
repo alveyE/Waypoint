@@ -89,6 +89,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         note.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight * 7/10)
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         
+        note.editable = false
+        
         mapView.mapType = MKMapType.standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
@@ -197,9 +199,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func updateNoteView(_ loadedNote: Note){
         note.clearNote()
-        note.textContent.isEditable = true
-        note.titleText.isEditable = true
-
+//        note.textContent.isEditable = true
+//        note.titleText.isEditable = true
+//
         note.title = loadedNote.title
         note.time = loadedNote.timeStamp
         
@@ -229,8 +231,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         UIView.transition(with: note, duration: 0.5, options: [.transitionCurlDown], animations: {
             self.note.alpha = 1
         },completion: {_ in})
-        note.textContent.isEditable = false
-        note.titleText.isEditable = false
+//        note.textContent.isEditable = false
+ //       note.titleText.isEditable = false
     }
     
     
