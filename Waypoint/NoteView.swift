@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class NoteView: UIView {
     
-    var width: CGFloat = 0
-    var height: CGFloat = 0
+    
     // public var noteColor = #colorLiteral(red: 1, green: 0.9230569365, blue: 0.3114053169, alpha: 1)
 //    public var noteColor = UIColor(red: 1, green: 0.9230569365, blue: 0.3114053169, alpha: 1){
 //        didSet{
@@ -66,29 +66,48 @@ class NoteView: UIView {
             setNeedsLayout()
         }
     }
+    private var imageUrls: [String] = [] {
+        didSet{
+       //     subviews.forEach({ $0.removeFromSuperview() })
+
+            setNeedsDisplay()
+            setNeedsLayout()
+        }
+    }
     public var attributedText: NSAttributedString? {
         didSet{
             setNeedsDisplay()
             setNeedsLayout()
         }
     }
+    
+    
     private var hasDrawn = false;
 
     
     
     private lazy var yPosition = height * 10/48
-    lazy var titleText = UITextView(frame: CGRect(x: width/20, y: height/24, width: width, height: height * (7/48)))
     
-    lazy var textContent = UITextView(frame: CGRect(x: width/2 - (width*3/5)/2 , y: yPosition, width: width * 3/5, height: height * 2/5))
-      
     
+    lazy var titleText = createTitleText()
+    private lazy var timeText = createTimeText()
+    lazy var textContent = createTextContent()
+    private lazy var displayImages = createImages()
+    
+    private lazy var width: CGFloat = bounds.width
+    private lazy var height: CGFloat = bounds.height
+    
+    
+    private var font = UIFont(name: "Marker Felt", size: 30)
     
     override func draw(_ rect: CGRect) {
         // Drawing code
         width = bounds.width
         height = bounds.height
-        
-        
+        yPosition = height * 10/48
+
+        font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font!)
+
         
 //        Making square missing bottom right triangle
         
@@ -102,7 +121,6 @@ class NoteView: UIView {
         outlinePath.addLine(to: CGPoint(x: width, y: height - cornerCut))
         outlinePath.close()
         
-        
         let triangleFold = UIBezierPath()
         triangleFold.move(to: CGPoint(x: width, y: height - cornerCut))
         triangleFold.addLine(to: CGPoint(x: width - cornerCut, y: height))
@@ -112,12 +130,12 @@ class NoteView: UIView {
         let titleBar = UIBezierPath(rect: CGRect(x: 0, y: 0, width: width, height: height * 9/48))
         triangleFold.append(titleBar)
         
-        
-        
         noteColor.setFill()
         outlinePath.fill()
 
         if !hasDrawn {
+            clip()
+            
         let triangleShape = CAShapeLayer()
         
         triangleShape.path = triangleFold.cgPath
@@ -130,75 +148,144 @@ class NoteView: UIView {
         layer.addSublayer(triangleShape)
         }
         
-        
-        //Draw Note Elements
-        
-        var font = UIFont(name: "Marker Felt", size: 30)
-        font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font!)
-        titleText.font = font
-        titleText.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        titleText.text = title
-        print(titleText.text)
-        
-        let timeText = UILabel(frame: CGRect(x: width/20, y: height * 13/96, width: width - width/10, height: height * 1/24))
-        let fontTime = UIFont(name: "Marker Felt", size: 15)
-        timeText.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: fontTime!)
-        timeText.text = time
-        
-        
-        timeText.textColor = textColor
-        titleText.textColor = textColor
-        
-     
-        
-        addSubview(titleText)
-        addSubview(timeText)
-        
-        
-        if text != "" {
-         
-        
-        textContent.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        textContent.font = font
-        textContent.textAlignment = .center
-        
-        
-        if attributedText != nil {
-        textContent.attributedText = attributedText
-        }else{
-        textContent.text = text
-        }
-        textContent.textColor = textColor
-            
-        addSubview(textContent)
-           
-        yPosition += textContent.frame.height + height/25
-        }
-        for img in imageDisplay {
-            //let displayedImage = UIImageView(frame: CGRect(x: width/2 - (img.size.width/2), y: yPosition, width: img.size.width, height: img.size.height))
-            let spacing: CGFloat = 8
-            let adjustedWidth = width - width / spacing
-            
-            let displayedImage = UIImageView(frame: CGRect(x: width/(spacing * 2), y: yPosition, width: adjustedWidth, height: img.size.height * (adjustedWidth/img.size.width)))
-            displayedImage.image = img
-            addSubview(displayedImage)
-            yPosition += displayedImage.frame.height + height/25
-        }
         hasDrawn = true
+    }
+    
+    private func createImages() -> [UIImageView]{
+        
+        var imageViews = [UIImageView]()
+        
+        for imgurl in imageUrls {
+      
+            
+            let spacing: CGFloat = 8
+            
+            
+            let adjustedWidth = width - width / spacing
+            let adjustedHeight = height - (height / (spacing/2))
+            
+            
+            
+            
+            let storage = Storage.storage()
+            let imgadjurl = imgurl + ".jpg"
+            let reference = storage.reference(forURL: imgadjurl)
+            
+            
+            // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+            
+            var image = UIImage()
+            reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                
+                if let error = error {
+                    print("error \(error)")
+                } else {
+                    
+                    image = UIImage(data: data!) ?? UIImage()
+                    if image.size.height > image.size.width {
+                        
+                        let imageView = UIImageView(frame: CGRect(x: (self.width/2) - ((image.size.width * (adjustedHeight/image.size.height))/2), y: self.yPosition, width: image.size.width * (adjustedHeight/image.size.height), height: adjustedHeight))
+                        
+                        imageView.image = image
+                        imageViews.append(imageView)
+
+                        self.yPosition += imageView.frame.height + self.height/25
+                        
+                        
+                        
+                    }else {
+                        let imageView = UIImageView(frame: CGRect(x: self.width/(spacing * 2), y: self.yPosition, width: adjustedWidth, height: image.size.height * (adjustedWidth/image.size.width)))
+                        imageView.image = image
+                        imageViews.append(imageView)
+                        self.yPosition += imageView.frame.height + self.height/25
+                        
+                    }
+                    
+                    
+                }
+                
+                
+                
+            }
+            
+            
+            
+            
+        }
+        
+        
+        return imageViews
+        
+    }
+    
+    private func clip(){
+        clipsToBounds = true
+        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
+       
+        
+        
+        
+        
+        
+        
     }
+    
+    private func createTextContent() -> UITextView{
+        let textField = UITextView(frame: CGRect(x: width/2 - (width*3/5)/2 , y: yPosition, width: width * 3/5, height: height * 2/5))
+        
+        if text != "" {
+            textField.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+            textField.font = font
+            textField.textAlignment = .center
+            
+            
+            if attributedText != nil {
+                textField.attributedText = attributedText
+            }else{
+                textField.text = text
+            }
+            textField.textColor = textColor
+        }
+        return textField
+    }
+    
+    
+    private func createTimeText() -> UILabel {
+        let timeLabel = UILabel(frame: CGRect(x: width/20, y: height * 13/96, width: width - width/10, height: height * 1/24))
+        
+        let fontTime = UIFont(name: "Marker Felt", size: 15)
+        timeLabel.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: fontTime!)
+        timeLabel.text = time
+        timeLabel.textColor = textColor
+        
+        return timeLabel
+        
+    }
+    
+    private func createTitleText() -> UITextView {
+        let titleTextView = UITextView(frame: CGRect(x: width/20, y: height/24, width: width, height: height * (7/48)))
+        
+        titleTextView.font = font
+        titleTextView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        titleTextView.text = title
+        titleTextView.textColor = textColor
+        
+        return titleTextView
+    }
+    
     
     
     public func setText(to text: String){
         self.text = text
     }
     
-    public func addImage(_ imageAdding: UIImage){
-        imageDisplay.append(imageAdding)
+    public func addImage(withURL imageAdding: String){
+        imageUrls.append(imageAdding)
     }
     
     
@@ -222,13 +309,23 @@ class NoteView: UIView {
     }
     
     public func clearNote(){
+        title = ""
+        time = ""
         text = ""
         link = ("","")
         attributedText = nil
         imageDisplay = []
-        subviews.forEach({ $0.removeFromSuperview() })
+        imageUrls = []
+     //   subviews.forEach({ $0.removeFromSuperview() })
     }
     
+    func loadImage(withURL url: String){
+        
+        
+        
+        
+        
+    }
     
     
     

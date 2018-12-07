@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		13E6AFCA1F837775253FB43F /* Pods_Waypoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */; };
 		C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510EFAE21ADAFE500243FA2 /* DBManager.swift */; };
+		D1A7997F21B9B36C002AF7B2 /* pending.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A7997E21B9B36C002AF7B2 /* pending.png */; };
 		D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C7219E025E003FF5DB /* AppDelegate.swift */; };
 		D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C9219E025E003FF5DB /* MapViewController.swift */; };
 		D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AE58CB219E025E003FF5DB /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 		4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Waypoint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80CA2E99CF4C2788871EB08E /* Pods-Waypoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Waypoint.release.xcconfig"; path = "Pods/Target Support Files/Pods-Waypoint/Pods-Waypoint.release.xcconfig"; sourceTree = "<group>"; };
 		C510EFAE21ADAFE500243FA2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
+		D1A7997E21B9B36C002AF7B2 /* pending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pending.png; sourceTree = "<group>"; };
 		D1AE58C4219E025E003FF5DB /* Waypoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waypoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AE58C7219E025E003FF5DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1AE58C9219E025E003FF5DB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */,
 				C510EFAE21ADAFE500243FA2 /* DBManager.swift */,
 				D1AE58F321ADD967003FF5DB /* NoteCreator.swift */,
+				D1A7997E21B9B36C002AF7B2 /* pending.png */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1B648FC21B6426400B74900 /* Podfile in Resources */,
+				D1A7997F21B9B36C002AF7B2 /* pending.png in Resources */,
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
 				D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
