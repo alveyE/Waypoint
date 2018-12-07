@@ -253,8 +253,9 @@ class NoteView: UIView {
                 textField.text = text
             }
             textField.textColor = textColor
+            yPosition += textField.frame.height + self.height/25
+
         }
-        yPosition += textField.frame.height + self.height/25
         return textField
     }
     
