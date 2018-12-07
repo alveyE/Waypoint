@@ -10,6 +10,7 @@
 		13E6AFCA1F837775253FB43F /* Pods_Waypoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */; };
 		C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510EFAE21ADAFE500243FA2 /* DBManager.swift */; };
 		D1A7997F21B9B36C002AF7B2 /* pending.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A7997E21B9B36C002AF7B2 /* pending.png */; };
+		D1A7998121BA631F002AF7B2 /* CustomPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */; };
 		D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C7219E025E003FF5DB /* AppDelegate.swift */; };
 		D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C9219E025E003FF5DB /* MapViewController.swift */; };
 		D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AE58CB219E025E003FF5DB /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 		80CA2E99CF4C2788871EB08E /* Pods-Waypoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Waypoint.release.xcconfig"; path = "Pods/Target Support Files/Pods-Waypoint/Pods-Waypoint.release.xcconfig"; sourceTree = "<group>"; };
 		C510EFAE21ADAFE500243FA2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		D1A7997E21B9B36C002AF7B2 /* pending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pending.png; sourceTree = "<group>"; };
+		D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPointAnnotation.swift; sourceTree = "<group>"; };
 		D1AE58C4219E025E003FF5DB /* Waypoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waypoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AE58C7219E025E003FF5DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1AE58C9219E025E003FF5DB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				C510EFAE21ADAFE500243FA2 /* DBManager.swift */,
 				D1AE58F321ADD967003FF5DB /* NoteCreator.swift */,
 				D1A7997E21B9B36C002AF7B2 /* pending.png */,
+				D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */,
 				D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */,
 				C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */,
+				D1A7998121BA631F002AF7B2 /* CustomPointAnnotation.swift in Sources */,
 				D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */,
 				D1AE58DE219E5639003FF5DB /* User.swift in Sources */,
 				D1AE58DC219E5183003FF5DB /* Note.swift in Sources */,

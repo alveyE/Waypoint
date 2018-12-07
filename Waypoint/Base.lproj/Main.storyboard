@@ -87,7 +87,7 @@
             </objects>
             <point key="canvasLocation" x="-266.39999999999998" y="690.40479760119945"/>
         </scene>
-        <!--Item 1-->
+        <!--Map View Controller-->
         <scene sceneID="6J3-Jz-N6V">
             <objects>
                 <viewController id="Kuo-ij-o0E" customClass="MapViewController" customModule="Waypoint" customModuleProvider="target" sceneMemberID="viewController">
@@ -97,7 +97,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="LgW-eA-R6b"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="Lqa-ER-R75"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="Lqa-ER-R75"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tl9-3Q-x8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
