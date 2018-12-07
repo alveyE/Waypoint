@@ -48,14 +48,14 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         createNoteView()
-
+        noteCreator = NoteCreator(creator: User(username: "",password: "",id: 0), latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
     }
     @objc func disableKeyboard(){
         note.endEditing(true)
     }
     
     @IBAction func createNoteTouched(_ sender: UIButton) {
-    noteCreator = NoteCreator(creator: User(username: "",password: "",id: 0), latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+    
         if note.titleText.text != "" {
             noteCreator.title = note.titleText.text
         }
@@ -182,9 +182,11 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
                         print("error getting download url \(String(describing: error))")
                         return
                     }
-
+                    print(downloadURL)
                     let urlCreated = downloadURL.absoluteString
-                    
+                    print(urlCreated)
+                    self.noteCreator.images.append(urlCreated)
+                    self.note.addImage(withURL: urlCreated)
                 }
                 
                 
