@@ -56,19 +56,28 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     
     @IBAction func createNoteTouched(_ sender: UIButton) {
     
+        
         if note.titleText.text != "" {
             noteCreator.title = note.titleText.text
         }
         if note.textContent.text != "" {
             noteCreator.text = note.textContent.text
         }
+        
+        if noteCreator.text == "", noteCreator.title == "", noteCreator.images == [] {
+            
+            print("Add content to note")
+        }else{
+        
         noteCreator.writeNote()
         self.tabBarController?.selectedIndex = 0
-        
+        }
     }
     @IBAction func setLinkTouched(_ sender: UIButton) {
         
-        
+        let selectedText = "\(String(describing: note.textContent.selectedTextRange))"
+        noteCreator.linkText = selectedText
+        noteCreator.linkURL = "https://fractyldev.com"
         
     }
     @IBAction func chooseImageTouched(_ sender: UIButton) {
