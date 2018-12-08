@@ -20,8 +20,8 @@ struct NoteCreator{
     var AREnabled = false
     let creator: User
     var timeLeft: Int? = nil
-    let latitude: Double
-    let longitude: Double
+    var latitude: Double
+    var longitude: Double
     
     init(creator: User, latitude: Double, longitude: Double){
         self.creator = creator

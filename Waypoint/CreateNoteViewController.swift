@@ -11,20 +11,25 @@ import CoreLocation
 import FirebaseStorage
 
 
-class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
 
     var locationManager:CLLocationManager!
     var currentLocation = CLLocation(latitude: 0, longitude: 0)
     var noteCreator: NoteCreator!
 
     
+    
     var note:NoteView! {
         didSet{
+            note.textContent.delegate = self
             let tapped = UITapGestureRecognizer(target: self, action: #selector(disableKeyboard))
             note.addGestureRecognizer(tapped)
         }
     }
-    
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        print("TextContent Editing")
+    }
     
     
     @IBOutlet var mainView: UIView! {
@@ -58,6 +63,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     @IBAction func createNoteTouched(_ sender: UIButton) {
     
         
+        
         if note.titleText.text != "" {
             noteCreator.title = note.titleText.text
         }
@@ -69,7 +75,8 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
             
             print("Add content to note")
         }else{
-        
+        noteCreator.latitude = currentLocation.coordinate.latitude
+        noteCreator.longitude = currentLocation.coordinate.longitude
         noteCreator.writeNote()
         self.tabBarController?.selectedIndex = 0
         }
