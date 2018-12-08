@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:SignUpViewController.swift">
+   </FileRef>
+   <FileRef
       location = "group:Waypoint.xcodeproj">
    </FileRef>
    <FileRef
