@@ -14,6 +14,7 @@ class MyBulletinViewController: UIViewController {
 
     private let savedNotesIDs = ["-LSzHCaUkfje9BGRsq2R","-LSzHCaWz1HoKzLTsdhJ","-LSzcPImVM_hFKngJKrB"]
     
+    
     @IBOutlet weak var scrollView: UIScrollView!
     var ref: DatabaseReference!
     

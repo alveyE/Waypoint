@@ -279,7 +279,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="Y2b-E6-whs">
             <objects>
-                <viewController id="Nko-xm-ExQ" customClass="SignUpViewController" sceneMemberID="viewController">
+                <viewController id="Nko-xm-ExQ" customClass="SignUpViewController" customModule="Waypoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nee-fq-gef">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -100,6 +100,9 @@ class NoteView: UIView {
     
     private var font = UIFont(name: "Marker Felt", size: 30)
     
+    
+    
+    
     override func draw(_ rect: CGRect) {
         // Drawing code
         width = bounds.width

@@ -16,6 +16,7 @@
 		D1A7998721BA6EF3002AF7B2 /* MyBulletinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */; };
 		D1A7998921BA6FE7002AF7B2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */; };
 		D1A7998B21BB3906002AF7B2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */; };
+		D1A7999121BC68DE002AF7B2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */; };
 		D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C7219E025E003FF5DB /* AppDelegate.swift */; };
 		D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C9219E025E003FF5DB /* MapViewController.swift */; };
 		D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AE58CB219E025E003FF5DB /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 		D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBulletinViewController.swift; sourceTree = "<group>"; };
 		D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D1AE58C4219E025E003FF5DB /* Waypoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waypoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AE58C7219E025E003FF5DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1AE58C9219E025E003FF5DB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */,
 				D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */,
 				D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */,
+				D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				D1A7998B21BB3906002AF7B2 /* SignInViewController.swift in Sources */,
 				C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */,
 				D1A7998121BA631F002AF7B2 /* CustomPointAnnotation.swift in Sources */,
+				D1A7999121BC68DE002AF7B2 /* SignUpViewController.swift in Sources */,
 				D1A7998721BA6EF3002AF7B2 /* MyBulletinViewController.swift in Sources */,
 				D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */,
 				D1AE58DE219E5639003FF5DB /* User.swift in Sources */,

@@ -26,7 +26,6 @@ class SettingsViewController: UIViewController {
     }
     
     
-    
     private func determineShownElements(){
         
         

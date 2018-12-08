@@ -39,7 +39,6 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     override func viewDidLoad() {
         super.viewDidLoad()
         determineCurrentLocation()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +52,8 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     @objc func disableKeyboard(){
         note.endEditing(true)
     }
+    
+   
     
     @IBAction func createNoteTouched(_ sender: UIButton) {
     
