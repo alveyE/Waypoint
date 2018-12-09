@@ -366,11 +366,11 @@
             </objects>
             <point key="canvasLocation" x="-1372" y="-301"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Settings-->
         <scene sceneID="thO-jK-oc1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GVT-HZ-td4" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="o1R-Q2-hMf"/>
+                    <tabBarItem key="tabBarItem" title="Settings" id="o1R-Q2-hMf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ySg-XH-0cz">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
