@@ -19,7 +19,7 @@ public struct Note : Codable{
     var linkText: String?
     var linkURL: String?
     var AREnabled = false
-    let creator: User
+    let creator: String
     var timeLeft: Int?
     let latitude: Double
     let longitude: Double
@@ -30,7 +30,7 @@ public struct Note : Codable{
         case info, emergency, safety, helpful
     }
     
-    init(title: String, timeStamp: String, text: String?,images: [String],linkText: String?, linkURL: String? ,AREnabled: Bool,creator: User, timeLeft: Int?, location: (latitude: Double, longitude: Double)){
+    init(title: String, timeStamp: String, text: String?,images: [String],linkText: String?, linkURL: String? ,AREnabled: Bool,creator: String, timeLeft: Int?, location: (latitude: Double, longitude: Double)){
         self.title = title
         self.text = text
         self.images = images
@@ -65,7 +65,7 @@ public struct Note : Codable{
             images = []
             linkText = nil
             linkURL = nil
-            creator = User(username: "",password: "",id: 0)
+            creator = ""
             timeLeft = nil
             latitude = 0
             longitude = 0

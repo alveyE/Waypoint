@@ -9,14 +9,13 @@
 import UIKit
 import CoreLocation
 import FirebaseStorage
-
+import FirebaseAuth
 
 class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
 
     var locationManager:CLLocationManager!
     var currentLocation = CLLocation(latitude: 0, longitude: 0)
     var noteCreator: NoteCreator!
-
     
     
     var note:NoteView! {
@@ -52,7 +51,24 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         createNoteView()
-        noteCreator = NoteCreator(creator: User(username: "",password: "",id: 0), latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+        
+        if let user = Auth.auth().currentUser {
+    noteCreator = NoteCreator(creator: user.uid, latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+        }else{
+            let blurEffect = UIBlurEffect(style: .dark)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            //always fill the view
+            blurEffectView.frame = self.view.bounds
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            let notSignedInLabel = UILabel(frame: self.view.bounds)
+            notSignedInLabel.text = "Please sign in to create notes"
+            notSignedInLabel.textAlignment = .center
+            notSignedInLabel.font = UIFont(name: "Arial", size: 25)
+            
+            
+            view.addSubview(blurEffectView)
+            view.addSubview(notSignedInLabel)
+        }
     }
     @objc func disableKeyboard(){
         note.endEditing(true)

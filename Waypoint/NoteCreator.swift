@@ -18,12 +18,12 @@ struct NoteCreator{
     var linkText: String? = nil
     var linkURL: String? = nil
     var AREnabled = false
-    let creator: User
+    let creator: String
     var timeLeft: Int? = nil
     var latitude: Double
     var longitude: Double
     
-    init(creator: User, latitude: Double, longitude: Double){
+    init(creator: String, latitude: Double, longitude: Double){
         self.creator = creator
         self.latitude = latitude
         self.longitude = longitude
