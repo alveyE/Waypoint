@@ -190,6 +190,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
             
             let metaDataI = StorageMetadata()
             metaDataI.contentType = "image/jpg"
+          
             imageRef.putData(data, metadata: metaDataI) { (metadata, error) in
                
                 

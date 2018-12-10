@@ -262,6 +262,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         ref = Database.database().reference()
         let query = ref.child("notes").queryOrderedByKey()
         query.observeSingleEvent(of: .value, with: { (snapshot) in
+           
             for case let childSnapshot as DataSnapshot in snapshot.children {
                 //                let key = childSnapshot.key
                 if let childData = childSnapshot.value as? [String : Any] {
