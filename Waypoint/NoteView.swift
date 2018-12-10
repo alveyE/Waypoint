@@ -164,9 +164,10 @@ class NoteView: UIView {
             let spacing: CGFloat = 8
             
             
-            let adjustedWidth = width - width / spacing
-            let adjustedHeight = height - (height / (spacing/2))
-            
+       //     let adjustedWidth = width - width / spacing
+     //       let adjustedHeight = height - (height / (spacing/2))
+            let adjustedWidth = width/2
+            let adjustedHeight = height/2
             
             
             
@@ -178,7 +179,7 @@ class NoteView: UIView {
             // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
             
             var image = UIImage()
-            reference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            reference.getData(maxSize: 2 * 1024 * 1024) { data, error in
                 
                 if let error = error {
                     print("error \(error)")
@@ -198,7 +199,7 @@ class NoteView: UIView {
                         
                         
                     }else {
-                        let imageView = UIImageView(frame: CGRect(x: self.width/(spacing * 2), y: self.yPosition, width: adjustedWidth, height: image.size.height * (adjustedWidth/image.size.width)))
+                        let imageView = UIImageView(frame: CGRect(x: self.width/2 - adjustedWidth/2, y: self.yPosition, width: adjustedWidth, height: image.size.height * (adjustedWidth/image.size.width)))
                         imageView.image = image
                         self.displayImages.append(imageView)
                         self.yPosition += imageView.frame.height + self.height/25
@@ -240,7 +241,17 @@ class NoteView: UIView {
     
     private func createTextContent() -> UITextView{
         
-        let textField = UITextView(frame: CGRect(x: width/2 - (width*3/5)/2 , y: yPosition, width: width * 3/5, height: height * 2/5))
+        //calculate height
+        
+        let estimatedLines: CGFloat = CGFloat(text.count)/7
+        var textHeight = height * 2/25 * estimatedLines
+        print(estimatedLines)
+        print(estimatedLines/25)
+        if editable {
+            textHeight = height * 2/5
+        }
+       
+        let textField = UITextView(frame: CGRect(x: width/2 - (width*3/5)/2 , y: yPosition, width: width * 3/5, height: textHeight))
         textField.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         textField.isEditable = editable
         

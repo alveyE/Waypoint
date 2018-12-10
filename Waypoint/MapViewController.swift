@@ -312,7 +312,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     
                     newNoteView.title = note.title
                     newNoteView.time = note.timeStamp
-                    
+                    newNoteView.editable = false
                     
                     if let displayText = note.text {
                         newNoteView.text = displayText

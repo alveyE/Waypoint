@@ -92,6 +92,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         
         let picker = UIImagePickerController()
         picker.delegate = self
+        picker.allowsEditing = true
        present(picker, animated: true, completion: nil)
         
             
@@ -107,9 +108,12 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
-        guard let selectedImage = info[.originalImage] as? UIImage else {
+        guard let selectedImage = info[.editedImage] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
+        
+        
+        
         uploadImage(selectedImage)
         dismiss(animated: true, completion: nil)
     }
@@ -186,7 +190,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         
         let imageRef = storageRef.child("uploads").child(locationString).child(timeStamp)
         
-        if let img = image, let data = img.jpegData(compressionQuality: 1){
+        if let img = image, let data = img.jpegData(compressionQuality: 0.5){
             
             let metaDataI = StorageMetadata()
             metaDataI.contentType = "image/jpg"
