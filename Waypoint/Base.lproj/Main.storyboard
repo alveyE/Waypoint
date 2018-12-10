@@ -301,6 +301,9 @@
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="signupButtonPressed:" destination="Nko-xm-ExQ" eventType="touchUpInside" id="q55-tb-c3V"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="X2a-bF-QCj">
                                 <rect key="frame" x="80" y="218" width="215" height="150"/>
@@ -341,6 +344,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qYd-gE-ZvL"/>
                     </view>
+                    <connections>
+                        <outlet property="emailField" destination="Avz-4p-6Du" id="BIZ-HH-mwf"/>
+                        <outlet property="passwordField" destination="dfB-qN-kJV" id="UVh-lt-99y"/>
+                        <outlet property="signupButton" destination="4i4-fu-E5D" id="NbK-ck-mnN"/>
+                        <outlet property="usernameField" destination="Vc8-R2-EwL" id="Fg4-cc-Tml"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hke-ca-SsJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
