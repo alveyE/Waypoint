@@ -12,6 +12,12 @@
 		D1A4038F21BE5139004F0367 /* account@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A4038C21BE5134004F0367 /* account@2x.png */; };
 		D1A4039021BE5139004F0367 /* account@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A4038D21BE5136004F0367 /* account@3x.png */; };
 		D1A4039121BE5139004F0367 /* account.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A4038E21BE5138004F0367 /* account.png */; };
+		D1A4039821BE7443004F0367 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A4039221BE741F004F0367 /* list.png */; };
+		D1A4039921BE7443004F0367 /* draw.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A4039321BE7425004F0367 /* draw.png */; };
+		D1A4039A21BE7443004F0367 /* draw@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A4039421BE742F004F0367 /* draw@2x.png */; };
+		D1A4039B21BE7443004F0367 /* draw@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A4039521BE743A004F0367 /* draw@3x.png */; };
+		D1A4039C21BE7443004F0367 /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A4039621BE743F004F0367 /* list@2x.png */; };
+		D1A4039D21BE7443004F0367 /* list@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A4039721BE7443004F0367 /* list@3x.png */; };
 		D1A7998121BA631F002AF7B2 /* CustomPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */; };
 		D1A7998721BA6EF3002AF7B2 /* MyBulletinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */; };
 		D1A7998921BA6FE7002AF7B2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */; };
@@ -49,10 +55,12 @@
 		D1A4038C21BE5134004F0367 /* account@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account@2x.png"; sourceTree = "<group>"; };
 		D1A4038D21BE5136004F0367 /* account@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account@3x.png"; sourceTree = "<group>"; };
 		D1A4038E21BE5138004F0367 /* account.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account.png; sourceTree = "<group>"; };
-		D1A4039221BE741F004F0367 /* list30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list30.png; sourceTree = "<group>"; };
-		D1A4039321BE7425004F0367 /* draw30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = draw30.png; sourceTree = "<group>"; };
-		D1A4039421BE742F004F0367 /* draw60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = draw60.png; sourceTree = "<group>"; };
-		D1A4039521BE743A004F0367 /* draw90.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = draw90.png; sourceTree = "<group>"; };
+		D1A4039221BE741F004F0367 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
+		D1A4039321BE7425004F0367 /* draw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = draw.png; sourceTree = "<group>"; };
+		D1A4039421BE742F004F0367 /* draw@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "draw@2x.png"; sourceTree = "<group>"; };
+		D1A4039521BE743A004F0367 /* draw@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "draw@3x.png"; sourceTree = "<group>"; };
+		D1A4039621BE743F004F0367 /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@2x.png"; sourceTree = "<group>"; };
+		D1A4039721BE7443004F0367 /* list@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@3x.png"; sourceTree = "<group>"; };
 		D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPointAnnotation.swift; sourceTree = "<group>"; };
 		D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBulletinViewController.swift; sourceTree = "<group>"; };
 		D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -159,10 +167,12 @@
 				D1A4038E21BE5138004F0367 /* account.png */,
 				D1A4038C21BE5134004F0367 /* account@2x.png */,
 				D1A4038D21BE5136004F0367 /* account@3x.png */,
-				D1A4039321BE7425004F0367 /* draw30.png */,
-				D1A4039421BE742F004F0367 /* draw60.png */,
-				D1A4039521BE743A004F0367 /* draw90.png */,
-				D1A4039221BE741F004F0367 /* list30.png */,
+				D1A4039321BE7425004F0367 /* draw.png */,
+				D1A4039421BE742F004F0367 /* draw@2x.png */,
+				D1A4039521BE743A004F0367 /* draw@3x.png */,
+				D1A4039221BE741F004F0367 /* list.png */,
+				D1A4039621BE743F004F0367 /* list@2x.png */,
+				D1A4039721BE7443004F0367 /* list@3x.png */,
 				D1A799A821BD96BD002AF7B2 /* bulletin@3x.png */,
 				D1A799A021BD96AC002AF7B2 /* globe.png */,
 				D1A799A521BD96B7002AF7B2 /* globe@2x.png */,
@@ -234,8 +244,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1A4039821BE7443004F0367 /* list.png in Resources */,
+				D1A4039A21BE7443004F0367 /* draw@2x.png in Resources */,
 				D1B648FC21B6426400B74900 /* Podfile in Resources */,
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
+				D1A4039D21BE7443004F0367 /* list@3x.png in Resources */,
+				D1A4039921BE7443004F0367 /* draw.png in Resources */,
 				D1A4038F21BE5139004F0367 /* account@2x.png in Resources */,
 				D1A799B121BD96BE002AF7B2 /* bulletin@3x.png in Resources */,
 				D1A799AF21BD96BE002AF7B2 /* bulletin@2x.png in Resources */,
@@ -247,8 +261,10 @@
 				D1A799A921BD96BE002AF7B2 /* globe.png in Resources */,
 				D1A799AB21BD96BE002AF7B2 /* pin@2x.png in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
+				D1A4039B21BE7443004F0367 /* draw@3x.png in Resources */,
 				D1A799B021BD96BE002AF7B2 /* globe@3x.png in Resources */,
 				D1A799AE21BD96BE002AF7B2 /* globe@2x.png in Resources */,
+				D1A4039C21BE7443004F0367 /* list@2x.png in Resources */,
 				D1A799AA21BD96BE002AF7B2 /* pin.png in Resources */,
 				D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */,
 			);
