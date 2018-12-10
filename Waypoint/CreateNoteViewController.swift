@@ -26,10 +26,16 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         }
     }
 
-    func textViewDidBeginEditing(_ textView: UITextView) {
+     func textViewDidBeginEditing(_ textView: UITextView) {
         print("TextContent Editing")
     }
-    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        print("bein gay")
+        if text == "\n" {
+            textView.resignFirstResponder()
+        }
+        return true
+    }
     
     @IBOutlet var mainView: UIView! {
         didSet{

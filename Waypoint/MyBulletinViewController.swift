@@ -28,7 +28,9 @@ class MyBulletinViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        scrollView.subviews.forEach({ $0.removeFromSuperview() })
         savedNotesIDs = []
+        yPosition = 0;
         if let user = Auth.auth().currentUser {
             ref = Database.database().reference()
             ref.child("users").child(user.uid).child("saves").observeSingleEvent(of: .value) { (snapshot) in
