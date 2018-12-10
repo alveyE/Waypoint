@@ -17,6 +17,17 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
    
     
+    @IBOutlet var mainView: UIView! {
+        didSet{
+            let tap = UITapGestureRecognizer(target: self, action: #selector(disableKeyboard))
+            mainView.addGestureRecognizer(tap)
+        }
+    }
+    
+    
+    @objc private func disableKeyboard(){
+        mainView.endEditing(true)
+    }
     @IBOutlet weak var signupButton: UIButton!
     
     override func viewDidLoad() {

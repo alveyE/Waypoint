@@ -245,8 +245,7 @@ class NoteView: UIView {
         
         let estimatedLines: CGFloat = CGFloat(text.count)/7
         var textHeight = height * 2/25 * estimatedLines
-        print(estimatedLines)
-        print(estimatedLines/25)
+
         if editable {
             textHeight = height * 2/5
         }
