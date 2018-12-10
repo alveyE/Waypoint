@@ -29,7 +29,10 @@ class DBManager  {
         do{
         let dataJSON = try encoder.encode(note)
         let data =  try JSONSerialization.jsonObject(with: dataJSON) as? [String : Any] ?? [:]
-        self.ref.child("notes").childByAutoId().setValue(data)
+        let locationData = ["latitude" : note.latitude, "longitude" : note.longitude]
+        let autoId = self.ref.childByAutoId().key
+        self.ref.child("notes").child(autoId!).setValue(data)
+        self.ref.child("locations").child(autoId!).setValue(locationData)
         }catch{
             print("error \(error)")
         }

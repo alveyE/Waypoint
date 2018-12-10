@@ -26,7 +26,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var scroll: UIScrollView!
     var ref: DatabaseReference!
     var locations = [(latitude: Double, longitude: Double)]()
-    
+    var noteIDs = [String]()
     var xPosition: CGFloat = 0
     
     public static var notes = [Note]()
@@ -170,23 +170,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         print("Error \(error)")
     }
     
-//
-//          CARS THIS THE FUNCTION FOR TAPPING ON ANNOTATIONS
-//
-//
-//         WHERE IT SAYS add Note qualities to NoteView thats where note stuff happens
-    
-    
-//
-//
-//
-//
+
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
       
         
         
         if let coordinates = view.annotation?.coordinate, view.annotation?.title != "My Location" {
          
+            
+            getNote(withLocation: (latitude: coordinates.latitude, longitude: coordinates.longitude), addingNote: false)
+
+            
+            
+            
             let otherLocations = locations.filter({$0 != (latitude: coordinates.latitude, longitude: coordinates.longitude)})
             for coord in otherLocations {
                 let locationCoordinate = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
@@ -196,14 +192,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 if distance < 110 {
                     print("Adding with location \(coordinates.latitude) \(coordinates.longitude) compared to original location of ")
-                    addNote(withLocation: (latitude: otherCoordinate.coordinate.latitude, longitude: otherCoordinate.coordinate.longitude))
+                    getNote(withLocation: (latitude: otherCoordinate.coordinate.latitude, longitude: otherCoordinate.coordinate.longitude), addingNote: true)
                 }
                 
                 
             }
                     //THIS LOADED NOTE needs to be the note from server CHECK NOTE MANAGER to see how its doin it rn
                     scroll.isHidden = false
-                    getNote(withLocation: (latitude: coordinates.latitude, longitude: coordinates.longitude))
                     //Add Note qualities to NoteView
                     
                     
@@ -228,9 +223,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func updateNoteView(_ loadedNote: Note){
         note.clearNote()
-//        note.textContent.isEditable = true
-//        note.titleText.isEditable = true
-//
+
         note.title = loadedNote.title
         note.time = loadedNote.timeStamp
         
@@ -253,15 +246,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         UIView.transition(with: note, duration: 0.5, options: [.transitionCurlDown], animations: {
             self.note.alpha = 1
         },completion: {_ in})
-//        note.textContent.isEditable = false
- //       note.titleText.isEditable = false
     }
     
     
     func fetchPinLocation(){
         ref = Database.database().reference()
-        let query = ref.child("notes").queryOrderedByKey()
-        query.observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("locations").observeSingleEvent(of: .value, with: { (snapshot) in
            
             for case let childSnapshot as DataSnapshot in snapshot.children {
                 //                let key = childSnapshot.key
@@ -269,12 +259,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     
                     let lat = childData["latitude"] as? Double
                     let long = childData["longitude"] as? Double
-                    
+                    let idRetrieved = childSnapshot.key
                     if let latitude = lat, let longitude = long {
                         let coord = (latitude: latitude, longitude: longitude)
                         if !self.locations.contains(coord) {
                             
                             self.locations.append((latitude: latitude, longitude: longitude))
+                            self.noteIDs.append(idRetrieved)
                             self.updatePins()
                         }
                     }
@@ -293,7 +284,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
-    public func getNote(withID noteID: String){
+    public func getNote(withID noteID: String, addingNote: Bool){
         ref = Database.database().reference()
 
         ref.child("notes").child(noteID).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -312,7 +303,39 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let latitude = value["latitude"] as? Double
                 let longitude = value["longitude"] as? Double
                 let note = Note(title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images ?? [], linkText: linkText, linkURL: linkURL, AREnabled: AREnabled ?? false, creator: creator ?? User(username: "", password: "", id: 0), timeLeft: timeLeft, location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
-                self.updateNoteView(note)
+                if addingNote {
+
+                    let newNoteView = NoteView()
+                    
+                    newNoteView.frame = CGRect(x: self.xPosition, y: 0, width: self.view.frame.width, height: self.view.frame.height * 7/10)
+                    newNoteView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+                    
+                    newNoteView.title = note.title
+                    newNoteView.time = note.timeStamp
+                    
+                    
+                    if let displayText = note.text {
+                        newNoteView.text = displayText
+                    }
+                    if let notepics = note.images{
+                        for imgURL in notepics {
+                            newNoteView.addImage(withURL: imgURL)
+                        }
+                    }
+                    if let link = note.linkURL {
+                        if let linkText = note.linkText {
+                            newNoteView.addLink(text: linkText, url: link)
+                        }else{
+                            newNoteView.addLink(text: link, url: link)
+                        }
+                    }
+
+                    self.scroll.addSubview(newNoteView)
+                    self.xPosition += newNoteView.frame.width +  newNoteView.frame.width/15
+                    self.scroll.contentSize.width += newNoteView.frame.width +  newNoteView.frame.width/15
+                }else{
+                    self.updateNoteView(note)
+                }
             }
             
         }) { (error) in
@@ -322,125 +345,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
-    func getNote(withLocation coord: (latitude: Double, longitude: Double)){
-        ref = Database.database().reference()
-
-        
-        ref.child("notes").queryOrdered(byChild: "latitude").queryEqual(toValue: coord.latitude).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            for case let childSnapshot as DataSnapshot in snapshot.children {
-                
-                let childKey = childSnapshot.key
-                if childSnapshot.exists() {
-                let val = childSnapshot.value as? [String : Any] ?? [:]
-                let longitudeRetrieved = val["longitude"] as? Double
-                    if coord.longitude == longitudeRetrieved {
-                        self.getNote(withID: childKey)
-                    }
-                }
-               
-
-            }
-        }){ (error) in
-            print(error.localizedDescription)
+    
+    
+    func getNote(withLocation coord: (latitude: Double, longitude: Double), addingNote: Bool){
+     
+        if let indexFound = locations.firstIndex(where: {$0==coord}) {
+            getNote(withID: noteIDs[indexFound],addingNote: addingNote)
         }
-        
-        
-        
     }
     
-    
-    
-    private func addNote(withLocation coord: (latitude: Double, longitude: Double)){
-        
-        ref = Database.database().reference()
-        
-        
-        ref.child("notes").queryOrdered(byChild: "latitude").queryEqual(toValue: coord.latitude).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            for case let childSnapshot as DataSnapshot in snapshot.children {
-                
-                let childKey = childSnapshot.key
-                if childSnapshot.exists() {
-                    let val = childSnapshot.value as? [String : Any] ?? [:]
-                    let longitudeRetrieved = val["longitude"] as? Double
-                    if coord.longitude == longitudeRetrieved {
-                       
-                        self.ref.child("notes").child(childKey).observeSingleEvent(of: .value, with: { (snapshot) in
-                            // Get user value
-                            if let value = snapshot.value as? [String : Any] {
-                                
-                                let title = value["title"] as? String
-                                let timeStamp = value["timeStamp"] as? String
-                                let text = value["text"] as? String
-                                let images = value["images"] as? [String]
-                                let linkText = value["linkText"] as? String
-                                let linkURL = value["linkURL"] as? String
-                                let AREnabled = value["AREnabled"] as? Bool
-                                let creator = value["creator"] as? User
-                                let timeLeft = value["timeLeft"] as? Int
-                                let latitude = value["latitude"] as? Double
-                                let longitude = value["longitude"] as? Double
-                                let addedNote = Note(title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images ?? [], linkText: linkText, linkURL: linkURL, AREnabled: AREnabled ?? false, creator: creator ?? User(username: "", password: "", id: 0), timeLeft: timeLeft, location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
-                               
-                                let newNoteView = NoteView()
-                                
-                                newNoteView.frame = CGRect(x: self.xPosition, y: 0, width: self.view.frame.width, height: self.view.frame.height * 7/10)
-                                newNoteView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-                                
-                                newNoteView.title = addedNote.title
-                                newNoteView.time = addedNote.timeStamp
-                                
-                                
-                                if let displayText = addedNote.text {
-                                    newNoteView.text = displayText
-                                }
-                                if let notepics = addedNote.images{
-                                    for imgURL in notepics {
-                                        newNoteView.addImage(withURL: imgURL)
-                                    }
-                                }
-                                if let link = addedNote.linkURL {
-                                    if let linkText = addedNote.linkText {
-                                        newNoteView.addLink(text: linkText, url: link)
-                                    }else{
-                                        newNoteView.addLink(text: link, url: link)
-                                    }
-                                }
-                                
-                                self.scroll.addSubview(newNoteView)
-                                self.xPosition += newNoteView.frame.width +  newNoteView.frame.width/15
-                                self.scroll.contentSize.width += newNoteView.frame.width +  newNoteView.frame.width/15
-                            }
-                            
-                        }) { (error) in
-                            print(error.localizedDescription)
-                        }
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        self.getNote(withID: childKey)
-                    }
-                }
-                
-                
-            }
-        }){ (error) in
-            print(error.localizedDescription)
-        }
-        
-        
-        
-        
-    }
     
 
 
