@@ -47,6 +47,9 @@ class SignInViewController: UIViewController {
             if error != nil {
                 self.incorrectLabel.isHidden = false
             }
+            if user != nil {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
         
     }

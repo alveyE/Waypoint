@@ -10,8 +10,6 @@ import UIKit
 import FirebaseAuth
 
 class SettingsViewController: UIViewController {
-
-    var signedIn = false
     
     
     @IBOutlet weak var displayNameLabel: UILabel!
@@ -25,6 +23,10 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         determineShownElements()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        determineShownElements()
     }
     
     
@@ -44,25 +46,18 @@ class SettingsViewController: UIViewController {
     private func determineShownElements(){
         
         if let user = Auth.auth().currentUser {
-            signedIn = true
-        }else{
-            signedIn = false
-        }
-
-        if signedIn {
-
             signInButton.isHidden = true
-            displayNameLabel.isHidden = false
-            emailLabel.isHidden = false
+            displayNameLabel.text = user.displayName
+            emailLabel.text = user.email
             signOutButton.isHidden = false
-        }else {
-
+        }else{
             signInButton.isHidden = false
-            displayNameLabel.isHidden = true
-            emailLabel.isHidden = true
+            displayNameLabel.text = ""
+            emailLabel.text = ""
             signOutButton.isHidden = true
-
         }
+
+        
 
     }
 
