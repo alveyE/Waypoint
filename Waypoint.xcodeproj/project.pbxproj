@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		13E6AFCA1F837775253FB43F /* Pods_Waypoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */; };
 		C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510EFAE21ADAFE500243FA2 /* DBManager.swift */; };
+		D16D0E9521BEFBA10032230A /* baseline_bookmark_black_30pt - Edited.png in Resources */ = {isa = PBXBuildFile; fileRef = D16D0E9221BEFB9C0032230A /* baseline_bookmark_black_30pt - Edited.png */; };
+		D16D0E9621BEFBA10032230A /* baseline_bookmark_black_90pt.png in Resources */ = {isa = PBXBuildFile; fileRef = D16D0E9321BEFB9E0032230A /* baseline_bookmark_black_90pt.png */; };
+		D16D0E9721BEFBA10032230A /* baseline_bookmark_black_60pt - Edited.png in Resources */ = {isa = PBXBuildFile; fileRef = D16D0E9421BEFBA00032230A /* baseline_bookmark_black_60pt - Edited.png */; };
 		D1A4038F21BE5139004F0367 /* account@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A4038C21BE5134004F0367 /* account@2x.png */; };
 		D1A4039021BE5139004F0367 /* account@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A4038D21BE5136004F0367 /* account@3x.png */; };
 		D1A4039121BE5139004F0367 /* account.png in Resources */ = {isa = PBXBuildFile; fileRef = D1A4038E21BE5138004F0367 /* account.png */; };
@@ -52,6 +55,9 @@
 		4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Waypoint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80CA2E99CF4C2788871EB08E /* Pods-Waypoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Waypoint.release.xcconfig"; path = "Pods/Target Support Files/Pods-Waypoint/Pods-Waypoint.release.xcconfig"; sourceTree = "<group>"; };
 		C510EFAE21ADAFE500243FA2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
+		D16D0E9221BEFB9C0032230A /* baseline_bookmark_black_30pt - Edited.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "baseline_bookmark_black_30pt - Edited.png"; sourceTree = "<group>"; };
+		D16D0E9321BEFB9E0032230A /* baseline_bookmark_black_90pt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_bookmark_black_90pt.png; sourceTree = "<group>"; };
+		D16D0E9421BEFBA00032230A /* baseline_bookmark_black_60pt - Edited.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "baseline_bookmark_black_60pt - Edited.png"; sourceTree = "<group>"; };
 		D1A4038C21BE5134004F0367 /* account@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account@2x.png"; sourceTree = "<group>"; };
 		D1A4038D21BE5136004F0367 /* account@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account@3x.png"; sourceTree = "<group>"; };
 		D1A4038E21BE5138004F0367 /* account.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account.png; sourceTree = "<group>"; };
@@ -162,6 +168,9 @@
 				D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */,
 				D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */,
 				D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */,
+				D16D0E9221BEFB9C0032230A /* baseline_bookmark_black_30pt - Edited.png */,
+				D16D0E9421BEFBA00032230A /* baseline_bookmark_black_60pt - Edited.png */,
+				D16D0E9321BEFB9E0032230A /* baseline_bookmark_black_90pt.png */,
 				D1A799A321BD96B2002AF7B2 /* bulletin.png */,
 				D1A799A621BD96B9002AF7B2 /* bulletin@2x.png */,
 				D1A4038E21BE5138004F0367 /* account.png */,
@@ -255,13 +264,16 @@
 				D1A799AF21BD96BE002AF7B2 /* bulletin@2x.png in Resources */,
 				D1A799AD21BD96BE002AF7B2 /* pin@3x.png in Resources */,
 				D1A799AC21BD96BE002AF7B2 /* bulletin.png in Resources */,
+				D16D0E9721BEFBA10032230A /* baseline_bookmark_black_60pt - Edited.png in Resources */,
 				D1A4039021BE5139004F0367 /* account@3x.png in Resources */,
 				D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */,
 				D1A4039121BE5139004F0367 /* account.png in Resources */,
 				D1A799A921BD96BE002AF7B2 /* globe.png in Resources */,
 				D1A799AB21BD96BE002AF7B2 /* pin@2x.png in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
+				D16D0E9621BEFBA10032230A /* baseline_bookmark_black_90pt.png in Resources */,
 				D1A4039B21BE7443004F0367 /* draw@3x.png in Resources */,
+				D16D0E9521BEFBA10032230A /* baseline_bookmark_black_30pt - Edited.png in Resources */,
 				D1A799B021BD96BE002AF7B2 /* globe@3x.png in Resources */,
 				D1A799AE21BD96BE002AF7B2 /* globe@2x.png in Resources */,
 				D1A4039C21BE7443004F0367 /* list@2x.png in Resources */,
