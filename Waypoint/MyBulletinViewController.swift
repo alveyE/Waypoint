@@ -21,18 +21,26 @@ class MyBulletinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        savedNotesIDs = []
         if let user = Auth.auth().currentUser {
-        ref = Database.database().reference()
+            ref = Database.database().reference()
             ref.child("users").child(user.uid).child("saves").observeSingleEvent(of: .value) { (snapshot) in
                 for case let childSnapshot as DataSnapshot in snapshot.children {
                     if let childData = childSnapshot.value as? [String : Any] {
-                    
+                        
                         if let idToAdd = childData["savedID"] as? String {
                             print(idToAdd)
                             self.savedNotesIDs.append(idToAdd)
                         }
                         
-                    
+                        
                     }
                 }
                 
@@ -47,11 +55,11 @@ class MyBulletinViewController: UIViewController {
                     notesWillAppearLabel.font = UIFont(name: "Arial", size: 25)
                     self.view.addSubview(notesWillAppearLabel)
                     //Also check for if is logged and if not do blur effect
-
+                    
                 }
                 
             }
-        
+            
         }else{
             let notSignedInLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height/3))
             notSignedInLabel.text = "Sign in to see your saved notes"
@@ -59,9 +67,6 @@ class MyBulletinViewController: UIViewController {
             notSignedInLabel.font = UIFont(name: "Arial", size: 25)
             self.view.addSubview(notSignedInLabel)
         }
-        
-        
-        
     }
     
 
