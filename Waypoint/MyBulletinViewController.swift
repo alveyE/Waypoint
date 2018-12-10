@@ -40,9 +40,24 @@ class MyBulletinViewController: UIViewController {
                 for save in self.savedNotesIDs {
                     self.getNote(withID: save)
                 }
+                if self.savedNotesIDs.count == 0 {
+                    let notesWillAppearLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height/3))
+                    notesWillAppearLabel.text = "Notes you save will appear here"
+                    notesWillAppearLabel.textAlignment = .center
+                    notesWillAppearLabel.font = UIFont(name: "Arial", size: 25)
+                    self.view.addSubview(notesWillAppearLabel)
+                    //Also check for if is logged and if not do blur effect
+
+                }
                 
             }
         
+        }else{
+            let notSignedInLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height/3))
+            notSignedInLabel.text = "Sign in to see your saved notes"
+            notSignedInLabel.textAlignment = .center
+            notSignedInLabel.font = UIFont(name: "Arial", size: 25)
+            self.view.addSubview(notSignedInLabel)
         }
         
         
