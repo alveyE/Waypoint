@@ -15,7 +15,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-   
+    var ref: DatabaseReference!
     
     @IBOutlet var mainView: UIView! {
         didSet{
@@ -57,6 +57,13 @@ class SignUpViewController: UIViewController {
                 })
             
             
+                //Upload user to database as well
+            if let user = Auth.auth().currentUser {
+             self.ref = Database.database().reference()
+             self.ref.child("users").child(user.uid).setValue(["username": username])
+         
+            
+            }
             })
         
     }

@@ -39,31 +39,31 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="W3A-NN-ViM">
-                                <rect key="frame" x="73" y="569" width="228" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="FxE-cM-OeJ">
+                                <rect key="frame" x="329" y="113" width="30" height="132"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaB-GW-RWL">
-                                        <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
-                                        <color key="backgroundColor" red="1" green="0.87000711679999998" blue="0.29756866830000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Image"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaB-GW-RWL">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="draw.png"/>
                                         <connections>
                                             <action selector="chooseImageTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="Gct-q6-RDC"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmo-3a-FOA">
-                                        <rect key="frame" x="86" y="0.0" width="56" height="30"/>
-                                        <color key="backgroundColor" red="1" green="0.87000711679999998" blue="0.29756866830000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Create"/>
-                                        <connections>
-                                            <action selector="createNoteTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="0yU-xq-jyt"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xb-Lf-qen">
-                                        <rect key="frame" x="172" y="0.0" width="56" height="30"/>
-                                        <color key="backgroundColor" red="1" green="0.87000711679999998" blue="0.29756866830000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Set Link"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xb-Lf-qen">
+                                        <rect key="frame" x="0.0" y="51" width="30" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="list.png"/>
                                         <connections>
                                             <action selector="setLinkTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="dij-d2-I8k"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmo-3a-FOA">
+                                        <rect key="frame" x="0.0" y="102" width="30" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="globe.png"/>
+                                        <connections>
+                                            <action selector="createNoteTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="0yU-xq-jyt"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -71,10 +71,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.79614361702127656" green="0.52697480122217755" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="W3A-NN-ViM" firstAttribute="leading" secondItem="y8b-iA-yyE" secondAttribute="leading" constant="73" id="1Ow-0H-1mg"/>
-                            <constraint firstItem="y8b-iA-yyE" firstAttribute="trailing" secondItem="W3A-NN-ViM" secondAttribute="trailing" constant="74" id="YcF-JS-jIX"/>
-                            <constraint firstItem="W3A-NN-ViM" firstAttribute="top" secondItem="y8b-iA-yyE" secondAttribute="top" constant="549" id="iGD-2K-Mhg"/>
-                            <constraint firstItem="y8b-iA-yyE" firstAttribute="bottom" secondItem="W3A-NN-ViM" secondAttribute="bottom" constant="19" id="q9K-17-35e"/>
+                            <constraint firstItem="FxE-cM-OeJ" firstAttribute="top" secondItem="y8b-iA-yyE" secondAttribute="top" constant="93" id="12b-mB-gpW"/>
+                            <constraint firstItem="FxE-cM-OeJ" firstAttribute="leading" secondItem="y8b-iA-yyE" secondAttribute="leading" constant="329" id="Hvg-kG-yfO"/>
+                            <constraint firstItem="y8b-iA-yyE" firstAttribute="trailing" secondItem="FxE-cM-OeJ" secondAttribute="trailing" constant="16" id="IJF-7C-Wp4"/>
+                            <constraint firstItem="y8b-iA-yyE" firstAttribute="bottom" secondItem="FxE-cM-OeJ" secondAttribute="bottom" constant="373" id="RhU-Af-j4e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="y8b-iA-yyE"/>
                     </view>
@@ -82,7 +82,9 @@
                         <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-15"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="createNoteButton" destination="qmo-3a-FOA" id="sh4-Hl-9Ci"/>
                         <outlet property="imageButton" destination="TaB-GW-RWL" id="9Qg-UX-VbF"/>
+                        <outlet property="linkButton" destination="3Xb-Lf-qen" id="Hzt-OL-v4e"/>
                         <outlet property="mainView" destination="Ffe-dt-6xy" id="SZO-FE-C7O"/>
                     </connections>
                 </viewController>
@@ -454,7 +456,9 @@
     <resources>
         <image name="account.png" width="30" height="30"/>
         <image name="bulletin.png" width="30" height="30"/>
+        <image name="draw.png" width="30" height="30"/>
         <image name="globe.png" width="30" height="30"/>
+        <image name="list.png" width="30" height="30"/>
         <image name="pin.png" width="30" height="30"/>
     </resources>
 </document>

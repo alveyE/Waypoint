@@ -9,10 +9,11 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import FirebaseAuth
 
 class MyBulletinViewController: UIViewController {
 
-    private let savedNotesIDs = ["-LSzHCaUkfje9BGRsq2R","-LSzHCaWz1HoKzLTsdhJ","-LSzcPImVM_hFKngJKrB"]
+    private var savedNotesIDs = [String]()
     
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -20,10 +21,30 @@ class MyBulletinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        for save in savedNotesIDs {
-            getNote(withID: save)
+        if let user = Auth.auth().currentUser {
+        ref = Database.database().reference()
+            ref.child("users").child(user.uid).child("saves").observeSingleEvent(of: .value) { (snapshot) in
+                for case let childSnapshot as DataSnapshot in snapshot.children {
+                    if let childData = childSnapshot.value as? [String : Any] {
+                    
+                        if let idToAdd = childData["savedID"] as? String {
+                            print(idToAdd)
+                            self.savedNotesIDs.append(idToAdd)
+                        }
+                        
+                    
+                    }
+                }
+                
+                
+                for save in self.savedNotesIDs {
+                    self.getNote(withID: save)
+                }
+                
+            }
+        
         }
+        
         
         
     }
@@ -46,11 +67,11 @@ class MyBulletinViewController: UIViewController {
                 let linkText = value["linkText"] as? String
                 let linkURL = value["linkURL"] as? String
                 let AREnabled = value["AREnabled"] as? Bool
-                let creator = value["creator"] as? User
+                let creator = value["creator"] as? String
                 let timeLeft = value["timeLeft"] as? Int
                 let latitude = value["latitude"] as? Double
                 let longitude = value["longitude"] as? Double
-                let loadedNote = Note(title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images ?? [], linkText: linkText, linkURL: linkURL, AREnabled: AREnabled ?? false, creator: creator ?? User(username: "", password: "", id: 0), timeLeft: timeLeft, location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
+                let loadedNote = Note(title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images ?? [], linkText: linkText, linkURL: linkURL, AREnabled: AREnabled ?? false, creator: creator ?? "", timeLeft: timeLeft, location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
               
                 let noteView = NoteView()
                 
@@ -64,7 +85,6 @@ class MyBulletinViewController: UIViewController {
                 
                 noteView.title = loadedNote.title
                 noteView.time = loadedNote.timeStamp
-                
                 
                 if let displayText = loadedNote.text {
                     noteView.text = displayText

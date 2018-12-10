@@ -39,6 +39,9 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     }
     @IBOutlet weak var imageButton: UIButton!
     
+    @IBOutlet weak var linkButton: UIButton!
+    
+    @IBOutlet weak var createNoteButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +54,9 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         createNoteView()
-        
+//        view.bringSubviewToFront(imageButton)
+//        view.bringSubviewToFront(linkButton)
+//        view.bringSubviewToFront(createNoteButton)
         if let user = Auth.auth().currentUser {
     noteCreator = NoteCreator(creator: user.uid, latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         }else{
@@ -176,6 +181,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         note.text = "Enter text here"
         
         view.addSubview(note)
+        view.sendSubviewToBack(note)
      
   
     }

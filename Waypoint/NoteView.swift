@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseStorage
+import FirebaseAuth
 
 class NoteView: UIView {
     
@@ -74,17 +76,28 @@ class NoteView: UIView {
             setNeedsLayout()
         }
     }
+    public var noteID = ""
     
     
     private var hasDrawn = false
     public var editable = true
+    public var hasSaveButton = false
     
+    var ref: DatabaseReference!
     
     private lazy var yPosition = height * 10/48
     
     
     lazy var titleText = createTitleText()
     private lazy var timeText = createTimeText()
+  
+    public var saveButton: UIButton! {
+        didSet{
+            let tap = UITapGestureRecognizer(target: self, action: #selector(saveNote))
+            saveButton.addGestureRecognizer(tap)
+        }
+    }
+    
     lazy var textContent = createTextContent()
   
     private var displayImages = [UIImageView]() {
@@ -100,7 +113,14 @@ class NoteView: UIView {
     
     private var font = UIFont(name: "Marker Felt", size: 30)
     
-    
+    @objc private func saveNote(){
+        if let user = Auth.auth().currentUser {
+            
+            ref = Database.database().reference()
+            let userID = ref.child("users").child(user.uid).child("saves").childByAutoId()
+            userID.updateChildValues(["savedID" : noteID])
+        }
+    }
     
     
     override func draw(_ rect: CGRect) {
@@ -160,8 +180,8 @@ class NoteView: UIView {
         
         for imgurl in imageUrls {
       
-            
-            let spacing: CGFloat = 8
+        
+         //   let spacing: CGFloat = 8
             
             
        //     let adjustedWidth = width - width / spacing
@@ -228,11 +248,15 @@ class NoteView: UIView {
         textContent = createTextContent()
         titleText = createTitleText()
         timeText = createTimeText()
+        saveButton = createSaveButton()
+        
         
         addSubview(titleText)
         addSubview(timeText)
         addSubview(textContent)
-
+        if hasSaveButton {
+        addSubview(saveButton)
+        }
         for image in displayImages {
             addSubview(image)
         }
@@ -270,6 +294,13 @@ class NoteView: UIView {
 
         }
         return textField
+    }
+    
+    private func createSaveButton() -> UIButton {
+        let saveButton = UIButton(frame: CGRect(x: width * 9/10, y: height/12, width: width/20, height: width/20))
+        saveButton.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        return saveButton
+        
     }
     
     
