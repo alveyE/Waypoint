@@ -10,21 +10,30 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item 2-->
+        <!--ARScreen-->
         <scene sceneID="zpY-jk-lMd">
             <objects>
-                <viewController id="lGb-1Q-gSi" customClass="ARViewController" customModule="Waypoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="ARScreen" id="lGb-1Q-gSi" customClass="ARViewController" customModule="Waypoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oni-Ix-npp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="COG-vO-abX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </arscnView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="IEb-7Z-GOA"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="v5g-AQ-QAg"/>
+                    <connections>
+                        <outlet property="sceneView" destination="COG-vO-abX" id="zlT-t7-Qlk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FrG-dX-8jm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1470" y="-532"/>
+            <point key="canvasLocation" x="1469.5999999999999" y="-532.98350824587715"/>
         </scene>
         <!--Create Note View Controller-->
         <scene sceneID="a93-Aa-rPD">
@@ -53,7 +62,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xb-Lf-qen">
                                         <rect key="frame" x="0.0" y="102" width="30" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="list"/>
+                                        <state key="normal" image="link"/>
                                         <connections>
                                             <action selector="setLinkTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="dij-d2-I8k"/>
                                         </connections>
@@ -112,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tl9-3Q-x8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-159.19999999999999" y="-714.69265367316348"/>
+            <point key="canvasLocation" x="500" y="-672.41379310344837"/>
         </scene>
         <!--My Bulletin View Controller-->
         <scene sceneID="8jd-as-r3a">
@@ -432,6 +441,7 @@
                         <segue destination="XRD-5r-4JA" kind="relationship" relationship="viewControllers" id="VL6-gk-yms"/>
                         <segue destination="UIx-fv-ZkW" kind="relationship" relationship="viewControllers" id="G8r-4x-ICZ"/>
                         <segue destination="GVT-HZ-td4" kind="relationship" relationship="viewControllers" id="DvX-X9-ZDS"/>
+                        <segue destination="lGb-1Q-gSi" kind="relationship" relationship="viewControllers" id="hRg-6l-aVi"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CuJ-Oq-83I" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -466,7 +476,7 @@
         <image name="bulletin" width="30" height="30"/>
         <image name="globe" width="30" height="30"/>
         <image name="image" width="30" height="30"/>
-        <image name="list" width="30" height="30"/>
+        <image name="link" width="30" height="30"/>
         <image name="send" width="30" height="30"/>
     </resources>
 </document>

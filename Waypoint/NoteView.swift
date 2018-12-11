@@ -76,6 +76,7 @@ class NoteView: UIView {
             setNeedsLayout()
         }
     }
+    public var showARButton = false
     public var noteID = ""
     
     
@@ -98,6 +99,8 @@ class NoteView: UIView {
         }
     }
     
+    public lazy var arButton = createARButton()
+    
     lazy var textContent = createTextContent()
   
     private var displayImages = [UIImageView]() {
@@ -111,8 +114,8 @@ class NoteView: UIView {
     private lazy var height: CGFloat = bounds.height
     
     
-    //private var font = UIFont(name: "Marker Felt", size: 30)
-    private var font = UIFont(name: "Prompt-Regular", size: 30)
+    private var font = UIFont(name: "Marker Felt", size: 30)
+   // private var font = UIFont(name: "Prompt-Regular", size: 30)
     @objc private func saveNote(){
         if let user = Auth.auth().currentUser {
             
@@ -121,6 +124,7 @@ class NoteView: UIView {
             userID.updateChildValues(["savedID" : noteID])
         }
     }
+ 
     
     
     override func draw(_ rect: CGRect) {
@@ -157,14 +161,7 @@ class NoteView: UIView {
         if !hasDrawn {
             clip()
            font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font!)
-            for family: String in UIFont.familyNames
-            {
-                print(family)
-                for names: String in UIFont.fontNames(forFamilyName: family)
-                {
-                    print("== \(names)")
-                }
-            }
+            
             
             
         let triangleShape = CAShapeLayer()
@@ -256,6 +253,7 @@ class NoteView: UIView {
         titleText = createTitleText()
         timeText = createTimeText()
         saveButton = createSaveButton()
+        arButton = createARButton()
         
         
         addSubview(titleText)
@@ -263,6 +261,9 @@ class NoteView: UIView {
         addSubview(textContent)
         if hasSaveButton {
         addSubview(saveButton)
+        }
+        if showARButton {
+            addSubview(arButton)
         }
         for image in displayImages {
             addSubview(image)
@@ -324,6 +325,15 @@ class NoteView: UIView {
         
         return timeLabel
         
+    }
+    
+    private func createARButton() -> UIButton {
+        let viewInARButton = UIButton(frame: CGRect(x: width * 7/10, y: height/14, width: width/8, height: height * 2/24))
+        viewInARButton.setTitle("AR", for: UIControl.State.normal)
+        viewInARButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: UIControl.State.normal)
+        viewInARButton.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        
+        return viewInARButton
     }
     
     private func createTitleText() -> UITextView {
