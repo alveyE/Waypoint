@@ -21,7 +21,9 @@ class SignInViewController: UIViewController {
             mainView.addGestureRecognizer(tap)
         }
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.view = nil
+    }
     
     @objc private func disableKeyboard(){
         mainView.endEditing(true)

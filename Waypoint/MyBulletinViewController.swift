@@ -27,6 +27,10 @@ class MyBulletinViewController: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.view = nil
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         scrollView.subviews.forEach({ $0.removeFromSuperview() })
         savedNotesIDs = []

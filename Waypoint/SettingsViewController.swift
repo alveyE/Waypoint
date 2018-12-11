@@ -28,7 +28,9 @@ class SettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         determineShownElements()
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.view = nil
+    }
     
     @IBOutlet var mainView: UIView! {
         didSet{
