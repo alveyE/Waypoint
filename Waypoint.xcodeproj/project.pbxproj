@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		13E6AFCA1F837775253FB43F /* Pods_Waypoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */; };
 		C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510EFAE21ADAFE500243FA2 /* DBManager.swift */; };
-		D16D0EBE21BF6CA50032230A /* bulletin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D16D0EBB21BF6C9B0032230A /* bulletin@2x.png */; };
-		D16D0EBF21BF6CA50032230A /* bulletin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D16D0EBC21BF6C9F0032230A /* bulletin@3x.png */; };
-		D16D0EC021BF6CA50032230A /* bulletin.png in Resources */ = {isa = PBXBuildFile; fileRef = D16D0EBD21BF6CA40032230A /* bulletin.png */; };
 		D1A7998121BA631F002AF7B2 /* CustomPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */; };
 		D1A7998721BA6EF3002AF7B2 /* MyBulletinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */; };
 		D1A7998921BA6FE7002AF7B2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */; };
@@ -37,9 +34,6 @@
 		4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Waypoint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80CA2E99CF4C2788871EB08E /* Pods-Waypoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Waypoint.release.xcconfig"; path = "Pods/Target Support Files/Pods-Waypoint/Pods-Waypoint.release.xcconfig"; sourceTree = "<group>"; };
 		C510EFAE21ADAFE500243FA2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
-		D16D0EBB21BF6C9B0032230A /* bulletin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bulletin@2x.png"; sourceTree = "<group>"; };
-		D16D0EBC21BF6C9F0032230A /* bulletin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bulletin@3x.png"; sourceTree = "<group>"; };
-		D16D0EBD21BF6CA40032230A /* bulletin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bulletin.png; sourceTree = "<group>"; };
 		D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPointAnnotation.swift; sourceTree = "<group>"; };
 		D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBulletinViewController.swift; sourceTree = "<group>"; };
 		D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -132,9 +126,6 @@
 				D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */,
 				D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */,
 				D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */,
-				D16D0EBD21BF6CA40032230A /* bulletin.png */,
-				D16D0EBB21BF6C9B0032230A /* bulletin@2x.png */,
-				D16D0EBC21BF6C9F0032230A /* bulletin@3x.png */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -199,10 +190,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D16D0EBF21BF6CA50032230A /* bulletin@3x.png in Resources */,
-				D16D0EBE21BF6CA50032230A /* bulletin@2x.png in Resources */,
 				D1B648FC21B6426400B74900 /* Podfile in Resources */,
-				D16D0EC021BF6CA50032230A /* bulletin.png in Resources */,
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
 				D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
