@@ -111,8 +111,8 @@ class NoteView: UIView {
     private lazy var height: CGFloat = bounds.height
     
     
-    private var font = UIFont(name: "Marker Felt", size: 30)
-    
+    //private var font = UIFont(name: "Marker Felt", size: 30)
+    private var font = UIFont(name: "Prompt-Regular", size: 30)
     @objc private func saveNote(){
         if let user = Auth.auth().currentUser {
             
@@ -156,8 +156,15 @@ class NoteView: UIView {
 
         if !hasDrawn {
             clip()
-            font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font!)
-
+           font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font!)
+            for family: String in UIFont.familyNames
+            {
+                print(family)
+                for names: String in UIFont.fontNames(forFamilyName: family)
+                {
+                    print("== \(names)")
+                }
+            }
             
             
         let triangleShape = CAShapeLayer()
@@ -262,6 +269,7 @@ class NoteView: UIView {
         }
         
     }
+    
     
     private func createTextContent() -> UITextView{
         
