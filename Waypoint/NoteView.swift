@@ -298,7 +298,9 @@ class NoteView: UIView {
     
     private func createSaveButton() -> UIButton {
         let saveButton = UIButton(frame: CGRect(x: width * 9/10, y: height/12, width: width/20, height: width/20))
-        saveButton.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        let tag = UIImage(named: "tag")
+        saveButton.setImage(tag, for: UIControl.State.normal)
+   //     saveButton.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         return saveButton
         
     }

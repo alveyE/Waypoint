@@ -38,6 +38,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.view = nil
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

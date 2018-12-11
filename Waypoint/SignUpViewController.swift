@@ -24,7 +24,9 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.view = nil
+    }
     @objc private func disableKeyboard(){
         mainView.endEditing(true)
     }

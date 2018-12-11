@@ -37,6 +37,10 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         return true
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.view = nil
+    }
+    
     @IBOutlet var mainView: UIView! {
         didSet{
         let tap = UITapGestureRecognizer(target: self, action: #selector(disableKeyboard))
