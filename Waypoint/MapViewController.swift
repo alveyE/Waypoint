@@ -105,12 +105,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         scroll.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight * 7/10)
         note.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight * 7/10)
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        viewInARButton = UIButton(frame: CGRect(x: note.frame.width * 7/10, y: note.frame.height/14, width: note.frame.width/8, height: note.frame.height * 2/24))
-        viewInARButton.setTitle("AR", for: UIControl.State.normal)
-        viewInARButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: UIControl.State.normal)
-        viewInARButton.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        viewInARButton.addTarget(self, action: #selector(arButtonAction), for: .touchUpInside)
-        
+      
         
         note.editable = false
         note.hasSaveButton = true
@@ -134,8 +129,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         view.addSubview(mapView)
         mapView.addSubview(scroll)
         mapView.addSubview(note)
-        mapView.addSubview(viewInARButton)
-        viewInARButton.isHidden = true
         mapView.isUserInteractionEnabled = true
 
         note.alpha = 0
@@ -252,9 +245,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         note.title = loadedNote.title
         note.time = loadedNote.timeStamp
      //   note.showARButton = loadedNote.AREnabled
-        viewInARButton.isHidden = loadedNote.AREnabled
 
-        
         
         if let displayText = loadedNote.text {
             note.text = displayText

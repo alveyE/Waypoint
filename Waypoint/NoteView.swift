@@ -14,6 +14,7 @@ import FirebaseAuth
 class NoteView: UIView {
     
     
+    
     // public var noteColor = #colorLiteral(red: 1, green: 0.9230569365, blue: 0.3114053169, alpha: 1)
 //    public var noteColor = UIColor(red: 1, green: 0.9230569365, blue: 0.3114053169, alpha: 1){
 //        didSet{
@@ -243,7 +244,7 @@ class NoteView: UIView {
     private func clip(){
         clipsToBounds = true
     }
-    
+    private var hasLayout = false
     override func layoutSubviews() {
         super.layoutSubviews()
         subviews.forEach({ $0.removeFromSuperview() })
@@ -254,8 +255,6 @@ class NoteView: UIView {
         timeText = createTimeText()
         saveButton = createSaveButton()
         arButton = createARButton()
-        
-        
         addSubview(titleText)
         addSubview(timeText)
         addSubview(textContent)

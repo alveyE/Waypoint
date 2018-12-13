@@ -105,8 +105,9 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     }
     @IBAction func setLinkTouched(_ sender: UIButton) {
         
-        let selectedText = "\(String(describing: note.textContent.selectedTextRange))"
-        noteCreator.linkText = selectedText
+        let selectedText = note.textContent.selectedTextRange
+        
+        noteCreator.linkText = "GRSK aldk8352 ks9"
         noteCreator.linkURL = "https://fractyldev.com"
         
     }
