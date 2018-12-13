@@ -132,6 +132,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.isUserInteractionEnabled = true
 
         note.alpha = 0
+        
+        if let userLocation = locationManager.location?.coordinate {
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 200, longitudinalMeters: 200)
+            mapView.setRegion(viewRegion, animated: true)
+        }
+
       
         
        
@@ -151,18 +157,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     }
     
-    func determineCurrentLocationAndZoom()
+    func determineCurrentLocation()
     {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         
-        if let userLocation = locationManager.location?.coordinate {
-            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 200, longitudinalMeters: 200)
-            mapView.setRegion(viewRegion, animated: true)
-        }
-
         
         if CLLocationManager.locationServicesEnabled() {
             //locationManager.startUpdatingHeading()
