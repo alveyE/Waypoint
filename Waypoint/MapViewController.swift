@@ -24,6 +24,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     var scroll: UIScrollView!
+    var viewInARButton: UIButton!
     var ref: DatabaseReference!
     var locations = [(latitude: Double, longitude: Double)]()
     var noteIDs = [String]()
@@ -104,7 +105,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         scroll.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight * 7/10)
         note.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight * 7/10)
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-
+      
+        
         note.editable = false
         note.hasSaveButton = true
         xPosition += note.frame.width + note.frame.width/15
@@ -116,7 +118,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // Or, if needed, we can position map in the center of the view
         mapView.center = view.center
         mapView.contentMode = .scaleToFill
+        mapView.showsCompass = false
         
+
         updatePins()
         
         scroll.isHidden = true
@@ -174,6 +178,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         print("Error \(error)")
     }
     
+    
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        
+        for view in views {
+            if view.annotation?.isKind(of: MKUserLocation.self) ?? false {
+                view.canShowCallout = false
+            }
+        }
+        
+    }
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
       
@@ -227,10 +241,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func updateNoteView(_ loadedNote: Note){
         note.clearNote()
-
+        
         note.title = loadedNote.title
         note.time = loadedNote.timeStamp
-        
+     //   note.showARButton = loadedNote.AREnabled
+
         
         if let displayText = loadedNote.text {
             note.text = displayText
@@ -288,6 +303,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
+    @objc func arButtonAction(sender: UIButton!){
+        print("AR pressed")
+        performSegue(withIdentifier: "ARScreen", sender: self)
+        
+    }
+    
     public func getNote(withID noteID: String, addingNote: Bool){
         ref = Database.database().reference()
 
@@ -318,6 +339,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     newNoteView.time = note.timeStamp
                     newNoteView.editable = false
                     newNoteView.hasSaveButton = true
+                    newNoteView.arButton.addTarget(self, action: #selector(self.arButtonAction), for: .touchUpInside)
                     if let displayText = note.text {
                         newNoteView.text = displayText
                     }

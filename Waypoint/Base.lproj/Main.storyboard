@@ -1,30 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n0K-SW-KVl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n0K-SW-KVl">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item 2-->
+        <!--ARScreen-->
         <scene sceneID="zpY-jk-lMd">
             <objects>
-                <viewController id="lGb-1Q-gSi" customClass="ARViewController" customModule="Waypoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="ARScreen" id="lGb-1Q-gSi" customClass="ARViewController" customModule="Waypoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oni-Ix-npp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="COG-vO-abX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </arscnView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="IEb-7Z-GOA"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="v5g-AQ-QAg"/>
+                    <connections>
+                        <outlet property="sceneView" destination="COG-vO-abX" id="zlT-t7-Qlk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FrG-dX-8jm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1470" y="-532"/>
+            <point key="canvasLocation" x="1469.5999999999999" y="-532.98350824587715"/>
         </scene>
         <!--Create Note View Controller-->
         <scene sceneID="a93-Aa-rPD">
@@ -42,44 +51,48 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="FxE-cM-OeJ">
                                 <rect key="frame" x="329" y="113" width="30" height="132"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaB-GW-RWL">
-                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaB-GW-RWL">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="81"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="image"/>
                                         <connections>
                                             <action selector="chooseImageTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="Gct-q6-RDC"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xb-Lf-qen">
-                                        <rect key="frame" x="0.0" y="51" width="30" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xb-Lf-qen">
+                                        <rect key="frame" x="0.0" y="102" width="30" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="list"/>
+                                        <state key="normal" image="link"/>
                                         <connections>
                                             <action selector="setLinkTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="dij-d2-I8k"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmo-3a-FOA">
-                                        <rect key="frame" x="0.0" y="102" width="30" height="30"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="globe.png"/>
-                                        <connections>
-                                            <action selector="createNoteTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="0yU-xq-jyt"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmo-3a-FOA">
+                                <rect key="frame" x="329" y="25" width="30" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="send"/>
+                                <connections>
+                                    <action selector="createNoteTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="0yU-xq-jyt"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.79614361702127656" green="0.52697480122217755" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="0.98474785848366608" blue="0.80681842670445758" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="FxE-cM-OeJ" firstAttribute="top" secondItem="y8b-iA-yyE" secondAttribute="top" constant="93" id="12b-mB-gpW"/>
+                            <constraint firstItem="qmo-3a-FOA" firstAttribute="leading" secondItem="y8b-iA-yyE" secondAttribute="leading" constant="329" id="8f7-j2-HD7"/>
                             <constraint firstItem="FxE-cM-OeJ" firstAttribute="leading" secondItem="y8b-iA-yyE" secondAttribute="leading" constant="329" id="Hvg-kG-yfO"/>
                             <constraint firstItem="y8b-iA-yyE" firstAttribute="trailing" secondItem="FxE-cM-OeJ" secondAttribute="trailing" constant="16" id="IJF-7C-Wp4"/>
                             <constraint firstItem="y8b-iA-yyE" firstAttribute="bottom" secondItem="FxE-cM-OeJ" secondAttribute="bottom" constant="373" id="RhU-Af-j4e"/>
+                            <constraint firstItem="y8b-iA-yyE" firstAttribute="bottom" secondItem="qmo-3a-FOA" secondAttribute="bottom" constant="563" id="XJW-TW-yUi"/>
+                            <constraint firstItem="qmo-3a-FOA" firstAttribute="top" secondItem="y8b-iA-yyE" secondAttribute="top" constant="5" id="ieM-7Z-99z"/>
+                            <constraint firstItem="y8b-iA-yyE" firstAttribute="trailing" secondItem="qmo-3a-FOA" secondAttribute="trailing" constant="16" id="oCh-3c-zwN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="y8b-iA-yyE"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="pin" landscapeImage="pin" largeContentSizeImage="pin" id="NfJ-E4-mCE">
-                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-15"/>
+                    <tabBarItem key="tabBarItem" title="" image="add" landscapeImage="add" largeContentSizeImage="add" id="NfJ-E4-mCE">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-12"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="createNoteButton" destination="qmo-3a-FOA" id="sh4-Hl-9Ci"/>
@@ -108,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tl9-3Q-x8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-159.19999999999999" y="-714.69265367316348"/>
+            <point key="canvasLocation" x="500" y="-672.41379310344837"/>
         </scene>
         <!--My Bulletin View Controller-->
         <scene sceneID="8jd-as-r3a">
@@ -148,7 +161,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Display Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcF-Jg-Up5">
                                 <rect key="frame" x="29" y="129" width="323" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -421,6 +434,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="Kuo-ij-o0E" kind="relationship" relationship="viewControllers" id="72G-HX-cJH"/>
@@ -433,11 +447,13 @@
             </objects>
             <point key="canvasLocation" x="-1372" y="-301"/>
         </scene>
-        <!--Settings-->
+        <!--Navigation Controller-->
         <scene sceneID="thO-jK-oc1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GVT-HZ-td4" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="account" landscapeImage="account" largeContentSizeImage="account" id="o1R-Q2-hMf"/>
+                    <tabBarItem key="tabBarItem" title="" image="account" landscapeImage="account" largeContentSizeImage="account" id="o1R-Q2-hMf">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-12"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ySg-XH-0cz">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -455,11 +471,11 @@
     </scenes>
     <resources>
         <image name="account" width="30" height="30"/>
+        <image name="add" width="30" height="30"/>
         <image name="bulletin" width="30" height="30"/>
         <image name="globe" width="30" height="30"/>
-        <image name="globe.png" width="30" height="30"/>
         <image name="image" width="30" height="30"/>
-        <image name="list" width="30" height="30"/>
-        <image name="pin" width="30" height="30"/>
+        <image name="link" width="30" height="30"/>
+        <image name="send" width="30" height="30"/>
     </resources>
 </document>

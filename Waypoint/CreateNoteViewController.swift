@@ -11,7 +11,7 @@ import CoreLocation
 import FirebaseStorage
 import FirebaseAuth
 
-class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var locationManager:CLLocationManager!
     var currentLocation = CLLocation(latitude: 0, longitude: 0)
@@ -20,22 +20,13 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     
     var note:NoteView! {
         didSet{
-            note.textContent.delegate = self
             let tapped = UITapGestureRecognizer(target: self, action: #selector(disableKeyboard))
             note.addGestureRecognizer(tapped)
         }
     }
 
-     func textViewDidBeginEditing(_ textView: UITextView) {
-        print("TextContent Editing")
-    }
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        print("bein gay")
-        if text == "\n" {
-            textView.resignFirstResponder()
-        }
-        return true
-    }
+   
+   
     
     override func viewWillDisappear(_ animated: Bool) {
         self.view = nil
@@ -114,8 +105,9 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     }
     @IBAction func setLinkTouched(_ sender: UIButton) {
         
-        let selectedText = "\(String(describing: note.textContent.selectedTextRange))"
-        noteCreator.linkText = selectedText
+        let selectedText = note.textContent.selectedTextRange
+        
+        noteCreator.linkText = "GRSK aldk8352 ks9"
         noteCreator.linkURL = "https://fractyldev.com"
         
     }
