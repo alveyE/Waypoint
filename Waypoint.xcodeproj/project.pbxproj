@@ -29,6 +29,8 @@
 		D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58F321ADD967003FF5DB /* NoteCreator.swift */; };
 		D1B648FC21B6426400B74900 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D1B648FB21B6426400B74900 /* Podfile */; };
 		D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D35D2221B7118600272F76 /* GoogleService-Info.plist */; };
+		D1DDA16521C2B9ED00E3F2B0 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */; };
+		D1DDA16721C2C69300E3F2B0 /* TextWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		D1AE58F321ADD967003FF5DB /* NoteCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCreator.swift; sourceTree = "<group>"; };
 		D1B648FB21B6426400B74900 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D1D35D2221B7118600272F76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWidget.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,8 @@
 				D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */,
 				D1603A6521C07A7900121FFA /* art.scnassets */,
 				D1603A6721C092DC00121FFA /* note.xib */,
+				D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */,
+				D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -272,6 +278,7 @@
 				D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */,
 				D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */,
 				D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */,
+				D1DDA16721C2C69300E3F2B0 /* TextWidget.swift in Sources */,
 				D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */,
 				D1A7998B21BB3906002AF7B2 /* SignInViewController.swift in Sources */,
 				C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */,
@@ -282,6 +289,7 @@
 				D1AE58DE219E5639003FF5DB /* User.swift in Sources */,
 				D1AE58DC219E5183003FF5DB /* Note.swift in Sources */,
 				D1A7998921BA6FE7002AF7B2 /* SettingsViewController.swift in Sources */,
+				D1DDA16521C2B9ED00E3F2B0 /* TitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
