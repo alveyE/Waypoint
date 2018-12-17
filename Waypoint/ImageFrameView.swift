@@ -11,7 +11,11 @@ import UIKit
 class ImageFrameView: UIView {
 
     let image = UIImage(named: "kenya.jpeg")
-    lazy var imageView = createCenteredImage()
+    
+    
+    
+    private lazy var imageView = createCenteredImage()
+    private lazy var frameCorners = createFrameCorners()
     
     lazy var width = bounds.width
     lazy var height = bounds.height
@@ -21,15 +25,13 @@ class ImageFrameView: UIView {
     override func draw(_ rect: CGRect) {
         
         backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        createFrameCorners()
-        
+        clipsToBounds = true
     }
     
     
     override func layoutSubviews() {
         addSubview(imageView)
-    //    createFrameCorners()
-        
+        layer.addSublayer(frameCorners)
     }
     
     
@@ -67,13 +69,15 @@ class ImageFrameView: UIView {
   
     
     
-    private func createFrameCorners(){
+    private func createFrameCorners() -> CAShapeLayer{
         
+        let triangles = CAShapeLayer()
         
-        if let img = image {
+        var iWidth = imageView.frame.width
         
-        let iWidth = img.size.width
-        let iHeight = img.size.height
+        if imageView.frame.width > imageView.frame.height {
+            iWidth = imageView.frame.height
+        }
             
         let bottomLeftCorner = UIBezierPath()
         
@@ -90,19 +94,13 @@ class ImageFrameView: UIView {
         topRightCorner.addLine(to: CGPoint(x: imageView.frame.maxX - iWidth/4, y: imageView.frame.minY - iWidth/8))
         topRightCorner.close()
         
+        bottomLeftCorner.append(topRightCorner)
+            
+        triangles.path = bottomLeftCorner.cgPath
+        triangles.fillColor = #colorLiteral(red: 0.2162140839, green: 1, blue: 0.7142448477, alpha: 1)
         
         
-        
-        
-        
-        
-        #colorLiteral(red: 0.2162140839, green: 1, blue: 0.7142448477, alpha: 1).setFill()
-        bottomLeftCorner.fill()
-        topRightCorner.fill()
-        
-        }
-        
-        
+        return triangles
     }
     
     
