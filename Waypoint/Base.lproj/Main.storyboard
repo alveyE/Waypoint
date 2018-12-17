@@ -48,13 +48,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5pf-JZ-z95" customClass="TextWidget" customModule="Waypoint" customModuleProvider="target">
-                                <rect key="frame" x="16" y="153" width="343" height="356"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GuZ-Kr-B82" customClass="ImageFrameView" customModule="Waypoint" customModuleProvider="target">
+                                <rect key="frame" x="16" y="159" width="343" height="305"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GuZ-Kr-B82" customClass="ImageFrameView" customModule="Waypoint" customModuleProvider="target">
-                                <rect key="frame" x="16" y="519" width="343" height="128"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBB-a1-7Wd" customClass="TextWidget" customModule="Waypoint" customModuleProvider="target">
+                                <rect key="frame" x="16" y="491" width="343" height="156"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>

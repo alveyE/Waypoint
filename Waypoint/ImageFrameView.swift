@@ -10,7 +10,7 @@ import UIKit
 
 class ImageFrameView: UIView {
 
-    let image = UIImage(named: "kenya.jpeg")
+    let image = UIImage(named: "mountain.jpg")
     
     
     
@@ -42,19 +42,19 @@ class ImageFrameView: UIView {
             var adjustedWidth = imageGiven.size.width
             var adjustedHeight = imageGiven.size.height
           
+          
+            let minimumPadding = width * 2/20
             
-            if adjustedWidth > width - width/10{
+            if adjustedWidth > adjustedHeight{
                 let preAdj = adjustedWidth
-                adjustedWidth = width - width/10
+                adjustedWidth = width - minimumPadding
                 adjustedHeight *= adjustedWidth/preAdj
-            }
-            
-            if adjustedHeight > height - height/10 {
+            }else {
                 let preAdj = adjustedHeight
-                adjustedHeight = height - height/10
+                adjustedHeight = height - minimumPadding
                 adjustedWidth *= adjustedHeight/preAdj
             }
-            
+        
             
             
         let imageCentered = UIImageView(frame: CGRect(x: width/2 - adjustedWidth/2, y: height/2 - adjustedHeight/2, width: adjustedWidth, height: adjustedHeight))
@@ -78,26 +78,28 @@ class ImageFrameView: UIView {
         if imageView.frame.width > imageView.frame.height {
             iWidth = imageView.frame.height
         }
-            
+        
+        let margin = iWidth/50
+        
         let bottomLeftCorner = UIBezierPath()
         
-        bottomLeftCorner.move(to: CGPoint(x: imageView.frame.minX - iWidth/8, y: imageView.frame.maxY - iWidth/4))
-        bottomLeftCorner.addLine(to: CGPoint(x: imageView.frame.minX - iWidth/8, y: imageView.frame.maxY + iWidth/8))
-        bottomLeftCorner.addLine(to: CGPoint(x: imageView.frame.minX + iWidth/4, y: imageView.frame.maxY + iWidth/8))
+        bottomLeftCorner.move(to: CGPoint(x: imageView.frame.minX - margin, y: imageView.frame.maxY - iWidth/4))
+        bottomLeftCorner.addLine(to: CGPoint(x: imageView.frame.minX - margin, y: imageView.frame.maxY + margin))
+        bottomLeftCorner.addLine(to: CGPoint(x: imageView.frame.minX + iWidth/4, y: imageView.frame.maxY + margin))
         bottomLeftCorner.close()
         
       
         let topRightCorner = UIBezierPath()
         
-        topRightCorner.move(to: CGPoint(x: imageView.frame.maxX + iWidth/8, y: imageView.frame.minY + iWidth/4))
-        topRightCorner.addLine(to: CGPoint(x: imageView.frame.maxX + iWidth/8, y: imageView.frame.minY - iWidth/8))
-        topRightCorner.addLine(to: CGPoint(x: imageView.frame.maxX - iWidth/4, y: imageView.frame.minY - iWidth/8))
+        topRightCorner.move(to: CGPoint(x: imageView.frame.maxX + margin, y: imageView.frame.minY + iWidth/4))
+        topRightCorner.addLine(to: CGPoint(x: imageView.frame.maxX + margin, y: imageView.frame.minY - margin))
+        topRightCorner.addLine(to: CGPoint(x: imageView.frame.maxX - iWidth/4, y: imageView.frame.minY - margin))
         topRightCorner.close()
         
         bottomLeftCorner.append(topRightCorner)
             
         triangles.path = bottomLeftCorner.cgPath
-        triangles.fillColor = #colorLiteral(red: 0.2162140839, green: 1, blue: 0.7142448477, alpha: 1)
+        triangles.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
         
         return triangles

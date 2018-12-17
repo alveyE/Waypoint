@@ -34,6 +34,8 @@
 		D1DDA16921C45DB900E3F2B0 /* ImageFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */; };
 		D1DDA16B21C471BE00E3F2B0 /* kenya.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D1DDA16A21C471BE00E3F2B0 /* kenya.jpeg */; };
 		D1DDA16D21C472D400E3F2B0 /* kenya.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D1DDA16C21C472D300E3F2B0 /* kenya.jpg */; };
+		D1DDA16F21C84D2000E3F2B0 /* trees.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D1DDA16E21C84D1E00E3F2B0 /* trees.jpg */; };
+		D1DDA17121C85B2F00E3F2B0 /* mountain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D1DDA17021C85B2E00E3F2B0 /* mountain.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFrameView.swift; sourceTree = "<group>"; };
 		D1DDA16A21C471BE00E3F2B0 /* kenya.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kenya.jpeg; sourceTree = "<group>"; };
 		D1DDA16C21C472D300E3F2B0 /* kenya.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kenya.jpg; sourceTree = "<group>"; };
+		D1DDA16E21C84D1E00E3F2B0 /* trees.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = trees.jpg; sourceTree = "<group>"; };
+		D1DDA17021C85B2E00E3F2B0 /* mountain.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mountain.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,10 +146,12 @@
 				D1DDA16C21C472D300E3F2B0 /* kenya.jpg */,
 				D1DDA16A21C471BE00E3F2B0 /* kenya.jpeg */,
 				D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */,
+				D1DDA17021C85B2E00E3F2B0 /* mountain.jpg */,
 				D1603A6521C07A7900121FFA /* art.scnassets */,
 				D1603A6721C092DC00121FFA /* note.xib */,
 				D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */,
 				D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */,
+				D1DDA16E21C84D1E00E3F2B0 /* trees.jpg */,
 				D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */,
 			);
 			path = Waypoint;
@@ -211,7 +217,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1DDA17121C85B2F00E3F2B0 /* mountain.jpg in Resources */,
 				D1B648FC21B6426400B74900 /* Podfile in Resources */,
+				D1DDA16F21C84D2000E3F2B0 /* trees.jpg in Resources */,
 				D1603A6621C07A7900121FFA /* art.scnassets in Resources */,
 				D1603A6821C092DC00121FFA /* note.xib in Resources */,
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
