@@ -31,6 +31,9 @@
 		D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D35D2221B7118600272F76 /* GoogleService-Info.plist */; };
 		D1DDA16521C2B9ED00E3F2B0 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */; };
 		D1DDA16721C2C69300E3F2B0 /* TextWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */; };
+		D1DDA16921C45DB900E3F2B0 /* ImageFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */; };
+		D1DDA16B21C471BE00E3F2B0 /* kenya.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D1DDA16A21C471BE00E3F2B0 /* kenya.jpeg */; };
+		D1DDA16D21C472D400E3F2B0 /* kenya.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D1DDA16C21C472D300E3F2B0 /* kenya.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		D1D35D2221B7118600272F76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWidget.swift; sourceTree = "<group>"; };
+		D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFrameView.swift; sourceTree = "<group>"; };
+		D1DDA16A21C471BE00E3F2B0 /* kenya.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kenya.jpeg; sourceTree = "<group>"; };
+		D1DDA16C21C472D300E3F2B0 /* kenya.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kenya.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,11 +139,14 @@
 				D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */,
 				D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */,
 				D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */,
+				D1DDA16C21C472D300E3F2B0 /* kenya.jpg */,
+				D1DDA16A21C471BE00E3F2B0 /* kenya.jpeg */,
 				D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */,
 				D1603A6521C07A7900121FFA /* art.scnassets */,
 				D1603A6721C092DC00121FFA /* note.xib */,
 				D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */,
 				D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */,
+				D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -206,8 +215,10 @@
 				D1603A6621C07A7900121FFA /* art.scnassets in Resources */,
 				D1603A6821C092DC00121FFA /* note.xib in Resources */,
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
+				D1DDA16D21C472D400E3F2B0 /* kenya.jpg in Resources */,
 				D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
+				D1DDA16B21C471BE00E3F2B0 /* kenya.jpeg in Resources */,
 				D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,6 +301,7 @@
 				D1AE58DC219E5183003FF5DB /* Note.swift in Sources */,
 				D1A7998921BA6FE7002AF7B2 /* SettingsViewController.swift in Sources */,
 				D1DDA16521C2B9ED00E3F2B0 /* TitleView.swift in Sources */,
+				D1DDA16921C45DB900E3F2B0 /* ImageFrameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

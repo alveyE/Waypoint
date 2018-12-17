@@ -30,17 +30,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var noteIDs = [String]()
     var xPosition: CGFloat = 0
     
-    public static var notes = [Note]()
-    public static var locations = [(latitude: Double, longitude: Double)]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view, typically from a nib.
+       // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.view = nil
+        xPosition = 0
+        locations = []
+        noteIDs = []
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -120,7 +121,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.contentMode = .scaleToFill
         mapView.showsCompass = false
         
-
+        
+        
         updatePins()
         
         scroll.isHidden = true
@@ -133,11 +135,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
         note.alpha = 0
         
-        if let userLocation = locationManager.location?.coordinate {
-            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 200, longitudinalMeters: 200)
-            mapView.setRegion(viewRegion, animated: true)
-        }
-
+        
       
         
        
@@ -169,7 +167,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             //locationManager.startUpdatingHeading()
             locationManager.startUpdatingLocation()
         }
-        
+        if let userLocation = locationManager.location?.coordinate {
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 200, longitudinalMeters: 200)
+            mapView.setRegion(viewRegion, animated: true)
+        }
 
     }
     

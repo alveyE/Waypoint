@@ -23,10 +23,10 @@ class TextWidget: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        let box = UIBezierPath(rect: CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height))
-        #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).setFill()
-        box.fill()
-        backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+//        let box = UIBezierPath(rect: CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height))
+//        #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).setFill()
+//        box.fill()
+        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         
     }
@@ -71,7 +71,6 @@ class TextWidget: UIView {
             line.backgroundColor = #colorLiteral(red: 0.8667220611, green: 0.8667220611, blue: 0.8667220611, alpha: 1)
             lines.addSubview(line)
             yPosition += (textFont?.lineHeight)! + (textFont?.lineHeight)!/2
-            print(yPosition)
         }
     
         return lines

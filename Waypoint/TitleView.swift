@@ -22,10 +22,10 @@ class TitleView: UIView {
     private lazy var saveButton = createSaveButton()
     override func draw(_ rect: CGRect) {
 
-        let box = UIBezierPath(rect: CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height))
-        #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).setFill()
-        box.fill()
-        backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+//        let box = UIBezierPath(rect: CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height))
+//        #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).setFill()
+//        box.fill()
+        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
     }
  
