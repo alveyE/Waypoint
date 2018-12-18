@@ -36,6 +36,7 @@
 		D1DDA16D21C472D400E3F2B0 /* kenya.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D1DDA16C21C472D300E3F2B0 /* kenya.jpg */; };
 		D1DDA16F21C84D2000E3F2B0 /* trees.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D1DDA16E21C84D1E00E3F2B0 /* trees.jpg */; };
 		D1DDA17121C85B2F00E3F2B0 /* mountain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D1DDA17021C85B2E00E3F2B0 /* mountain.jpg */; };
+		D1DDA17321C863EA00E3F2B0 /* DrawingWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA17221C863EA00E3F2B0 /* DrawingWidget.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		D1DDA16C21C472D300E3F2B0 /* kenya.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kenya.jpg; sourceTree = "<group>"; };
 		D1DDA16E21C84D1E00E3F2B0 /* trees.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = trees.jpg; sourceTree = "<group>"; };
 		D1DDA17021C85B2E00E3F2B0 /* mountain.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mountain.jpg; sourceTree = "<group>"; };
+		D1DDA17221C863EA00E3F2B0 /* DrawingWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingWidget.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 				D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */,
 				D1DDA16E21C84D1E00E3F2B0 /* trees.jpg */,
 				D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */,
+				D1DDA17221C863EA00E3F2B0 /* DrawingWidget.swift */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */,
 				D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */,
 				D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */,
+				D1DDA17321C863EA00E3F2B0 /* DrawingWidget.swift in Sources */,
 				D1DDA16721C2C69300E3F2B0 /* TextWidget.swift in Sources */,
 				D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */,
 				D1A7998B21BB3906002AF7B2 /* SignInViewController.swift in Sources */,

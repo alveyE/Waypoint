@@ -10,7 +10,7 @@ import UIKit
 
 class ImageFrameView: UIView {
 
-    let image = UIImage(named: "mountain.jpg")
+    let image = UIImage(named: "trees.jpg")
     
     
     
@@ -20,7 +20,7 @@ class ImageFrameView: UIView {
     lazy var width = bounds.width
     lazy var height = bounds.height
     
-    
+ 
     
     override func draw(_ rect: CGRect) {
         
@@ -99,7 +99,13 @@ class ImageFrameView: UIView {
         bottomLeftCorner.append(topRightCorner)
             
         triangles.path = bottomLeftCorner.cgPath
-        triangles.fillColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        triangles.fillColor = #colorLiteral(red: 0.277395557, green: 0.277395557, blue: 0.277395557, alpha: 1)
+
+        triangles.shadowColor = UIColor.black.cgColor
+        triangles.shadowOpacity = 0.5
+        triangles.shadowOffset = CGSize.zero
+        triangles.shadowRadius = 5
+        
         
         
         return triangles
