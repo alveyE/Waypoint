@@ -54,7 +54,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         // Create and Add MapView to our main view
         fetchPinLocation()
-        
         createMapView()
     }
     

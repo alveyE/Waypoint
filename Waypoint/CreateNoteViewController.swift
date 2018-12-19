@@ -84,27 +84,28 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     
     @IBAction func createNoteTouched(_ sender: UIButton) {
     
-        
-        
-        if note.titleText.text != "" {
             noteCreator.title = note.titleText.text
-        }
-        if note.textContent.text != "" {
             noteCreator.text = note.textContent.text
-        }
+        
         
         if noteCreator.text == "", noteCreator.title == "", noteCreator.images == [] {
+            //Display message to add content to note
             
-            print("Add content to note")
-        }else{
+          
+            //Makes sure user location can be determined within 10m
+        }else if currentLocation.horizontalAccuracy < 10{
         noteCreator.latitude = currentLocation.coordinate.latitude
         noteCreator.longitude = currentLocation.coordinate.longitude
         noteCreator.writeNote()
         self.tabBarController?.selectedIndex = 0
+        }else{
+            //Display error message that userlocation cannot accuratly be determined
+            let alert = UIAlertController(title: "Cannot determine user location", message: "Your note could not be published as your device's location could not be determined accurately", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     @IBAction func setLinkTouched(_ sender: UIButton) {
-        
         let selectedText = note.textContent.selectedTextRange
         
         noteCreator.linkText = "GRSK aldk8352 ks9"
