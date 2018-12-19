@@ -49,12 +49,10 @@ public struct Note : Codable{
         let month = calendar.component(.month, from: date)
         let day = calendar.component(.day, from: date)
         let year = calendar.component(.year, from: date)
-        var hour = calendar.component(.hour, from: date)
-        if hour > 12 {
-            hour -= 12
-        }
+        let hour = calendar.component(.hour, from: date)
+        let seconds = calendar.component(.second, from: date)
         let minutes = calendar.component(.minute, from: date)
-        self.timeStamp = "\(day)/\(month)/\(year) \(hour):\(minutes)"
+        self.timeStamp = "\(year)\(month)\(day)\(hour)\(minutes)\(seconds)"
         }else {
             self.timeStamp = timeStamp
         }
