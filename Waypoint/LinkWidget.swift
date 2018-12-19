@@ -17,15 +17,25 @@ class LinkWidget: UIView {
     private lazy var height = bounds.height
     
     private lazy var linkText = createLinkText()
-    
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-        backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    }
+    private lazy var shadow = createShadow()
     
     override func layoutSubviews() {
+        layer.addSublayer(shadow)
         addSubview(linkText)
     }
+    
+    private func createShadow() -> CAShapeLayer {
+        let box = UIBezierPath(rect: CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height))
+        let boxShadow = CAShapeLayer()
+        boxShadow.path = box.cgPath
+        boxShadow.shadowColor = UIColor.black.cgColor
+        boxShadow.shadowOpacity = 0.25
+        boxShadow.shadowOffset = CGSize.zero
+        boxShadow.shadowRadius = 5
+        boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        return boxShadow
+    }
+    
     
     private func createLinkText() -> UILabel{
         let text = UILabel(frame: CGRect(x: width/20, y: height/3, width: width - width/20, height: height/3))

@@ -17,24 +17,30 @@ class ImageFrameView: UIView {
     private lazy var imageView = createCenteredImage()
     private lazy var frameCorners = createFrameCorners()
     
+    private lazy var shadow = createShadow()
+    
     lazy var width = bounds.width
     lazy var height = bounds.height
-    
  
     
-    override func draw(_ rect: CGRect) {
-        
-        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        clipsToBounds = true
-    }
-    
-    
     override func layoutSubviews() {
+        layer.addSublayer(shadow)
         addSubview(imageView)
         layer.addSublayer(frameCorners)
     }
     
-    
+  
+    private func createShadow() -> CAShapeLayer {
+        let box = UIBezierPath(rect: CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height))
+        let boxShadow = CAShapeLayer()
+        boxShadow.path = box.cgPath
+        boxShadow.shadowColor = UIColor.black.cgColor
+        boxShadow.shadowOpacity = 0.25
+        boxShadow.shadowOffset = CGSize.zero
+        boxShadow.shadowRadius = 5
+        boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        return boxShadow
+    }
     
     private func createCenteredImage() -> UIImageView {
         if let imageGiven = image {
