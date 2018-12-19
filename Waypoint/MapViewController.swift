@@ -121,7 +121,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.showsCompass = false
         mapView.isPitchEnabled = false
         
-        
         updatePins()
         
         scroll.isHidden = true
@@ -191,6 +190,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         for view in views {
             if view.annotation?.isKind(of: MKUserLocation.self) ?? false {
                 view.canShowCallout = false
+                view.isEnabled = false
             }
         }
         
