@@ -19,20 +19,26 @@ class TextWidget: UIView {
     
     
     private lazy var textContent = createTextContent()
+    private lazy var shadow = createShadow()
     
-    
-    override func draw(_ rect: CGRect) {
-        
-//        let box = UIBezierPath(rect: CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height))
-//        #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).setFill()
-//        box.fill()
-        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        
-        
-    }
+ 
     
     override func layoutSubviews() {
+        layer.addSublayer(shadow)
         addSubview(textContent)
+    }
+    
+    
+    private func createShadow() -> CAShapeLayer {
+        let box = UIBezierPath(rect: CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height))
+        let boxShadow = CAShapeLayer()
+        boxShadow.path = box.cgPath
+        boxShadow.shadowColor = UIColor.black.cgColor
+        boxShadow.shadowOpacity = 0.25
+        boxShadow.shadowOffset = CGSize.zero
+        boxShadow.shadowRadius = 5
+        boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        return boxShadow
     }
     
     let textFont = UIFont(name: "Arial", size: 16)

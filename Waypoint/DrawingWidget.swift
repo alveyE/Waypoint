@@ -21,24 +21,36 @@ class DrawingWidget: UIView {
     private var green: CGFloat = 0.0
     private var blue: CGFloat = 0.0
     
-    public var editable = false
+    public var editable = true
     
     public var urlOfDrawing = ""
     
     private lazy var imageView = createImageView()
     private lazy var preDrawnImage = getPredrawnImage()
+    private lazy var shadow = createShadow()
     
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-        backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    }
+    
+   
     
     override func layoutSubviews() {
+        layer.addSublayer(shadow)
         if editable {
             addSubview(imageView)
         }else if urlOfDrawing != ""{
             addSubview(preDrawnImage)
         }
+    }
+    
+    private func createShadow() -> CAShapeLayer {
+        let box = UIBezierPath(rect: CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height))
+        let boxShadow = CAShapeLayer()
+        boxShadow.path = box.cgPath
+        boxShadow.shadowColor = UIColor.black.cgColor
+        boxShadow.shadowOpacity = 0.25
+        boxShadow.shadowOffset = CGSize.zero
+        boxShadow.shadowRadius = 5
+        boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        return boxShadow
     }
     
     
