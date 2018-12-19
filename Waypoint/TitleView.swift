@@ -75,6 +75,30 @@ class TitleView: UIView {
         
         
     }
-    
-
+    private func determineHowLongAgo(currentTime : String, noteCreationDate : String) -> String {
+        let nowTime = Double(currentTime)!
+        let noteTime = Double(noteCreationDate)!
+        if(nowTime <= noteTime){
+            return "Right Now At noteCreationDate"
+        }
+        else if(nowTime > noteTime && nowTime - noteTime < 240000){
+            return "Today at \(parseDate(date: noteTime))"
+        }
+        else if(nowTime > noteTime && nowTime - noteTime > 240000){
+            return "Yesterday at \(parseDate(date: noteTime))"
+        }
+        else{
+            return "1d ago"
+        }
+    }
+    func parseDate(date : Double) -> String{
+        let hourSecond = String(date)
+        let second = hourSecond.suffix(2)
+        var hour = String(Array(hourSecond)[8...9])
+        let minute = String(Array(hourSecond)[10...11])
+        if (Int(hour)! > 12) {
+            hour = String(Int(hour)!-12)
+        }
+        return "\(hour):\(minute)"
+}
 }
