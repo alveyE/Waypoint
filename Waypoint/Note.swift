@@ -10,7 +10,7 @@ import Foundation
 
 public struct Note : Codable{
     
-    
+    var widgets = ["title"]
     
     var title: String
     var timeStamp: String
@@ -23,6 +23,7 @@ public struct Note : Codable{
     var timeLeft: Int?
     let latitude: Double
     let longitude: Double
+    
     
     
     

@@ -23,7 +23,6 @@
 		D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AE58D0219E0262003FF5DB /* LaunchScreen.storyboard */; };
 		D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58D9219E0F5C003FF5DB /* NoteView.swift */; };
 		D1AE58DC219E5183003FF5DB /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58DB219E5183003FF5DB /* Note.swift */; };
-		D1AE58DE219E5639003FF5DB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58DD219E5639003FF5DB /* User.swift */; };
 		D1AE58E2219E6C39003FF5DB /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E1219E6C39003FF5DB /* ARViewController.swift */; };
 		D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */; };
 		D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58F321ADD967003FF5DB /* NoteCreator.swift */; };
@@ -37,6 +36,7 @@
 		D1DDA16F21C84D2000E3F2B0 /* trees.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D1DDA16E21C84D1E00E3F2B0 /* trees.jpg */; };
 		D1DDA17121C85B2F00E3F2B0 /* mountain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D1DDA17021C85B2E00E3F2B0 /* mountain.jpg */; };
 		D1DDA17321C863EA00E3F2B0 /* DrawingWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA17221C863EA00E3F2B0 /* DrawingWidget.swift */; };
+		D1DDA17521C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA17421C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,7 +60,6 @@
 		D1AE58D3219E0262003FF5DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D1AE58D9219E0F5C003FF5DB /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		D1AE58DB219E5183003FF5DB /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
-		D1AE58DD219E5639003FF5DB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D1AE58E1219E6C39003FF5DB /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
 		D1AE58F321ADD967003FF5DB /* NoteCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCreator.swift; sourceTree = "<group>"; };
@@ -74,6 +73,7 @@
 		D1DDA16E21C84D1E00E3F2B0 /* trees.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = trees.jpg; sourceTree = "<group>"; };
 		D1DDA17021C85B2E00E3F2B0 /* mountain.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mountain.jpg; sourceTree = "<group>"; };
 		D1DDA17221C863EA00E3F2B0 /* DrawingWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingWidget.swift; sourceTree = "<group>"; };
+		D1DDA17421C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreNearbyNotesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +136,6 @@
 				D1D35D2221B7118600272F76 /* GoogleService-Info.plist */,
 				D1AE58D9219E0F5C003FF5DB /* NoteView.swift */,
 				D1AE58DB219E5183003FF5DB /* Note.swift */,
-				D1AE58DD219E5639003FF5DB /* User.swift */,
 				D1AE58E1219E6C39003FF5DB /* ARViewController.swift */,
 				D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */,
 				C510EFAE21ADAFE500243FA2 /* DBManager.swift */,
@@ -156,6 +155,7 @@
 				D1DDA16E21C84D1E00E3F2B0 /* trees.jpg */,
 				D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */,
 				D1DDA17221C863EA00E3F2B0 /* DrawingWidget.swift */,
+				D1DDA17421C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -309,8 +309,8 @@
 				D1A7999121BC68DE002AF7B2 /* SignUpViewController.swift in Sources */,
 				D1A7998721BA6EF3002AF7B2 /* MyBulletinViewController.swift in Sources */,
 				D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */,
-				D1AE58DE219E5639003FF5DB /* User.swift in Sources */,
 				D1AE58DC219E5183003FF5DB /* Note.swift in Sources */,
+				D1DDA17521C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift in Sources */,
 				D1A7998921BA6FE7002AF7B2 /* SettingsViewController.swift in Sources */,
 				D1DDA16521C2B9ED00E3F2B0 /* TitleView.swift in Sources */,
 				D1DDA16921C45DB900E3F2B0 /* ImageFrameView.swift in Sources */,

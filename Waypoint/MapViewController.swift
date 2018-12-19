@@ -120,7 +120,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.center = view.center
         mapView.contentMode = .scaleToFill
         mapView.showsCompass = false
-        
+        mapView.isPitchEnabled = false
         
         
         updatePins()

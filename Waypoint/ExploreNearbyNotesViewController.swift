@@ -1,82 +1,112 @@
 //
-//  MyBulletinViewController.swift
+//  ExploreNearbyNotesViewController.swift
 //  Waypoint
 //
-//  Created by Bret Alvey on 12/7/18.
+//  Created by Bret Alvey on 12/18/18.
 //  Copyright © 2018 Ethan Alvey. All rights reserved.
 //
 
 import UIKit
-import Firebase
 import FirebaseDatabase
-import FirebaseAuth
+import CoreLocation
 
-class MyBulletinViewController: UIViewController {
+class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDelegate {
 
-    private var savedNotesIDs = [String]()
-    
-    
     @IBOutlet weak var scrollView: UIScrollView!
     var ref: DatabaseReference!
+
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        
-        
-    }
+    private var locationManager:CLLocationManager!
+    private var currentLocation = CLLocation(latitude: 0, longitude: 0)
+    
+    private var locationsAndIDs = [(latitude: Double, longitude: Double, id: String)]()
+    
+    private var yPosition: CGFloat = 0
     
     override func viewWillDisappear(_ animated: Bool) {
         self.view = nil
+        locationsAndIDs = []
+        yPosition = 0
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        determineCurrentLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         scrollView.subviews.forEach({ $0.removeFromSuperview() })
-        savedNotesIDs = []
-        yPosition = 0;
-        if let user = Auth.auth().currentUser {
-            ref = Database.database().reference()
-            ref.child("users").child(user.uid).child("saves").observeSingleEvent(of: .value) { (snapshot) in
-                for case let childSnapshot as DataSnapshot in snapshot.children {
-                    if let childData = childSnapshot.value as? [String : Any] {
-                        
-                        if let idToAdd = childData["savedID"] as? String {
-                            print(idToAdd)
-                            self.savedNotesIDs.append(idToAdd)
-                        }
-                        
-                        
-                    }
-                }
-                
-                
-                for save in self.savedNotesIDs {
-                    self.getNote(withID: save)
-                }
-                if self.savedNotesIDs.count == 0 {
-                    let notesWillAppearLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height/3))
-                    notesWillAppearLabel.text = "Notes you save will appear here"
-                    notesWillAppearLabel.textAlignment = .center
-                    notesWillAppearLabel.font = UIFont(name: "Arial", size: 25)
-                    self.view.addSubview(notesWillAppearLabel)
-                    
-                }
-                
-            }
-            
-        }else{
-            let notSignedInLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height/3))
-            notSignedInLabel.text = "Sign in to see your saved notes"
-            notSignedInLabel.textAlignment = .center
-            notSignedInLabel.font = UIFont(name: "Arial", size: 25)
-            self.view.addSubview(notSignedInLabel)
-        }
+        fetchPinLocation()
     }
     
 
-    private var yPosition: CGFloat = 0
-
+    func determineCurrentLocation()
+    {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            //locationManager.startUpdatingHeading()
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation: CLLocation = locations[0] as CLLocation
+        currentLocation = userLocation
+    }
+    
+    
+    private func sortBasedOnNearby(){
+        locationsAndIDs.sort(by: {
+           CLLocation(latitude: $0.latitude, longitude: $0.longitude).distance(from: CLLocation(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)) < CLLocation(latitude: $1.latitude, longitude: $1.longitude).distance(from: CLLocation(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude))
+            
+        })
+    }
+    
+    
+    
+    private func fetchPinLocation(){
+        ref = Database.database().reference()
+        ref.child("locations").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            for case let childSnapshot as DataSnapshot in snapshot.children {
+                //                let key = childSnapshot.key
+                if let childData = childSnapshot.value as? [String : Any] {
+                    
+                    let lat = childData["latitude"] as? Double
+                    let long = childData["longitude"] as? Double
+                    let idRetrieved = childSnapshot.key
+                    if let latitude = lat, let longitude = long {
+                        
+                        self.locationsAndIDs.append((latitude: latitude, longitude: longitude, id: idRetrieved))
+                        
+                        
+                    }
+                    
+                }
+            }
+            self.determineCurrentLocation()
+            self.sortBasedOnNearby()
+            //Display notes
+            for pin in self.locationsAndIDs {
+                self.getNote(withID: pin.id)
+            }
+            
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        
+        
+        
+        
+    }
     
     private func getNote(withID noteID: String){
         ref = Database.database().reference()
@@ -97,7 +127,7 @@ class MyBulletinViewController: UIViewController {
                 let latitude = value["latitude"] as? Double
                 let longitude = value["longitude"] as? Double
                 let loadedNote = Note(title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images ?? [], linkText: linkText, linkURL: linkURL, AREnabled: AREnabled ?? false, creator: creator ?? "", timeLeft: timeLeft, location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
-              
+                
                 let noteView = NoteView()
                 
                 let width: CGFloat = self.view.frame.size.width
@@ -140,3 +170,7 @@ class MyBulletinViewController: UIViewController {
     }
 
 }
+
+
+
+
