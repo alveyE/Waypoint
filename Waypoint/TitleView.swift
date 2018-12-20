@@ -17,14 +17,16 @@ class TitleView: UIView {
     
     public var editable = false
     public var noteTimeStamp = "20181219101034"
+    public var title = ""
+    
     private lazy var titleText = createTitleText()
     private lazy var timeStamp = createTimeStamp()
     private lazy var saveButton = createSaveButton()
     private lazy var shadow = createShadow()
     
-
     
- 
+   
+
     override func layoutSubviews() {
         layer.addSublayer(shadow)
         addSubview(titleText)
@@ -52,7 +54,7 @@ class TitleView: UIView {
         title.isScrollEnabled = false
         let titleFont = UIFont(name: "Arial-BoldMT", size: 20)
         title.font = titleFont
-        title.text = "Note Title Here"
+        title.text = self.title
         
         
         return title
@@ -61,7 +63,7 @@ class TitleView: UIView {
     
     
     private func createTimeStamp() -> UILabel {
-        let time = UILabel(frame: CGRect(x: width/8, y: height * 7/24, width: width * 7/9, height: height/4))
+        let time = UILabel(frame: CGRect(x: width/8, y: height * 9/24, width: width * 7/9, height: height/4))
         time.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         let dateFont = UIFont(name: "Arial", size: 18)
         time.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
@@ -91,13 +93,12 @@ class TitleView: UIView {
         let hour = calendar.component(.hour, from: date)
         let seconds = calendar.component(.second, from: date)
         let minutes = calendar.component(.minute, from: date)
-        let currentTime = "\(year)\(month)\(day)\(hour)\(minutes)\(seconds)"
-        
-        
+        let currentTime = String(format: "%04d%02d%02d%02d%02d%02d", year,month,day,hour,minutes,seconds)
+
         let nowTime = Double(currentTime)!
         let noteTime = Double(noteCreationDate)!
         if(nowTime <= noteTime){
-            return "Right Now At noteCreationDate"
+            return "Right Now At \(noteCreationDate)"
         }
         else if(nowTime > noteTime && nowTime - noteTime < 240000){
             return "Today at \(parseDate(date: noteTime))"

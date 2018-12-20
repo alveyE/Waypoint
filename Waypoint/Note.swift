@@ -52,7 +52,7 @@ public struct Note : Codable{
         let hour = calendar.component(.hour, from: date)
         let seconds = calendar.component(.second, from: date)
         let minutes = calendar.component(.minute, from: date)
-        self.timeStamp = "\(year)\(month)\(day)\(hour)\(minutes)\(seconds)"
+        self.timeStamp = String(format: "%04d%02d%02d%02d%02d%02d", year,month,day,hour,minutes,seconds)
         }else {
             self.timeStamp = timeStamp
         }

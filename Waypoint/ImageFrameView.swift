@@ -10,7 +10,7 @@ import UIKit
 
 class ImageFrameView: UIView {
 
-    let image = UIImage(named: "trees.jpg")
+    var image = UIImage(named: "trees.jpg")
     
     
     

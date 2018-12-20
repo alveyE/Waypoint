@@ -35,30 +35,13 @@
             </objects>
             <point key="canvasLocation" x="1469.5999999999999" y="-532.98350824587715"/>
         </scene>
-        <!--View Controller-->
+        <!--Note Layout View Controller-->
         <scene sceneID="sxg-K7-TlU">
             <objects>
-                <viewController id="oFD-cN-AOH" sceneMemberID="viewController">
+                <viewController id="oFD-cN-AOH" customClass="NoteLayoutViewController" customModule="Waypoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EQr-g8-bgE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ham-GE-fKQ" customClass="TitleView" customModule="Waypoint" customModuleProvider="target">
-                                <rect key="frame" x="16" y="29" width="343" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GuZ-Kr-B82" customClass="TextWidget" customModule="Waypoint" customModuleProvider="target">
-                                <rect key="frame" x="16" y="159" width="343" height="305"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pup-Eo-B2z" customClass="LinkWidget" customModule="Waypoint" customModuleProvider="target">
-                                <rect key="frame" x="16" y="491" width="343" height="83"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="0.98474785850000002" blue="0.80681842670000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="1eC-kB-Jn8"/>
                     </view>

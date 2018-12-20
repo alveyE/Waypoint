@@ -388,6 +388,37 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
+    func displayNote(_ noteGiven: Note){
+        let scrollNote = UIScrollView(frame: mapView.frame)
+        let yPosition: CGFloat = scrollNote.frame.height/30
+        for item in noteGiven.widgets {
+            switch item{
+            case "title":
+                let titleBar = TitleView()
+                titleBar.frame = CGRect(x: scrollNote.frame.minX, y: yPosition, width: scrollNote.frame.width * 9/10, height: mapView.frame.height/5)
+                titleBar.title = noteGiven.title
+                titleBar.noteTimeStamp = noteGiven.timeStamp
+                
+                scrollNote.addSubview(titleBar)
+                
+            break;
+            case "text":
+            break;
+            case "image":
+            break;
+            case "drawing":
+            break;
+            case "link":
+            break;
+            default:
+            break;
+                
+                
+            }
+        }
+        
+        
+    }
     
 
 
