@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		13E6AFCA1F837775253FB43F /* Pods_Waypoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */; };
 		C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510EFAE21ADAFE500243FA2 /* DBManager.swift */; };
+		C5BD13A821DF4B9C00BE7F17 /* GeoFenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */; };
 		D140339121CA95630030BC62 /* ChosenLogo_TransparentGlobe.png in Resources */ = {isa = PBXBuildFile; fileRef = D140339021CA95630030BC62 /* ChosenLogo_TransparentGlobe.png */; };
 		D140339321CA97F40030BC62 /* LinkWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339221CA97F40030BC62 /* LinkWidget.swift */; };
 		D140339521CAF1890030BC62 /* UINoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339421CAF1890030BC62 /* UINoteView.swift */; };
@@ -48,6 +49,7 @@
 		4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Waypoint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80CA2E99CF4C2788871EB08E /* Pods-Waypoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Waypoint.release.xcconfig"; path = "Pods/Target Support Files/Pods-Waypoint/Pods-Waypoint.release.xcconfig"; sourceTree = "<group>"; };
 		C510EFAE21ADAFE500243FA2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
+		C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoFenceManager.swift; sourceTree = "<group>"; };
 		D140339021CA95630030BC62 /* ChosenLogo_TransparentGlobe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChosenLogo_TransparentGlobe.png; sourceTree = "<group>"; };
 		D140339221CA97F40030BC62 /* LinkWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkWidget.swift; sourceTree = "<group>"; };
 		D140339421CAF1890030BC62 /* UINoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINoteView.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				D140339221CA97F40030BC62 /* LinkWidget.swift */,
 				D140339421CAF1890030BC62 /* UINoteView.swift */,
 				D140339621CAF5370030BC62 /* NoteLayoutViewController.swift */,
+				C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1AE58E2219E6C39003FF5DB /* ARViewController.swift in Sources */,
+				C5BD13A821DF4B9C00BE7F17 /* GeoFenceManager.swift in Sources */,
 				D140339721CAF5370030BC62 /* NoteLayoutViewController.swift in Sources */,
 				D140339321CA97F40030BC62 /* LinkWidget.swift in Sources */,
 				D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */,
