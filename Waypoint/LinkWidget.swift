@@ -24,6 +24,9 @@ class LinkWidget: UIView {
         addSubview(linkText)
     }
     
+    
+    
+    
     private func createShadow() -> CAShapeLayer {
         let box = UIBezierPath(rect: CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height))
         let boxShadow = CAShapeLayer()
@@ -37,9 +40,10 @@ class LinkWidget: UIView {
     }
     
     
-    private func createLinkText() -> UILabel{
-        let text = UILabel(frame: CGRect(x: width/20, y: height/3, width: width - width/20, height: height/3))
-
+    private func createLinkText() -> UITextView{
+        let text = UITextView(frame: CGRect(x: width/20, y: height/3, width: width - width/20, height: height/3))
+        text.isEditable = false
+        text.isScrollEnabled = false
         let textFont = UIFont(name: "Arial", size: 16)
         let centeredText = NSMutableParagraphStyle()
         centeredText.alignment = .center
@@ -47,8 +51,9 @@ class LinkWidget: UIView {
             .font : textFont!,
             .paragraphStyle : centeredText
         ]
-        let linkedText = NSMutableAttributedString(string: url, attributes: attributes)
-        let hyperlinked = linkedText.setAsLink(textToFind: url, linkURL: url)
+        let domainString: String = URL(string: url)?.host ?? url
+        let linkedText = NSMutableAttributedString(string: domainString, attributes: attributes)
+        let hyperlinked = linkedText.setAsLink(textToFind: domainString, linkURL: url)
         
         if hyperlinked {
             text.attributedText = NSAttributedString(attributedString: linkedText)

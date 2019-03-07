@@ -13,6 +13,9 @@
 		D140339321CA97F40030BC62 /* LinkWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339221CA97F40030BC62 /* LinkWidget.swift */; };
 		D140339521CAF1890030BC62 /* UINoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339421CAF1890030BC62 /* UINoteView.swift */; };
 		D140339721CAF5370030BC62 /* NoteLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339621CAF5370030BC62 /* NoteLayoutViewController.swift */; };
+		D140339921CC50840030BC62 /* tower.JPG in Resources */ = {isa = PBXBuildFile; fileRef = D140339821CC50830030BC62 /* tower.JPG */; };
+		D140339B21CC525A0030BC62 /* tiger.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D140339A21CC52590030BC62 /* tiger.jpeg */; };
+		D140339D21CC529B0030BC62 /* bret.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D140339C21CC529B0030BC62 /* bret.jpeg */; };
 		D1603A6621C07A7900121FFA /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D1603A6521C07A7900121FFA /* art.scnassets */; };
 		D1603A6821C092DC00121FFA /* note.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1603A6721C092DC00121FFA /* note.xib */; };
 		D1A7998121BA631F002AF7B2 /* CustomPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */; };
@@ -32,6 +35,8 @@
 		D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58F321ADD967003FF5DB /* NoteCreator.swift */; };
 		D1B648FC21B6426400B74900 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D1B648FB21B6426400B74900 /* Podfile */; };
 		D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D35D2221B7118600272F76 /* GoogleService-Info.plist */; };
+		D1DBA67D222B4A56006D5728 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1DBA67B222B4A3E006D5728 /* Lato-Bold.ttf */; };
+		D1DBA67E222B4A59006D5728 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1DBA67C222B4A40006D5728 /* Lato-Regular.ttf */; };
 		D1DDA16521C2B9ED00E3F2B0 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */; };
 		D1DDA16721C2C69300E3F2B0 /* TextWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */; };
 		D1DDA16921C45DB900E3F2B0 /* ImageFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */; };
@@ -41,6 +46,7 @@
 		D1DDA17121C85B2F00E3F2B0 /* mountain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D1DDA17021C85B2E00E3F2B0 /* mountain.jpg */; };
 		D1DDA17321C863EA00E3F2B0 /* DrawingWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA17221C863EA00E3F2B0 /* DrawingWidget.swift */; };
 		D1DDA17521C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA17421C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift */; };
+		D1EF481D21DF1AAE00115599 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = D1EF481C21DF1AAE00115599 /* blank.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +58,9 @@
 		D140339221CA97F40030BC62 /* LinkWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkWidget.swift; sourceTree = "<group>"; };
 		D140339421CAF1890030BC62 /* UINoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINoteView.swift; sourceTree = "<group>"; };
 		D140339621CAF5370030BC62 /* NoteLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLayoutViewController.swift; sourceTree = "<group>"; };
+		D140339821CC50830030BC62 /* tower.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tower.JPG; sourceTree = "<group>"; };
+		D140339A21CC52590030BC62 /* tiger.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tiger.jpeg; sourceTree = "<group>"; };
+		D140339C21CC529B0030BC62 /* bret.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bret.jpeg; sourceTree = "<group>"; };
 		D1603A6521C07A7900121FFA /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		D1603A6721C092DC00121FFA /* note.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = note.xib; sourceTree = "<group>"; };
 		D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPointAnnotation.swift; sourceTree = "<group>"; };
@@ -73,6 +82,8 @@
 		D1AE58F321ADD967003FF5DB /* NoteCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCreator.swift; sourceTree = "<group>"; };
 		D1B648FB21B6426400B74900 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D1D35D2221B7118600272F76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D1DBA67B222B4A3E006D5728 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		D1DBA67C222B4A40006D5728 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWidget.swift; sourceTree = "<group>"; };
 		D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFrameView.swift; sourceTree = "<group>"; };
@@ -82,6 +93,7 @@
 		D1DDA17021C85B2E00E3F2B0 /* mountain.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mountain.jpg; sourceTree = "<group>"; };
 		D1DDA17221C863EA00E3F2B0 /* DrawingWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingWidget.swift; sourceTree = "<group>"; };
 		D1DDA17421C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreNearbyNotesViewController.swift; sourceTree = "<group>"; };
+		D1EF481C21DF1AAE00115599 /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +147,7 @@
 		D1AE58C6219E025E003FF5DB /* Waypoint */ = {
 			isa = PBXGroup;
 			children = (
+				D1DBA67A222B4A22006D5728 /* Fonts */,
 				D1AE58C7219E025E003FF5DB /* AppDelegate.swift */,
 				D1AE58C9219E025E003FF5DB /* MapViewController.swift */,
 				D1AE58CB219E025E003FF5DB /* Main.storyboard */,
@@ -161,15 +174,28 @@
 				D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */,
 				D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */,
 				D140339021CA95630030BC62 /* ChosenLogo_TransparentGlobe.png */,
+				D140339821CC50830030BC62 /* tower.JPG */,
 				D1DDA16E21C84D1E00E3F2B0 /* trees.jpg */,
 				D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */,
 				D1DDA17221C863EA00E3F2B0 /* DrawingWidget.swift */,
 				D1DDA17421C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift */,
+				D140339C21CC529B0030BC62 /* bret.jpeg */,
+				D140339A21CC52590030BC62 /* tiger.jpeg */,
 				D140339221CA97F40030BC62 /* LinkWidget.swift */,
 				D140339421CAF1890030BC62 /* UINoteView.swift */,
 				D140339621CAF5370030BC62 /* NoteLayoutViewController.swift */,
+				D1EF481C21DF1AAE00115599 /* blank.png */,
 			);
 			path = Waypoint;
+			sourceTree = "<group>";
+		};
+		D1DBA67A222B4A22006D5728 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D1DBA67B222B4A3E006D5728 /* Lato-Bold.ttf */,
+				D1DBA67C222B4A40006D5728 /* Lato-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,14 +260,20 @@
 			files = (
 				D1DDA17121C85B2F00E3F2B0 /* mountain.jpg in Resources */,
 				D1B648FC21B6426400B74900 /* Podfile in Resources */,
+				D140339D21CC529B0030BC62 /* bret.jpeg in Resources */,
 				D1DDA16F21C84D2000E3F2B0 /* trees.jpg in Resources */,
+				D1EF481D21DF1AAE00115599 /* blank.png in Resources */,
 				D1603A6621C07A7900121FFA /* art.scnassets in Resources */,
 				D1603A6821C092DC00121FFA /* note.xib in Resources */,
+				D140339B21CC525A0030BC62 /* tiger.jpeg in Resources */,
 				D140339121CA95630030BC62 /* ChosenLogo_TransparentGlobe.png in Resources */,
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
 				D1DDA16D21C472D400E3F2B0 /* kenya.jpg in Resources */,
+				D1DBA67D222B4A56006D5728 /* Lato-Bold.ttf in Resources */,
 				D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */,
+				D1DBA67E222B4A59006D5728 /* Lato-Regular.ttf in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
+				D140339921CC50840030BC62 /* tower.JPG in Resources */,
 				D1DDA16B21C471BE00E3F2B0 /* kenya.jpeg in Resources */,
 				D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */,
 			);

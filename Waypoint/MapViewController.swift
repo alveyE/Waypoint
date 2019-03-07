@@ -13,22 +13,23 @@ import Firebase
 import FirebaseDatabase
 import FirebaseUI
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate{
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, UINoteViewDelegate{
+    
+    
     var locationManager:CLLocationManager!
     var mapView:MKMapView!
-    var note:NoteView! {
+    var note:UINoteView! {
         didSet {
-            let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(mapTapped))
-            swipeUp.direction = [.up]
-            note.addGestureRecognizer(swipeUp)
+            let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(mapTapped))
+            swipeLeft.direction = [.left]
+            note.addGestureRecognizer(swipeLeft)
         }
     }
-    var scroll: UIScrollView!
-    var viewInARButton: UIButton!
+
     var ref: DatabaseReference!
     var locations = [(latitude: Double, longitude: Double)]()
     var noteIDs = [String]()
-    var xPosition: CGFloat = 0
+    var notesIDSInExpand = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewWillDisappear(_ animated: Bool) {
         self.view = nil
-        xPosition = 0
         locations = []
         noteIDs = []
         
@@ -63,26 +63,62 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
+    func touchHeard(onIndex index: Int) {
+        //EXPAND NOTE TILE BASED ON INDEX GIVEN
+        
+        if notesIDSInExpand[index].first != "E" {
+            let noteToBeExpanded = notesIDSInExpand[index]
+            notesIDSInExpand[index] = "E" + notesIDSInExpand[index]
+            
+            let titleEndY = note.endYPositions[index]
+            
+            expandNoteWidgets(withID: noteToBeExpanded, titleEndY: titleEndY)
+            
+        }else{
+            //DEEXPAND
+            notesIDSInExpand[index].remove(at: notesIDSInExpand[index].startIndex)
+            
+            let firstYVal = note.endYPositions[index]
+            var lastYVal: CGFloat = 0
+            if note.endYPositions.indices.contains(index + 1) {
+                lastYVal = note.endYPositions[index + 1]
+            }else {
+                lastYVal = note.getScrollMax()
+            }
+            let nextTitleMaxY = note.nextYmax(overY: firstYVal)
+            note.removeWidgetsInRange(minY: firstYVal, maxY: lastYVal)
+            
+            let totalAmnt = nextTitleMaxY - firstYVal + note.getPadding()
+
+            note.moveWidgets(overY: firstYVal, by: totalAmnt, down: false)
+
+ 
+            
+            
+            
+        }
+        
+        
+        
+    }
+    
+    
     @objc func mapTapped(){
         
-        scroll.subviews.forEach({ $0.removeFromSuperview() })
-        scroll.addSubview(note)
-        scroll.contentSize.width = note.frame.width
-        xPosition = note.frame.width + note.frame.width/15
         
         for ann in mapView.annotations {
             mapView.deselectAnnotation(ann, animated: true)
         }
-
+        
         note.endEditing(true)
-        if note.alpha == 1 {
-        UIView.transition(with: note, duration: 0.5, options: [.transitionCurlUp], animations: {
-            self.note.alpha = 0
-        },completion: {_ in self.scroll.isHidden = true})
-         //   note.textContent.isEditable = true
-            note.clearNote()
-            
-        }
+        notesIDSInExpand = []
+        
+        note.hide()
+        note.clearNote()
+
+
+        
+        
         
        
     }
@@ -93,48 +129,44 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.delegate = self
         let mapTapped = UITapGestureRecognizer(target: self, action: #selector(self.mapTapped))
         mapView.addGestureRecognizer(mapTapped)
-        scroll = UIScrollView()
-        scroll.delegate = self
-        note = NoteView()
+
+        note = UINoteView()
         
         let leftMargin:CGFloat = 0
         let topMargin:CGFloat = 0
         let mapWidth:CGFloat = view.frame.size.width
         let mapHeight:CGFloat = view.frame.size.height
         mapView.frame = CGRect(x: leftMargin, y: topMargin, width: mapWidth, height: mapHeight)
-        scroll.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight * 7/10)
         note.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight * 7/10)
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-      
         
         note.editable = false
         note.hasSaveButton = true
-        xPosition += note.frame.width + note.frame.width/15
+        note.delegate = self
+        note.hide()
         
         mapView.mapType = MKMapType.standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
         mapView.showsUserLocation = true
-        // Or, if needed, we can position map in the center of the view
+        mapView.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
         mapView.center = view.center
         mapView.contentMode = .scaleToFill
         mapView.showsCompass = false
         mapView.isPitchEnabled = false
         
+        
+        
         updatePins()
         
-        scroll.isHidden = true
         
         
         view.addSubview(mapView)
-        mapView.addSubview(scroll)
         mapView.addSubview(note)
         mapView.isUserInteractionEnabled = true
 
-        note.alpha = 0
         
-        
-      
         
        
     }
@@ -203,11 +235,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if let coordinates = view.annotation?.coordinate, view.annotation?.title != "My Location" {
          
             
-            getNote(withLocation: (latitude: coordinates.latitude, longitude: coordinates.longitude), addingNote: false)
+            
 
             
             
-            
+            var singleAdd = true
             let otherLocations = locations.filter({$0 != (latitude: coordinates.latitude, longitude: coordinates.longitude)})
             for coord in otherLocations {
                 let locationCoordinate = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
@@ -216,24 +248,28 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let distance = locationCoordinate.distance(from: otherCoordinate)
                 
                 if distance < 110 {
+                    singleAdd = false
                     print("Adding with location \(coordinates.latitude) \(coordinates.longitude) compared to original location of ")
+                    
+                    note.unHide()
+                    note.trimExcess()
+
+                    getNote(withLocation: (latitude: coordinates.latitude, longitude: coordinates.longitude), addingNote: true)
+                    
                     getNote(withLocation: (latitude: otherCoordinate.coordinate.latitude, longitude: otherCoordinate.coordinate.longitude), addingNote: true)
                 }
                 
                 
             }
-                    //THIS LOADED NOTE needs to be the note from server CHECK NOTE MANAGER to see how its doin it rn
-                    scroll.isHidden = false
-                    //Add Note qualities to NoteView
-                    
+            if singleAdd {
+                getNote(withLocation: (latitude: coordinates.latitude, longitude: coordinates.longitude), addingNote: false)
+            }
                     
                     
                     
                 
             
             
-            
-            //TODO: Make note textview non editable also do reverse in mapTapped()
         }
         
     }
@@ -247,31 +283,48 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func updateNoteView(_ loadedNote: Note){
-        note.clearNote()
         
-        note.title = loadedNote.title
-        note.time = loadedNote.timeStamp
-     //   note.showARButton = loadedNote.AREnabled
+        
+            var displayNote = loadedNote
+      //      note.clearNote()
+           note.unHide()
+        
 
+        for widget in loadedNote.widgets {
+            switch widget{
+            case "title":
+                note.addTitleWidget(title: loadedNote.title, timeStamp: loadedNote.timeStamp, yPlacement: nil)
+                print("title ADD")
+                break;
+            case "text":
+                if loadedNote.text != nil {
+                    note.addTextWidget(text: displayNote.text!.remove(at: 0), yPlacement: nil)
+                }
+                break;
+            case "image":
+                //LOAD AND ADD IMAGE
+                
+                if loadedNote.images != nil {
+                    let imageInfo = displayNote.images!.remove(at: 0)
+                    let imageUrl = imageInfo["url"]
+                    let imageW = CGFloat((imageInfo["width"]! as NSString).floatValue)
+                    let imageH = CGFloat((imageInfo["height"]! as NSString).floatValue)
+                    note.addImageWidget(imageURL: imageUrl!, imageWidth: imageW, imageHeight: imageH, yPlacement: nil)
+                }
+                
+                break;
+            case "drawing":
+                break;
+            case "link":
+                break;
+            default:
+                break;
+                
+            }
+        }
+
+            note.trimExcess()
         
-        if let displayText = loadedNote.text {
-            note.text = displayText
-        }
-        if let notepics = loadedNote.images{
-            for imgURL in notepics {
-                note.addImage(withURL: imgURL)
-            }
-        }
-        if let link = loadedNote.linkURL {
-            if let linkText = loadedNote.linkText {
-                note.addLink(text: linkText, url: link)
-            }else{
-                note.addLink(text: link, url: link)
-            }
-        }
-        UIView.transition(with: note, duration: 0.5, options: [.transitionCurlDown], animations: {
-            self.note.alpha = 1
-        },completion: {_ in})
     }
     
     
@@ -309,12 +362,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
-    
-    @objc func arButtonAction(sender: UIButton!){
-        print("AR pressed")
-        performSegue(withIdentifier: "ARScreen", sender: self)
-        
-    }
+   
     
     public func getNote(withID noteID: String, addingNote: Bool){
         ref = Database.database().reference()
@@ -322,53 +370,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         ref.child("notes").child(noteID).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             if let value = snapshot.value as? [String : Any] {
-                
+                print("DOWNLOADING \(noteID)")
+                let widgets = value["widgets"] as? [String]
                 let title = value["title"] as? String
                 let timeStamp = value["timeStamp"] as? String
-                let text = value["text"] as? String
-                let images = value["images"] as? [String]
-                let linkText = value["linkText"] as? String
-                let linkURL = value["linkURL"] as? String
-                let AREnabled = value["AREnabled"] as? Bool
+                let text = value["text"] as? [String]
+                let links = value["links"] as? [String]
+                let images = value["images"] as? [[String:String]]
                 let creator = value["creator"] as? String
-                let timeLeft = value["timeLeft"] as? Int
                 let latitude = value["latitude"] as? Double
                 let longitude = value["longitude"] as? Double
-                let note = Note(title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images ?? [], linkText: linkText, linkURL: linkURL, AREnabled: AREnabled ?? false, creator: creator ?? "", timeLeft: timeLeft, location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
+                let note = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images ?? nil, links: links ?? nil, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
+              
                 if addingNote {
+                    self.notesIDSInExpand.append(noteID)
+                    self.note.addTitleWidget(title: note.title, timeStamp: note.timeStamp, yPlacement: nil)
+                    self.note.increaseScrollSlack(by: self.note.calculateHeight(of: "title", includePadding: false) * 11/12)
 
-                    let newNoteView = NoteView()
-                    
-                    newNoteView.frame = CGRect(x: self.xPosition, y: 0, width: self.view.frame.width, height: self.view.frame.height * 7/10)
-                    newNoteView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-                    
-                    newNoteView.title = note.title
-                    newNoteView.time = note.timeStamp
-                    newNoteView.editable = false
-                    newNoteView.hasSaveButton = true
-                    newNoteView.arButton.addTarget(self, action: #selector(self.arButtonAction), for: .touchUpInside)
-                    if let displayText = note.text {
-                        newNoteView.text = displayText
-                    }
-                    if let notepics = note.images{
-                        for imgURL in notepics {
-                            newNoteView.addImage(withURL: imgURL)
-                        }
-                    }
-                    if let link = note.linkURL {
-                        if let linkText = note.linkText {
-                            newNoteView.addLink(text: linkText, url: link)
-                        }else{
-                            newNoteView.addLink(text: link, url: link)
-                        }
-                    }
-                    newNoteView.noteID = noteID
-                    self.scroll.addSubview(newNoteView)
-                    self.xPosition += newNoteView.frame.width +  newNoteView.frame.width/15
-                    self.scroll.contentSize.width += newNoteView.frame.width +  newNoteView.frame.width/15
+                
+                
                 }else{
+                    print("Added single note")
                     self.note.noteID = noteID
                     self.updateNoteView(note)
+                    
                 }
             }
             
@@ -388,35 +413,102 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    func displayNote(_ noteGiven: Note){
-        let scrollNote = UIScrollView(frame: mapView.frame)
-        let yPosition: CGFloat = scrollNote.frame.height/30
-        for item in noteGiven.widgets {
-            switch item{
-            case "title":
-                let titleBar = TitleView()
-                titleBar.frame = CGRect(x: scrollNote.frame.minX, y: yPosition, width: scrollNote.frame.width * 9/10, height: mapView.frame.height/5)
-                titleBar.title = noteGiven.title
-                titleBar.noteTimeStamp = noteGiven.timeStamp
+    
+    
+    
+    func expandNoteWidgets(withID id: String, titleEndY: CGFloat){
+        ref = Database.database().reference()
+        
+        ref.child("notes").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            if let value = snapshot.value as? [String : Any] {
+   
                 
-                scrollNote.addSubview(titleBar)
+                let widgets = value["widgets"] as? [String]
+                let title = value["title"] as? String
+                let timeStamp = value["timeStamp"] as? String
+                let text = value["text"] as? [String]
+                let links = value["links"] as? [String]
+                let images = value["images"] as? [[String:String]] ?? []
+                let creator = value["creator"] as? String
+                let latitude = value["latitude"] as? Double
+                let longitude = value["longitude"] as? Double
+                var note = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images , links: links ?? nil, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
                 
-            break;
-            case "text":
-            break;
-            case "image":
-            break;
-            case "drawing":
-            break;
-            case "link":
-            break;
-            default:
-            break;
+                var totalHeight: CGFloat = self.note.getPadding()
+            
+                var imagesC = images
+                
+            //Moves elements down
+                
+                for widget in note.widgets {
+                    if widget == "image" {
+                        let imageInfo = imagesC.remove(at: 0)
+                        let imageW = CGFloat((imageInfo["width"]! as NSString).floatValue)
+                        let imageH = CGFloat((imageInfo["height"]! as NSString).floatValue)
+                        
+                        totalHeight += self.note.calculateHeight(imageWidth: imageW, imageHeight: imageH, includePadding: true)
+                    }else if widget != note.widgets[0]{
+                        totalHeight += self.note.calculateHeight(of: widget, includePadding: true)
+                    }
+                }
+
+                self.note.moveWidgets(overY: titleEndY, by: totalHeight, down: true)
+               //Add elements in correct place
+                var yPlacing: CGFloat = titleEndY + self.note.getPadding()
+                for widget in note.widgets {
+                    if widget != note.widgets[0] {
+                        
+                        
+                        switch widget{
+                        case "title":
+                            self.note.addTitleWidget(title: note.title, timeStamp: note.timeStamp, yPlacement: yPlacing)
+                            break;
+                        case "text":
+                            if note.text != nil {
+                                self.note.addTextWidget(text: note.text!.remove(at: 0), yPlacement: yPlacing)
+                            }
+                            break;
+                        case "image":
+                            //LOAD AND ADD IMAGE
+                            
+                            if note.images != nil {
+                                let imageInfo = note.images!.remove(at: 0)
+                                let imageUrl = imageInfo["url"]
+                                let imageW = CGFloat((imageInfo["width"]! as NSString).floatValue)
+                                let imageH = CGFloat((imageInfo["height"]! as NSString).floatValue)
+                                self.note.addImageWidget(imageURL: imageUrl!, imageWidth: imageW, imageHeight: imageH, yPlacement: yPlacing)
+                                
+                                yPlacing += self.note.calculateHeight(imageWidth: imageW, imageHeight: imageH, includePadding: true)
+                            }
+                            
+                            break;
+                        case "drawing":
+                            break;
+                        case "link":
+                            break;
+                        default:
+                            break;
+                            
+                        }
+                        
+                        if widget != "image" {
+                            yPlacing += self.note.calculateHeight(of: widget, includePadding: true)
+                        }
+                        
+                        
+                        
+                        
+                        
+                    }
+                }
                 
                 
             }
+            
+        }) { (error) in
+            print(error.localizedDescription)
         }
-        
         
     }
     

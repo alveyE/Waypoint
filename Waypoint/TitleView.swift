@@ -16,6 +16,7 @@ class TitleView: UIView {
     private lazy var height = bounds.height
     
     public var editable = false
+    public var hasSaveButton = false
     public var noteTimeStamp = "20181219101034"
     public var title = ""
     
@@ -31,7 +32,9 @@ class TitleView: UIView {
         layer.addSublayer(shadow)
         addSubview(titleText)
         addSubview(timeStamp)
+        if hasSaveButton {
         addSubview(saveButton)
+        }
     }
     
     private func createShadow() -> CAShapeLayer {
@@ -52,7 +55,7 @@ class TitleView: UIView {
         title.isEditable = editable
         title.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         title.isScrollEnabled = false
-        let titleFont = UIFont(name: "Arial-BoldMT", size: 20)
+        let titleFont = UIFont(name: "Lato-Bold", size: height/4)
         title.font = titleFont
         title.text = self.title
         
@@ -63,9 +66,9 @@ class TitleView: UIView {
     
     
     private func createTimeStamp() -> UILabel {
-        let time = UILabel(frame: CGRect(x: width/8, y: height * 9/24, width: width * 7/9, height: height/4))
+        let time = UILabel(frame: CGRect(x: width/8, y: height * 9/24, width: width * 7/9, height: height * 3/8))
         time.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        let dateFont = UIFont(name: "Arial", size: 18)
+        let dateFont = UIFont(name: "Lato", size: height/4.3)
         time.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         let timeText = determineHowLongAgo(noteCreationDate: noteTimeStamp)
         let attributedTime = NSMutableAttributedString(string: timeText, attributes: [.font : dateFont as Any])
@@ -84,6 +87,7 @@ class TitleView: UIView {
     }
     
     private func determineHowLongAgo(noteCreationDate : String) -> String {
+        print(noteCreationDate)
         
         let date = Date()
         let calendar = Calendar.current
@@ -95,8 +99,8 @@ class TitleView: UIView {
         let minutes = calendar.component(.minute, from: date)
         let currentTime = String(format: "%04d%02d%02d%02d%02d%02d", year,month,day,hour,minutes,seconds)
 
-        let nowTime = Double(currentTime)!
-        let noteTime = Double(noteCreationDate)!
+        let nowTime = Double(currentTime) ?? 0
+        let noteTime = Double(noteCreationDate) ?? 11111111111111
         if(nowTime <= noteTime){
             return "Moments ago"
         }

@@ -14,13 +14,11 @@ public struct Note : Codable{
     
     var title: String
     var timeStamp: String
-    var text: String?
-    var images: [String]?
-    var linkText: String?
-    var linkURL: String?
-    var AREnabled = false
+    var text: [String]?
+   // var images: [String]?
+    var images: [[String:String]]?
+    var links: [String]?
     let creator: String
-    var timeLeft: Int?
     let latitude: Double
     let longitude: Double
     
@@ -31,15 +29,13 @@ public struct Note : Codable{
         case info, emergency, safety, helpful
     }
     
-    init(title: String, timeStamp: String, text: String?,images: [String],linkText: String?, linkURL: String? ,AREnabled: Bool,creator: String, timeLeft: Int?, location: (latitude: Double, longitude: Double)){
+    init(widgets: [String], title: String, timeStamp: String, text: [String]?,images: [[String:String]]?,  links: [String]?, creator: String, location: (latitude: Double, longitude: Double)){
+        self.widgets = widgets
         self.title = title
         self.text = text
         self.images = images
-        self.linkText = linkText
-        self.linkURL = linkURL
-        self.AREnabled = AREnabled
+        self.links = links
         self.creator = creator
-        self.timeLeft = timeLeft
         latitude = location.latitude
         longitude = location.longitude
         
@@ -61,11 +57,9 @@ public struct Note : Codable{
         init(){
             title = ""
             text = nil
-            images = []
-            linkText = nil
-            linkURL = nil
+            images = nil
+            links = nil
             creator = ""
-            timeLeft = nil
             latitude = 0
             longitude = 0
             timeStamp = ""

@@ -18,10 +18,10 @@ class TextWidget: UIView {
     public var editable = true
     public var text = ""
     
-    private lazy var textContent = createTextContent()
+    public lazy var textContent = createTextContent()
     private lazy var shadow = createShadow()
     
- 
+    public var noteID = ""
     
     override func layoutSubviews() {
         layer.addSublayer(shadow)
@@ -57,6 +57,10 @@ class TextWidget: UIView {
             .paragraphStyle : paragraphStyle,
             .foregroundColor : #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         ]
+        if self.text == "" {
+            text.attributedText = NSAttributedString(string: " ", attributes: attributes)
+            text.attributedText = NSAttributedString(string: "")
+        }
         let displayText = self.text
         
         let attributedText = NSAttributedString(string: displayText, attributes: attributes)

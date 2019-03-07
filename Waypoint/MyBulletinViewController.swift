@@ -87,8 +87,8 @@ class MyBulletinViewController: UIViewController {
                 
                 let title = value["title"] as? String
                 let timeStamp = value["timeStamp"] as? String
-                let text = value["text"] as? String
-                let images = value["images"] as? [String]
+                let text = value["text"] as? [String]
+                let images = value["images"] as? [[String : String]]
                 let linkText = value["linkText"] as? String
                 let linkURL = value["linkURL"] as? String
                 let AREnabled = value["AREnabled"] as? Bool
@@ -96,7 +96,7 @@ class MyBulletinViewController: UIViewController {
                 let timeLeft = value["timeLeft"] as? Int
                 let latitude = value["latitude"] as? Double
                 let longitude = value["longitude"] as? Double
-                let loadedNote = Note(title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images ?? [], linkText: linkText, linkURL: linkURL, AREnabled: AREnabled ?? false, creator: creator ?? "", timeLeft: timeLeft, location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
+                let loadedNote = Note(widgets: [], title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images ?? nil, links: nil, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
               
                 let noteView = NoteView()
                 
@@ -112,20 +112,20 @@ class MyBulletinViewController: UIViewController {
                 noteView.time = loadedNote.timeStamp
                 
                 if let displayText = loadedNote.text {
-                    noteView.text = displayText
+
                 }
                 if let notepics = loadedNote.images{
                     for imgURL in notepics {
-                        noteView.addImage(withURL: imgURL)
+                    //    noteView.addImage(withURL: imgURL)
                     }
                 }
-                if let link = loadedNote.linkURL {
-                    if let linkText = loadedNote.linkText {
-                        noteView.addLink(text: linkText, url: link)
-                    }else{
-                        noteView.addLink(text: link, url: link)
-                    }
-                }
+//                if let link = loadedNote.linkURL {
+//                    if let linkText = loadedNote.linkText {
+//                        noteView.addLink(text: linkText, url: link)
+//                    }else{
+//                        noteView.addLink(text: link, url: link)
+//                    }
+//                }
                 
                 self.scrollView.addSubview(noteView)
                 self.yPosition += noteView.frame.height + height/15

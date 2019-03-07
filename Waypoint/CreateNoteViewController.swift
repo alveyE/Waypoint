@@ -85,10 +85,10 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     @IBAction func createNoteTouched(_ sender: UIButton) {
     
             noteCreator.title = note.titleText.text
-            noteCreator.text = note.textContent.text
+        //    noteCreator.text = note.textContent.text
         
         
-        if noteCreator.text == "", noteCreator.title == "", noteCreator.images == [] {
+        if noteCreator.text == nil, noteCreator.title == "", noteCreator.images == [] {
             //Display message to add content to note
             
           
