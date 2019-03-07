@@ -58,7 +58,8 @@ class UINoteView: UIView, UITextViewDelegate {
             verticalPlacing = yPosition
         }
             let titleWidget = TitleView()
-        titleWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: height * 5/24)
+        titleWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width/4)
+        print(width)
             titleWidget.editable = editable
             titleWidget.hasSaveButton = hasSaveButton
             titleWidget.title = title
@@ -95,14 +96,14 @@ class UINoteView: UIView, UITextViewDelegate {
         }else{
             verticalPlacing = yPosition
         }
-        let textFont = UIFont(name: "Arial", size: 16)
+        let textFont = UIFont(name: "Helvetica Neue", size: 16)
         if let lineFontHeight = textFont?.lineHeight {
             let lineHeight = lineFontHeight * 1.5
             
         }
         
             let textWidget = TextWidget()
-            textWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: height * 5/24)
+            textWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width/4)
             textWidget.editable = editable
             textWidget.text = text
             textWidget.alpha = 0
@@ -185,7 +186,7 @@ class UINoteView: UIView, UITextViewDelegate {
         }
         
         let linkWidget = LinkWidget()
-        linkWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: height/8)
+        linkWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width * 3/20)
         linkWidget.url = url
         scroll.addSubview(linkWidget)
         if yPlacement == nil {
@@ -204,7 +205,7 @@ class UINoteView: UIView, UITextViewDelegate {
         }
         
         let drawingWidget = DrawingWidget()
-        drawingWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: height/3)
+        drawingWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width * 2/5)
         
         drawingWidget.urlOfDrawing = setImage
         
@@ -274,18 +275,13 @@ class UINoteView: UIView, UITextViewDelegate {
         subCopy.sort(by: {$0.frame.minY < $1.frame.minY})
         
         for sub in subCopy {
-            print("LOOSOP")
             if sub.frame.minY > yVal {
             
             if let _ = sub as? TitleView {
-                print("FOUND TITLE")
                 break
             }else {
-                print("SAVING SUB")
                 savedSub = sub
             }
-            }else {
-                print("IS NOT OVER Y VAL")
             }
         }
         
@@ -297,13 +293,13 @@ class UINoteView: UIView, UITextViewDelegate {
     public func calculateHeight(of widgetType: String, includePadding: Bool) -> CGFloat{
         var heightCalc: CGFloat = 0
         if widgetType == "title" {
-            heightCalc =  height * 5/24
+            heightCalc =  width/4
         }else if widgetType == "text" {
-            heightCalc = height * 5/24
+            heightCalc = width/4
         }else if widgetType == "drawing" {
-            heightCalc =  height/3
+            heightCalc =  width * 2/5
         }else if widgetType == "link" {
-            heightCalc = height/8
+            heightCalc = width * 3/20
         }
         if includePadding {
             return heightCalc + verticalPadding
@@ -331,12 +327,6 @@ class UINoteView: UIView, UITextViewDelegate {
     }
     
     public func clearNote(){
-        //Animate
-        print("CLEAR")
-//        UIView.transition(with: self, duration: 0.5, options: [.transitionCrossDissolve], animations: {
-//            self.alpha = 0
-//        }, completion: nil)
-        
         scroll.subviews.forEach({$0.removeFromSuperview()})
         scroll.contentSize.height = height
         yPosition = height/30
@@ -363,7 +353,7 @@ class UINoteView: UIView, UITextViewDelegate {
         
     }
     private func leway() -> CGFloat {
-        return height * 5/24
+        return width/4
     }
     
     private func getTopMinY() -> CGFloat {
@@ -397,7 +387,6 @@ class UINoteView: UIView, UITextViewDelegate {
     public func hide(){
         UIView.animate(withDuration: animationTime) {
             self.alpha = 0
-            
         }
 //        UIView.transition(with: self, duration: 0.2, options: [.transitionCrossDissolve], animations: {
 //
@@ -412,7 +401,7 @@ class UINoteView: UIView, UITextViewDelegate {
     
     public func trimExcess(){
         scroll.contentSize.height -= height
-        scroll.contentSize.height += height * 5/24
+        scroll.contentSize.height += width/4
     }
     
     

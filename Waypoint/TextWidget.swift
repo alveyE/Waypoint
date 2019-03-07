@@ -41,7 +41,7 @@ class TextWidget: UIView {
         return boxShadow
     }
     
-    let textFont = UIFont(name: "Arial", size: 16)
+    let textFont = UIFont(name: "Helvetica Neue", size: 16)
     private func createTextContent() -> UITextView {
         let text = UITextView(frame: CGRect(x: width/20, y: height/30, width: width - width/10, height: height - height/30))
         

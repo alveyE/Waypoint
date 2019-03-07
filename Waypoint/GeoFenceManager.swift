@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct GeoFence {
     
@@ -30,7 +31,7 @@ struct GeoFence {
     //checks to see if location is enabled before doin the other stuff
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if (status == CLAuthorizationStatus.authorizedAlways) {
-            self.setUpGeofenceOnNoteLocation()()
+            self.setUpGeofenceOnNoteLocation(latitude: 0, longitude: 0, noteTitle: "")
         }
     }
 

@@ -9,13 +9,14 @@
 import UIKit
 import FirebaseDatabase
 import CoreLocation
+import MapKit
 
 class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDelegate, UINoteViewDelegate {
 
     var ref: DatabaseReference!
 
     var note:UINoteView!
-    
+    var mapView:MKMapView!
     
     private var locationManager:CLLocationManager!
     private var currentLocation = CLLocation(latitude: 0, longitude: 0)
@@ -33,6 +34,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createMapView()
         createNoteView()
         determineCurrentLocation()
     }
@@ -42,7 +44,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     }
     
     private func createNoteView(){
-        view.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+    //    view.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
         
         note = UINoteView()
         
@@ -57,6 +59,14 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         
         view.addSubview(note)
     }
+    
+    private func createMapView() {
+        mapView = MKMapView()
+        mapView.frame = view.bounds
+        mapView.isUserInteractionEnabled = false
+        
+        view.addSubview(mapView)
+    }
 
     func determineCurrentLocation()
     {
@@ -68,6 +78,11 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         if CLLocationManager.locationServicesEnabled() {
             //locationManager.startUpdatingHeading()
             locationManager.startUpdatingLocation()
+        }
+        
+        if let userLocation = locationManager.location?.coordinate {
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 2000, longitudinalMeters: 2000)
+            mapView.setRegion(viewRegion, animated: false)
         }
     }
     
