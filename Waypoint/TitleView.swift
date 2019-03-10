@@ -47,6 +47,7 @@ class TitleView: UIView {
         boxShadow.shadowOffset = CGSize.zero
         boxShadow.shadowRadius = 5
         boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+ //       boxShadow.fillColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         return boxShadow
     }
     
@@ -55,6 +56,7 @@ class TitleView: UIView {
         let title = UITextView(frame: CGRect(x: width/25, y: height/50, width: width * 8/9, height: height * 3/8))
         title.isEditable = editable
         title.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+   //     title.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         title.isScrollEnabled = false
         let titleFont = UIFont(name: "Helvetica Neue", size: height/4)
         title.font = titleFont?.bold()
@@ -66,8 +68,8 @@ class TitleView: UIView {
     }
     
     private func createCalendarIcon() -> UIImageView {
-        let calendar = UIImage(named: "calendar")
-        let calendarIcon = UIImageView(frame: CGRect(x: width/25, y: height * 19/48, width: calendar!.size.width, height: calendar!.size.height))
+        let calendar = UIImage(named: "cal")
+        let calendarIcon = UIImageView(frame: CGRect(x: width/18, y: height * 22/48, width: calendar!.size.width * 2/3, height: calendar!.size.height  * 2/3))
         calendarIcon.image = calendar!
         return calendarIcon
         
@@ -79,6 +81,7 @@ class TitleView: UIView {
         time.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         let dateFont = UIFont(name: "Helvetica Neue", size: height/4.3)
         time.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+//        time.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         let timeText = determineHowLongAgo(noteCreationDate: noteTimeStamp)
         let attributedTime = NSMutableAttributedString(string: timeText, attributes: [.font : dateFont as Any])
         time.attributedText = attributedTime
@@ -87,7 +90,7 @@ class TitleView: UIView {
     
     private func createSaveButton() -> UIButton {
         let save = UIButton(frame: CGRect(x: width * 17/20, y: height/9, width: width/10, height: width/10))
-        let saveImage = UIImage(named: "tag")
+        let saveImage = UIImage(named: "tagEmpty")
         save.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         save.setImage(saveImage, for: UIControl.State.normal)
         return save

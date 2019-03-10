@@ -27,7 +27,7 @@ class UINoteView: UIView, UITextViewDelegate {
     
     private lazy var width = bounds.width
     private lazy var height = bounds.height
-    private lazy var yPosition = height/30
+    private lazy var yPosition = height/15
     private lazy var padding = width/20
     private lazy var verticalPadding = height/50
     private var animationTime: TimeInterval = 0.3
@@ -328,7 +328,7 @@ class UINoteView: UIView, UITextViewDelegate {
     public func clearNote(){
         scroll.subviews.forEach({$0.removeFromSuperview()})
         scroll.contentSize.height = height
-        yPosition = height/30
+        yPosition = height/15
         endYPositions = []
         tapGestures = []
     }
