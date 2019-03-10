@@ -147,7 +147,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
         mapView.showsUserLocation = true
-        mapView.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        mapView.tintColor = #colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1)
         
         mapView.center = view.center
         mapView.contentMode = .scaleToFill
