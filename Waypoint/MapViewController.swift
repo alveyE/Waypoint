@@ -102,9 +102,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
-    
     @objc func mapTapped(){
-        
         
         for ann in mapView.annotations {
             mapView.deselectAnnotation(ann, animated: true)
@@ -165,11 +163,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         view.addSubview(mapView)
         mapView.addSubview(note)
         mapView.isUserInteractionEnabled = true
-
         
-        
-       
     }
+    
+    
+    
     
     func updatePins(){
         // Add annotations
@@ -316,6 +314,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             case "drawing":
                 break;
             case "link":
+                if loadedNote.links != nil {
+                    let link = displayNote.links!.remove(at: 0)
+                    note.addLinkWidget(url: link, yPlacement: nil)
+                }
                 break;
             default:
                 break;
@@ -486,6 +488,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         case "drawing":
                             break;
                         case "link":
+                            if note.links != nil {
+                                let link =  note.links!.remove(at: 0)
+                                self.note.addLinkWidget(url: link, yPlacement: yPlacing)
+                            }
                             break;
                         default:
                             break;

@@ -10,14 +10,18 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import MapKit
 
-class MyBulletinViewController: UIViewController, UINoteViewDelegate {
+class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocationManagerDelegate {
     
 
     private var savedNotesIDs = [String]()
     var note:UINoteView!
+    var mapView:MKMapView!
     
     private var notesIDSInExpand = [String]()
+    private var locationManager:CLLocationManager!
+    
     
     var ref: DatabaseReference!
     
@@ -31,13 +35,14 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.view = nil
+        notesIDSInExpand = []
+        savedNotesIDs = []
+        note.clearNote()
     }
     
     
     
     private func createNoteView(){
-        view.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
-        
         note = UINoteView()
         
         let width: CGFloat = self.view.frame.size.width
@@ -52,7 +57,35 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate {
         view.addSubview(note)
     }
     
+    private func createMapView() {
+        mapView = MKMapView()
+        mapView.frame = view.bounds
+        mapView.isUserInteractionEnabled = false
+        
+        view.addSubview(mapView)
+    }
+    
+    func determineCurrentLocation()
+    {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            //locationManager.startUpdatingHeading()
+            locationManager.startUpdatingLocation()
+        }
+        
+        if let userLocation = locationManager.location?.coordinate {
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 2000, longitudinalMeters: 2000)
+            mapView.setRegion(viewRegion, animated: false)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
+        createMapView()
+        determineCurrentLocation()
         createNoteView()
         savedNotesIDs = []
         yPosition = 0;

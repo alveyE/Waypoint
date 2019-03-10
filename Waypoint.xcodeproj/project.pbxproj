@@ -24,6 +24,9 @@
 		D1A7998921BA6FE7002AF7B2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */; };
 		D1A7998B21BB3906002AF7B2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */; };
 		D1A7999121BC68DE002AF7B2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */; };
+		D1A8EE232232F57800B308CF /* pending.gif in Resources */ = {isa = PBXBuildFile; fileRef = D1A8EE222232F57600B308CF /* pending.gif */; };
+		D1A8EE252232F77600B308CF /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A8EE242232F77600B308CF /* UIImage+Gif.swift */; };
+		D1A8EE272232F85E00B308CF /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = D1A8EE262232F85D00B308CF /* loading.gif */; };
 		D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C7219E025E003FF5DB /* AppDelegate.swift */; };
 		D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C9219E025E003FF5DB /* MapViewController.swift */; };
 		D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AE58CB219E025E003FF5DB /* Main.storyboard */; };
@@ -70,6 +73,9 @@
 		D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		D1A8EE222232F57600B308CF /* pending.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = pending.gif; sourceTree = "<group>"; };
+		D1A8EE242232F77600B308CF /* UIImage+Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
+		D1A8EE262232F85D00B308CF /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		D1AE58C4219E025E003FF5DB /* Waypoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waypoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AE58C7219E025E003FF5DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1AE58C9219E025E003FF5DB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +181,7 @@
 				D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */,
 				D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */,
 				D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */,
+				D1A8EE222232F57600B308CF /* pending.gif */,
 				D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */,
 				D1DDA16C21C472D300E3F2B0 /* kenya.jpg */,
 				D1DDA16A21C471BE00E3F2B0 /* kenya.jpeg */,
@@ -192,10 +199,12 @@
 				D1DDA17421C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift */,
 				D140339C21CC529B0030BC62 /* bret.jpeg */,
 				D140339A21CC52590030BC62 /* tiger.jpeg */,
+				D1A8EE262232F85D00B308CF /* loading.gif */,
 				D140339221CA97F40030BC62 /* LinkWidget.swift */,
 				D140339421CAF1890030BC62 /* UINoteView.swift */,
 				D140339621CAF5370030BC62 /* NoteLayoutViewController.swift */,
 				C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */,
+				D1A8EE242232F77600B308CF /* UIImage+Gif.swift */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -285,6 +294,8 @@
 				D1DBA67E222B4A59006D5728 /* Lato-Regular.ttf in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
 				D140339921CC50840030BC62 /* tower.JPG in Resources */,
+				D1A8EE232232F57800B308CF /* pending.gif in Resources */,
+				D1A8EE272232F85E00B308CF /* loading.gif in Resources */,
 				D1DDA16B21C471BE00E3F2B0 /* kenya.jpeg in Resources */,
 				D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */,
 			);
@@ -356,6 +367,7 @@
 				C5BD13A821DF4B9C00BE7F17 /* GeoFenceManager.swift in Sources */,
 				D140339721CAF5370030BC62 /* NoteLayoutViewController.swift in Sources */,
 				D140339321CA97F40030BC62 /* LinkWidget.swift in Sources */,
+				D1A8EE252232F77600B308CF /* UIImage+Gif.swift in Sources */,
 				D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */,
 				D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */,
 				D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */,

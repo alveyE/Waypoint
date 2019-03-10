@@ -134,13 +134,27 @@ class TitleView: UIView {
 
 extension UIFont {
     
-    func withTraits(traits:UIFontDescriptor.SymbolicTraits...) -> UIFont {
-        let descriptor = self.fontDescriptor
-            .withSymbolicTraits(UIFontDescriptor.SymbolicTraits(traits))
-        return UIFont(descriptor: descriptor!, size: 0)
+    func withTraits(_ traits: UIFontDescriptor.SymbolicTraits) -> UIFont {
+        
+        // create a new font descriptor with the given traits
+        if let fd = fontDescriptor.withSymbolicTraits(traits) {
+            // return a new font with the created font descriptor
+            return UIFont(descriptor: fd, size: pointSize)
+        }
+        
+        // the given traits couldn't be applied, return self
+        return self
+    }
+    
+    func italics() -> UIFont {
+        return withTraits(.traitItalic)
     }
     
     func bold() -> UIFont {
-        return withTraits(traits: .traitBold)
+        return withTraits(.traitBold)
+    }
+    
+    func boldItalics() -> UIFont {
+        return withTraits([ .traitBold, .traitItalic ])
     }
 }

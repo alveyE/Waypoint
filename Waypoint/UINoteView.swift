@@ -147,18 +147,8 @@ class UINoteView: UIView, UITextViewDelegate {
         adjustedHeight *= adjustedWidth/preAdj
         
         
-        imageWidget.frame = CGRect(x: self.padding, y: verticalPlacing, width: self.width - 2*self.padding, height: adjustedHeight - minimumPadding*3)
+        imageWidget.frame = CGRect(x: self.padding, y: verticalPlacing, width: self.width - 2*self.padding, height: adjustedHeight)
         
-        self.scroll.addSubview(imageWidget)
-        UIView.animate(withDuration: animationTime) {
-            imageWidget.alpha = 1
-            
-        }
-        
-        if yPlacement == nil {
-        self.yPosition += imageWidget.frame.height + self.verticalPadding
-        self.scroll.contentSize.height += imageWidget.frame.height + self.verticalPadding
-        }
         reference.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
             let image = UIImage(data: data!) ?? UIImage()
             
@@ -173,7 +163,16 @@ class UINoteView: UIView, UITextViewDelegate {
             
            
         })
+        self.scroll.addSubview(imageWidget)
+        UIView.animate(withDuration: animationTime) {
+            imageWidget.alpha = 1
+            
+        }
         
+        if yPlacement == nil {
+            self.yPosition += imageWidget.frame.height + self.verticalPadding
+            self.scroll.contentSize.height += imageWidget.frame.height + self.verticalPadding
+            }
     }
     
     public func addLinkWidget(url: String, yPlacement: CGFloat?){
@@ -186,7 +185,7 @@ class UINoteView: UIView, UITextViewDelegate {
         }
         
         let linkWidget = LinkWidget()
-        linkWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width * 3/20)
+        linkWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width * 6/20)
         linkWidget.url = url
         scroll.addSubview(linkWidget)
         if yPlacement == nil {
@@ -299,7 +298,7 @@ class UINoteView: UIView, UITextViewDelegate {
         }else if widgetType == "drawing" {
             heightCalc =  width * 2/5
         }else if widgetType == "link" {
-            heightCalc = width * 3/20
+            heightCalc = width * 6/20
         }
         if includePadding {
             return heightCalc + verticalPadding
@@ -320,9 +319,9 @@ class UINoteView: UIView, UITextViewDelegate {
         adjustedHeight *= adjustedWidth/preAdj
         
         if includePadding {
-            return adjustedHeight - minimumPadding*3 + verticalPadding
+            return adjustedHeight + verticalPadding
         }else{
-            return adjustedHeight - minimumPadding*3
+            return adjustedHeight
         }
     }
     

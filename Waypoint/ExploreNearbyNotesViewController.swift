@@ -26,6 +26,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     private var notesIDSInExpand = [String]()
     
     override func viewWillDisappear(_ animated: Bool) {
+        note = nil
         self.view = nil
         locationsAndIDs = []
         notesIDSInExpand = []
@@ -34,6 +35,9 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let shouldNotExist = note {
+            print("YOU ARE NOT EVEN BORN YET WTF")
+        }
         createMapView()
         createNoteView()
         determineCurrentLocation()

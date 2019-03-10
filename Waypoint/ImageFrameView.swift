@@ -9,8 +9,22 @@
 import UIKit
 
 class ImageFrameView: UIView {
-
-    var image = UIImage(named: "trees.jpg")
+//replace trees with loading gif or something similar
+    
+    var image = UIImage.gif(name: "loading") {
+        didSet{
+            print(image)
+            UIView.animate(withDuration: 0.2, animations: {
+                self.imageView.alpha = 0
+            }) { (true) in
+                self.imageView.image = self.image
+                UIView.animate(withDuration: 0.2) {
+                    self.imageView.alpha = 1
+                }
+            }
+            
+        }
+    }
     
     
     
