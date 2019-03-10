@@ -163,7 +163,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         view.addSubview(mapView)
         mapView.addSubview(note)
         mapView.isUserInteractionEnabled = true
-        
+
     }
     
     
@@ -438,7 +438,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 var note = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images , links: links ?? nil, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
                 
                 var totalHeight: CGFloat = self.note.getPadding()
-            
+                print(images)
                 var imagesC = images
                 
             //Moves elements down

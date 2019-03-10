@@ -24,7 +24,7 @@ class TitleView: UIView {
     private lazy var timeStamp = createTimeStamp()
     private lazy var saveButton = createSaveButton()
     private lazy var shadow = createShadow()
-    
+    private lazy var calendarIcon = createCalendarIcon()
     
    
 
@@ -32,6 +32,7 @@ class TitleView: UIView {
         layer.addSublayer(shadow)
         addSubview(titleText)
         addSubview(timeStamp)
+        addSubview(calendarIcon)
         if hasSaveButton {
         addSubview(saveButton)
         }
@@ -61,6 +62,14 @@ class TitleView: UIView {
         
         
         return title
+        
+    }
+    
+    private func createCalendarIcon() -> UIImageView {
+        let calendar = UIImage(named: "calendar")
+        let calendarIcon = UIImageView(frame: CGRect(x: width/25, y: height * 19/48, width: calendar!.size.width, height: calendar!.size.height))
+        calendarIcon.image = calendar!
+        return calendarIcon
         
     }
     
