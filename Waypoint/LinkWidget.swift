@@ -110,6 +110,14 @@ class LinkWidget: UIView {
 //        let imageView = UIImageView(frame: CGRect(x: width - (width * 3/4), y: height * 1/3, width: height * 2/3, height: height * 2/3))
         let imageView = UIImageView(image: icon)
         imageView.frame = CGRect(x: width - (width * 7/8), y: height/2 - height * 1/3, width: scaledWidth, height: adjustedHeight)
+        if imageView.frame.width > height {
+            let originalWidth = icon.size.width
+            let adjustedWidth = height * 2/3
+            let scaledHeight = icon.size.height * (adjustedWidth/originalWidth)
+            imageView.frame = CGRect(x: width - (width * 7/8), y: height/2 - scaledHeight/2, width: adjustedWidth, height: scaledHeight)
+            
+        }
+        
         
         self.icon = imageView
     }
