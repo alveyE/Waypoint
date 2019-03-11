@@ -396,7 +396,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 }else{
                     print("Added single note")
-                    self.note.noteID = noteID
                     self.updateNoteView(note)
                     
                 }

@@ -22,7 +22,17 @@ class TitleView: UIView {
     public var noteTimeStamp = "20181219101034"
     public var title = ""
     public var noteID = ""
-    public var saved = false
+    public var saved = false {
+        didSet{
+            let emptyTag = UIImage(named: "tagEmpty")
+            let filledTag = UIImage(named: "tagFilled")
+            if self.saved {
+                self.saveButton.setImage(filledTag, for: UIControl.State.normal)
+            }else {
+                self.saveButton.setImage(emptyTag, for: UIControl.State.normal)
+            }
+        }
+    }
     
     
     private lazy var titleText = createTitleText()
@@ -94,6 +104,7 @@ class TitleView: UIView {
     }
     
     private func createSaveButton() -> UIButton {
+        setSavedCorrectly()
         let save = UIButton(frame: CGRect(x: width * 17/20, y: height/9, width: width/10, height: width/10))
         save.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         let emptyTag = UIImage(named: "tagEmpty")
@@ -110,15 +121,34 @@ class TitleView: UIView {
         
     }
     
+    private func setSavedCorrectly(){
+        if let user = Auth.auth().currentUser {
+        ref = Database.database().reference()
+            ref.child("users").child(user.uid).child("saves").observeSingleEvent(of: .value, with: { (snapshot) in
+                for case let childSnapshot as DataSnapshot in snapshot.children {
+                    if let childData = childSnapshot.value as? [String : Any] {
+                        
+                        let savedID = childData["savedID"] as? String
+                        
+                        if savedID! == self.noteID {
+                           self.saved = true
+                            print("note is saved")
+                        }
+                        
+                        
+                        
+                    }
+                }
+                
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+
+        }
+    }
+    
     @objc private func saveTapped(){
         saved = !saved
-        let emptyTag = UIImage(named: "tagEmpty")
-        let filledTag = UIImage(named: "tagFilled")
-        if saved {
-            saveButton.setImage(filledTag, for: UIControl.State.normal)
-        }else {
-            saveButton.setImage(emptyTag, for: UIControl.State.normal)
-        }
         
         if let user = Auth.auth().currentUser {
             ref = Database.database().reference()

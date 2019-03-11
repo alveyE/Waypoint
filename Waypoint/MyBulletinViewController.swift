@@ -177,7 +177,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                 
                 let title = value["title"] as? String ?? ""
                 let timeStamp = value["timeStamp"] as? String ?? ""
-                
+                self.note.noteID = noteID
                 self.notesIDSInExpand.append(noteID)
                 self.note.addTitleWidget(title: title, timeStamp: timeStamp, yPlacement: nil)
                 self.note.increaseScrollSlack(by: self.note.calculateHeight(of: "title", includePadding: false) * 11/12)

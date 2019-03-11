@@ -35,7 +35,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let shouldNotExist = note {
+        if let _ = note {
             print("YOU ARE NOT EVEN BORN YET WTF")
         }
         createMapView()
@@ -191,7 +191,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                
                 let title = value["title"] as? String ?? ""
                 let timeStamp = value["timeStamp"] as? String ?? ""
-                
+                self.note.noteID = noteID
                 self.notesIDSInExpand.append(noteID)
                 self.note.addTitleWidget(title: title, timeStamp: timeStamp, yPlacement: nil)
                 self.note.increaseScrollSlack(by: self.note.calculateHeight(of: "title", includePadding: false) * 11/12)
