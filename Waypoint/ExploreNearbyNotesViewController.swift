@@ -220,11 +220,12 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                 let timeStamp = value["timeStamp"] as? String
                 let text = value["text"] as? [String]
                 let links = value["links"] as? [String]
+                let drawings = value["drawings"] as? [String]
                 let images = value["images"] as? [[String:String]] ?? []
                 let creator = value["creator"] as? String
                 let latitude = value["latitude"] as? Double
                 let longitude = value["longitude"] as? Double
-                var note = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images , links: links ?? nil, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
+                var note = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images , links: links ?? nil, drawings: drawings ?? nil, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
                 
                 var totalHeight: CGFloat = self.note.getPadding()
                 
@@ -275,6 +276,10 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                             
                             break;
                         case "drawing":
+                            if note.drawings != nil {
+                                let drawing = note.drawings!.remove(at: 0)
+                                self.note.addDrawingWidget(setImage: drawing, yPlacement: yPlacing)
+                            }
                             break;
                         case "link":
                             if note.links != nil {

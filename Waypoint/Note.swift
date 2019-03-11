@@ -18,6 +18,7 @@ public struct Note : Codable{
    // var images: [String]?
     var images: [[String:String]]?
     var links: [String]?
+    var drawings: [String]?
     let creator: String
     let latitude: Double
     let longitude: Double
@@ -29,12 +30,13 @@ public struct Note : Codable{
         case info, emergency, safety, helpful
     }
     
-    init(widgets: [String], title: String, timeStamp: String, text: [String]?,images: [[String:String]]?,  links: [String]?, creator: String, location: (latitude: Double, longitude: Double)){
+    init(widgets: [String], title: String, timeStamp: String, text: [String]?,images: [[String:String]]?,  links: [String]?, drawings: [String]?, creator: String, location: (latitude: Double, longitude: Double)){
         self.widgets = widgets
         self.title = title
         self.text = text
         self.images = images
         self.links = links
+        self.drawings = drawings
         self.creator = creator
         latitude = location.latitude
         longitude = location.longitude

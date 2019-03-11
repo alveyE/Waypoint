@@ -13,7 +13,6 @@ class ImageFrameView: UIView {
     
     var image = UIImage.gif(name: "loading") {
         didSet{
-            print(image)
             UIView.animate(withDuration: 0.2, animations: {
                 self.imageView.alpha = 0
             }) { (true) in
@@ -81,7 +80,9 @@ class ImageFrameView: UIView {
         
     }
   
-    
+    @objc private func imageTapped(){
+    //    let fullScreenImage = UIView(frame: CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>))
+    }
     
     private func createFrameCorners() -> CAShapeLayer{
         
@@ -113,8 +114,8 @@ class ImageFrameView: UIView {
         bottomLeftCorner.append(topRightCorner)
             
         triangles.path = bottomLeftCorner.cgPath
-        triangles.fillColor = #colorLiteral(red: 0.277395557, green: 0.277395557, blue: 0.277395557, alpha: 1)
-
+    //    triangles.fillColor = #colorLiteral(red: 0.277395557, green: 0.277395557, blue: 0.277395557, alpha: 1)
+        triangles.fillColor = #colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1)
         triangles.shadowColor = UIColor.black.cgColor
         triangles.shadowOpacity = 0.5
         triangles.shadowOffset = CGSize.zero

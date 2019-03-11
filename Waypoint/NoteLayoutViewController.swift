@@ -58,12 +58,13 @@ class NoteLayoutViewController: UIViewController, UITextViewDelegate {
                 let timeStamp = value["timeStamp"] as? String
                 let text = value["text"] as? [String]
                 let links = value["links"] as? [String]
+                let drawings = value["drawings"] as? [String]
                 let images = value["images"] as? [[String:String]]
                 let creator = value["creator"] as? String
                 let latitude = value["latitude"] as? Double
                 let longitude = value["longitude"] as? Double
              //   let loadedNote = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images ?? [], linkText: linkText, linkURL: linkURL, AREnabled: AREnabled ?? false, creator: creator ?? "", timeLeft: timeLeft, location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
-                let loadedNote = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text, images: images ?? nil, links: links, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
+                let loadedNote = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text, images: images ?? nil, links: links, drawings: drawings, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
                 
                 //UI STUFF
                 self.updateNoteView(loadedNote)
