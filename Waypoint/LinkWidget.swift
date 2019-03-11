@@ -44,6 +44,7 @@ class LinkWidget: UIView {
         boxShadow.shadowRadius = 5
         boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         setMetaImage()
+        setTitleContent()
         return boxShadow
     }
     
@@ -51,13 +52,14 @@ class LinkWidget: UIView {
     private func createLinkText() -> UITextView{
         let text = UITextView(frame: CGRect(x: width/4, y: height/3, width: width - width/4, height: height/3))
      //   text.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        tintColor = #colorLiteral(red: 0, green: 0, blue: 0.9803921569, alpha: 1)
         text.isEditable = false
         text.isScrollEnabled = false
-        let textFont = UIFont(name: "Helvetica Neue", size: 20)
+        let textFont = UIFont(name: "Roboto-MediumItalic", size: 20)
         let centeredText = NSMutableParagraphStyle()
         centeredText.alignment = .center
         let attributes: [NSAttributedString.Key:Any] = [
-            .font : textFont!.boldItalics(),
+            .font : textFont!,
             .paragraphStyle : centeredText,
             .underlineStyle : NSUnderlineStyle.single.rawValue,
         ]
@@ -80,13 +82,16 @@ class LinkWidget: UIView {
         if imageURL == "no image found" {
             iconURL = "https://image.flaticon.com/icons/png/512/93/93618.png"
         }
-        if iconURL.first == " " {
+        while iconURL.first == " " {
             iconURL.remove(at: iconURL.startIndex)
         }
-        print(imageURL)
+        while iconURL.last == " " {
+            iconURL.removeLast()
+        }
+        print(iconURL)
         let url = URL(string: iconURL)
         print("Download Started")
-        getData(from: url!) { data, response, error in
+        getData(from: url ?? URL(string: "https://image.flaticon.com/icons/png/512/93/93618.png")!) { data, response, error in
             guard let data = data, error == nil else { return }
             print(response?.suggestedFilename ?? url!.lastPathComponent)
             print("Download Finished")
@@ -104,10 +109,13 @@ class LinkWidget: UIView {
     private func createImageIcon(with icon: UIImage){
         
         //CHANGE WIDTH TO SCALE TO IMAGE
-        let originalHeight = icon.size.height
+        var originalHeight = icon.size.height
         let adjustedHeight = height * 2/3
+        //Prevents dividing by 0 errors
+        if originalHeight == 0 {
+            originalHeight = 1
+        }
         let scaledWidth = icon.size.width * (adjustedHeight/originalHeight)
-//        let imageView = UIImageView(frame: CGRect(x: width - (width * 3/4), y: height * 1/3, width: height * 2/3, height: height * 2/3))
         let imageView = UIImageView(image: icon)
         imageView.frame = CGRect(x: width - (width * 7/8), y: height/2 - height * 1/3, width: scaledWidth, height: adjustedHeight)
         if imageView.frame.width > height {

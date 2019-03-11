@@ -148,6 +148,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.isScrollEnabled = true
         mapView.showsUserLocation = true
         mapView.tintColor = #colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1)
+       // mapView.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
         mapView.center = view.center
         mapView.contentMode = .scaleToFill
@@ -384,6 +385,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let longitude = value["longitude"] as? Double
                 let note = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images ?? nil, links: links ?? nil, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
               
+                self.note.noteID = noteID
+                
                 if addingNote {
                     self.notesIDSInExpand.append(noteID)
                     self.note.addTitleWidget(title: note.title, timeStamp: note.timeStamp, yPlacement: nil)

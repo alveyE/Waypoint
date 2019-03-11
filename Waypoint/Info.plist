@@ -51,6 +51,10 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Roboto-MediumItalic.ttf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Regular.ttf</string>
+		<string>Roboto-Bold.ttf</string>
 		<string>Lato-Regular.ttf</string>
 		<string>Lato-Bold.ttf</string>
 	</array>

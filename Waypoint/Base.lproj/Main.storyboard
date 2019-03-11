@@ -69,6 +69,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaB-GW-RWL">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="81"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" image="image"/>
                                         <connections>
                                             <action selector="chooseImageTouched:" destination="XRD-5r-4JA" eventType="touchUpInside" id="Gct-q6-RDC"/>

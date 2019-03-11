@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 @IBDesignable
 class TitleView: UIView {
@@ -19,6 +21,9 @@ class TitleView: UIView {
     public var hasSaveButton = false
     public var noteTimeStamp = "20181219101034"
     public var title = ""
+    public var noteID = ""
+    public var saved = false
+    
     
     private lazy var titleText = createTitleText()
     private lazy var timeStamp = createTimeStamp()
@@ -26,7 +31,7 @@ class TitleView: UIView {
     private lazy var shadow = createShadow()
     private lazy var calendarIcon = createCalendarIcon()
     
-   
+   var ref: DatabaseReference!
 
     override func layoutSubviews() {
         layer.addSublayer(shadow)
@@ -58,8 +63,8 @@ class TitleView: UIView {
         title.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
    //     title.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         title.isScrollEnabled = false
-        let titleFont = UIFont(name: "Helvetica Neue", size: height/4)
-        title.font = titleFont?.bold()
+        let titleFont = UIFont(name: "Roboto-Medium", size: height/4)
+        title.font = titleFont
         title.text = self.title
         
         
@@ -79,7 +84,7 @@ class TitleView: UIView {
     private func createTimeStamp() -> UILabel {
         let time = UILabel(frame: CGRect(x: width/8, y: height * 9/24, width: width * 7/9, height: height * 3/8))
         time.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        let dateFont = UIFont(name: "Helvetica Neue", size: height/4.3)
+        let dateFont = UIFont(name: "Roboto", size: height/4.3)
         time.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
 //        time.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         let timeText = determineHowLongAgo(noteCreationDate: noteTimeStamp)
@@ -90,10 +95,69 @@ class TitleView: UIView {
     
     private func createSaveButton() -> UIButton {
         let save = UIButton(frame: CGRect(x: width * 17/20, y: height/9, width: width/10, height: width/10))
-        let saveImage = UIImage(named: "tagEmpty")
         save.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        save.setImage(saveImage, for: UIControl.State.normal)
+        let emptyTag = UIImage(named: "tagEmpty")
+        let filledTag = UIImage(named: "tagFilled")
+        if saved {
+            save.setImage(filledTag, for: UIControl.State.normal)
+        }else {
+            save.setImage(emptyTag, for: UIControl.State.normal)
+        }
+        save.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
+        
         return save
+        
+        
+    }
+    
+    @objc private func saveTapped(){
+        saved = !saved
+        let emptyTag = UIImage(named: "tagEmpty")
+        let filledTag = UIImage(named: "tagFilled")
+        if saved {
+            saveButton.setImage(filledTag, for: UIControl.State.normal)
+        }else {
+            saveButton.setImage(emptyTag, for: UIControl.State.normal)
+        }
+        
+        if let user = Auth.auth().currentUser {
+            ref = Database.database().reference()
+            
+            if saved {
+            let userID = ref.child("users").child(user.uid).child("saves").childByAutoId()
+            userID.updateChildValues(["savedID" : noteID])
+       
+            }else {
+                var idRetrieved = "no id found"
+                ref.child("users").child(user.uid).child("saves").observeSingleEvent(of: .value, with: { (snapshot) in
+                    for case let childSnapshot as DataSnapshot in snapshot.children {
+                        if let childData = childSnapshot.value as? [String : Any] {
+     
+                            let savedID = childData["savedID"] as? String
+                            
+                            print("THIS THE ID")
+                            print(savedID)
+                            if savedID == self.noteID {
+                            idRetrieved = childSnapshot.key
+                            }
+                            
+                        }
+                    }
+                    
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
+            if idRetrieved != "no id found" {
+            self.ref.child("users").child(user.uid).child("saves").child(idRetrieved)
+
+            ref.removeValue { error, _ in
+                
+                print(error)
+            }
+                }
+            }
+        
+        }
         
         
     }
@@ -165,6 +229,7 @@ extension UIFont {
     func bold() -> UIFont {
         return withTraits(.traitBold)
     }
+    
     
     func boldItalics() -> UIFont {
         return withTraits([ .traitBold, .traitItalic ])

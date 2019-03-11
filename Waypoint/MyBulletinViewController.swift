@@ -263,6 +263,10 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                         case "drawing":
                             break;
                         case "link":
+                            if note.links != nil {
+                                let link =  note.links!.remove(at: 0)
+                                self.note.addLinkWidget(url: link, yPlacement: yPlacing)
+                            }
                             break;
                         default:
                             break;

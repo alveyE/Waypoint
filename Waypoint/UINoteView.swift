@@ -15,6 +15,7 @@ class UINoteView: UIView, UITextViewDelegate {
     public var editable = false
     public var hasSaveButton = false
     public var noteID = ""
+    public var saved = false
     public var endYPositions = [CGFloat]() {
         didSet{
          //   print("ALL END Y Positions \(endYPositions)")
@@ -62,6 +63,8 @@ class UINoteView: UIView, UITextViewDelegate {
         print(width)
             titleWidget.editable = editable
             titleWidget.hasSaveButton = hasSaveButton
+            titleWidget.noteID = noteID
+            titleWidget.saved = saved
             titleWidget.title = title
             titleWidget.noteTimeStamp = timeStamp
             titleWidget.alpha = 0
