@@ -135,11 +135,23 @@ class TitleView: UIView {
      
                             let savedID = childData["savedID"] as? String
                             
-                            print("THIS THE ID")
-                            print(savedID)
-                            if savedID == self.noteID {
+                            if savedID! == self.noteID {
                             idRetrieved = childSnapshot.key
+                                
                             }
+                            
+                            
+                            if idRetrieved != "no id found" {
+                                
+                                
+                                self.ref.child("users").child(user.uid).child("saves").child(idRetrieved).removeValue(completionBlock: { (error, ref) in
+                                    if error != nil {
+                                        print(error!)
+                                    }
+                                })
+
+                            }
+                            
                             
                         }
                     }
@@ -147,20 +159,16 @@ class TitleView: UIView {
                 }) { (error) in
                     print(error.localizedDescription)
                 }
-            if idRetrieved != "no id found" {
-            self.ref.child("users").child(user.uid).child("saves").child(idRetrieved)
-
-            ref.removeValue { error, _ in
-                
-                print(error)
-            }
-                }
+            
             }
         
         }
         
         
     }
+    
+    
+   
     
     private func determineHowLongAgo(noteCreationDate : String) -> String {
         print(noteCreationDate)
