@@ -108,7 +108,7 @@ class LinkWidget: UIView {
     
     private func createImageIcon(with icon: UIImage){
         
-        //CHANGE WIDTH TO SCALE TO IMAGE
+        //Scales keeping aspect ratio
         var originalHeight = icon.size.height
         let adjustedHeight = height * 2/3
         //Prevents dividing by 0 errors

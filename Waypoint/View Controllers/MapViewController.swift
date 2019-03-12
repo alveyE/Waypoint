@@ -20,9 +20,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var mapView:MKMapView!
     var note:UINoteView! {
         didSet {
-            let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(mapTapped))
-            swipeLeft.direction = [.left]
+            let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(noteSwiped))
+            swipeLeft.direction = [.right]
             note.addGestureRecognizer(swipeLeft)
+            
+            let noteTap = UITapGestureRecognizer(target: self, action: #selector(doNothing))
+            note.addGestureRecognizer(noteTap)
         }
     }
 
@@ -102,6 +105,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    @objc func doNothing(){
+        
+    }
+    @objc func noteSwiped(){
+            let savedX = note.frame.origin.x
+        UIView.animate(withDuration: 0.3, animations: {
+            self.note.frame.origin.x *= 2.5
+        }) { (true) in
+            self.note.frame.origin.x = savedX
+        }
+        mapTapped()
+    }
+    
     @objc func mapTapped(){
         
         for ann in mapView.annotations {
@@ -113,12 +129,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         note.hide()
         note.clearNote()
-
-
-        
-        
-        
-       
     }
     
     func createMapView() {

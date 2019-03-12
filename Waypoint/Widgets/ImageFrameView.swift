@@ -73,6 +73,9 @@ class ImageFrameView: UIView {
         let imageCentered = UIImageView(frame: CGRect(x: width/2 - adjustedWidth/2, y: height/2 - adjustedHeight/2, width: adjustedWidth, height: adjustedHeight))
             
             imageCentered.image = imageGiven
+            print("WWWJAT")
+            let iTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+            imageCentered.addGestureRecognizer(iTap)
             return imageCentered
         }else{
             return UIImageView()
@@ -81,7 +84,14 @@ class ImageFrameView: UIView {
     }
   
     @objc private func imageTapped(){
-    //    let fullScreenImage = UIView(frame: CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>))
+        print("image tap")
+        let screenSize: CGRect = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+//        let fullImage = ImageFullScreen(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
+//        fullImage.image = imageView
+//        addSubview(fullImage)
+        imageView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
     }
     
     private func createFrameCorners() -> CAShapeLayer{

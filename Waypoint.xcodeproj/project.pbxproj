@@ -14,15 +14,12 @@
 		D140339521CAF1890030BC62 /* UINoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339421CAF1890030BC62 /* UINoteView.swift */; };
 		D140339721CAF5370030BC62 /* NoteLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339621CAF5370030BC62 /* NoteLayoutViewController.swift */; };
 		D1603A6621C07A7900121FFA /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D1603A6521C07A7900121FFA /* art.scnassets */; };
-		D1603A6821C092DC00121FFA /* note.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1603A6721C092DC00121FFA /* note.xib */; };
 		D1A7998121BA631F002AF7B2 /* CustomPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */; };
 		D1A7998721BA6EF3002AF7B2 /* MyBulletinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */; };
 		D1A7998921BA6FE7002AF7B2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */; };
 		D1A7998B21BB3906002AF7B2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */; };
 		D1A7999121BC68DE002AF7B2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */; };
-		D1A8EE232232F57800B308CF /* pending.gif in Resources */ = {isa = PBXBuildFile; fileRef = D1A8EE222232F57600B308CF /* pending.gif */; };
 		D1A8EE252232F77600B308CF /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A8EE242232F77600B308CF /* UIImage+Gif.swift */; };
-		D1A8EE272232F85E00B308CF /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = D1A8EE262232F85D00B308CF /* loading.gif */; };
 		D1A8EE322235BFB800B308CF /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1A8EE302235BFB800B308CF /* Roboto-Regular.ttf */; };
 		D1A8EE332235BFB800B308CF /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1A8EE312235BFB800B308CF /* Roboto-Bold.ttf */; };
 		D1A8EE352235C04100B308CF /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1A8EE342235C04100B308CF /* Roboto-Medium.ttf */; };
@@ -34,7 +31,6 @@
 		D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AE58D0219E0262003FF5DB /* LaunchScreen.storyboard */; };
 		D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58D9219E0F5C003FF5DB /* NoteView.swift */; };
 		D1AE58DC219E5183003FF5DB /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58DB219E5183003FF5DB /* Note.swift */; };
-		D1AE58E2219E6C39003FF5DB /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E1219E6C39003FF5DB /* ARViewController.swift */; };
 		D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */; };
 		D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58F321ADD967003FF5DB /* NoteCreator.swift */; };
 		D1B648FC21B6426400B74900 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D1B648FB21B6426400B74900 /* Podfile */; };
@@ -46,6 +42,8 @@
 		D1DDA16921C45DB900E3F2B0 /* ImageFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */; };
 		D1DDA17321C863EA00E3F2B0 /* DrawingWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA17221C863EA00E3F2B0 /* DrawingWidget.swift */; };
 		D1DDA17521C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA17421C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift */; };
+		D1F8F4332237F35100C5A997 /* ImageFullScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F8F4322237F35000C5A997 /* ImageFullScreen.swift */; };
+		D1F8F4352238021400C5A997 /* AddWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F8F4342238021400C5A997 /* AddWidgetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,15 +56,12 @@
 		D140339421CAF1890030BC62 /* UINoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINoteView.swift; sourceTree = "<group>"; };
 		D140339621CAF5370030BC62 /* NoteLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLayoutViewController.swift; sourceTree = "<group>"; };
 		D1603A6521C07A7900121FFA /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		D1603A6721C092DC00121FFA /* note.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = note.xib; sourceTree = "<group>"; };
 		D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPointAnnotation.swift; sourceTree = "<group>"; };
 		D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBulletinViewController.swift; sourceTree = "<group>"; };
 		D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		D1A8EE222232F57600B308CF /* pending.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = pending.gif; sourceTree = "<group>"; };
 		D1A8EE242232F77600B308CF /* UIImage+Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
-		D1A8EE262232F85D00B308CF /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		D1A8EE302235BFB800B308CF /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../../../../../Downloads/Roboto/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		D1A8EE312235BFB800B308CF /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "../../../../../Downloads/Roboto/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		D1A8EE342235C04100B308CF /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -80,7 +75,6 @@
 		D1AE58D3219E0262003FF5DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D1AE58D9219E0F5C003FF5DB /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		D1AE58DB219E5183003FF5DB /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
-		D1AE58E1219E6C39003FF5DB /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
 		D1AE58F321ADD967003FF5DB /* NoteCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCreator.swift; sourceTree = "<group>"; };
 		D1B648FB21B6426400B74900 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -92,6 +86,8 @@
 		D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFrameView.swift; sourceTree = "<group>"; };
 		D1DDA17221C863EA00E3F2B0 /* DrawingWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingWidget.swift; sourceTree = "<group>"; };
 		D1DDA17421C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreNearbyNotesViewController.swift; sourceTree = "<group>"; };
+		D1F8F4322237F35000C5A997 /* ImageFullScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFullScreen.swift; sourceTree = "<group>"; };
+		D1F8F4342238021400C5A997 /* AddWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWidgetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,38 +150,23 @@
 			isa = PBXGroup;
 			children = (
 				D1DBA67A222B4A22006D5728 /* Fonts */,
-				D1AE58C7219E025E003FF5DB /* AppDelegate.swift */,
-				D1AE58C9219E025E003FF5DB /* MapViewController.swift */,
+				D1F8F4382238074300C5A997 /* Supporting Files */,
+				D1F8F437223806B800C5A997 /* View Controllers */,
 				D1AE58CB219E025E003FF5DB /* Main.storyboard */,
 				D1AE58CE219E0262003FF5DB /* Assets.xcassets */,
 				D1AE58D0219E0262003FF5DB /* LaunchScreen.storyboard */,
-				D1AE58D3219E0262003FF5DB /* Info.plist */,
-				D1D35D2221B7118600272F76 /* GoogleService-Info.plist */,
 				D1AE58D9219E0F5C003FF5DB /* NoteView.swift */,
 				D1AE58DB219E5183003FF5DB /* Note.swift */,
-				D1AE58E1219E6C39003FF5DB /* ARViewController.swift */,
-				D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */,
 				C510EFAE21ADAFE500243FA2 /* DBManager.swift */,
 				D1AE58F321ADD967003FF5DB /* NoteCreator.swift */,
 				D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */,
-				D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */,
-				D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */,
-				D1A8EE222232F57600B308CF /* pending.gif */,
-				D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */,
-				D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */,
 				D1603A6521C07A7900121FFA /* art.scnassets */,
-				D1603A6721C092DC00121FFA /* note.xib */,
-				D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */,
-				D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */,
-				D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */,
-				D1DDA17221C863EA00E3F2B0 /* DrawingWidget.swift */,
-				D1DDA17421C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift */,
-				D1A8EE262232F85D00B308CF /* loading.gif */,
-				D140339221CA97F40030BC62 /* LinkWidget.swift */,
+				D1F8F4362238060200C5A997 /* Widgets */,
 				D140339421CAF1890030BC62 /* UINoteView.swift */,
 				D140339621CAF5370030BC62 /* NoteLayoutViewController.swift */,
 				C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */,
 				D1A8EE242232F77600B308CF /* UIImage+Gif.swift */,
+				D1F8F4322237F35000C5A997 /* ImageFullScreen.swift */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -201,6 +182,43 @@
 				D1DBA67C222B4A40006D5728 /* Lato-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		D1F8F4362238060200C5A997 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */,
+				D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */,
+				D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */,
+				D1DDA17221C863EA00E3F2B0 /* DrawingWidget.swift */,
+				D140339221CA97F40030BC62 /* LinkWidget.swift */,
+				D1F8F4342238021400C5A997 /* AddWidgetView.swift */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
+		D1F8F437223806B800C5A997 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D1AE58C9219E025E003FF5DB /* MapViewController.swift */,
+				D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */,
+				D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */,
+				D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */,
+				D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */,
+				D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */,
+				D1DDA17421C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D1F8F4382238074300C5A997 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D1AE58C7219E025E003FF5DB /* AppDelegate.swift */,
+				D1AE58D3219E0262003FF5DB /* Info.plist */,
+				D1D35D2221B7118600272F76 /* GoogleService-Info.plist */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,7 +285,6 @@
 				D1A8EE372235C47E00B308CF /* Roboto-MediumItalic.ttf in Resources */,
 				D1A8EE332235BFB800B308CF /* Roboto-Bold.ttf in Resources */,
 				D1603A6621C07A7900121FFA /* art.scnassets in Resources */,
-				D1603A6821C092DC00121FFA /* note.xib in Resources */,
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
 				D1DBA67D222B4A56006D5728 /* Lato-Bold.ttf in Resources */,
 				D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */,
@@ -275,8 +292,6 @@
 				D1DBA67E222B4A59006D5728 /* Lato-Regular.ttf in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
 				D1A8EE352235C04100B308CF /* Roboto-Medium.ttf in Resources */,
-				D1A8EE232232F57800B308CF /* pending.gif in Resources */,
-				D1A8EE272232F85E00B308CF /* loading.gif in Resources */,
 				D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,18 +358,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1AE58E2219E6C39003FF5DB /* ARViewController.swift in Sources */,
 				C5BD13A821DF4B9C00BE7F17 /* GeoFenceManager.swift in Sources */,
 				D140339721CAF5370030BC62 /* NoteLayoutViewController.swift in Sources */,
 				D140339321CA97F40030BC62 /* LinkWidget.swift in Sources */,
 				D1A8EE252232F77600B308CF /* UIImage+Gif.swift in Sources */,
 				D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */,
+				D1F8F4332237F35100C5A997 /* ImageFullScreen.swift in Sources */,
 				D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */,
 				D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */,
 				D1DDA17321C863EA00E3F2B0 /* DrawingWidget.swift in Sources */,
 				D1DDA16721C2C69300E3F2B0 /* TextWidget.swift in Sources */,
 				D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */,
 				D1A7998B21BB3906002AF7B2 /* SignInViewController.swift in Sources */,
+				D1F8F4352238021400C5A997 /* AddWidgetView.swift in Sources */,
 				C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */,
 				D140339521CAF1890030BC62 /* UINoteView.swift in Sources */,
 				D1A7998121BA631F002AF7B2 /* CustomPointAnnotation.swift in Sources */,
