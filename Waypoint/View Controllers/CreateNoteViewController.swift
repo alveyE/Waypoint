@@ -120,9 +120,13 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         noteCreator.latitude = currentLocation.coordinate.latitude
         noteCreator.longitude = currentLocation.coordinate.longitude
             
-        //DO THE WIDGET
-            
+        noteCreator.widgets = note.listOfWidgets()
+        noteCreator.title = note.titleText()
+        noteCreator.text = note.listOfText()
+
         noteCreator.writeNote()
+        self.view = nil
+        shouldLoad = true
         self.tabBarController?.selectedIndex = 0
         }else{
             //Display error message that userlocation cannot accuratly be determined
@@ -132,12 +136,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         }
     }
     
-    private func saveWidgets(){
-        
-        
-        
-        
-    }
+   
     func addText() {
         let savedYPosition = note.widgetAdderY
         note.moveWidgets(overY: note.widgetAdderY - 1, by: note.calculateHeight(of: "text", includePadding: true), down: true)
@@ -158,7 +157,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     }
     
     func addLink() {
-        
+        createNoteTouched(UIButton())
     }
     
     
@@ -262,6 +261,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
                     print(urlCreated)
                     let imageDataToSave = ["width":"\(img.size.width)","height":"\(img.size.height)","url":urlCreated]
                     self.noteCreator.images?.append(imageDataToSave)
+                    print(self.noteCreator.images)
                 }
                 
                 

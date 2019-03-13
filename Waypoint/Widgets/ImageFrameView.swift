@@ -11,7 +11,8 @@ import UIKit
 class ImageFrameView: UIView {
 //replace trees with loading gif or something similar
     
-    var image = UIImage.gif(name: "loading") {
+   // var image = UIImage.gif(name: "loading") {
+    var image = UIImage(named: "mountain") {
         didSet{
             UIView.animate(withDuration: 0.2, animations: {
                 self.imageView.alpha = 0

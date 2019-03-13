@@ -352,6 +352,55 @@ class UINoteView: UIView, UITextViewDelegate {
         return savedSub.frame.maxY
     }
     
+    public func listOfWidgets() -> [String]{
+        var widgets = [String]()
+        var subCopy = scroll.subviews
+        subCopy.sort(by: {$0.frame.minY < $1.frame.minY})
+        
+        for sub in subCopy {
+            if let _ = sub as? TitleView {
+                widgets.append("title")
+            }else if let _ = sub as? TextWidget {
+                widgets.append("text")
+            }else if let _ = sub as? ImageFrameView {
+                widgets.append("image")
+            }else if let _ = sub as? LinkWidget {
+                widgets.append("link")
+            }else if let _ = sub as? DrawingWidget {
+                widgets.append("drawing")
+            }
+        }
+        
+        return widgets
+    }
+    
+    public func listOfText() -> [String] {
+        var textWritten = [String]()
+        var subCopy = scroll.subviews
+        subCopy.sort(by: {$0.frame.minY < $1.frame.minY})
+        
+         for sub in subCopy {
+            if let textWidget = sub as? TextWidget {
+                textWritten.append(textWidget.textContent.text)
+            }
+        }
+        return textWritten
+    }
+    
+    public func titleText() -> String {
+        var titleText = ""
+        var subCopy = scroll.subviews
+        subCopy.sort(by: {$0.frame.minY < $1.frame.minY})
+        
+        for sub in subCopy {
+            if let title = sub as? TitleView {
+                titleText = title.titleText.text ?? ""
+            }
+        }
+        return titleText
+    }
+    
+    
     public func calculateHeight(of widgetType: String, includePadding: Bool) -> CGFloat{
         var heightCalc: CGFloat = 0
         if widgetType == "title" {

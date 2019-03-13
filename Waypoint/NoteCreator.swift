@@ -17,7 +17,7 @@ struct NoteCreator{
     var title: String = ""
     var timeStamp: String = ""
     var text: [String]? = nil
-    var images: [[String:String]]? = nil
+    var images: [[String:String]]? = []
     var links: [String]? = nil
     var drawings: [String]? = nil
     let creator: String

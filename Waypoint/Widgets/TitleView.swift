@@ -35,7 +35,7 @@ class TitleView: UIView, UITextViewDelegate {
     }
     
     
-    private lazy var titleText = createTitleText()
+    public lazy var titleText = createTitleText()
     private lazy var timeStamp = createTimeStamp()
     private lazy var saveButton = createSaveButton()
     private lazy var shadow = createShadow()
