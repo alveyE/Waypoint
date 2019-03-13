@@ -11,14 +11,22 @@ import CoreLocation
 import FirebaseStorage
 import FirebaseAuth
 
-class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AddWidgetViewDelegate, UINoteViewDelegate {
+    func touchHeard(onIndex index: Int) {
+        
+    }
+    
+    
+    
 
     var locationManager:CLLocationManager!
     var currentLocation = CLLocation(latitude: 0, longitude: 0)
     var noteCreator: NoteCreator!
     
+    private var yAddPosition: CGFloat = 0
+    private var shouldLoad = true
     
-    var note:NoteView! {
+    var note:UINoteView! {
         didSet{
             let tapped = UITapGestureRecognizer(target: self, action: #selector(disableKeyboard))
             note.addGestureRecognizer(tapped)
@@ -29,7 +37,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
    
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.view = nil
+     //   self.view = nil
     }
     
     @IBOutlet var mainView: UIView! {
@@ -38,11 +46,6 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         mainView.addGestureRecognizer(tap)
         }
     }
-    @IBOutlet weak var imageButton: UIButton!
-    
-    @IBOutlet weak var linkButton: UIButton!
-    
-    @IBOutlet weak var createNoteButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +56,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         super.viewWillAppear(animated)
     }
     override func viewDidAppear(_ animated: Bool) {
+        if shouldLoad {
         super.viewDidAppear(animated)
         createNoteView()
 //        view.bringSubviewToFront(imageButton)
@@ -75,16 +79,35 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
             view.addSubview(blurEffectView)
             view.addSubview(notSignedInLabel)
         }
+        }
     }
     @objc func disableKeyboard(){
         note.endEditing(true)
     }
     
+    
+    private func createNoteView(){
+        note = UINoteView()
+
+        let noteWidth:CGFloat = view.frame.size.width
+        let noteHeight:CGFloat = view.frame.size.height
+        note.frame = CGRect(x: 0, y: 0, width: noteWidth, height: noteHeight)
+        note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        note.editable = true
+        note.delegate = self
+        
+        view.addSubview(note)
+        note.addTitleWidget(title: "Enter title here", timeStamp: "", yPlacement: nil)
+        note.addWidgetMaker(yPlacement: nil, adderDelegate: self)
+        
+        
+        
+    }
+    
    
+    func createNoteTouched(_ sender: UIButton) {
     
-    @IBAction func createNoteTouched(_ sender: UIButton) {
-    
-            noteCreator.title = note.titleText.text
+//              noteCreator.title = note.titleText.text
         //    noteCreator.text = note.textContent.text
         
         
@@ -96,6 +119,9 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         }else if currentLocation.horizontalAccuracy < 10{
         noteCreator.latitude = currentLocation.coordinate.latitude
         noteCreator.longitude = currentLocation.coordinate.longitude
+            
+        //DO THE WIDGET
+            
         noteCreator.writeNote()
         self.tabBarController?.selectedIndex = 0
         }else{
@@ -105,19 +131,43 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
             self.present(alert, animated: true, completion: nil)
         }
     }
-    @IBAction func setLinkTouched(_ sender: UIButton) {
-        let selectedText = note.textContent.selectedTextRange
+    
+    private func saveWidgets(){
         
-        noteCreator.linkText = "GRSK aldk8352 ks9"
-        noteCreator.linkURL = "https://fractyldev.com"
+        
+        
         
     }
-    @IBAction func chooseImageTouched(_ sender: UIButton) {
+    func addText() {
+        let savedYPosition = note.widgetAdderY
+        note.moveWidgets(overY: note.widgetAdderY - 1, by: note.calculateHeight(of: "text", includePadding: true), down: true)
+        note.addTextWidget(text: "Enter text here", yPlacement: savedYPosition)
+        
+    }
+    
+    func addImage() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        shouldLoad = false
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func addDrawing() {
+        
+    }
+    
+    func addLink() {
+        
+    }
+    
+    
+    func chooseImageTouched(_ sender: UIButton) {
         
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
-       present(picker, animated: true, completion: nil)
+        present(picker, animated: true, completion: nil)
         
             
         
@@ -136,7 +186,9 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
         
-        
+        let savedYPosition = note.widgetAdderY
+        note.moveWidgets(overY: note.widgetAdderY - 1, by: note.calculateHeight(imageWidth: selectedImage.size.width, imageHeight: selectedImage.size.height, includePadding: true), down: true)
+        note.addImageWidget(image: selectedImage, imageWidth: selectedImage.size.width, imageHeight: selectedImage.size.height, yPlacement: savedYPosition)
         
         uploadImage(selectedImage)
         dismiss(animated: true, completion: nil)
@@ -163,31 +215,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         currentLocation = userLocation
     }
     
-    private func createNoteView(){
-        
-        
-        
-        
-        
-        
-        note = NoteView()
     
-        
-      
-        
-        let noteWidth:CGFloat = view.frame.size.width
-        let noteHeight:CGFloat = view.frame.size.height
-        note.frame = CGRect(x: 0, y: 0, width: noteWidth, height: noteHeight * 7/10)
-        note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-
-        note.title = "Enter title"
-        note.text = "Enter text here"
-        
-        view.addSubview(note)
-        view.sendSubviewToBack(note)
-     
-  
-    }
     
 
     
@@ -232,8 +260,8 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
                     print(downloadURL)
                     let urlCreated = downloadURL.absoluteString
                     print(urlCreated)
-                    self.noteCreator.images.append(urlCreated)
-                    self.note.addImage(withURL: urlCreated)
+                    let imageDataToSave = ["width":"\(img.size.width)","height":"\(img.size.height)","url":urlCreated]
+                    self.noteCreator.images?.append(imageDataToSave)
                 }
                 
                 

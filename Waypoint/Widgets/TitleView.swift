@@ -11,7 +11,7 @@ import Firebase
 import FirebaseAuth
 
 @IBDesignable
-class TitleView: UIView {
+class TitleView: UIView, UITextViewDelegate {
 
     
     private lazy var width = bounds.width
@@ -67,19 +67,31 @@ class TitleView: UIView {
     }
     
     
-    private func createTitleText() -> UITextView {
-        let title = UITextView(frame: CGRect(x: width/25, y: height/50, width: width * 8/9, height: height * 3/8))
-        title.isEditable = editable
+    private func createTitleText() -> UITextField {
+        // width * 8/9
+        let title = UITextField(frame: CGRect(x: width/25, y: height/50, width: width * 81/100, height: height * 3/8))
+        title.isUserInteractionEnabled = editable
+    //    title.isEditable = editable
         title.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
    //     title.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        title.isScrollEnabled = false
+ //       title.isScrollEnabled = false
+ //       title.delegate = self
         let titleFont = UIFont(name: "Roboto-Medium", size: height/4)
         title.font = titleFont
+        if editable {
+        title.placeholder = "Enter title here"
+        }else {
         title.text = self.title
-        
+        }
         
         return title
         
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        let numberOfChars = newText.count
+        return numberOfChars < 20    // 10 Limit Value
     }
     
     private func createCalendarIcon() -> UIImageView {

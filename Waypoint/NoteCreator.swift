@@ -11,15 +11,16 @@ import Foundation
 
 
 struct NoteCreator{
+
+    var widgets = ["title"]
     
     var title: String = ""
+    var timeStamp: String = ""
     var text: [String]? = nil
-    var images: [String] = []
-    var linkText: String? = nil
-    var linkURL: String? = nil
-    var AREnabled = false
+    var images: [[String:String]]? = nil
+    var links: [String]? = nil
+    var drawings: [String]? = nil
     let creator: String
-    var timeLeft: Int? = nil
     var latitude: Double
     var longitude: Double
     
@@ -32,16 +33,13 @@ struct NoteCreator{
     
     
     public func writeNote(){
-        let noteToWrite: Note
-       
-//        let note = Note(widgets: [""],title: title, timeStamp: "", text: text, images: images, linkText: linkText, linkURL: linkURL, AREnabled: AREnabled, creator: creator, timeLeft: timeLeft, location: (latitude: latitude, longitude: longitude))
-//            noteToWrite = note
-//        
+        let noteToWrite = Note(widgets: widgets, title: title, timeStamp: timeStamp, text: text, images: images, links: links, drawings: drawings, creator: creator, location: (latitude: latitude, longitude: longitude))
+        
 //        //Write noteToWrite
-//
-//        let uploader = DBManager()
-//        uploader.uploadPin(noteToWrite)
-//        
+
+        let uploader = DBManager()
+        uploader.uploadPin(noteToWrite)
+        
         
     }
 }

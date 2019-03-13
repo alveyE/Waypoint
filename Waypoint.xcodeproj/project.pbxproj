@@ -147,6 +147,7 @@
 		D1AE58C6219E025E003FF5DB /* Waypoint */ = {
 			isa = PBXGroup;
 			children = (
+				D1AE58D3219E0262003FF5DB /* Info.plist */,
 				D1DBA67A222B4A22006D5728 /* Fonts */,
 				D1F8F4382238074300C5A997 /* Supporting Files */,
 				D1F8F437223806B800C5A997 /* View Controllers */,
@@ -212,7 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				D1AE58C7219E025E003FF5DB /* AppDelegate.swift */,
-				D1AE58D3219E0262003FF5DB /* Info.plist */,
 				D1D35D2221B7118600272F76 /* GoogleService-Info.plist */,
 			);
 			path = "Supporting Files";

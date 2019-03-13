@@ -16,11 +16,8 @@ class UINoteView: UIView, UITextViewDelegate {
     public var hasSaveButton = false
     public var noteID = ""
     public var saved = false
-    public var endYPositions = [CGFloat]() {
-        didSet{
-         //   print("ALL END Y Positions \(endYPositions)")
-        }
-    }
+    public var endYPositions = [CGFloat]()
+    public var widgetAdderY: CGFloat = 0
     
     
     private lazy var scroll = createScrollView()
@@ -178,6 +175,47 @@ class UINoteView: UIView, UITextViewDelegate {
             }
     }
     
+    public func addImageWidget(image: UIImage, imageWidth: CGFloat, imageHeight: CGFloat, yPlacement: CGFloat?){
+        var verticalPlacing: CGFloat = 0
+        
+        if let yyy = yPlacement {
+            verticalPlacing = yyy
+        }else{
+            verticalPlacing = yPosition
+        }
+        
+    
+        let imageWidget = ImageFrameView()
+        imageWidget.alpha = 0
+        
+        var adjustedWidth = imageWidth
+        var adjustedHeight = imageHeight
+        
+        
+        let minimumPadding = (self.width - 2*self.padding) * 2/20
+        
+        let preAdj = adjustedWidth
+        adjustedWidth = self.width - minimumPadding
+        adjustedHeight *= adjustedWidth/preAdj
+        
+        
+        imageWidget.frame = CGRect(x: self.padding, y: verticalPlacing, width: self.width - 2*self.padding, height: adjustedHeight)
+        imageWidget.image = image
+
+        self.scroll.addSubview(imageWidget)
+        UIView.animate(withDuration: animationTime) {
+            imageWidget.alpha = 1
+            
+        }
+        
+        if yPlacement == nil {
+            self.yPosition += imageWidget.frame.height + self.verticalPadding
+            self.scroll.contentSize.height += imageWidget.frame.height + self.verticalPadding
+        }
+    }
+    
+    
+    
     public func addLinkWidget(url: String, yPlacement: CGFloat?){
         var verticalPlacing: CGFloat = 0
         
@@ -218,6 +256,25 @@ class UINoteView: UIView, UITextViewDelegate {
         scroll.contentSize.height += drawingWidget.frame.height + verticalPadding
     }
     
+    public func addWidgetMaker(yPlacement: CGFloat?, adderDelegate: AddWidgetViewDelegate){
+        var verticalPlacing: CGFloat = 0
+        
+        if let yyy = yPlacement {
+            verticalPlacing = yyy
+        }else{
+            verticalPlacing = yPosition
+        }
+        let widgetAdder = AddWidgetView(frame: CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width/4))
+        
+        scroll.addSubview(widgetAdder)
+        if yPlacement == nil {
+            yPosition += widgetAdder.frame.height + verticalPadding
+        }
+        widgetAdder.delegate = adderDelegate
+        
+        scroll.contentSize.height += widgetAdder.frame.height + verticalPadding
+        widgetAdderY = widgetAdder.frame.minY
+    }
     
     @objc private func titleTapped(_ sender: Any){
     
@@ -256,6 +313,9 @@ class UINoteView: UIView, UITextViewDelegate {
             if endYPositions[index] - (calculateHeight(of: "title", includePadding: false)) > setY {
                 endYPositions[index] += moveAmnt
             }
+        }
+        if widgetAdderY > setY {
+            widgetAdderY += moveAmnt
         }
         
     }

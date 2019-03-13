@@ -16,12 +16,17 @@ class AddWidgetView: UIView {
     private lazy var shadow = createShadow()
     private lazy var textIcon = createIcon(imageName: "text", iconNum: 1)
     private lazy var imageIcon = createIcon(imageName: "image", iconNum: 2)
-    private lazy var drawingIcon = createIcon(imageName: "drawing", iconNum: 3)
+    private lazy var drawingIcon = createIcon(imageName: "draw", iconNum: 3)
     private lazy var linkIcon = createIcon(imageName: "link", iconNum: 4)
     
+    weak var delegate: AddWidgetViewDelegate?
     
     override func layoutSubviews() {
         layer.addSublayer(shadow)
+        addSubview(textIcon)
+        addSubview(imageIcon)
+        addSubview(drawingIcon)
+        addSubview(linkIcon)
     }
     
     
@@ -38,19 +43,58 @@ class AddWidgetView: UIView {
     }
     
     
-    private func createIcon(imageName: String, iconNum: Int) -> UIImageView {
+    private func createIcon(imageName: String, iconNum: Int) -> UIButton {
         let icon = UIImage(named: imageName)
         
-        let sideMargin = (width/12) * CGFloat(iconNum)
+        let sideMargin = (width/12)
         let topMargin = height/8
         let padding = width/14
         let widthValid = (width - (sideMargin * 2) - padding)/4
         let heightValid = height - topMargin*2
+        let xPosition = sideMargin + (widthValid)*(CGFloat(iconNum - 1))
         
-        let iconView = UIImageView(frame: CGRect(x: sideMargin, y: topMargin, width: widthValid, height: heightValid))
-        iconView.image = icon
-        
+        let iconView = UIButton(frame: CGRect(x: xPosition, y: topMargin, width: widthValid, height: heightValid))
+        iconView.setImage(icon, for: UIControl.State.normal)
+      //  iconView.image = icon
+        if imageName == "text" {
+            iconView.addTarget(self, action: #selector(textTapped), for: .touchUpInside)
+        }else if imageName == "image" {
+            iconView.addTarget(self, action: #selector(imageTapped), for: .touchUpInside)
+        }else if imageName == "draw" {
+            iconView.addTarget(self, action: #selector(drawTapped), for: .touchUpInside)
+        }else if imageName == "link" {
+            iconView.addTarget(self, action: #selector(linkTapped), for: .touchUpInside)
+        }
+            
         return iconView
     }
+    
+    @objc private func textTapped(){
+        delegate?.addText()
+    }
+    
+    @objc private func imageTapped(){
+        delegate?.addImage()
+    }
+    
+    @objc private func drawTapped(){
+        delegate?.addDrawing()
+    }
+    
+    @objc private func linkTapped(){
+        delegate?.addLink()
+    }
+    
+    
 
+}
+
+
+protocol AddWidgetViewDelegate: class {
+    
+    func addText()
+    func addImage()
+    func addDrawing()
+    func addLink()
+    
 }

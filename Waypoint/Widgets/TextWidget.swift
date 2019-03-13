@@ -65,7 +65,7 @@ class TextWidget: UIView {
         
         let attributedText = NSAttributedString(string: displayText, attributes: attributes)
         text.attributedText = attributedText
-//        text.translatesAutoresizingMaskIntoConstraints = true
+      //  text.translatesAutoresizingMaskIntoConstraints = false
 //        text.sizeToFit()
         text.addSubview(createLines())
         return text

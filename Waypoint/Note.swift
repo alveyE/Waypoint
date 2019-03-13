@@ -15,7 +15,6 @@ public struct Note : Codable{
     var title: String
     var timeStamp: String
     var text: [String]?
-   // var images: [String]?
     var images: [[String:String]]?
     var links: [String]?
     var drawings: [String]?
