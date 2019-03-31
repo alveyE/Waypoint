@@ -12,11 +12,12 @@ class LinkWidget: UIView {
 
 
     public var url = "https://fractyldev.com"
+    public var editable = false
     
     private lazy var width = bounds.width
     private lazy var height = bounds.height
     
-    private lazy var linkText = createLinkText()
+    public lazy var linkText = createLinkText()
     private lazy var shadow = createShadow()
     private var icon = UIImageView() {
         didSet{
@@ -53,7 +54,7 @@ class LinkWidget: UIView {
         let text = UITextView(frame: CGRect(x: width/4, y: height/3, width: width - width/4, height: height/3))
      //   text.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         tintColor = #colorLiteral(red: 0, green: 0, blue: 0.9803921569, alpha: 1)
-        text.isEditable = false
+        text.isEditable = editable
         text.isScrollEnabled = false
         let textFont = UIFont(name: "Roboto-MediumItalic", size: 20)
         let centeredText = NSMutableParagraphStyle()
@@ -66,6 +67,9 @@ class LinkWidget: UIView {
         let domainString: String = URL(string: url)?.host ?? url
         let linkedText = NSMutableAttributedString(string: domainString, attributes: attributes)
         let hyperlinked = linkedText.setAsLink(textToFind: domainString, linkURL: url)
+        if editable {
+       //     text.placeholder = "Enter url"
+        }
         
         if hyperlinked {
             text.attributedText = NSAttributedString(attributedString: linkedText)

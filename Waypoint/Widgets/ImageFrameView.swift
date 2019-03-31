@@ -11,8 +11,7 @@ import UIKit
 class ImageFrameView: UIView {
 //replace trees with loading gif or something similar
     
-   // var image = UIImage.gif(name: "loading") {
-    var image = UIImage(named: "mountain") {
+    var image = UIImage.gif(name: "loading") {
         didSet{
             UIView.animate(withDuration: 0.2, animations: {
                 self.imageView.alpha = 0
@@ -35,7 +34,9 @@ class ImageFrameView: UIView {
     
     lazy var width = bounds.width
     lazy var height = bounds.height
- 
+    
+    public var imageWidth: CGFloat = 0
+    public var imageHeight: CGFloat = 0
     
     override func layoutSubviews() {
         layer.addSublayer(shadow)
@@ -59,9 +60,11 @@ class ImageFrameView: UIView {
     private func createCenteredImage() -> UIImageView {
         if let imageGiven = image {
             
-            var adjustedWidth = imageGiven.size.width
-            var adjustedHeight = imageGiven.size.height
-          
+            var adjustedWidth = imageWidth
+            var adjustedHeight = imageHeight
+            if adjustedWidth == 0 {
+                adjustedWidth = 1
+            }
           
             let minimumPadding = width * 2/20
             

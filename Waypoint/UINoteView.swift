@@ -31,7 +31,8 @@ class UINoteView: UIView, UITextViewDelegate {
     private var animationTime: TimeInterval = 0.3
     
     private var tapGestures: [UITapGestureRecognizer] = []
-    
+    private let noteTap = UITapGestureRecognizer(target: self, action: #selector(doNothing))
+   
     weak var delegate: UINoteViewDelegate?
     
     override func layoutSubviews() {
@@ -56,8 +57,7 @@ class UINoteView: UIView, UITextViewDelegate {
             verticalPlacing = yPosition
         }
             let titleWidget = TitleView()
-        titleWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width/4)
-        print(width)
+            titleWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width/4)
             titleWidget.editable = editable
             titleWidget.hasSaveButton = hasSaveButton
             titleWidget.noteID = noteID
@@ -97,10 +97,7 @@ class UINoteView: UIView, UITextViewDelegate {
             verticalPlacing = yPosition
         }
         let textFont = UIFont(name: "Helvetica Neue", size: 16)
-        if let lineFontHeight = textFont?.lineHeight {
-            let lineHeight = lineFontHeight * 1.5
-            
-        }
+    
         
             let textWidget = TextWidget()
             textWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width/4)
@@ -118,6 +115,8 @@ class UINoteView: UIView, UITextViewDelegate {
             scroll.contentSize.height += textWidget.frame.height + verticalPadding
         }
                 textWidget.textContent.delegate = self
+        textWidget.addGestureRecognizer(noteTap)
+        
     }
     
     public func addImageWidget(imageURL: String, imageWidth: CGFloat, imageHeight: CGFloat, yPlacement: CGFloat?){
@@ -135,6 +134,9 @@ class UINoteView: UIView, UITextViewDelegate {
         
         let imageWidget = ImageFrameView()
         imageWidget.alpha = 0
+        
+        imageWidget.imageWidth = imageWidth
+        imageWidget.imageHeight = imageHeight
         
         var adjustedWidth = imageWidth
         var adjustedHeight = imageHeight
@@ -173,6 +175,7 @@ class UINoteView: UIView, UITextViewDelegate {
             self.yPosition += imageWidget.frame.height + self.verticalPadding
             self.scroll.contentSize.height += imageWidget.frame.height + self.verticalPadding
             }
+        imageWidget.addGestureRecognizer(noteTap)
     }
     
     public func addImageWidget(image: UIImage, imageWidth: CGFloat, imageHeight: CGFloat, yPlacement: CGFloat?){
@@ -187,6 +190,9 @@ class UINoteView: UIView, UITextViewDelegate {
     
         let imageWidget = ImageFrameView()
         imageWidget.alpha = 0
+        
+        imageWidget.imageWidth = imageWidth
+        imageWidget.imageHeight = imageHeight
         
         var adjustedWidth = imageWidth
         var adjustedHeight = imageHeight
@@ -212,6 +218,7 @@ class UINoteView: UIView, UITextViewDelegate {
             self.yPosition += imageWidget.frame.height + self.verticalPadding
             self.scroll.contentSize.height += imageWidget.frame.height + self.verticalPadding
         }
+        imageWidget.addGestureRecognizer(noteTap)
     }
     
     
@@ -228,11 +235,13 @@ class UINoteView: UIView, UITextViewDelegate {
         let linkWidget = LinkWidget()
         linkWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width * 6/20)
         linkWidget.url = url
+        linkWidget.editable = editable
         scroll.addSubview(linkWidget)
         if yPlacement == nil {
         yPosition += linkWidget.frame.height + verticalPadding
         scroll.contentSize.height += linkWidget.frame.height + verticalPadding
         }
+        linkWidget.addGestureRecognizer(noteTap)
     }
     
     public func addDrawingWidget(setImage: String, yPlacement: CGFloat?){
@@ -254,6 +263,7 @@ class UINoteView: UIView, UITextViewDelegate {
         yPosition += drawingWidget.frame.height + verticalPadding
         }
         scroll.contentSize.height += drawingWidget.frame.height + verticalPadding
+        drawingWidget.addGestureRecognizer(noteTap)
     }
     
     public func addWidgetMaker(yPlacement: CGFloat?, adderDelegate: AddWidgetViewDelegate){
@@ -387,6 +397,19 @@ class UINoteView: UIView, UITextViewDelegate {
         return textWritten
     }
     
+    public func listOfLinks() -> [String] {
+        var links = [String]()
+        var subCopy = scroll.subviews
+        subCopy.sort(by: {$0.frame.minY < $1.frame.minY})
+        
+        for sub in subCopy {
+            if let linkWidget = sub as? LinkWidget {
+                links.append(linkWidget.linkText.text ?? "")
+            }
+        }
+        return links
+    }
+    
     public func titleText() -> String {
         var titleText = ""
         var subCopy = scroll.subviews
@@ -481,6 +504,10 @@ class UINoteView: UIView, UITextViewDelegate {
         return top
     }
     
+    @objc private func doNothing(){
+        delegate?.doNothing()
+    }
+    
     private func getBottomMaxY() -> CGFloat {
         
         var bottom: CGFloat = scroll.subviews.first?.frame.maxY ?? 0
@@ -517,10 +544,8 @@ class UINoteView: UIView, UITextViewDelegate {
     
     
     public func correctScroll(){
-        print(getScrollMax())
         let scrollAmnt = getBottomMaxY() - getTopMinY() + leway()
         scroll.contentSize.height = scrollAmnt
-        print(getScrollMax())
     }
     public func increaseScrollSlack(by amnt: CGFloat){
         scroll.contentSize.height += amnt
@@ -560,5 +585,6 @@ class UINoteView: UIView, UITextViewDelegate {
 protocol UINoteViewDelegate: class {
     
     func touchHeard(onIndex index: Int)
+    func doNothing()
     
 }

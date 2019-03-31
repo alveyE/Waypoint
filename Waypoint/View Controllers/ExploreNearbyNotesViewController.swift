@@ -12,6 +12,10 @@ import CoreLocation
 import MapKit
 
 class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDelegate, UINoteViewDelegate {
+    func doNothing() {
+
+    }
+    
 
     var ref: DatabaseReference!
 
@@ -26,25 +30,25 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     private var notesIDSInExpand = [String]()
     
     override func viewWillDisappear(_ animated: Bool) {
-        note = nil
-        self.view = nil
-        locationsAndIDs = []
-        notesIDSInExpand = []
+//        self.view = nil
+//        locationsAndIDs = []
+//        notesIDSInExpand = []
+//        note.clearNote()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let _ = note {
-            print("YOU ARE NOT EVEN BORN YET WTF")
-        }
+        if mapView == nil {
+        fetchPinLocation()
         createMapView()
         createNoteView()
         determineCurrentLocation()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        fetchPinLocation()
+        
     }
     
     private func createNoteView(){
@@ -188,7 +192,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
             // Get user value
             if let value = snapshot.value as? [String : Any] {
                 
-               
+                
                 let title = value["title"] as? String ?? ""
                 let timeStamp = value["timeStamp"] as? String ?? ""
                 self.note.noteID = noteID
@@ -196,7 +200,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                 self.note.addTitleWidget(title: title, timeStamp: timeStamp, yPlacement: nil)
                 self.note.increaseScrollSlack(by: self.note.calculateHeight(of: "title", includePadding: false) * 11/12)
                 
-    
+                
             }
             
         }) { (error) in
@@ -221,7 +225,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                 let text = value["text"] as? [String]
                 let links = value["links"] as? [String]
                 let drawings = value["drawings"] as? [String]
-                let images = value["images"] as? [[String:String]] ?? []
+                let images = value["images"] as? [[String:String]]
                 let creator = value["creator"] as? String
                 let latitude = value["latitude"] as? Double
                 let longitude = value["longitude"] as? Double
@@ -229,7 +233,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                 
                 var totalHeight: CGFloat = self.note.getPadding()
                 
-                var imagesC = images
+                var imagesC = images ?? []
                 
                 //Moves elements down
                 

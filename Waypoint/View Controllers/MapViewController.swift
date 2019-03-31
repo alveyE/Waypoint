@@ -24,8 +24,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             swipeLeft.direction = [.right]
             note.addGestureRecognizer(swipeLeft)
             
-            let noteTap = UITapGestureRecognizer(target: self, action: #selector(doNothing))
-            note.addGestureRecognizer(noteTap)
+            //let noteTap = UITapGestureRecognizer(target: self, action: #selector(doNothing))
+           // note.addGestureRecognizer(noteTap)
         }
     }
 
@@ -33,16 +33,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var locations = [(latitude: Double, longitude: Double)]()
     var noteIDs = [String]()
     var notesIDSInExpand = [String]()
+    var timeRefreshed = NSDate()
+    var shouldRecenter = true
+    
+    let minutesInactiveBeforeRefresh = 5.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
        // Do any additional setup after loading the view, typically from a nib.
     }
     
+    
     override func viewWillDisappear(_ animated: Bool) {
-        self.view = nil
-        locations = []
-        noteIDs = []
+//        self.view = nil
+//        locations = []
+//        noteIDs = []
+//        notesIDSInExpand = []
+        
+        timeRefreshed = NSDate()
         
         
     }
@@ -54,20 +62,35 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let timeDifference = timeRefreshed.timeIntervalSinceNow
         
-        // Create and Add MapView to our main view
+        if timeDifference < minutesInactiveBeforeRefresh * -60 {
+            mapView = nil
+            shouldRecenter = true
+        }
+        determineCurrentLocation()
+       
+        if mapView == nil {
         fetchPinLocation()
         createMapView()
+        
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        determineCurrentLocation()
+        if mapView != nil, shouldRecenter {
+        centerOnUser()
+        shouldRecenter = false
+        }
     }
     
     
     func touchHeard(onIndex index: Int) {
         //EXPAND NOTE TILE BASED ON INDEX GIVEN
+        
+        if notesIDSInExpand.indices.contains(index){
         
         if notesIDSInExpand[index].first != "E" {
             let noteToBeExpanded = notesIDSInExpand[index]
@@ -100,14 +123,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             
         }
-        
+        }
         
         
     }
     
-    @objc func doNothing(){
+    func doNothing(){}
         
-    }
+        
     @objc func noteSwiped(){
             let savedX = note.frame.origin.x
         UIView.animate(withDuration: 0.3, animations: {
@@ -175,6 +198,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.addSubview(note)
         mapView.isUserInteractionEnabled = true
 
+        
+        
     }
     
     
@@ -194,6 +219,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     }
     
+    func centerOnUser(){
+        if let userLocation = locationManager.location?.coordinate {
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 200, longitudinalMeters: 200)
+            mapView.setRegion(viewRegion, animated: true)
+        }
+    }
+    
     func determineCurrentLocation()
     {
         locationManager = CLLocationManager()
@@ -206,10 +238,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             //locationManager.startUpdatingHeading()
             locationManager.startUpdatingLocation()
         }
-        if let userLocation = locationManager.location?.coordinate {
-            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 200, longitudinalMeters: 200)
-            mapView.setRegion(viewRegion, animated: true)
-        }
+        
 
     }
     
@@ -257,13 +286,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let distance = locationCoordinate.distance(from: otherCoordinate)
                 
                 if distance < 110 {
+                    if singleAdd {
+                        getNote(withLocation: (latitude: coordinates.latitude, longitude: coordinates.longitude), addingNote: true)
+                    }
                     singleAdd = false
                     print("Adding with location \(coordinates.latitude) \(coordinates.longitude) compared to original location of ")
                     
                     note.unHide()
                     note.trimExcess()
 
-                    getNote(withLocation: (latitude: coordinates.latitude, longitude: coordinates.longitude), addingNote: true)
+                    
                     
                     getNote(withLocation: (latitude: otherCoordinate.coordinate.latitude, longitude: otherCoordinate.coordinate.longitude), addingNote: true)
                 }
@@ -403,14 +435,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 self.note.noteID = noteID
                 
                 if addingNote {
+                    print(noteID)
                     self.notesIDSInExpand.append(noteID)
                     self.note.addTitleWidget(title: note.title, timeStamp: note.timeStamp, yPlacement: nil)
-                    self.note.increaseScrollSlack(by: self.note.calculateHeight(of: "title", includePadding: false) * 11/12)
+                 //   self.note.increaseScrollSlack(by: self.note.calculateHeight(of: "title", includePadding: false) * 11/12)
 
                 
                 
                 }else{
-                    print("Added single note")
+        
                     self.updateNoteView(note)
                     
                 }
@@ -449,15 +482,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let text = value["text"] as? [String]
                 let links = value["links"] as? [String]
                 let drawings = value["drawings"] as? [String]
-                let images = value["images"] as? [[String:String]] ?? []
+                let images = value["images"] as? [[String:String]]
                 let creator = value["creator"] as? String
                 let latitude = value["latitude"] as? Double
                 let longitude = value["longitude"] as? Double
                 var note = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images , links: links ?? nil, drawings: drawings ?? nil, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
                 
                 var totalHeight: CGFloat = self.note.getPadding()
-                print(images)
-                var imagesC = images
+
+                var imagesC = images ?? []
                 
             //Moves elements down
                 

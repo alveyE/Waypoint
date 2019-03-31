@@ -12,6 +12,10 @@ import FirebaseStorage
 import FirebaseAuth
 
 class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AddWidgetViewDelegate, UINoteViewDelegate {
+    func doNothing() {
+
+    }
+    
     func touchHeard(onIndex index: Int) {
         
     }
@@ -37,7 +41,9 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
    
     
     override func viewWillDisappear(_ animated: Bool) {
-     //   self.view = nil
+        if shouldLoad {
+        self.view = nil
+        }
     }
     
     @IBOutlet var mainView: UIView! {
@@ -107,22 +113,21 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
    
     func createNoteTouched(_ sender: UIButton) {
     
-//              noteCreator.title = note.titleText.text
-        //    noteCreator.text = note.textContent.text
-        
-        
-        if noteCreator.text == nil, noteCreator.title == "", noteCreator.images == [] {
-            //Display message to add content to note
-            
-          
-            //Makes sure user location can be determined within 10m
-        }else if currentLocation.horizontalAccuracy < 10{
-        noteCreator.latitude = currentLocation.coordinate.latitude
-        noteCreator.longitude = currentLocation.coordinate.longitude
-            
         noteCreator.widgets = note.listOfWidgets()
         noteCreator.title = note.titleText()
         noteCreator.text = note.listOfText()
+        noteCreator.links = note.listOfLinks()
+        
+        if noteCreator.title == "" || noteCreator.widgets == ["title"] {
+            //Display message to add content to note
+            
+          
+            //Makes sure user location can be determined within so many meters
+        }else if currentLocation.horizontalAccuracy < 100{
+        noteCreator.latitude = currentLocation.coordinate.latitude
+        noteCreator.longitude = currentLocation.coordinate.longitude
+            
+       
 
         noteCreator.writeNote()
         self.view = nil
@@ -140,24 +145,27 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     func addText() {
         let savedYPosition = note.widgetAdderY
         note.moveWidgets(overY: note.widgetAdderY - 1, by: note.calculateHeight(of: "text", includePadding: true), down: true)
-        note.addTextWidget(text: "Enter text here", yPlacement: savedYPosition)
+        note.addTextWidget(text: "", yPlacement: savedYPosition)
         
     }
     
     func addImage() {
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.allowsEditing = true
+        picker.allowsEditing = false
         shouldLoad = false
         present(picker, animated: true, completion: nil)
     }
     
     func addDrawing() {
-        
+        print("creating note")
+        createNoteTouched(UIButton())
     }
     
     func addLink() {
-        createNoteTouched(UIButton())
+        let savedYPosition = note.widgetAdderY
+        note.moveWidgets(overY: note.widgetAdderY - 1, by: note.calculateHeight(of: "link", includePadding: true), down: true)
+        note.addLinkWidget(url: "", yPlacement: savedYPosition)
     }
     
     
@@ -165,7 +173,8 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.allowsEditing = true
+        picker.allowsEditing = false
+        
         present(picker, animated: true, completion: nil)
         
             
@@ -181,7 +190,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
-        guard let selectedImage = info[.editedImage] as? UIImage else {
+        guard let selectedImage = info[.originalImage] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
         

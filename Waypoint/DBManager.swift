@@ -19,7 +19,7 @@ class DBManager  {
         ref = Database.database().reference()
     }
     
-    
+    var mostRecentNoteID = ""
     
     
     func uploadPin(_ note : Note){
@@ -31,6 +31,7 @@ class DBManager  {
         let data =  try JSONSerialization.jsonObject(with: dataJSON) as? [String : Any] ?? [:]
         let locationData = ["latitude" : note.latitude, "longitude" : note.longitude]
         let autoId = self.ref.childByAutoId().key
+        mostRecentNoteID = autoId!
         self.ref.child("notes").child(autoId!).setValue(data)
         self.ref.child("locations").child(autoId!).setValue(locationData)
         }catch{
@@ -40,6 +41,9 @@ class DBManager  {
     }
     
     
+    func addImageToNote(){
+        
+    }
    
     
     

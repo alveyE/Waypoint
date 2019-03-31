@@ -13,6 +13,10 @@ import FirebaseAuth
 import MapKit
 
 class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocationManagerDelegate {
+    func doNothing() {
+
+    }
+    
     
 
     private var savedNotesIDs = [String]()
@@ -34,10 +38,10 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.view = nil
-        notesIDSInExpand = []
-        savedNotesIDs = []
-        note.clearNote()
+//        self.view = nil
+//        notesIDSInExpand = []
+//        savedNotesIDs = []
+//        note.clearNote()
     }
     
     
@@ -84,6 +88,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if mapView == nil {
         createMapView()
         determineCurrentLocation()
         createNoteView()
@@ -125,6 +130,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
             notSignedInLabel.textAlignment = .center
             notSignedInLabel.font = UIFont(name: "Lato", size: 25)
             self.view.addSubview(notSignedInLabel)
+        }
         }
     }
     
@@ -207,7 +213,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                 let text = value["text"] as? [String]
                 let links = value["links"] as? [String]
                 let drawings = value["drawings"] as? [String]
-                let images = value["images"] as? [[String:String]] ?? []
+                let images = value["images"] as? [[String:String]]
                 let creator = value["creator"] as? String
                 let latitude = value["latitude"] as? Double
                 let longitude = value["longitude"] as? Double
@@ -215,7 +221,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                 
                 var totalHeight: CGFloat = self.note.getPadding()
                 
-                var imagesC = images
+                var imagesC = images ?? []
                 
                 //Moves elements down
                 

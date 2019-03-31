@@ -144,7 +144,6 @@ class TitleView: UIView, UITextViewDelegate {
                         
                         if savedID! == self.noteID {
                            self.saved = true
-                            print("note is saved")
                         }
                         
                         
@@ -213,7 +212,6 @@ class TitleView: UIView, UITextViewDelegate {
    
     
     private func determineHowLongAgo(noteCreationDate : String) -> String {
-        print(noteCreationDate)
         
         let date = Date()
         let calendar = Calendar.current

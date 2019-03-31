@@ -161,7 +161,7 @@ class NoteView: UIView {
 
         if !hasDrawn {
             clip()
-           font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font!)
+          // font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font!)
             
             
             
@@ -318,7 +318,7 @@ class NoteView: UIView {
         let timeLabel = UILabel(frame: CGRect(x: width/20, y: height * 13/96, width: width - width/10, height: height * 1/24))
         
         let fontTime = UIFont(name: "Marker Felt", size: 15)
-        timeLabel.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: fontTime!)
+     //   timeLabel.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: fontTime!)
         timeLabel.text = time
         timeLabel.textColor = textColor
         

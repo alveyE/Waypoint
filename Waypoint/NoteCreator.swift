@@ -17,12 +17,21 @@ struct NoteCreator{
     var title: String = ""
     var timeStamp: String = ""
     var text: [String]? = nil
-    var images: [[String:String]]? = []
+    var images: [[String:String]]? = [] {
+        didSet{
+            if submitted {
+                //Find note submitted and add image url
+                
+            }
+        }
+    }
     var links: [String]? = nil
     var drawings: [String]? = nil
     let creator: String
     var latitude: Double
     var longitude: Double
+    
+    var submitted = false
     
     init(creator: String, latitude: Double, longitude: Double){
         self.creator = creator
@@ -32,14 +41,14 @@ struct NoteCreator{
     
     
     
-    public func writeNote(){
+    public mutating func writeNote(){
         let noteToWrite = Note(widgets: widgets, title: title, timeStamp: timeStamp, text: text, images: images, links: links, drawings: drawings, creator: creator, location: (latitude: latitude, longitude: longitude))
         
 //        //Write noteToWrite
 
         let uploader = DBManager()
         uploader.uploadPin(noteToWrite)
-        
+        submitted = true
         
     }
 }
