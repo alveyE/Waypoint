@@ -227,11 +227,13 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                 
                 for widget in note.widgets {
                     if widget == "image" {
+                        if imagesC.count > 0{
                         let imageInfo = imagesC.remove(at: 0)
                         let imageW = CGFloat((imageInfo["width"]! as NSString).floatValue)
                         let imageH = CGFloat((imageInfo["height"]! as NSString).floatValue)
                         
                         totalHeight += self.note.calculateHeight(imageWidth: imageW, imageHeight: imageH, includePadding: true)
+                        }
                     }else if widget != note.widgets[0]{
                         totalHeight += self.note.calculateHeight(of: widget, includePadding: true)
                     }
