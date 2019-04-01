@@ -16,17 +16,12 @@ class DBManager  {
 
     var ref: DatabaseReference!
     
-    weak var delegate: DBManagerDelegate?
     
     init(){
         ref = Database.database().reference()
     }
     
-    public var createdID = ""{
-        didSet{
-            print("ID CREATED MODIFIED to \(createdID)")
-        }
-    }
+    public var createdID = ""
     
     func uploadPin(_ note : Note){
         
@@ -73,11 +68,6 @@ class DBManager  {
 }
 
 
-protocol DBManagerDelegate: class {
-    
-    var idCreated: String { get set }
-    
-}
 
 
 
