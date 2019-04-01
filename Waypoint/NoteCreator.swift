@@ -12,6 +12,8 @@ import Foundation
 
 struct NoteCreator{
 
+    let uploader = DBManager()
+    
     var widgets = ["title"]
     
     var title: String = ""
@@ -21,7 +23,10 @@ struct NoteCreator{
         didSet{
             if submitted {
                 //Find note submitted and add image url
-                
+                let id = ""
+                if let dataAdded = images?.last {
+                uploader.addImageToNote(id: id, imageData: dataAdded)
+                }
             }
         }
     }
@@ -32,7 +37,7 @@ struct NoteCreator{
     var longitude: Double
     
     var submitted = false
-    
+    var idCreated = ""
     init(creator: String, latitude: Double, longitude: Double){
         self.creator = creator
         self.latitude = latitude
@@ -46,11 +51,13 @@ struct NoteCreator{
         
 //        //Write noteToWrite
 
-        let uploader = DBManager()
+        
         uploader.uploadPin(noteToWrite)
         submitted = true
         
     }
+    
+
 }
 
 

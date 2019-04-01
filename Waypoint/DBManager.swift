@@ -15,12 +15,18 @@ import UIKit
 class DBManager  {
 
     var ref: DatabaseReference!
+    
+    weak var delegate: DBManagerDelegate?
+    
     init(){
         ref = Database.database().reference()
     }
     
-    var mostRecentNoteID = ""
-    
+    public var createdID = ""{
+        didSet{
+            print("ID CREATED MODIFIED to \(createdID)")
+        }
+    }
     
     func uploadPin(_ note : Note){
         
@@ -31,7 +37,7 @@ class DBManager  {
         let data =  try JSONSerialization.jsonObject(with: dataJSON) as? [String : Any] ?? [:]
         let locationData = ["latitude" : note.latitude, "longitude" : note.longitude]
         let autoId = self.ref.childByAutoId().key
-        mostRecentNoteID = autoId!
+        self.createdID = autoId ?? ""
         self.ref.child("notes").child(autoId!).setValue(data)
         self.ref.child("locations").child(autoId!).setValue(locationData)
         }catch{
@@ -41,16 +47,37 @@ class DBManager  {
     }
     
     
-    func addImageToNote(){
-        
+    func addImageToNote(id: String, imageData: [String:String]){
+        ref = Database.database().reference()
+        if createdID != "" {
+        ref.child("notes").child(createdID).child("images").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            if let value = snapshot.value as? [String : Any] {
+                var images = value["images"] as? [[String:String]] ?? []
+                images.append(imageData)
+                
+                self.addImageData(images: images)
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        }
     }
    
     
-    
+    func addImageData(images: [[String:String]]){
+        ref.child("notes").child(self.createdID).child("images").setValue(images)
+    }
     
     
 }
 
+
+protocol DBManagerDelegate: class {
+    
+    var idCreated: String { get set }
+    
+}
 
 
 
