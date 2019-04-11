@@ -17,11 +17,7 @@ class UINoteView: UIView, UITextViewDelegate {
     public var hasCalanderIcon = true
     public var noteID = ""
     public var saved = false
-    public var endYPositions = [CGFloat]() {
-        didSet{
-            print(endYPositions)
-        }
-    }
+    public var endYPositions = [CGFloat]()
     public var widgetAdderY: CGFloat = 0
     public var hasRefresh = false
     

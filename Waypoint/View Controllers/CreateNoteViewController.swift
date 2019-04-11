@@ -271,7 +271,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
                     print(urlCreated)
                     let imageDataToSave = ["width":"\(img.size.width)","height":"\(img.size.height)","url":urlCreated]
                     self.noteCreator.images?.append(imageDataToSave)
-                    print(self.noteCreator.images)
+                    
                 }
                 
                 

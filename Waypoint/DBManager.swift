@@ -45,12 +45,12 @@ class DBManager  {
     func addImageToNote(id: String, imageData: [String:String]){
         ref = Database.database().reference()
         if createdID != "" {
-        ref.child("notes").child(createdID).child("images").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("notes").child(createdID).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             if let value = snapshot.value as? [String : Any] {
                 var images = value["images"] as? [[String:String]] ?? []
                 images.append(imageData)
-                
+
                 self.addImageData(images: images)
             }
         }) { (error) in
