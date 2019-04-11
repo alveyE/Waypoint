@@ -101,6 +101,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         note.editable = true
         note.delegate = self
+        note.hasCalanderIcon = false
         
         view.addSubview(note)
         note.addTitleWidget(title: "Enter title here", timeStamp: "", yPlacement: nil)

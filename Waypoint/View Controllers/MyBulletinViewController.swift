@@ -14,7 +14,7 @@ import MapKit
 
 class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocationManagerDelegate {
     func doNothing() {
-
+       
     }
     
     
@@ -38,10 +38,11 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-//        self.view = nil
-//        notesIDSInExpand = []
-//        savedNotesIDs = []
-//        note.clearNote()
+        self.view = nil
+        mapView = nil
+        notesIDSInExpand = []
+        savedNotesIDs = []
+        note.clearNote()
     }
     
     
@@ -55,7 +56,8 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         
         note.editable = false
-        note.hasSaveButton = false
+        note.hasSaveButton = true
+        note.hasRefresh = true
         note.delegate = self
         
         view.addSubview(note)
@@ -67,6 +69,13 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
         mapView.isUserInteractionEnabled = false
         
         view.addSubview(mapView)
+    }
+    
+    func refreshPulled() {
+        note.cleanClear()
+        notesIDSInExpand = []
+        savedNotesIDs = []
+        addSavedNotes()
     }
     
     func determineCurrentLocation()
@@ -93,7 +102,12 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
         determineCurrentLocation()
         createNoteView()
         savedNotesIDs = []
-        yPosition = 0;
+        yPosition = 0
+        addSavedNotes()
+        }
+    }
+    
+    private func addSavedNotes(){
         if let user = Auth.auth().currentUser {
             ref = Database.database().reference()
             ref.child("users").child(user.uid).child("saves").observeSingleEvent(of: .value) { (snapshot) in
@@ -131,7 +145,6 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
             notSignedInLabel.font = UIFont(name: "Lato", size: 25)
             self.view.addSubview(notSignedInLabel)
         }
-        }
     }
     
 
@@ -152,11 +165,11 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
             notesIDSInExpand[index].remove(at: notesIDSInExpand[index].startIndex)
             
             let firstYVal = note.endYPositions[index]
-            var lastYVal: CGFloat = 0
+            var lastYVal: CGFloat? = 0
             if note.endYPositions.indices.contains(index + 1) {
                 lastYVal = note.endYPositions[index + 1]
             }else {
-                lastYVal = note.getScrollMax()
+                lastYVal = nil
             }
             let nextTitleMaxY = note.nextYmax(overY: firstYVal)
             note.removeWidgetsInRange(minY: firstYVal, maxY: lastYVal)
@@ -238,7 +251,9 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                         totalHeight += self.note.calculateHeight(of: widget, includePadding: true)
                     }
                 }
-                
+                if note.widgets.count == 0 {
+                    totalHeight = 0
+                }
                 self.note.moveWidgets(overY: titleEndY, by: totalHeight, down: true)
                 //Add elements in correct place
                 var yPlacing: CGFloat = titleEndY + self.note.getPadding()

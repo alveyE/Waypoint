@@ -14,11 +14,16 @@ class UINoteView: UIView, UITextViewDelegate {
     
     public var editable = false
     public var hasSaveButton = false
+    public var hasCalanderIcon = true
     public var noteID = ""
     public var saved = false
-    public var endYPositions = [CGFloat]()
+    public var endYPositions = [CGFloat]() {
+        didSet{
+            print(endYPositions)
+        }
+    }
     public var widgetAdderY: CGFloat = 0
-    
+    public var hasRefresh = false
     
     private lazy var scroll = createScrollView()
     
@@ -42,12 +47,25 @@ class UINoteView: UIView, UITextViewDelegate {
     private func createScrollView() -> UIScrollView {
         let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         scrollView.showsVerticalScrollIndicator = false
-        
+        if hasRefresh {
+        scrollView.addSubview(refresh)
+        }
         return scrollView
     }
     
     
+    private var refresh: UIRefreshControl {
+        let ref = UIRefreshControl()
+        ref.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        return ref
+    }
     
+    
+    
+    @objc private func handleRefresh(_ control: UIRefreshControl){
+        delegate?.refreshPulled()
+        control.endRefreshing()
+    }
     public func addTitleWidget(title: String, timeStamp: String, yPlacement: CGFloat?){
         var verticalPlacing: CGFloat = 0
 
@@ -60,6 +78,7 @@ class UINoteView: UIView, UITextViewDelegate {
             titleWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width/4)
             titleWidget.editable = editable
             titleWidget.hasSaveButton = hasSaveButton
+            titleWidget.hasCalanderIcon = hasCalanderIcon
             titleWidget.noteID = noteID
             titleWidget.saved = saved
             titleWidget.title = title
@@ -83,9 +102,9 @@ class UINoteView: UIView, UITextViewDelegate {
         
         if yPlacement == nil {
             yPosition += titleWidget.frame.height + verticalPadding
-            scroll.contentSize.height += (titleWidget.frame.height + verticalPadding)
+           // scroll.contentSize.height += (titleWidget.frame.height + verticalPadding)
         }
-        
+        adjustScroll()
     }
     
     public func addTextWidget(text: String, yPlacement: CGFloat?){
@@ -100,7 +119,7 @@ class UINoteView: UIView, UITextViewDelegate {
     
         
             let textWidget = TextWidget()
-            textWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width/4)
+            textWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width * 17/48)
             textWidget.editable = editable
             textWidget.text = text
             textWidget.alpha = 0
@@ -112,11 +131,11 @@ class UINoteView: UIView, UITextViewDelegate {
         
         if yPlacement == nil {
             yPosition += textWidget.frame.height + verticalPadding
-            scroll.contentSize.height += textWidget.frame.height + verticalPadding
+         //   scroll.contentSize.height += textWidget.frame.height + verticalPadding
         }
                 textWidget.textContent.delegate = self
         textWidget.addGestureRecognizer(noteTap)
-        
+        adjustScroll()
     }
     
     public func addImageWidget(imageURL: String, imageWidth: CGFloat, imageHeight: CGFloat, yPlacement: CGFloat?){
@@ -173,9 +192,10 @@ class UINoteView: UIView, UITextViewDelegate {
         
         if yPlacement == nil {
             self.yPosition += imageWidget.frame.height + self.verticalPadding
-            self.scroll.contentSize.height += imageWidget.frame.height + self.verticalPadding
+        //    self.scroll.contentSize.height += imageWidget.frame.height + self.verticalPadding
             }
         imageWidget.addGestureRecognizer(noteTap)
+        adjustScroll()
     }
     
     public func addImageWidget(image: UIImage, imageWidth: CGFloat, imageHeight: CGFloat, yPlacement: CGFloat?){
@@ -216,9 +236,10 @@ class UINoteView: UIView, UITextViewDelegate {
         
         if yPlacement == nil {
             self.yPosition += imageWidget.frame.height + self.verticalPadding
-            self.scroll.contentSize.height += imageWidget.frame.height + self.verticalPadding
+         //   self.scroll.contentSize.height += imageWidget.frame.height + self.verticalPadding
         }
         imageWidget.addGestureRecognizer(noteTap)
+        adjustScroll()
     }
     
     
@@ -239,8 +260,9 @@ class UINoteView: UIView, UITextViewDelegate {
         scroll.addSubview(linkWidget)
         if yPlacement == nil {
         yPosition += linkWidget.frame.height + verticalPadding
-        scroll.contentSize.height += linkWidget.frame.height + verticalPadding
+       // scroll.contentSize.height += linkWidget.frame.height + verticalPadding
         }
+        adjustScroll()
         linkWidget.addGestureRecognizer(noteTap)
     }
     
@@ -262,7 +284,8 @@ class UINoteView: UIView, UITextViewDelegate {
         if yPlacement == nil {
         yPosition += drawingWidget.frame.height + verticalPadding
         }
-        scroll.contentSize.height += drawingWidget.frame.height + verticalPadding
+      //scroll.contentSize.height += drawingWidget.frame.height + verticalPadding
+        adjustScroll()
         drawingWidget.addGestureRecognizer(noteTap)
     }
     
@@ -282,7 +305,8 @@ class UINoteView: UIView, UITextViewDelegate {
         }
         widgetAdder.delegate = adderDelegate
         
-        scroll.contentSize.height += widgetAdder.frame.height + verticalPadding
+      //  scroll.contentSize.height += widgetAdder.frame.height + verticalPadding
+        adjustScroll()
         widgetAdderY = widgetAdder.frame.minY
     }
     
@@ -297,6 +321,18 @@ class UINoteView: UIView, UITextViewDelegate {
         }
     }
  
+    private func adjustScroll(){
+        var contentRect = CGRect.zero
+        
+        for view in scroll.subviews {
+            contentRect = contentRect.union(view.frame)
+        }
+        scroll.contentSize.height = contentRect.size.height
+        if scroll.contentSize.height < height {
+            scroll.contentSize.height = height + 1
+        }
+    }
+    
     
     public func moveWidgets(overY setY: CGFloat, by amnt: CGFloat, down: Bool){
         var moveAmnt = amnt
@@ -316,7 +352,8 @@ class UINoteView: UIView, UITextViewDelegate {
             
         }
         UIView.animate(withDuration: animationTime) {
-            self.scroll.contentSize.height += moveAmnt
+            //self.scroll.contentSize.height += moveAmnt
+            self.adjustScroll()
         }
         
         for index in endYPositions.indices {
@@ -330,14 +367,41 @@ class UINoteView: UIView, UITextViewDelegate {
         
     }
     
-    public func removeWidgetsInRange(minY: CGFloat, maxY: CGFloat){
+    public func removeWidgetsInRange(minY: CGFloat, maxY: CGFloat?){
         for sub in scroll.subviews {
-            if sub.frame.minY > minY, sub.frame.maxY < maxY {
+            var meetsMaxReq = true
+            if let maxVal = maxY {
+                if !(sub.frame.maxY < maxVal) {
+                    meetsMaxReq = false
+                }
+            }
+            
+            if sub.frame.minY > minY, meetsMaxReq {
+                
+                if let title = sub as? TitleView {
+                    for tap in tapGestures {
+                        if (title.gestureRecognizers?.contains(tap))!{
+                            if let indexOfTap = tapGestures.index(of: tap) {
+                            tapGestures.remove(at: indexOfTap)
+                            endYPositions.remove(at: indexOfTap)
+                            }
+                        }
+                    }
+//                    endYPositions = []
+//                    var sortedCopy = scroll.subviews
+//                    sortedCopy.sort(by: {$0.frame.minY < $1.frame.minY})
+//                    for possibleTitle in sortedCopy {
+//                        if let otherTitle = possibleTitle as? TitleView{
+//                            endYPositions.append(otherTitle.frame.maxY)
+//                        }
+//                    }
+                }
+                
                 sub.removeFromSuperview()
             }
             
         }
-        
+        adjustScroll()
     }
     
     public func nextYmax(overY yVal: CGFloat) -> CGFloat {
@@ -429,7 +493,7 @@ class UINoteView: UIView, UITextViewDelegate {
         if widgetType == "title" {
             heightCalc =  width/4
         }else if widgetType == "text" {
-            heightCalc = width/4
+            heightCalc = width * 17/48
         }else if widgetType == "drawing" {
             heightCalc =  width * 2/5
         }else if widgetType == "link" {
@@ -467,6 +531,12 @@ class UINoteView: UIView, UITextViewDelegate {
         endYPositions = []
         tapGestures = []
     }
+    
+    public func cleanClear(){
+        removeWidgetsInRange(minY: 0, maxY: nil)
+        yPosition = height/15
+    }
+    
     
     public func getPadding() -> CGFloat {
         return verticalPadding
@@ -517,8 +587,7 @@ class UINoteView: UIView, UITextViewDelegate {
                 bottom = sub.frame.maxY
             }
         }
-        
-        
+
         return bottom
     }
     
@@ -586,5 +655,10 @@ protocol UINoteViewDelegate: class {
     
     func touchHeard(onIndex index: Int)
     func doNothing()
+    func refreshPulled()
     
+}
+
+extension UINoteViewDelegate{
+    func refreshPulled(){}
 }

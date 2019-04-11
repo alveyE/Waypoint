@@ -63,10 +63,19 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         
         note.editable = false
         note.hasSaveButton = true
+        note.hasRefresh = true
         note.delegate = self
         
         view.addSubview(note)
     }
+    
+    func refreshPulled() {
+        note.cleanClear()
+        locationsAndIDs = []
+        notesIDSInExpand = []
+        fetchPinLocation()
+    }
+    
     
     private func createMapView() {
         mapView = MKMapView()
@@ -160,15 +169,16 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
             expandNoteWidgets(withID: noteToBeExpanded, titleEndY: titleEndY)
             
         }else{
+            
             //DEEXPAND
             notesIDSInExpand[index].remove(at: notesIDSInExpand[index].startIndex)
             
             let firstYVal = note.endYPositions[index]
-            var lastYVal: CGFloat = 0
+            var lastYVal: CGFloat? = 0
             if note.endYPositions.indices.contains(index + 1) {
                 lastYVal = note.endYPositions[index + 1]
             }else {
-                lastYVal = note.getScrollMax()
+                lastYVal = nil
             }
             let nextTitleMaxY = note.nextYmax(overY: firstYVal)
             note.removeWidgetsInRange(minY: firstYVal, maxY: lastYVal)
@@ -198,7 +208,6 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                 self.note.noteID = noteID
                 self.notesIDSInExpand.append(noteID)
                 self.note.addTitleWidget(title: title, timeStamp: timeStamp, yPlacement: nil)
-                self.note.increaseScrollSlack(by: self.note.calculateHeight(of: "title", includePadding: false) * 11/12)
                 
                 
             }
@@ -210,6 +219,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         
     }
 
+    
     
     func expandNoteWidgets(withID id: String, titleEndY: CGFloat){
         ref = Database.database().reference()
@@ -250,7 +260,9 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                         totalHeight += self.note.calculateHeight(of: widget, includePadding: true)
                     }
                 }
-                
+                if note.widgets.count == 0 {
+                    totalHeight = 0
+                }
                 self.note.moveWidgets(overY: titleEndY, by: totalHeight, down: true)
                 //Add elements in correct place
                 var yPlacing: CGFloat = titleEndY + self.note.getPadding()

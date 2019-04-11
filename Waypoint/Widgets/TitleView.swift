@@ -19,6 +19,7 @@ class TitleView: UIView, UITextViewDelegate {
     
     public var editable = false
     public var hasSaveButton = false
+    public var hasCalanderIcon = true
     public var noteTimeStamp = "20181219101034"
     public var title = ""
     public var noteID = ""
@@ -47,7 +48,9 @@ class TitleView: UIView, UITextViewDelegate {
         layer.addSublayer(shadow)
         addSubview(titleText)
         addSubview(timeStamp)
+        if hasCalanderIcon{
         addSubview(calendarIcon)
+        }
         if hasSaveButton {
         addSubview(saveButton)
         }
@@ -225,6 +228,9 @@ class TitleView: UIView, UITextViewDelegate {
 
         let nowTime = Double(currentTime) ?? 11111111111111
         let noteTime = Double(noteCreationDate) ?? 11111111111111
+        if noteTime == 11111111111111 {
+            return ""
+        }
         if(nowTime <= noteTime){
             return "Moments ago"
         }

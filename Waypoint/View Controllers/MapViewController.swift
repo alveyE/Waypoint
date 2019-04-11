@@ -105,11 +105,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             notesIDSInExpand[index].remove(at: notesIDSInExpand[index].startIndex)
             
             let firstYVal = note.endYPositions[index]
-            var lastYVal: CGFloat = 0
+            var lastYVal: CGFloat? = 0
             if note.endYPositions.indices.contains(index + 1) {
                 lastYVal = note.endYPositions[index + 1]
             }else {
-                lastYVal = note.getScrollMax()
+                lastYVal = nil
             }
             let nextTitleMaxY = note.nextYmax(overY: firstYVal)
             note.removeWidgetsInRange(minY: firstYVal, maxY: lastYVal)
@@ -129,6 +129,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func doNothing(){}
+    
+    @objc func refreshPins(){
+        mapTapped()
+        noteIDs = []
+        notesIDSInExpand = []
+        locations = []
+        mapView.annotations.forEach({mapView.removeAnnotation($0)})
+        fetchPinLocation()
+        timeRefreshed = NSDate()
+        
+    }
         
         
     @objc func noteSwiped(){
@@ -188,11 +199,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.showsCompass = false
         mapView.isPitchEnabled = false
         
+        let refreshSize = mapWidth/10
+        let refreshPadding = mapWidth/15
+        let refreshButton = UIButton(frame: CGRect(x: mapWidth - refreshPadding - refreshPadding, y: mapHeight - mapHeight/10 - refreshSize - refreshPadding, width: refreshSize, height: refreshSize))
+        refreshButton.setImage(UIImage(named: "refresh"), for: UIControl.State.normal)
+        refreshButton.addTarget(self, action: #selector(refreshPins), for: .touchUpInside)
+        
+        let recenterButton = UIButton(frame: CGRect(x: mapWidth - refreshPadding - refreshPadding, y: mapHeight - mapHeight/10 - refreshSize*2 - refreshPadding*2, width: refreshSize, height: refreshSize))
+        recenterButton.setImage(UIImage(named: "center"), for: UIControl.State.normal)
+        recenterButton.addTarget(self, action: #selector(centerOnUser), for: .touchUpInside)
+        
+        
+        mapView.addSubview(refreshButton)
+        mapView.addSubview(recenterButton)
         
         
         updatePins()
-        
-        
         
         view.addSubview(mapView)
         mapView.addSubview(note)
@@ -201,8 +223,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
     }
-    
-    
     
     
     func updatePins(){
@@ -219,7 +239,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     }
     
-    func centerOnUser(){
+    @objc func centerOnUser(){
         if let userLocation = locationManager.location?.coordinate {
             let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 200, longitudinalMeters: 200)
             mapView.setRegion(viewRegion, animated: true)
@@ -293,7 +313,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     print("Adding with location \(coordinates.latitude) \(coordinates.longitude) compared to original location of ")
                     
                     note.unHide()
-                    note.trimExcess()
+                 //   note.trimExcess()
 
                     
                     
@@ -372,7 +392,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             }
         }
 
-            note.trimExcess()
+          //  note.trimExcess()
         
     }
     
@@ -507,7 +527,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         totalHeight += self.note.calculateHeight(of: widget, includePadding: true)
                     }
                 }
-
+                if note.widgets.count == 0 {
+                    totalHeight = 0
+                }
                 self.note.moveWidgets(overY: titleEndY, by: totalHeight, down: true)
                //Add elements in correct place
                 var yPlacing: CGFloat = titleEndY + self.note.getPadding()
