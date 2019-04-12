@@ -41,15 +41,14 @@ public struct Note : Codable{
         longitude = location.longitude
         
         if timeStamp ==  "" {
-        let date = Date()
-        let calendar = Calendar.current
-        let month = calendar.component(.month, from: date)
-        let day = calendar.component(.day, from: date)
-        let year = calendar.component(.year, from: date)
-        let hour = calendar.component(.hour, from: date)
-        let seconds = calendar.component(.second, from: date)
-        let minutes = calendar.component(.minute, from: date)
-        self.timeStamp = String(format: "%04d%02d%02d%02d%02d%02d", year,month,day,hour,minutes,seconds)
+        let utcDate = Date()
+            
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.dateFormat = "yyyyMMddHHmmss"
+        let utcTimeZoneStr = formatter.string(from: utcDate)
+
+        self.timeStamp = utcTimeZoneStr
         }else {
             self.timeStamp = timeStamp
         }

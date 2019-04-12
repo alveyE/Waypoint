@@ -39,11 +39,11 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        determineCurrentLocation()
         if mapView == nil {
         fetchPinLocation()
         createMapView()
         createNoteView()
-        determineCurrentLocation()
         }
     }
     
@@ -85,8 +85,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         view.addSubview(mapView)
     }
 
-    func determineCurrentLocation()
-    {
+    func determineCurrentLocation(){
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -97,12 +96,11 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
             locationManager.startUpdatingLocation()
         }
         
-        if let userLocation = locationManager.location?.coordinate {
+        if let userLocation = locationManager.location?.coordinate, mapView != nil {
             let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 2000, longitudinalMeters: 2000)
             mapView.setRegion(viewRegion, animated: false)
         }
     }
-    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation: CLLocation = locations[0] as CLLocation
