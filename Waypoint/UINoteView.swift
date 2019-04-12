@@ -416,9 +416,7 @@ class UINoteView: UIView, UITextViewDelegate {
             }
             }
         }
-        
-        
-        
+      
         return savedSub.frame.maxY
     }
     

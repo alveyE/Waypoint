@@ -180,9 +180,12 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
             }else {
                 lastYVal = nil
             }
-            let nextTitleMaxY = note.nextYmax(overY: firstYVal)
+            var nextTitleMaxY = note.nextYmax(overY: firstYVal)
             note.removeWidgetsInRange(minY: firstYVal, maxY: lastYVal)
             
+            if nextTitleMaxY == 0 {
+                nextTitleMaxY = firstYVal
+            }
             let totalAmnt = nextTitleMaxY - firstYVal + note.getPadding()
             
             note.moveWidgets(overY: firstYVal, by: totalAmnt, down: false)
@@ -263,6 +266,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                 if note.widgets.count == 0 {
                     totalHeight = 0
                 }
+                print(totalHeight)
                 self.note.moveWidgets(overY: titleEndY, by: totalHeight, down: true)
                 //Add elements in correct place
                 var yPlacing: CGFloat = titleEndY + self.note.getPadding()
