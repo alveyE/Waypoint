@@ -91,7 +91,6 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         note.endEditing(true)
     }
     
-    
     private func createNoteView(){
         note = UINoteView()
 
@@ -103,7 +102,27 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         note.delegate = self
         note.hasCalanderIcon = false
         
+        let topBar = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/11))
+    //    topBar.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.5817197086)
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = topBar.frame
+        
+        gradientLayer.colors = [UIColor.darkGray.cgColor, UIColor.white.cgColor]
+        gradientLayer.opacity = 0.7
+        topBar.layer.addSublayer(gradientLayer)
+        
+        let submitSize = (view.bounds.height/11) * 3/5
+        let submitPadding = view.bounds.width/8
+        let submitButton = UIButton(frame: CGRect(x: view.bounds.width - submitPadding, y: topBar.frame.height * 5/8 - submitSize/2, width: submitSize, height: submitSize))
+        submitButton.setImage(UIImage(named: "finish"), for: UIControl.State.normal)
+        submitButton.addTarget(self, action: #selector(createNoteTouched), for: .touchUpInside)
+        topBar.addSubview(submitButton)
+        
+        
         view.addSubview(note)
+        view.addSubview(topBar)
+        
         note.addTitleWidget(title: "Enter title here", timeStamp: "", yPlacement: nil)
         note.addWidgetMaker(yPlacement: nil, adderDelegate: self)
         
@@ -112,7 +131,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     }
     
    
-    func createNoteTouched(_ sender: UIButton) {
+    @objc func createNoteTouched() {
     
         noteCreator.widgets = note.listOfWidgets()
         noteCreator.title = note.titleText()
@@ -159,8 +178,16 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     }
     
     func addDrawing() {
-        print("creating note")
-        createNoteTouched(UIButton())
+        shouldLoad = false
+        let drawVC = self.storyboard!.instantiateViewController(withIdentifier: "DrawScreen") as! CreateDrawingViewController
+        self.show(drawVC, sender: self)
+        drawVC.callback = { result in
+            let returnedDrawing = UIImage(data: result)!
+            let savedYPosition = self.note.widgetAdderY
+            self.note.moveWidgets(overY: self.note.widgetAdderY - 1, by: self.note.calculateHeight(of: "drawing", includePadding: true), down: true)
+            self.note.addDrawingWidget(drawing: returnedDrawing, yPlacement: savedYPosition)
+        }
+       // createNoteTouched(UIButton())
     }
     
     func addLink() {

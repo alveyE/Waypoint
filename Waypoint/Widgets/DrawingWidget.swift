@@ -14,19 +14,24 @@ class DrawingWidget: UIView {
     private lazy var width = bounds.width
     private lazy var height = bounds.height
     
-    private var lastPoint = CGPoint.zero
-    private var swiped = false
+    public var drawingImage = UIImage.gif(name: "loading"){
+        didSet{
+            UIView.animate(withDuration: 0.2, animations: {
+                self.imageView.alpha = 0
+            }) { (true) in
+                self.imageView.image = self.drawingImage
+                UIView.animate(withDuration: 0.2) {
+                    self.imageView.alpha = 1
+                }
+            }
+            
+        }
+    }
     
-    private var red: CGFloat = 0.0
-    private var green: CGFloat = 0.0
-    private var blue: CGFloat = 0.0
     
-    public var editable = true
-    
-    public var urlOfDrawing = ""
     
     private lazy var imageView = createImageView()
-    private lazy var preDrawnImage = getPredrawnImage()
+   
     private lazy var shadow = createShadow()
     
     
@@ -34,11 +39,7 @@ class DrawingWidget: UIView {
     
     override func layoutSubviews() {
         layer.addSublayer(shadow)
-        if editable {
-            addSubview(imageView)
-        }else if urlOfDrawing != ""{
-            addSubview(preDrawnImage)
-        }
+        addSubview(imageView)
     }
     
     private func createShadow() -> CAShapeLayer {
@@ -53,80 +54,12 @@ class DrawingWidget: UIView {
         return boxShadow
     }
     
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if editable {
-        swiped = false
-        if let touch = touches.first {
-            lastPoint = touch.location(in: self.imageView)
-        }
-        }
-    }
-    
-    func drawLine(fromPoint:CGPoint, toPoint:CGPoint){
-        if editable {
-        UIGraphicsBeginImageContext(self.imageView.frame.size)
-        imageView.image?.draw(in: CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height))
-        let context = UIGraphicsGetCurrentContext()
-        
-        context?.move(to: CGPoint(x: fromPoint.x, y: fromPoint.y))
-        context?.addLine(to: CGPoint(x: toPoint.x, y: toPoint.y))
-        context?.setBlendMode(CGBlendMode.normal)
-        context?.setLineCap(CGLineCap.round)
-        context?.setLineWidth(5)
-        context?.setStrokeColor(UIColor(displayP3Red: red, green: green, blue: blue, alpha: 1.0).cgColor)
-        
-        context?.strokePath()
-        
-        imageView.image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        }
-    }
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if editable {
-        swiped = true
-        if let touch = touches.first {
-            let currentPoint = touch.location(in: self.imageView)
-            drawLine(fromPoint: lastPoint, toPoint: currentPoint)
-            lastPoint = currentPoint
-        }
-        }
-    }
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !swiped, editable {
-            drawLine(fromPoint: lastPoint, toPoint: lastPoint)
-        }
-    }
-    
-    private func getPredrawnImage() -> UIImageView {
-        let drawing = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
-        loadImage(withURL: urlOfDrawing)
-        return drawing
-    }
-    
     private func createImageView() -> UIImageView {
         let imageV = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+        imageV.image = drawingImage
         return imageV
     }
     
-    private func loadImage(withURL url: String){
-        let storage = Storage.storage()
-        let imgadjurl = url + ".jpg"
-        let reference = storage.reference(forURL: imgadjurl)
-        
-        reference.getData(maxSize: 2 * 1024 * 1024) { data, error in
-            
-            if let error = error {
-                print("error \(error)")
-            } else {
-             
-             let imageGrabbed = UIImage(data: data!) ?? UIImage()
-             self.preDrawnImage.image = imageGrabbed
-                
-            }
-        }
-        
-    }
 
 
 }

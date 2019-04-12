@@ -171,13 +171,7 @@ class UINoteView: UIView, UITextViewDelegate {
             
             
             imageWidget.image = image
-//
-//            imageWidget.alpha = 0
-//
-//            UIView.transition(with: imageWidget, duration: 0.2, options: [.transitionCrossDissolve], animations: {
-//                imageWidget.alpha = 1
-//            }, completion: nil)
-            
+
            
         })
         self.scroll.addSubview(imageWidget)
@@ -265,6 +259,10 @@ class UINoteView: UIView, UITextViewDelegate {
     public func addDrawingWidget(setImage: String, yPlacement: CGFloat?){
         var verticalPlacing: CGFloat = 0
         
+        let storage = Storage.storage()
+        let imgadjurl = setImage + ".jpg"
+        let reference = storage.reference(forURL: imgadjurl)
+        
         if let yyy = yPlacement {
             verticalPlacing = yyy
         }else{
@@ -272,15 +270,41 @@ class UINoteView: UIView, UITextViewDelegate {
         }
         
         let drawingWidget = DrawingWidget()
-        drawingWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width * 2/5)
+        drawingWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width * 3/5)
         
-        drawingWidget.urlOfDrawing = setImage
+        reference.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
+            let image = UIImage(data: data!) ?? UIImage()
+            drawingWidget.drawingImage = image
+        })
         
         scroll.addSubview(drawingWidget)
         if yPlacement == nil {
         yPosition += drawingWidget.frame.height + verticalPadding
         }
       //scroll.contentSize.height += drawingWidget.frame.height + verticalPadding
+        adjustScroll()
+        drawingWidget.addGestureRecognizer(noteTap)
+    }
+    
+    
+    public func addDrawingWidget(drawing: UIImage, yPlacement: CGFloat?){
+        var verticalPlacing: CGFloat = 0
+    
+        if let yyy = yPlacement {
+            verticalPlacing = yyy
+        }else{
+            verticalPlacing = yPosition
+        }
+        
+        let drawingWidget = DrawingWidget()
+        drawingWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width * 3/5)
+        drawingWidget.drawingImage = drawing
+        
+        scroll.addSubview(drawingWidget)
+        if yPlacement == nil {
+            yPosition += drawingWidget.frame.height + verticalPadding
+        }
+        //scroll.contentSize.height += drawingWidget.frame.height + verticalPadding
         adjustScroll()
         drawingWidget.addGestureRecognizer(noteTap)
     }
@@ -489,7 +513,7 @@ class UINoteView: UIView, UITextViewDelegate {
         }else if widgetType == "text" {
             heightCalc = width * 17/48
         }else if widgetType == "drawing" {
-            heightCalc =  width * 2/5
+            heightCalc =  width * 3/5
         }else if widgetType == "link" {
             heightCalc = width * 6/20
         }

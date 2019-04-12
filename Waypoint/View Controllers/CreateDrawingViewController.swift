@@ -43,6 +43,9 @@ class CreateDrawingViewController: UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        view = nil
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         swiped = false
@@ -88,12 +91,17 @@ class CreateDrawingViewController: UIViewController {
         self.imageView.image = nil
     }
     
-    func completedDrawing(){
+    @IBAction func completedDrawing(_ sender: Any) {
         //push and return image
+        callback?(imageView.image?.jpegDrawingRepresentation ?? Data())
+        self.dismiss(animated: true, completion: nil)
     }
+   
     
     
     @IBOutlet weak var imageView: UIImageView!
+    
+    public var callback : ((Data)->())?
     
 }
 
