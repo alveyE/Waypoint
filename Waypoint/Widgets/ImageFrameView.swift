@@ -17,6 +17,7 @@ class ImageFrameView: UIView {
                 self.imageView.alpha = 0
             }) { (true) in
                 self.imageView.image = self.image
+                self.hasChanged = true
                 UIView.animate(withDuration: 0.2) {
                     self.imageView.alpha = 1
                 }
@@ -26,7 +27,7 @@ class ImageFrameView: UIView {
     }
     
     
-    
+    private var hasChanged = false
     private lazy var imageView = createCenteredImage()
     private lazy var frameCorners = createFrameCorners()
     
@@ -37,6 +38,8 @@ class ImageFrameView: UIView {
     
     public var imageWidth: CGFloat = 0
     public var imageHeight: CGFloat = 0
+    
+    public weak var delegate: ImageFrameViewDelegate?
     
     override func layoutSubviews() {
         layer.addSublayer(shadow)
@@ -77,7 +80,7 @@ class ImageFrameView: UIView {
         let imageCentered = UIImageView(frame: CGRect(x: width/2 - adjustedWidth/2, y: height/2 - adjustedHeight/2, width: adjustedWidth, height: adjustedHeight))
             
             imageCentered.image = imageGiven
-            print("WWWJAT")
+            imageCentered.isUserInteractionEnabled = true
             let iTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
             imageCentered.addGestureRecognizer(iTap)
             return imageCentered
@@ -88,14 +91,9 @@ class ImageFrameView: UIView {
     }
   
     @objc private func imageTapped(){
-        print("image tap")
-        let screenSize: CGRect = UIScreen.main.bounds
-        let screenWidth = screenSize.width
-        let screenHeight = screenSize.height
-//        let fullImage = ImageFullScreen(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
-//        fullImage.image = imageView
-//        addSubview(fullImage)
-        imageView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
+        if hasChanged {
+        delegate?.displayImage(image: image!)
+        }
     }
     
     private func createFrameCorners() -> CAShapeLayer{
@@ -142,4 +140,11 @@ class ImageFrameView: UIView {
     
     
 
+}
+
+
+protocol ImageFrameViewDelegate: class {
+    
+    func displayImage(image: UIImage)
+    
 }

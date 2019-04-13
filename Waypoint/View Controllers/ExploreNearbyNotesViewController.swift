@@ -102,6 +102,12 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         }
     }
     
+    func displayImage(image: UIImage) {
+        let imageFullScreenVC = self.storyboard!.instantiateViewController(withIdentifier: "FullScreenImage") as! FullScreenImageViewController
+        imageFullScreenVC.image = image
+        self.show(imageFullScreenVC, sender: self)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation: CLLocation = locations[0] as CLLocation
         currentLocation = userLocation

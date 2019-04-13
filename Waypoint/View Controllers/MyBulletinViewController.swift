@@ -150,6 +150,11 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
 
     private var yPosition: CGFloat = 0
 
+    func displayImage(image: UIImage) {
+        let imageFullScreenVC = self.storyboard!.instantiateViewController(withIdentifier: "FullScreenImage") as! FullScreenImageViewController
+        imageFullScreenVC.image = image
+        self.show(imageFullScreenVC, sender: self)
+    }
     
     func touchHeard(onIndex index: Int) {
         if notesIDSInExpand[index].first != "E" {

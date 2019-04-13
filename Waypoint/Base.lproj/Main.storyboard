@@ -553,6 +553,21 @@
             </objects>
             <point key="canvasLocation" x="2156" y="-426.83658170914543"/>
         </scene>
+        <!--View Image-->
+        <scene sceneID="b6b-BN-Zyp">
+            <objects>
+                <viewController storyboardIdentifier="FullScreenImage" title="View Image" id="v4y-qC-agm" customClass="FullScreenImageViewController" customModule="Waypoint" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="trb-Lf-3iK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="9Et-ol-b0B"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jP7-0u-3mY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3407.1999999999998" y="-424.13793103448279"/>
+        </scene>
     </scenes>
     <resources>
         <image name="ChosenLogo_TransparentGlobe.png" width="2795" height="643"/>

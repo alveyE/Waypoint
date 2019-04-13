@@ -182,6 +182,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         note.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight * 7/10)
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         
+        
         note.editable = false
         note.hasSaveButton = true
         note.delegate = self
@@ -260,6 +261,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
 
+    }
+    
+    func displayImage(image: UIImage) {
+        let imageFullScreenVC = self.storyboard!.instantiateViewController(withIdentifier: "FullScreenImage") as! FullScreenImageViewController
+        imageFullScreenVC.image = image
+        self.show(imageFullScreenVC, sender: self)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

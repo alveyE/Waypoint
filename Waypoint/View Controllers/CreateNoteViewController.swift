@@ -91,6 +91,12 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         note.endEditing(true)
     }
     
+    func displayImage(image: UIImage) {
+        let imageFullScreenVC = self.storyboard!.instantiateViewController(withIdentifier: "FullScreenImage") as! FullScreenImageViewController
+        imageFullScreenVC.image = image
+        self.show(imageFullScreenVC, sender: self)
+    }
+    
     private func createNoteView(){
         note = UINoteView()
 
@@ -103,14 +109,9 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         note.hasCalanderIcon = false
         
         let topBar = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/11))
-    //    topBar.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.5817197086)
+        topBar.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9)
+        topBar.addBottomBorderWithColor(color: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), width: topBar.frame.height/50)
         
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = topBar.frame
-        
-        gradientLayer.colors = [UIColor.darkGray.cgColor, UIColor.white.cgColor]
-        gradientLayer.opacity = 0.7
-        topBar.layer.addSublayer(gradientLayer)
         
         let submitSize = (view.bounds.height/11) * 3/5
         let submitPadding = view.bounds.width/8
@@ -178,6 +179,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     }
     
     func addDrawing() {
+        //UPLOAD
         shouldLoad = false
         let drawVC = self.storyboard!.instantiateViewController(withIdentifier: "DrawScreen") as! CreateDrawingViewController
         self.show(drawVC, sender: self)
@@ -311,4 +313,34 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     }
     
 
+}
+
+extension UIView {
+    func addTopBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: width)
+        self.layer.addSublayer(border)
+    }
+    
+    func addRightBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: self.frame.size.width - width, y: 0, width: width, height: self.frame.size.height)
+        self.layer.addSublayer(border)
+    }
+    
+    func addBottomBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width: self.frame.size.width, height: width)
+        self.layer.addSublayer(border)
+    }
+    
+    func addLeftBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: 0, y: 0, width: width, height: self.frame.size.height)
+        self.layer.addSublayer(border)
+    }
 }

@@ -10,7 +10,7 @@ import UIKit
 import FirebaseStorage
 
 
-class UINoteView: UIView, UITextViewDelegate {
+class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate {
     
     public var editable = false
     public var hasSaveButton = false
@@ -56,7 +56,9 @@ class UINoteView: UIView, UITextViewDelegate {
         return ref
     }
     
-    
+    func displayImage(image: UIImage) {
+        delegate?.displayImage(image: image)
+    }
     
     @objc private func handleRefresh(_ control: UIRefreshControl){
         delegate?.refreshPulled()
@@ -152,7 +154,7 @@ class UINoteView: UIView, UITextViewDelegate {
         
         imageWidget.imageWidth = imageWidth
         imageWidget.imageHeight = imageHeight
-        
+        imageWidget.delegate = self
         var adjustedWidth = imageWidth
         var adjustedHeight = imageHeight
         
@@ -203,7 +205,7 @@ class UINoteView: UIView, UITextViewDelegate {
         
         imageWidget.imageWidth = imageWidth
         imageWidget.imageHeight = imageHeight
-        
+        imageWidget.delegate = self
         var adjustedWidth = imageWidth
         var adjustedHeight = imageHeight
         
@@ -674,9 +676,11 @@ protocol UINoteViewDelegate: class {
     func touchHeard(onIndex index: Int)
     func doNothing()
     func refreshPulled()
+    func displayImage(image: UIImage)
     
 }
 
 extension UINoteViewDelegate{
     func refreshPulled(){}
+    func displayImage(image: UIImage){}
 }
