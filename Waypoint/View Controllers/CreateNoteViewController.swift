@@ -138,7 +138,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         noteCreator.title = note.titleText()
         noteCreator.text = note.listOfText()
         noteCreator.links = note.listOfLinks()
-        
+        (self.tabBarController!.viewControllers![0] as! MapViewController).mapView = nil
         if noteCreator.title == "" || noteCreator.widgets == ["title"] {
             //Display message to add content to note
             
@@ -184,6 +184,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         let drawVC = self.storyboard!.instantiateViewController(withIdentifier: "DrawScreen") as! CreateDrawingViewController
         self.show(drawVC, sender: self)
         drawVC.callback = { result in
+            self.uploadDrawing(result)
             let returnedDrawing = UIImage(data: result)!
             let savedYPosition = self.note.widgetAdderY
             self.note.moveWidgets(overY: self.note.widgetAdderY - 1, by: self.note.calculateHeight(of: "drawing", includePadding: true), down: true)
@@ -255,7 +256,50 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     
     
     
-
+    func uploadDrawing(_ drawingData: Data){
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        determineCurrentLocation()
+        
+        let date = Date()
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        let year = calendar.component(.year, from: date)
+        var hour = calendar.component(.hour, from: date)
+        if hour > 12 {
+            hour -= 12
+        }
+        let minutes = calendar.component(.minute, from: date)
+        let seconds = calendar.component(.second, from: date)
+        let nanoSeconds = calendar.component(.nanosecond, from: date)
+        let timeStamp = "\(day)\(month)\(year)\(hour):\(minutes)\(seconds)\(nanoSeconds)"
+        let locationString = "\(currentLocation.coordinate.latitude)\(currentLocation.coordinate.longitude)"
+        
+        let imageRef = storageRef.child("uploads").child("drawings").child(locationString).child(timeStamp)
+        
+        let metaDataI = StorageMetadata()
+        metaDataI.contentType = "image/jpg"
+        
+        imageRef.putData(drawingData, metadata: metaDataI) { (metadata, error) in
+            
+            
+            imageRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    // Uh-oh, an error occurred!
+                    print("error getting download url \(String(describing: error))")
+                    return
+                }
+                let urlCreated = downloadURL.absoluteString
+                self.noteCreator.drawings?.append(urlCreated)
+                
+            }
+            
+            
+        }
+        
+        
+    }
     
     
     
@@ -279,7 +323,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         let timeStamp = "\(day)\(month)\(year)\(hour):\(minutes)\(seconds)\(nanoSeconds)"
         let locationString = "\(currentLocation.coordinate.latitude)\(currentLocation.coordinate.longitude)"
         
-        let imageRef = storageRef.child("uploads").child(locationString).child(timeStamp)
+        let imageRef = storageRef.child("uploads").child("images").child(locationString).child(timeStamp)
         
         if let img = image, let data = img.jpegData(compressionQuality: 0.5){
             

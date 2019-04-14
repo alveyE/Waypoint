@@ -17,7 +17,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     var locationManager:CLLocationManager!
-    var mapView:MKMapView!
+    public var mapView:MKMapView!
     var note:UINoteView! {
         didSet {
             let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(noteSwiped))

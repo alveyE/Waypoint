@@ -42,7 +42,7 @@ class DBManager  {
     }
     
     
-    func addImageToNote(id: String, imageData: [String:String]){
+    func addImageToNote(imageData: [String:String]){
         ref = Database.database().reference()
         if createdID != "" {
         ref.child("notes").child(createdID).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -58,10 +58,31 @@ class DBManager  {
         }
         }
     }
+    
+    func addDrawingToNote(drawingURL: String){
+        ref = Database.database().reference()
+        if createdID != "" {
+            ref.child("notes").child(createdID).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                if let value = snapshot.value as? [String : Any] {
+                    var drawings = value["drawings"] as? [String] ?? []
+                    drawings.append(drawingURL)
+                    self.addDrawingLink(drawings: drawings)
+                    
+                }
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+        }
+    }
    
     
-    func addImageData(images: [[String:String]]){
+    private func addImageData(images: [[String:String]]){
         ref.child("notes").child(self.createdID).child("images").setValue(images)
+    }
+    
+    private func addDrawingLink(drawings: [String]){
+        ref.child("notes").child(self.createdID).child("drawings").setValue(drawings)
     }
     
     

@@ -22,16 +22,24 @@ struct NoteCreator{
     var images: [[String:String]]? = [] {
         didSet{
             if submitted {
-                //Find note submitted and add image url
-                let id = ""
+                //Adds late image to already created note
                 if let dataAdded = images?.last {
-                uploader.addImageToNote(id: id, imageData: dataAdded)
+                uploader.addImageToNote(imageData: dataAdded)
                 }
             }
         }
     }
     var links: [String]? = nil
-    var drawings: [String]? = nil
+    var drawings: [String]? = [] {
+        didSet{
+            if submitted {
+                if let drawingAdded = drawings?.last {
+                    uploader.addDrawingToNote(drawingURL: drawingAdded)
+                }
+                
+            }
+        }
+    }
     let creator: String
     var latitude: Double
     var longitude: Double
