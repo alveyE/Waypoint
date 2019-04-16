@@ -13,11 +13,16 @@ class LinkWidget: UIView {
 
     public var url = "https://fractyldev.com"
     public var editable = false
+    public var delegate: LinkWidgetDelegate?
+    
     
     private lazy var width = bounds.width
     private lazy var height = bounds.height
     
-    public lazy var linkText = createLinkText()
+    private lazy var linkText = createLinkText()
+    private lazy var deleteIcon = createDeleteIcon()
+    public lazy var linkField = createLinkField()
+    
     private lazy var shadow = createShadow()
     private var icon = UIImageView() {
         didSet{
@@ -28,12 +33,28 @@ class LinkWidget: UIView {
     
     override func layoutSubviews() {
         layer.addSublayer(shadow)
-        addSubview(linkText)
+        if editable {
+            addSubview(linkField)
+            addSubview(deleteIcon)
+        }else{
+            addSubview(linkText)
+        }
         addSubview(icon)
     }
     
     
+    private func createDeleteIcon() -> UIButton{
+        let iconWidth = width/10
+        
+        let deleteButton = UIButton(frame: CGRect(x:  iconWidth * -1/4, y: iconWidth * -1/4, width: iconWidth, height: iconWidth))
+        deleteButton.setImage(UIImage(named: "delete"), for: UIControl.State.normal)
+        deleteButton.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
+        return deleteButton
+    }
     
+    @objc func deleteTapped(){
+        delegate?.deleteWidget(self)
+    }
     
     private func createShadow() -> CAShapeLayer {
         let box = UIBezierPath(rect: CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height))
@@ -50,12 +71,25 @@ class LinkWidget: UIView {
     }
     
     
+    private func createLinkField() -> UITextField{
+        let text = UITextField(frame: CGRect(x: width/4, y: height/3, width: width - width/4, height: height/3))
+        text.placeholder = "Enter url"
+        text.autocorrectionType = .no
+        text.autocapitalizationType = .none
+        text.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        let textFont = UIFont(name: "Roboto-MediumItalic", size: 20)
+        text.font = textFont
+        return text
+    }
+    
+    
     private func createLinkText() -> UITextView{
         let text = UITextView(frame: CGRect(x: width/4, y: height/3, width: width - width/4, height: height/3))
      //   text.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         tintColor = #colorLiteral(red: 0, green: 0, blue: 0.9803921569, alpha: 1)
         text.isEditable = editable
         text.isScrollEnabled = false
+        text.autocorrectionType = .no
         let textFont = UIFont(name: "Roboto-MediumItalic", size: 20)
         let centeredText = NSMutableParagraphStyle()
         centeredText.alignment = .center
@@ -227,4 +261,9 @@ extension String {
             }
         }
     }
+}
+
+
+protocol LinkWidgetDelegate: class {
+    func deleteWidget(_ widget: UIView)
 }

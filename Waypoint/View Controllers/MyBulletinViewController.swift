@@ -38,11 +38,11 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.view = nil
-        mapView = nil
-        notesIDSInExpand = []
-        savedNotesIDs = []
-        note.clearNote()
+//        self.view = nil
+//        mapView = nil
+//        notesIDSInExpand = []
+//        savedNotesIDs = []
+//        note.clearNote()
     }
     
     
@@ -176,9 +176,11 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
             }else {
                 lastYVal = nil
             }
-            let nextTitleMaxY = note.nextYmax(overY: firstYVal)
+            var nextTitleMaxY = note.nextYmax(overY: firstYVal)
             note.removeWidgetsInRange(minY: firstYVal, maxY: lastYVal)
-            
+            if nextTitleMaxY == 0 {
+                nextTitleMaxY = firstYVal
+            }
             let totalAmnt = nextTitleMaxY - firstYVal + note.getPadding()
             
             note.moveWidgets(overY: firstYVal, by: totalAmnt, down: false)
@@ -201,9 +203,10 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                 
                 let title = value["title"] as? String ?? ""
                 let timeStamp = value["timeStamp"] as? String ?? ""
+                let username = value["creator"] as? String ?? ""
                 self.note.noteID = noteID
                 self.notesIDSInExpand.append(noteID)
-                self.note.addTitleWidget(title: title, timeStamp: timeStamp, yPlacement: nil)
+                self.note.addTitleWidget(title: title, timeStamp: timeStamp, username: username, yPlacement: nil)
                 self.note.increaseScrollSlack(by: self.note.calculateHeight(of: "title", includePadding: false) * 11/12)
                 
                 
@@ -268,7 +271,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                         
                         switch widget{
                         case "title":
-                            self.note.addTitleWidget(title: note.title, timeStamp: note.timeStamp, yPlacement: yPlacing)
+                            self.note.addTitleWidget(title: note.title, timeStamp: note.timeStamp, username: note.creator, yPlacement: yPlacing)
                             break;
                         case "text":
                             if note.text != nil {

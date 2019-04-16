@@ -28,18 +28,34 @@ class DrawingWidget: UIView {
         }
     }
     
-    
+    public var canDelete = false
     
     private lazy var imageView = createImageView()
    
     private lazy var shadow = createShadow()
     
-    
-   
+    public weak var delegate: DrawingWidgetDelegate?
+    private lazy var deleteIcon = createDeleteIcon()
     
     override func layoutSubviews() {
         layer.addSublayer(shadow)
         addSubview(imageView)
+        if canDelete {
+            addSubview(deleteIcon)
+        }
+    }
+    
+    private func createDeleteIcon() -> UIButton{
+        let iconWidth = width/10
+        
+        let deleteButton = UIButton(frame: CGRect(x:  iconWidth * -1/4, y: iconWidth * -1/4, width: iconWidth, height: iconWidth))
+        deleteButton.setImage(UIImage(named: "delete"), for: UIControl.State.normal)
+        deleteButton.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
+        return deleteButton
+    }
+    
+    @objc func deleteTapped(){
+        delegate?.deleteWidget(self)
     }
     
     private func createShadow() -> CAShapeLayer {
@@ -57,9 +73,22 @@ class DrawingWidget: UIView {
     private func createImageView() -> UIImageView {
         let imageV = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         imageV.image = drawingImage
+        imageV.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(drawingTapped))
+        imageV.addGestureRecognizer(tap)
         return imageV
     }
     
+    @objc private func drawingTapped(){
+        delegate?.displayImage(image: drawingImage!)
+    }
 
 
+}
+
+
+protocol DrawingWidgetDelegate: class{
+    
+    func displayImage(image: UIImage)
+    func deleteWidget(_ widget: UIView)
 }

@@ -34,7 +34,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var noteIDs = [String]()
     var notesIDSInExpand = [String]()
     var timeRefreshed = NSDate()
-    var shouldRecenter = true
+    public var shouldRecenter = true
     
     let minutesInactiveBeforeRefresh = 5.0
     
@@ -111,9 +111,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             }else {
                 lastYVal = nil
             }
-            let nextTitleMaxY = note.nextYmax(overY: firstYVal)
+            var nextTitleMaxY = note.nextYmax(overY: firstYVal)
             note.removeWidgetsInRange(minY: firstYVal, maxY: lastYVal)
-            
+            if nextTitleMaxY == 0 {
+                nextTitleMaxY = firstYVal
+            }
             let totalAmnt = nextTitleMaxY - firstYVal + note.getPadding()
 
             note.moveWidgets(overY: firstYVal, by: totalAmnt, down: false)
@@ -180,7 +182,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let mapHeight:CGFloat = view.frame.size.height
         mapView.frame = CGRect(x: leftMargin, y: topMargin, width: mapWidth, height: mapHeight)
         note.frame = CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight * 7/10)
-        note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        note.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 0)
         
         
         note.editable = false
@@ -349,6 +351,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         createMapView()
         
     }
+
+    
     
     func updateNoteView(_ loadedNote: Note){
         
@@ -361,7 +365,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         for widget in loadedNote.widgets {
             switch widget{
             case "title":
-                note.addTitleWidget(title: loadedNote.title, timeStamp: loadedNote.timeStamp, yPlacement: nil)
+                note.addTitleWidget(title: loadedNote.title, timeStamp: loadedNote.timeStamp, username: loadedNote.creator, yPlacement: nil)
                 print("title ADD")
                 break;
             case "text":
@@ -416,8 +420,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     let long = childData["longitude"] as? Double
                     let idRetrieved = childSnapshot.key
                     if let latitude = lat, let longitude = long {
-                        let coord = (latitude: latitude, longitude: longitude)
-                        if !self.locations.contains(coord) {
+                        if !self.noteIDs.contains(idRetrieved) {
                             
                             self.locations.append((latitude: latitude, longitude: longitude))
                             self.noteIDs.append(idRetrieved)
@@ -464,7 +467,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 if addingNote {
                     print(noteID)
                     self.notesIDSInExpand.append(noteID)
-                    self.note.addTitleWidget(title: note.title, timeStamp: note.timeStamp, yPlacement: nil)
+                    self.note.addTitleWidget(title: note.title, timeStamp: note.timeStamp, username: note.creator, yPlacement: nil)
                  //   self.note.increaseScrollSlack(by: self.note.calculateHeight(of: "title", includePadding: false) * 11/12)
 
                 
@@ -546,7 +549,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         
                         switch widget{
                         case "title":
-                            self.note.addTitleWidget(title: note.title, timeStamp: note.timeStamp, yPlacement: yPlacing)
+                            self.note.addTitleWidget(title: note.title, timeStamp: note.timeStamp, username: note.creator, yPlacement: yPlacing)
                             break;
                         case "text":
                             if note.text != nil {

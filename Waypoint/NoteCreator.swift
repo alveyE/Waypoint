@@ -40,7 +40,7 @@ struct NoteCreator{
             }
         }
     }
-    let creator: String
+    var creator: String
     var latitude: Double
     var longitude: Double
     

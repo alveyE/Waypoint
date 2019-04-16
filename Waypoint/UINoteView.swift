@@ -10,7 +10,8 @@ import UIKit
 import FirebaseStorage
 
 
-class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate {
+class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWidgetDelegate, LinkWidgetDelegate {
+    
     
     public var editable = false
     public var hasSaveButton = false
@@ -64,7 +65,7 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate {
         delegate?.refreshPulled()
         control.endRefreshing()
     }
-    public func addTitleWidget(title: String, timeStamp: String, yPlacement: CGFloat?){
+    public func addTitleWidget(title: String, timeStamp: String, username: String, yPlacement: CGFloat?){
         var verticalPlacing: CGFloat = 0
 
         if let yyy = yPlacement {
@@ -76,11 +77,12 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate {
             titleWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width/4)
             titleWidget.editable = editable
             titleWidget.hasSaveButton = hasSaveButton
-            titleWidget.hasCalanderIcon = hasCalanderIcon
+            titleWidget.hasCalendarIcon = hasCalanderIcon
             titleWidget.noteID = noteID
             titleWidget.saved = saved
             titleWidget.title = title
             titleWidget.noteTimeStamp = timeStamp
+            titleWidget.username = username
             titleWidget.alpha = 0
 
             self.scroll.addSubview(titleWidget)
@@ -113,13 +115,13 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate {
         }else{
             verticalPlacing = yPosition
         }
-        let textFont = UIFont(name: "Helvetica Neue", size: 16)
     
         
             let textWidget = TextWidget()
             textWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width * 17/48)
             textWidget.editable = editable
             textWidget.text = text
+            textWidget.delegate = self
             textWidget.alpha = 0
             scroll.addSubview(textWidget)
         UIView.animate(withDuration: animationTime) {
@@ -155,6 +157,7 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate {
         imageWidget.imageWidth = imageWidth
         imageWidget.imageHeight = imageHeight
         imageWidget.delegate = self
+        imageWidget.canDelete = editable
         var adjustedWidth = imageWidth
         var adjustedHeight = imageHeight
         
@@ -164,7 +167,6 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate {
         let preAdj = adjustedWidth
         adjustedWidth = self.width - minimumPadding
         adjustedHeight *= adjustedWidth/preAdj
-        
         
         imageWidget.frame = CGRect(x: self.padding, y: verticalPlacing, width: self.width - 2*self.padding, height: adjustedHeight)
         
@@ -206,6 +208,7 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate {
         imageWidget.imageWidth = imageWidth
         imageWidget.imageHeight = imageHeight
         imageWidget.delegate = self
+        imageWidget.canDelete = editable
         var adjustedWidth = imageWidth
         var adjustedHeight = imageHeight
         
@@ -249,6 +252,7 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate {
         linkWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width * 6/20)
         linkWidget.url = url
         linkWidget.editable = editable
+        linkWidget.delegate = self
         scroll.addSubview(linkWidget)
         if yPlacement == nil {
         yPosition += linkWidget.frame.height + verticalPadding
@@ -273,7 +277,8 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate {
         
         let drawingWidget = DrawingWidget()
         drawingWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width * 3/5)
-        
+        drawingWidget.delegate = self
+        drawingWidget.canDelete = editable
         reference.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
             let image = UIImage(data: data!) ?? UIImage()
             drawingWidget.drawingImage = image
@@ -301,7 +306,8 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate {
         let drawingWidget = DrawingWidget()
         drawingWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width * 3/5)
         drawingWidget.drawingImage = drawing
-        
+        drawingWidget.delegate = self
+        drawingWidget.canDelete = editable
         scroll.addSubview(drawingWidget)
         if yPlacement == nil {
             yPosition += drawingWidget.frame.height + verticalPadding
@@ -342,16 +348,24 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate {
             }
         }
     }
- 
+    func deleteWidget(_ widget : UIView) {
+            let totalAmnt = widget.frame.maxY - widget.frame.minY + getPadding()
+            widget.removeFromSuperview()
+            moveWidgets(overY: widget.frame.maxY, by: totalAmnt, down: false)
+        
+    }
     private func adjustScroll(){
         var contentRect = CGRect.zero
-        
+        let offset = scroll.contentOffset
         for view in scroll.subviews {
             contentRect = contentRect.union(view.frame)
         }
-        scroll.contentSize.height = contentRect.size.height
+        scroll.contentSize.height = contentRect.size.height //+ leway()
         if scroll.contentSize.height < height {
             scroll.contentSize.height = height + 1
+        }
+        if editable {
+        scroll.contentOffset = offset
         }
     }
     
@@ -488,7 +502,7 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate {
         
         for sub in subCopy {
             if let linkWidget = sub as? LinkWidget {
-                links.append(linkWidget.linkText.text ?? "")
+                links.append(linkWidget.linkField.text ?? "")
             }
         }
         return links

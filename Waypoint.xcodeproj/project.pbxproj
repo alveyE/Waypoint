@@ -10,6 +10,7 @@
 		13E6AFCA1F837775253FB43F /* Pods_Waypoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */; };
 		C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510EFAE21ADAFE500243FA2 /* DBManager.swift */; };
 		C5BD13A821DF4B9C00BE7F17 /* GeoFenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */; };
+		D118587B226646C5001F183C /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D118587A226646C4001F183C /* Roboto-LightItalic.ttf */; };
 		D140339321CA97F40030BC62 /* LinkWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339221CA97F40030BC62 /* LinkWidget.swift */; };
 		D140339521CAF1890030BC62 /* UINoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339421CAF1890030BC62 /* UINoteView.swift */; };
 		D140339721CAF5370030BC62 /* NoteLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339621CAF5370030BC62 /* NoteLayoutViewController.swift */; };
@@ -55,6 +56,7 @@
 		C510EFAE21ADAFE500243FA2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoFenceManager.swift; sourceTree = "<group>"; };
 		D105384D2239D9FA00AC5862 /* Waypoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Waypoint.entitlements; sourceTree = "<group>"; };
+		D118587A226646C4001F183C /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		D140339221CA97F40030BC62 /* LinkWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkWidget.swift; sourceTree = "<group>"; };
 		D140339421CAF1890030BC62 /* UINoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINoteView.swift; sourceTree = "<group>"; };
 		D140339621CAF5370030BC62 /* NoteLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLayoutViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				D1A8EE312235BFB800B308CF /* Roboto-Bold.ttf */,
 				D1A8EE342235C04100B308CF /* Roboto-Medium.ttf */,
 				D1A8EE302235BFB800B308CF /* Roboto-Regular.ttf */,
+				D118587A226646C4001F183C /* Roboto-LightItalic.ttf */,
 				D1A8EE362235C47E00B308CF /* Roboto-MediumItalic.ttf */,
 				D1DBA67B222B4A3E006D5728 /* Lato-Bold.ttf */,
 				D1DBA67C222B4A40006D5728 /* Lato-Regular.ttf */,
@@ -301,6 +304,7 @@
 				D1A8EE372235C47E00B308CF /* Roboto-MediumItalic.ttf in Resources */,
 				D1A8EE332235BFB800B308CF /* Roboto-Bold.ttf in Resources */,
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
+				D118587B226646C5001F183C /* Roboto-LightItalic.ttf in Resources */,
 				D1DBA67D222B4A56006D5728 /* Lato-Bold.ttf in Resources */,
 				D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */,
 				D1A8EE322235BFB800B308CF /* Roboto-Regular.ttf in Resources */,

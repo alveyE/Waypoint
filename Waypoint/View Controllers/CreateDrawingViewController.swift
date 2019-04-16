@@ -47,6 +47,16 @@ class CreateDrawingViewController: UIViewController {
         view = nil
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        imageView.layer.shadowColor = UIColor.black.cgColor
+        imageView.layer.shadowOffset = CGSize(width: 5, height: 5)
+        imageView.layer.shadowRadius = 5
+        imageView.layer.shadowOpacity = 0.25
+    
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         swiped = false
         if let touch = touches.first {

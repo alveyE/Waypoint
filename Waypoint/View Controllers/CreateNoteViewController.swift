@@ -10,10 +10,12 @@ import UIKit
 import CoreLocation
 import FirebaseStorage
 import FirebaseAuth
+import FirebaseDatabase
 
 class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AddWidgetViewDelegate, UINoteViewDelegate {
+    
+    
     func doNothing() {
-
     }
     
     func touchHeard(onIndex index: Int) {
@@ -69,7 +71,8 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
 //        view.bringSubviewToFront(linkButton)
 //        view.bringSubviewToFront(createNoteButton)
         if let user = Auth.auth().currentUser {
-    noteCreator = NoteCreator(creator: user.uid, latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+            noteCreator = NoteCreator(creator: user.uid, latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+            updateUsername()
         }else{
             let blurEffect = UIBlurEffect(style: .dark)
             let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -97,6 +100,18 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         self.show(imageFullScreenVC, sender: self)
     }
     
+    private func updateUsername(){
+        let ref = Database.database().reference()
+        if let user = Auth.auth().currentUser {
+            ref.child("users").child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let value = snapshot.value as? [String : Any] {
+                    let username = value["username"] as? String ?? ""
+                    self.noteCreator.creator = username
+                }
+            })
+        }
+    }
+    
     private func createNoteView(){
         note = UINoteView()
 
@@ -116,7 +131,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         let submitSize = (view.bounds.height/11) * 3/5
         let submitPadding = view.bounds.width/8
         let submitButton = UIButton(frame: CGRect(x: view.bounds.width - submitPadding, y: topBar.frame.height * 5/8 - submitSize/2, width: submitSize, height: submitSize))
-        submitButton.setImage(UIImage(named: "finish"), for: UIControl.State.normal)
+        submitButton.setImage(UIImage(named: "check"), for: UIControl.State.normal)
         submitButton.addTarget(self, action: #selector(createNoteTouched), for: .touchUpInside)
         topBar.addSubview(submitButton)
         
@@ -124,10 +139,8 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         view.addSubview(note)
         view.addSubview(topBar)
         
-        note.addTitleWidget(title: "Enter title here", timeStamp: "", yPlacement: nil)
+        note.addTitleWidget(title: "Enter title here", timeStamp: "", username: "", yPlacement: nil)
         note.addWidgetMaker(yPlacement: nil, adderDelegate: self)
-        
-        
         
     }
     
@@ -138,10 +151,34 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         noteCreator.title = note.titleText()
         noteCreator.text = note.listOfText()
         noteCreator.links = note.listOfLinks()
-        (self.tabBarController!.viewControllers![0] as! MapViewController).mapView = nil
-        if noteCreator.title == "" || noteCreator.widgets == ["title"] {
+        var validLinks = true
+        var linkNum = 0
+        for link in noteCreator.links ?? [] {
+            if !link.isValidURL(){
+                if "https://\(link)".isValidURL() {
+                    noteCreator.links![linkNum] = "https://\(link)"
+                }else if "http://\(link)".isValidURL() {
+                    noteCreator.links![linkNum] = "http://\(link)"
+                }else if "www.\(link)".isValidURL(){
+                    noteCreator.links![linkNum] = "www.\(link)"
+                }else{
+                    validLinks = false
+                }
+                
+                
+            }
+            linkNum += 1
+        }
+        
+        if !validLinks{
+            let alert = UIAlertController(title: "Please enter a valid link", message: "", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }else if noteCreator.title == "" || noteCreator.widgets == ["title"] {
             //Display message to add content to note
-            
+            let alert = UIAlertController(title: "Please add content to your note", message: "", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
           
             //Makes sure user location can be determined within so many meters
         }else if currentLocation.horizontalAccuracy < 100{
@@ -151,6 +188,8 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
        
 
         noteCreator.writeNote()
+        (self.tabBarController!.viewControllers![0] as! MapViewController).mapView = nil
+        (self.tabBarController!.viewControllers![0] as! MapViewController).shouldRecenter = true
         self.view = nil
         shouldLoad = true
         self.tabBarController?.selectedIndex = 0
@@ -177,7 +216,14 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         shouldLoad = false
         present(picker, animated: true, completion: nil)
     }
-    
+    func activateCamera() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = false
+        picker.sourceType = .camera
+        shouldLoad = false
+        present(picker, animated: true, completion: nil)
+    }
     func addDrawing() {
         //UPLOAD
         shouldLoad = false
@@ -386,5 +432,29 @@ extension UIView {
         border.backgroundColor = color.cgColor
         border.frame = CGRect(x: 0, y: 0, width: width, height: self.frame.size.height)
         self.layer.addSublayer(border)
+    }
+}
+
+
+extension String {
+    
+    private func matches(pattern: String) -> Bool {
+        let regex = try! NSRegularExpression(
+            pattern: pattern,
+            options: [.caseInsensitive])
+        return regex.firstMatch(
+            in: self,
+            options: [],
+            range: NSRange(location: 0, length: utf16.count)) != nil
+    }
+    
+    func isValidURL() -> Bool {
+        guard let url = URL(string: self) else { return false }
+        if !UIApplication.shared.canOpenURL(url) {
+            return false
+        }
+        
+        let urlPattern = "^(http|https|ftp)\\://([a-zA-Z0-9\\.\\-]+(\\:[a-zA-Z0-9\\.&amp;%\\$\\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|localhost|([a-zA-Z0-9\\-]+\\.)*[a-zA-Z0-9\\-]+\\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\\:[0-9]+)*(/($|[a-zA-Z0-9\\.\\,\\?\\'\\\\\\+&amp;%\\$#\\=~_\\-]+))*$"
+        return self.matches(pattern: urlPattern)
     }
 }

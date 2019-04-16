@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public var shouldRefresh = true
     
     var timeEnded = NSDate()
-    let minutesInactiveBeforeRefresh = 0.5
+    let minutesInactiveBeforeRefresh = 5.0
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -29,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
         timeEnded = NSDate()
-        print("recorded time")
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -40,6 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         shouldRefresh = timeEnded.timeIntervalSinceNow < minutesInactiveBeforeRefresh * -60
+        if shouldRefresh {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            self.window?.rootViewController = storyboard.instantiateInitialViewController()
+        }
         print("set refresh to \(shouldRefresh) since timeInterval was \(timeEnded.timeIntervalSinceNow)")
     }
 

@@ -212,9 +212,10 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                 
                 let title = value["title"] as? String ?? ""
                 let timeStamp = value["timeStamp"] as? String ?? ""
+                let username = value["creator"] as? String ?? ""
                 self.note.noteID = noteID
                 self.notesIDSInExpand.append(noteID)
-                self.note.addTitleWidget(title: title, timeStamp: timeStamp, yPlacement: nil)
+                self.note.addTitleWidget(title: title, timeStamp: timeStamp, username: username, yPlacement: nil)
                 
                 
             }
@@ -280,7 +281,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                         
                         switch widget{
                         case "title":
-                            self.note.addTitleWidget(title: note.title, timeStamp: note.timeStamp, yPlacement: yPlacing)
+                            self.note.addTitleWidget(title: note.title, timeStamp: note.timeStamp, username: note.creator, yPlacement: yPlacing)
                             break;
                         case "text":
                             if note.text != nil {

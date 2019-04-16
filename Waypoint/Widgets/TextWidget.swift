@@ -20,12 +20,17 @@ class TextWidget: UIView {
     
     public lazy var textContent = createTextContent()
     private lazy var shadow = createShadow()
+    private lazy var deleteIcon = createDeleteIcon()
     
     public var noteID = ""
+    public weak var delegate: TextWidgetDelegate?
     
     override func layoutSubviews() {
         layer.addSublayer(shadow)
         addSubview(textContent)
+        if editable{
+        addSubview(deleteIcon)
+        }
     }
     
     
@@ -75,6 +80,19 @@ class TextWidget: UIView {
         return textContent.frame.height
     }
     
+    private func createDeleteIcon() -> UIButton{
+        let iconWidth = width/10
+        
+        let deleteButton = UIButton(frame: CGRect(x:  iconWidth * -1/4, y: iconWidth * -1/4, width: iconWidth, height: iconWidth))
+        deleteButton.setImage(UIImage(named: "delete"), for: UIControl.State.normal)
+        deleteButton.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
+        return deleteButton
+    }
+    
+    @objc func deleteTapped(){
+        delegate?.deleteWidget(self)
+    }
+    
     private func createLines() -> UIView {
         let lines = UIView(frame: CGRect(x: width/20, y: height/30 + (textFont?.lineHeight)!, width: width - width/10, height: height - height/30))
         lines.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
@@ -91,4 +109,9 @@ class TextWidget: UIView {
     }
  
 
+}
+
+
+protocol TextWidgetDelegate: class{
+    func deleteWidget(_ widget: UIView)
 }

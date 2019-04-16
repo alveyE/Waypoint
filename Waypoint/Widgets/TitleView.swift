@@ -19,10 +19,11 @@ class TitleView: UIView, UITextViewDelegate {
     
     public var editable = false
     public var hasSaveButton = false
-    public var hasCalanderIcon = true
+    public var hasCalendarIcon = true
     public var noteTimeStamp = "20181219101034"
     public var title = ""
     public var noteID = ""
+    public var username = "ethanalvey"
     public var saved = false {
         didSet{
             let emptyTag = UIImage(named: "tagEmpty")
@@ -41,14 +42,18 @@ class TitleView: UIView, UITextViewDelegate {
     private lazy var saveButton = createSaveButton()
     private lazy var shadow = createShadow()
     private lazy var calendarIcon = createCalendarIcon()
+    private lazy var usernameLabel = createUserText()
     
    var ref: DatabaseReference!
 
     override func layoutSubviews() {
         layer.addSublayer(shadow)
         addSubview(titleText)
+        if !editable {
         addSubview(timeStamp)
-        if hasCalanderIcon{
+        addSubview(usernameLabel)
+        }
+        if hasCalendarIcon{
         addSubview(calendarIcon)
         }
         if hasSaveButton {
@@ -109,14 +114,27 @@ class TitleView: UIView, UITextViewDelegate {
     private func createTimeStamp() -> UILabel {
         let time = UILabel(frame: CGRect(x: width/8, y: height * 9/24, width: width * 7/9, height: height * 3/8))
         time.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        let dateFont = UIFont(name: "Roboto", size: height/4.3)
+        let dateFont = UIFont(name: "Roboto", size: height/4.3)?.italics()
+        
         time.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
 //        time.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        let timeText = determineHowLongAgo(noteCreationDate: noteTimeStamp)
+        let timeText = calculateTimeDifference()
         let attributedTime = NSMutableAttributedString(string: timeText, attributes: [.font : dateFont as Any])
         time.attributedText = attributedTime
         return time
     }
+    
+    private func createUserText() -> UILabel {
+        let usernameLabel = UILabel(frame: CGRect(x: 0, y: height - (height/2), width: width - width/30, height: height * 5/8))
+        usernameLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        usernameLabel.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        let userfont = UIFont(name: "Roboto-LightItalic", size: height/5)
+        usernameLabel.font = userfont
+        usernameLabel.textAlignment = .right
+        usernameLabel.text = username
+        return usernameLabel
+    }
+    
     
     private func createSaveButton() -> UIButton {
         setSavedCorrectly()
@@ -132,8 +150,6 @@ class TitleView: UIView, UITextViewDelegate {
         save.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         
         return save
-        
-        
     }
     
     private func setSavedCorrectly(){
@@ -212,55 +228,68 @@ class TitleView: UIView, UITextViewDelegate {
     }
     
     
-   
-    
-    private func determineHowLongAgo(noteCreationDate : String) -> String {
+    private func calculateTimeDifference() -> String{
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.dateFormat = "yyyyMMddHHmmss"
+        let noteTime = formatter.date(from: noteTimeStamp)
         
-        let date = Date()
-        let calendar = Calendar.current
-        let month = calendar.component(.month, from: date)
-        let day = calendar.component(.day, from: date)
-        let year = calendar.component(.year, from: date)
-        let hour = calendar.component(.hour, from: date)
-        let seconds = calendar.component(.second, from: date)
-        let minutes = calendar.component(.minute, from: date)
-        let currentTime = String(format: "%04d%02d%02d%02d%02d%02d", year,month,day,hour,minutes,seconds)
-
-        let nowTime = Double(currentTime) ?? 11111111111111
-        let noteTime = Double(noteCreationDate) ?? 11111111111111
-        if noteTime == 11111111111111 {
-            return ""
-        }
-        if(nowTime <= noteTime){
-            return "Moments ago"
-        }
-        else if(nowTime > noteTime && nowTime - noteTime < 240000){
-            return "Today at \(parseDate(date: noteTime))"
-        }
-        else if(nowTime > noteTime && nowTime - noteTime > 240000){
-            return "Yesterday at \(parseDate(date: noteTime))"
-        }
-        else{
-            return "1 day ago"
-        }
+        let timeDif = noteTime?.timeAgoDisplay()
+        return timeDif!
     }
-    func parseDate(date : Double) -> String{
+    
+    
+}
+
+extension Date {
+    func timeAgoDisplay() -> String {
         
+        let calendar = Calendar.current
+        let minuteAgo = calendar.date(byAdding: .minute, value: -1, to: Date())!
+        let hourAgo = calendar.date(byAdding: .hour, value: -1, to: Date())!
+        let dayAgo = calendar.date(byAdding: .day, value: -1, to: Date())!
+        let weekAgo = calendar.date(byAdding: .day, value: -7, to: Date())!
+        let monthAgo = calendar.date(byAdding: .month, value: -1, to: Date())!
         
-        
-        
-        
-        let hourSecond = String(date)
-        var hour = String(Array(hourSecond)[8...9])
-        let minute = String(Array(hourSecond)[10...11])
-        if (Int(hour)! > 12) {
-            hour = String(Int(hour)!-12)
+        if minuteAgo < self {
+            let diff = Calendar.current.dateComponents([.second], from: self, to: Date()).second ?? 0
+            if diff == 1{
+                return "1 second ago"
+            }
+            return "\(diff) seconds ago"
+        } else if hourAgo < self {
+            let diff = Calendar.current.dateComponents([.minute], from: self, to: Date()).minute ?? 0
+            if diff == 1{
+                return "1 minute ago"
+            }
+            return "\(diff) minutes ago"
+        } else if dayAgo < self {
+            let diff = Calendar.current.dateComponents([.hour], from: self, to: Date()).hour ?? 0
+            if diff == 1{
+                return "1 hour ago"
+            }
+            return "\(diff) hours ago"
+        } else if weekAgo < self {
+            let diff = Calendar.current.dateComponents([.day], from: self, to: Date()).day ?? 0
+            if diff == 1{
+                return "1 day ago"
+            }
+            return "\(diff) days ago"
+        } else if monthAgo < self {
+            let diff = Calendar.current.dateComponents([.weekOfYear], from: self, to: Date()).weekOfYear ?? 0
+            if diff == 1{
+                return "1 week ago"
+            }
+            return "\(diff) weeks ago"
         }
-        return "\(hour):\(minute)"
+        let diff = Calendar.current.dateComponents([.month], from: self, to: Date()).month ?? 0
+        if diff == 1{
+            return "1 month ago"
+        }
+        return "\(diff) months ago"
+        
+    }
 }
-}
-
-
 
 extension UIFont {
     

@@ -16,8 +16,9 @@ class AddWidgetView: UIView {
     private lazy var shadow = createShadow()
     private lazy var textIcon = createIcon(imageName: "addText", iconNum: 1)
     private lazy var imageIcon = createIcon(imageName: "addImage", iconNum: 2)
-    private lazy var drawingIcon = createIcon(imageName: "addDrawing", iconNum: 3)
-    private lazy var linkIcon = createIcon(imageName: "addLink", iconNum: 4)
+    private lazy var cameraIcon = createIcon(imageName: "camera", iconNum: 3)
+    private lazy var drawingIcon = createIcon(imageName: "addDrawing", iconNum: 4)
+    private lazy var linkIcon = createIcon(imageName: "addLink", iconNum: 5)
     
     weak var delegate: AddWidgetViewDelegate?
     
@@ -25,6 +26,7 @@ class AddWidgetView: UIView {
         layer.addSublayer(shadow)
         addSubview(textIcon)
         addSubview(imageIcon)
+        addSubview(cameraIcon)
         addSubview(drawingIcon)
         addSubview(linkIcon)
     }
@@ -46,11 +48,12 @@ class AddWidgetView: UIView {
     private func createIcon(imageName: String, iconNum: Int) -> UIButton {
         let icon = UIImage(named: imageName)
         
+        
         let sideMargin = (width/12)
-        let widthValid = width/5
+        let widthValid = (width-2*sideMargin)/5
         let heightValid = widthValid
         let topMargin = height/2 - heightValid/2
-        let padding = (width - 2*sideMargin - 4*widthValid)/4
+        let padding = (width - 2*sideMargin - 5*widthValid)/5
         let xPosition = sideMargin + (widthValid + padding)*(CGFloat(iconNum - 1))
         
         let iconView = UIButton(frame: CGRect(x: xPosition, y: topMargin, width: widthValid, height: heightValid))
@@ -60,6 +63,8 @@ class AddWidgetView: UIView {
             iconView.addTarget(self, action: #selector(textTapped), for: .touchUpInside)
         }else if imageName == "addImage" {
             iconView.addTarget(self, action: #selector(imageTapped), for: .touchUpInside)
+        }else if imageName == "camera" {
+            iconView.addTarget(self, action: #selector(cameraTapped), for: .touchUpInside)
         }else if imageName == "addDrawing" {
             iconView.addTarget(self, action: #selector(drawTapped), for: .touchUpInside)
         }else if imageName == "addLink" {
@@ -75,6 +80,10 @@ class AddWidgetView: UIView {
     
     @objc private func imageTapped(){
         delegate?.addImage()
+    }
+    
+    @objc private func cameraTapped(){
+        delegate?.activateCamera()
     }
     
     @objc private func drawTapped(){
@@ -96,5 +105,6 @@ protocol AddWidgetViewDelegate: class {
     func addImage()
     func addDrawing()
     func addLink()
+    func activateCamera()
     
 }

@@ -30,7 +30,7 @@ class ImageFrameView: UIView {
     private var hasChanged = false
     private lazy var imageView = createCenteredImage()
     private lazy var frameCorners = createFrameCorners()
-    
+    private lazy var deleteIcon = createDeleteIcon()
     private lazy var shadow = createShadow()
     
     lazy var width = bounds.width
@@ -38,13 +38,16 @@ class ImageFrameView: UIView {
     
     public var imageWidth: CGFloat = 0
     public var imageHeight: CGFloat = 0
-    
+    public var canDelete = false
     public weak var delegate: ImageFrameViewDelegate?
     
     override func layoutSubviews() {
         layer.addSublayer(shadow)
         addSubview(imageView)
-        layer.addSublayer(frameCorners)
+        if canDelete{
+            addSubview(deleteIcon)
+        }
+      //  layer.addSublayer(frameCorners)
     }
     
   
@@ -95,7 +98,18 @@ class ImageFrameView: UIView {
         delegate?.displayImage(image: image!)
         }
     }
+    private func createDeleteIcon() -> UIButton{
+        let iconWidth = width/10
+        
+        let deleteButton = UIButton(frame: CGRect(x:  iconWidth * -1/4, y: iconWidth * -1/4, width: iconWidth, height: iconWidth))
+        deleteButton.setImage(UIImage(named: "delete"), for: UIControl.State.normal)
+        deleteButton.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
+        return deleteButton
+    }
     
+    @objc func deleteTapped(){
+        delegate?.deleteWidget(self)
+    }
     private func createFrameCorners() -> CAShapeLayer{
         
         let triangles = CAShapeLayer()
@@ -146,5 +160,5 @@ class ImageFrameView: UIView {
 protocol ImageFrameViewDelegate: class {
     
     func displayImage(image: UIImage)
-    
+    func deleteWidget(_ widget: UIView)
 }
