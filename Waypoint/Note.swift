@@ -42,7 +42,7 @@ public struct Note : Codable{
         
         if timeStamp ==  "" {
         let utcDate = Date()
-            
+   
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         formatter.dateFormat = "yyyyMMddHHmmss"

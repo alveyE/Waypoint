@@ -16,8 +16,6 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
     func doNothing() {
        
     }
-    
-    
 
     private var savedNotesIDs = [String]()
     var note:UINoteView!
@@ -38,11 +36,11 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-//        self.view = nil
-//        mapView = nil
-//        notesIDSInExpand = []
-//        savedNotesIDs = []
-//        note.clearNote()
+        self.view = nil
+        mapView = nil
+        notesIDSInExpand = []
+        savedNotesIDs = []
+        note.clearNote()
     }
     
     
@@ -128,22 +126,30 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                     self.getNote(withID: save)
                 }
                 if self.savedNotesIDs.count == 0 {
-                    let notesWillAppearLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height/3))
+                    let backgroundBar = UIView(frame: CGRect(x: self.view.frame.width/20, y: self.view.frame.height/6, width: self.view.frame.width - (self.view.frame.width/10), height: self.view.frame.height/9))
+                    backgroundBar.backgroundColor = #colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1)
+                    let notesWillAppearLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width - (self.view.frame.width/10), height: self.view.frame.height/9))
                     notesWillAppearLabel.text = "Notes you save will appear here"
                     notesWillAppearLabel.textAlignment = .center
-                    notesWillAppearLabel.font = UIFont(name: "Lato", size: 25)
-                    self.view.addSubview(notesWillAppearLabel)
+                    notesWillAppearLabel.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                    notesWillAppearLabel.font = UIFont(name: "Roboto-Regular", size: 22)
+                    backgroundBar.addSubview(notesWillAppearLabel)
+                    self.view.addSubview(backgroundBar)
                     
                 }
                 
             }
             
         }else{
-            let notSignedInLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height/3))
+            let backgroundBar = UIView(frame: CGRect(x: self.view.frame.width/20, y: self.view.frame.height/6, width: self.view.frame.width - (self.view.frame.width/10), height: self.view.frame.height/9))
+            backgroundBar.backgroundColor = #colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1)
+            let notSignedInLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width - (self.view.frame.width/10), height: self.view.frame.height/9))
             notSignedInLabel.text = "Sign in to see your saved notes"
             notSignedInLabel.textAlignment = .center
-            notSignedInLabel.font = UIFont(name: "Lato", size: 25)
-            self.view.addSubview(notSignedInLabel)
+            notSignedInLabel.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            notSignedInLabel.font = UIFont(name: "Roboto-Regular", size: 22)
+            backgroundBar.addSubview(notSignedInLabel)
+            self.view.addSubview(backgroundBar)
         }
     }
     
@@ -154,6 +160,15 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
         let imageFullScreenVC = self.storyboard!.instantiateViewController(withIdentifier: "FullScreenImage") as! FullScreenImageViewController
         imageFullScreenVC.image = image
         self.show(imageFullScreenVC, sender: self)
+    }
+    
+    func menuAppear(withID id: String) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Edit", style: UIAlertAction.Style.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: nil))
+        alert.addAction(UIAlertAction(title: "Report", style: UIAlertAction.Style.destructive, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func touchHeard(onIndex index: Int) {

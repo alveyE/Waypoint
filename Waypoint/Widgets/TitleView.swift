@@ -17,6 +17,7 @@ class TitleView: UIView, UITextViewDelegate {
     private lazy var width = bounds.width
     private lazy var height = bounds.height
     
+    public var delegate: TitleViewDelegate?
     public var editable = false
     public var hasSaveButton = false
     public var hasCalendarIcon = true
@@ -43,6 +44,7 @@ class TitleView: UIView, UITextViewDelegate {
     private lazy var shadow = createShadow()
     private lazy var calendarIcon = createCalendarIcon()
     private lazy var usernameLabel = createUserText()
+    private lazy var menuDots = createDotsMenu()
     
    var ref: DatabaseReference!
 
@@ -59,6 +61,7 @@ class TitleView: UIView, UITextViewDelegate {
         if hasSaveButton {
         addSubview(saveButton)
         }
+        addSubview(menuDots)
     }
     
     private func createShadow() -> CAShapeLayer {
@@ -125,16 +128,22 @@ class TitleView: UIView, UITextViewDelegate {
     }
     
     private func createUserText() -> UILabel {
-        let usernameLabel = UILabel(frame: CGRect(x: 0, y: height - (height/2), width: width - width/30, height: height * 5/8))
+        let usernameLabel = UILabel(frame: CGRect(x: width/30, y: height - (height/2), width: width - width/30, height: height * 5/8))
         usernameLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         usernameLabel.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         let userfont = UIFont(name: "Roboto-LightItalic", size: height/5)
         usernameLabel.font = userfont
-        usernameLabel.textAlignment = .right
+        usernameLabel.textAlignment = .left
         usernameLabel.text = username
         return usernameLabel
     }
     
+    private func createDotsMenu() -> UIButton{
+        let menuButton = UIButton(frame: CGRect(x: width * 7/10, y: height/2, width: width - width * 7/10, height: height * 5/8))
+        menuButton.setImage(UIImage(named: "send"), for: UIControl.State.normal)
+        menuButton.addTarget(self, action: #selector(menuTapped), for: .touchUpInside)
+        return menuButton
+    }
     
     private func createSaveButton() -> UIButton {
         setSavedCorrectly()
@@ -175,6 +184,10 @@ class TitleView: UIView, UITextViewDelegate {
             }
 
         }
+    }
+    
+    @objc private func menuTapped(){
+        delegate?.menuAppear(withID: noteID)
     }
     
     @objc private func saveTapped(){
@@ -235,7 +248,7 @@ class TitleView: UIView, UITextViewDelegate {
         let noteTime = formatter.date(from: noteTimeStamp)
         
         let timeDif = noteTime?.timeAgoDisplay()
-        return timeDif!
+        return timeDif ?? ""
     }
     
     
@@ -317,4 +330,9 @@ extension UIFont {
     func boldItalics() -> UIFont {
         return withTraits([ .traitBold, .traitItalic ])
     }
+}
+
+
+protocol TitleViewDelegate: class {
+    func menuAppear(withID id: String)
 }

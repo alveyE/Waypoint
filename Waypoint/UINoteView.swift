@@ -10,7 +10,9 @@ import UIKit
 import FirebaseStorage
 
 
-class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWidgetDelegate, LinkWidgetDelegate {
+class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWidgetDelegate, LinkWidgetDelegate, TitleViewDelegate {
+    
+    
     
     
     public var editable = false
@@ -61,6 +63,10 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWid
         delegate?.displayImage(image: image)
     }
     
+    func menuAppear(withID id: String) {
+        delegate?.menuAppear(withID: id)
+    }
+    
     @objc private func handleRefresh(_ control: UIRefreshControl){
         delegate?.refreshPulled()
         control.endRefreshing()
@@ -76,6 +82,7 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWid
             let titleWidget = TitleView()
             titleWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width/4)
             titleWidget.editable = editable
+            titleWidget.delegate = self
             titleWidget.hasSaveButton = hasSaveButton
             titleWidget.hasCalendarIcon = hasCalanderIcon
             titleWidget.noteID = noteID
@@ -691,7 +698,7 @@ protocol UINoteViewDelegate: class {
     func doNothing()
     func refreshPulled()
     func displayImage(image: UIImage)
-    
+    func menuAppear(withID id: String)
 }
 
 extension UINoteViewDelegate{

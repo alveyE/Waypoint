@@ -13,7 +13,11 @@ import FirebaseAuth
 import FirebaseDatabase
 
 class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AddWidgetViewDelegate, UINoteViewDelegate {
-    
+    func menuAppear(withID id: String) {
+        let alert = UIAlertController(title: "Please enter a valid link", message: "", preferredStyle: UIAlertController.Style.actionSheet)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     func doNothing() {
     }
@@ -74,15 +78,16 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
             noteCreator = NoteCreator(creator: user.uid, latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
             updateUsername()
         }else{
-            let blurEffect = UIBlurEffect(style: .dark)
+            let blurEffect = UIBlurEffect(style: .prominent)
             let blurEffectView = UIVisualEffectView(effect: blurEffect)
             //always fill the view
+    
             blurEffectView.frame = self.view.bounds
             blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             let notSignedInLabel = UILabel(frame: self.view.bounds)
             notSignedInLabel.text = "Please sign in to create notes"
             notSignedInLabel.textAlignment = .center
-            notSignedInLabel.font = UIFont(name: "Arial", size: 25)
+            notSignedInLabel.font = UIFont(name: "Roboto-Regular", size: 25)
             
             
             view.addSubview(blurEffectView)
