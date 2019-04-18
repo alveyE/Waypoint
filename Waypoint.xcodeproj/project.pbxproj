@@ -210,9 +210,9 @@
 		D1F8F437223806B800C5A997 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D1AE58C9219E025E003FF5DB /* MapViewController.swift */,
 				D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */,
 				D1427CA3223BEB8600B7512C /* CreateDrawingViewController.swift */,
+				D1AE58C9219E025E003FF5DB /* MapViewController.swift */,
 				D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */,
 				D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */,
 				D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */,
