@@ -40,9 +40,10 @@ class FullScreenImageViewController: UIViewController, UIScrollViewDelegate {
         let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         scrollView.delegate = self
         scrollView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//        scrollView.contentSize.height = view.frame.height * 2
-//        scrollView.contentSize.width = view.frame.width * 2
-        scrollView.maximumZoomScale = 5
+
+        scrollView.maximumZoomScale = 15
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(scrollTapped))
         swipe.direction = .down
         let tap = UITapGestureRecognizer(target: self, action: #selector(scrollTapped))

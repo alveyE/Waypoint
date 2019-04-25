@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
+import FirebaseDatabase
 
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -32,28 +34,98 @@ class SignInViewController: UIViewController {
     
     @IBOutlet weak var signinButton: UIButton!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         incorrectLabel.isHidden = true
+        emailField.delegate = self
         // Do any additional setup after loading the view.
     }
     
-    
+     func textFieldDidBeginEditing(_ textField: UITextField) {
+        incorrectLabel.isHidden = true
+    }
   
+    func isValidEmail(testStr:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: testStr)
+    }
+    
+    
+    private func login(userEmail: String, userPassword: String){
+        
+        Auth.auth().signIn(withEmail: userEmail, password: userPassword) { (user, error) in
+            if error != nil {
+                self.incorrectLabel.isHidden = false
+            }
+            if user != nil {
+    
+                self.navigationController?.popViewController(animated: true)
+                    
+                if self.tabBarController == nil {
+//                let tabStart = self.storyboard!.instantiateViewController(withIdentifier: "startTab")
+//                self.show(tabStart, sender: self)
+//                self.view = nil
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
+                }
+                
+            }
+        }
+        
+        
+    }
+    
+    
     @IBAction func signinButtonPressed(_ sender: UIButton) {
         
         guard let email = emailField.text else {return}
         guard let password = passwordField.text else {return}
         
-        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-            if error != nil {
-                self.incorrectLabel.isHidden = false
-            }
-            if user != nil {
-                self.navigationController?.popViewController(animated: true)
-            }
-        }
         
+        
+        if isValidEmail(testStr: email){
+            login(userEmail: email, userPassword: password)
+        }else{
+            let ref = Database.database().reference()
+            
+                ref.child("users").child("usernames").observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    for case let childSnapshot as DataSnapshot in snapshot.children {
+
+                        if let childData = childSnapshot.value as? [String : Any] {
+                            
+                            let username = childData["username"] as? String ?? ""
+                            
+                            if email == username {
+                            let idRetrieved = childSnapshot.key
+                                ref.child("users").child(idRetrieved).observeSingleEvent(of: .value, with: { (usersnap) in
+                                    if let value = usersnap.value as? [String : Any] {
+                                        let emailRetrieved = value["email"] as? String ?? ""
+                                        
+                                        self.login(userEmail: emailRetrieved, userPassword: password)
+        
+                                        
+                                    }
+                                })
+                                
+                                
+                            }
+                            
+                        }
+                    }
+                    
+                    
+                })
+            
+            
+        }
+                
     }
     
 }

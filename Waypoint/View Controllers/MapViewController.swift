@@ -14,46 +14,11 @@ import FirebaseDatabase
 import FirebaseUI
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, UINoteViewDelegate{
-    func menuAppear(withID id: String) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-        let ref = Database.database().reference()
-        if let user = Auth.auth().currentUser {
-            var username = ""
-            ref.child("users").child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                if let value = snapshot.value as? [String : Any] {
-                     username = value["username"] as? String ?? ""
-                }
-            })
-            var tappedNoteUser = ","
-            ref.child("notes").child(id).observeSingleEvent(of: .value) { (snapshot) in
-                if let value = snapshot.value as? [String : Any] {
-                    tappedNoteUser = value["creator"] as? String ?? ""
-                    if username == tappedNoteUser || user.uid == tappedNoteUser {
-                        alert.addAction(UIAlertAction(title: "Edit", style: UIAlertAction.Style.default, handler: nil))
-                        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: nil))
-                    }
-                    alert.addAction(UIAlertAction(title: "Report", style: UIAlertAction.Style.destructive, handler: { action in
-                        if let user = Auth.auth().currentUser {
-                            let reportInfo = ["reporter" : user.uid]
-                            self.ref.child("reported").child(id).setValue(reportInfo)
-                        }
-                    }))
-                }
-            }
-            
-            
-        }
-        
-        
-        
-        self.present(alert, animated: true, completion: nil)
-    }
     
-   
-    
+
     var locationManager:CLLocationManager!
     public var mapView:MKMapView!
+    var errorBar:ErrorBar!
     var note:UINoteView! {
         didSet {
             let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(noteSwiped))
@@ -64,6 +29,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
            // note.addGestureRecognizer(noteTap)
         }
     }
+    
 
     var ref: DatabaseReference!
     var locations = [(latitude: Double, longitude: Double)]()
@@ -191,7 +157,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     @objc func mapTapped(){
-        
+        checkConnectionStatus()
         for ann in mapView.annotations {
             mapView.deselectAnnotation(ann, animated: true)
         }
@@ -238,6 +204,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.showsCompass = false
         mapView.isPitchEnabled = false
         
+        errorBar = ErrorBar(frame: CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight/10))
+        
         let refreshSize = mapWidth/10
         let refreshPadding = mapWidth/15
         let refreshButton = UIButton(frame: CGRect(x: mapWidth - refreshPadding - refreshPadding, y: mapHeight - mapHeight/10 - refreshSize - refreshPadding, width: refreshSize, height: refreshSize))
@@ -257,12 +225,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         view.addSubview(mapView)
         mapView.addSubview(note)
+        mapView.addSubview(errorBar)
         mapView.isUserInteractionEnabled = true
 
         
-        
+
     }
     
+    private func checkConnectionStatus(){
+        let connectedRef = Database.database().reference(withPath: ".info/connected")
+        connectedRef.observe(.value) { (snapshot) in
+            if !(snapshot.value as? Bool ?? false) {
+                self.errorBar.show()
+            }
+        } 
+    }
     
     func updatePins(){
         // Add annotations
@@ -307,6 +284,51 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.show(imageFullScreenVC, sender: self)
     }
     
+    func menuAppear(withID id: String) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        let ref = Database.database().reference()
+        if let user = Auth.auth().currentUser {
+            var username = ""
+            ref.child("users").child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let value = snapshot.value as? [String : Any] {
+                    username = value["username"] as? String ?? ""
+                }
+            })
+            var tappedNoteUser = ","
+            ref.child("notes").child(id).observeSingleEvent(of: .value) { (snapshot) in
+                if let value = snapshot.value as? [String : Any] {
+                    tappedNoteUser = value["creator"] as? String ?? ""
+                    if username == tappedNoteUser || user.uid == tappedNoteUser {
+                        alert.addAction(UIAlertAction(title: "Edit", style: UIAlertAction.Style.default, handler: nil))
+                        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { action in
+                            self.ref.child("locations").child(id).removeValue()
+                            self.ref.child("deleted").child(id).setValue(value)
+                            self.ref.child("notes").child(id).removeValue()
+                            self.mapTapped()
+                            self.refreshPins()
+                        }))
+                    }else {
+                        alert.addAction(UIAlertAction(title: "Report", style: UIAlertAction.Style.destructive, handler: { action in
+                            if let user = Auth.auth().currentUser {
+                                let reportInfo = ["reporter" : user.uid]
+                                self.ref.child("reported").child(id).setValue(reportInfo)
+                            }
+                        }))
+                    }
+                }
+            }
+            
+            
+        }
+        
+        
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        let userLocation: CLLocation = locations[0] as CLLocation
         
@@ -333,7 +355,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
       
-        
+        checkConnectionStatus()
         
         if let coordinates = view.annotation?.coordinate, view.annotation?.title != "My Location" {
          

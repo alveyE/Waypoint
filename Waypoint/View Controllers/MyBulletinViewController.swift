@@ -20,7 +20,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
     private var savedNotesIDs = [String]()
     var note:UINoteView!
     var mapView:MKMapView!
-    
+    var errorBar:ErrorBar!
     private var notesIDSInExpand = [String]()
     private var locationManager:CLLocationManager!
     
@@ -65,8 +65,18 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
         mapView = MKMapView()
         mapView.frame = view.bounds
         mapView.isUserInteractionEnabled = false
-        
+        errorBar = ErrorBar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/10))
+        mapView.addSubview(errorBar)
         view.addSubview(mapView)
+    }
+    
+    private func checkConnectionStatus(){
+        let connectedRef = Database.database().reference(withPath: ".info/connected")
+        connectedRef.observe(.value) { (snapshot) in
+            if !(snapshot.value as? Bool ?? false) {
+                self.errorBar.show()
+            }
+        }
     }
     
     func refreshPulled() {
@@ -106,6 +116,9 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
     }
     
     private func addSavedNotes(){
+        
+        checkConnectionStatus()
+        
         if let user = Auth.auth().currentUser {
             ref = Database.database().reference()
             ref.child("users").child(user.uid).child("saves").observeSingleEvent(of: .value) { (snapshot) in
@@ -132,7 +145,8 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                     notesWillAppearLabel.text = "Notes you save will appear here"
                     notesWillAppearLabel.textAlignment = .center
                     notesWillAppearLabel.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                    notesWillAppearLabel.font = UIFont(name: "Roboto-Regular", size: 22)
+                    print(22/backgroundBar.frame.height)
+                    notesWillAppearLabel.font = UIFont(name: "Roboto-Regular", size: backgroundBar.frame.height * 3/10)
                     backgroundBar.addSubview(notesWillAppearLabel)
                     self.view.addSubview(backgroundBar)
                     
@@ -147,7 +161,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
             notSignedInLabel.text = "Sign in to see your saved notes"
             notSignedInLabel.textAlignment = .center
             notSignedInLabel.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            notSignedInLabel.font = UIFont(name: "Roboto-Regular", size: 22)
+            notSignedInLabel.font = UIFont(name: "Roboto-Regular", size: backgroundBar.frame.height * 3/10)
             backgroundBar.addSubview(notSignedInLabel)
             self.view.addSubview(backgroundBar)
         }
@@ -163,13 +177,47 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
     }
     
     func menuAppear(withID id: String) {
+      
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Edit", style: UIAlertAction.Style.default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: nil))
-        alert.addAction(UIAlertAction(title: "Report", style: UIAlertAction.Style.destructive, handler: nil))
+        let ref = Database.database().reference()
+        if let user = Auth.auth().currentUser {
+            var username = ""
+            ref.child("users").child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let value = snapshot.value as? [String : Any] {
+                    username = value["username"] as? String ?? ""
+                }
+            })
+            var tappedNoteUser = ","
+            ref.child("notes").child(id).observeSingleEvent(of: .value) { (snapshot) in
+                if let value = snapshot.value as? [String : Any] {
+                    tappedNoteUser = value["creator"] as? String ?? ""
+                    if username == tappedNoteUser || user.uid == tappedNoteUser {
+                        alert.addAction(UIAlertAction(title: "Edit", style: UIAlertAction.Style.default, handler: nil))
+                        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { action in
+                            self.ref.child("locations").child(id).removeValue()
+                            self.ref.child("deleted").child(id).setValue(value)
+                            self.ref.child("notes").child(id).removeValue()
+                            self.refreshPulled()
+                        }))
+                    }else {
+                        alert.addAction(UIAlertAction(title: "Report", style: UIAlertAction.Style.destructive, handler: { action in
+                            if let user = Auth.auth().currentUser {
+                                let reportInfo = ["reporter" : user.uid]
+                                self.ref.child("reported").child(id).setValue(reportInfo)
+                            }
+                        }))
+                    }
+                }
+            }
+            
+        }
+        
+        
         self.present(alert, animated: true, completion: nil)
-    }
+        }
+    
+    
     
     func touchHeard(onIndex index: Int) {
         if notesIDSInExpand[index].first != "E" {
@@ -216,6 +264,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
             if let value = snapshot.value as? [String : Any] {
                 
                 
+                
                 let title = value["title"] as? String ?? ""
                 let timeStamp = value["timeStamp"] as? String ?? ""
                 let username = value["creator"] as? String ?? ""
@@ -225,6 +274,13 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                 self.note.increaseScrollSlack(by: self.note.calculateHeight(of: "title", includePadding: false) * 11/12)
                 
                 
+            }else{
+                if let index = self.savedNotesIDs.index(of: noteID) {
+                    self.savedNotesIDs.remove(at: index)
+                    if let user = Auth.auth().currentUser {
+                        self.ref.child("users").child(user.uid).child("saves").child(noteID).removeValue()
+                    }
+                }
             }
             
         }) { (error) in

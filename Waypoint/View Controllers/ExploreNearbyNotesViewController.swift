@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
 import CoreLocation
 import MapKit
 
@@ -24,6 +25,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     
     private var locationManager:CLLocationManager!
     private var currentLocation = CLLocation(latitude: 0, longitude: 0)
+    var errorBar:ErrorBar!
     
     private var locationsAndIDs = [(latitude: Double, longitude: Double, id: String)]()
     
@@ -44,6 +46,8 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         fetchPinLocation()
         createMapView()
         createNoteView()
+        }else{
+            checkConnectionStatus()
         }
     }
     
@@ -82,6 +86,8 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         mapView.frame = view.bounds
         mapView.isUserInteractionEnabled = false
         
+        errorBar = ErrorBar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/10))
+        mapView.addSubview(errorBar)
         view.addSubview(mapView)
     }
 
@@ -122,9 +128,19 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     }
     
     
+    private func checkConnectionStatus(){
+        let connectedRef = Database.database().reference(withPath: ".info/connected")
+        connectedRef.observe(.value) { (snapshot) in
+            if !(snapshot.value as? Bool ?? false) {
+                self.errorBar.show()
+            }
+        }
+    }
     
     private func fetchPinLocation(){
         
+        
+        checkConnectionStatus()
         
         ref = Database.database().reference()
         ref.child("locations").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -230,9 +246,42 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     func menuAppear(withID id: String) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Edit", style: UIAlertAction.Style.default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: nil))
-        alert.addAction(UIAlertAction(title: "Report", style: UIAlertAction.Style.destructive, handler: nil))
+        let ref = Database.database().reference()
+        if let user = Auth.auth().currentUser {
+            var username = ""
+            ref.child("users").child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let value = snapshot.value as? [String : Any] {
+                    username = value["username"] as? String ?? ""
+                }
+            })
+            var tappedNoteUser = ","
+            ref.child("notes").child(id).observeSingleEvent(of: .value) { (snapshot) in
+                if let value = snapshot.value as? [String : Any] {
+                    tappedNoteUser = value["creator"] as? String ?? ""
+                    if username == tappedNoteUser || user.uid == tappedNoteUser {
+                        alert.addAction(UIAlertAction(title: "Edit", style: UIAlertAction.Style.default, handler: nil))
+                        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { action in
+                            self.ref.child("locations").child(id).removeValue()
+                            self.ref.child("deleted").child(id).setValue(value)
+                            self.ref.child("notes").child(id).removeValue()
+                            self.refreshPulled()
+                        }))
+                    }else {
+                        alert.addAction(UIAlertAction(title: "Report", style: UIAlertAction.Style.destructive, handler: { action in
+                            if let user = Auth.auth().currentUser {
+                                let reportInfo = ["reporter" : user.uid]
+                                self.ref.child("reported").child(id).setValue(reportInfo)
+                            }
+                        }))
+                    }
+                }
+            }
+            
+            
+        }
+        
+        
+        
         self.present(alert, animated: true, completion: nil)
     }
     

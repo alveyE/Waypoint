@@ -87,7 +87,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
             let notSignedInLabel = UILabel(frame: self.view.bounds)
             notSignedInLabel.text = "Please sign in to create notes"
             notSignedInLabel.textAlignment = .center
-            notSignedInLabel.font = UIFont(name: "Roboto-Regular", size: 25)
+            notSignedInLabel.font = UIFont(name: "Roboto-Regular", size: blurEffectView.frame.width * 2/30)
             
             
             view.addSubview(blurEffectView)
@@ -186,7 +186,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
             self.present(alert, animated: true, completion: nil)
           
             //Makes sure user location can be determined within so many meters
-        }else if currentLocation.horizontalAccuracy < 100{
+        }else if currentLocation.horizontalAccuracy < 100 && (currentLocation.coordinate.latitude != 0 && currentLocation.coordinate.longitude != 0){
         noteCreator.latitude = currentLocation.coordinate.latitude
         noteCreator.longitude = currentLocation.coordinate.longitude
             
@@ -236,7 +236,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         self.show(drawVC, sender: self)
         drawVC.callback = { result in
             self.uploadDrawing(result)
-            let returnedDrawing = UIImage(data: result)!
+            let returnedDrawing = UIImage(data: result) ?? UIImage()
             let savedYPosition = self.note.widgetAdderY
             self.note.moveWidgets(overY: self.note.widgetAdderY - 1, by: self.note.calculateHeight(of: "drawing", includePadding: true), down: true)
             self.note.addDrawingWidget(drawing: returnedDrawing, yPlacement: savedYPosition)
@@ -459,7 +459,7 @@ extension String {
             return false
         }
         
-        let urlPattern = "^(http|https|ftp)\\://([a-zA-Z0-9\\.\\-]+(\\:[a-zA-Z0-9\\.&amp;%\\$\\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|localhost|([a-zA-Z0-9\\-]+\\.)*[a-zA-Z0-9\\-]+\\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\\:[0-9]+)*(/($|[a-zA-Z0-9\\.\\,\\?\\'\\\\\\+&amp;%\\$#\\=~_\\-]+))*$"
+        let urlPattern = "^(http|https|ftp)\\://([a-zA-Z0-9\\.\\-]+(\\:[a-zA-Z0-9\\.&amp;%\\$\\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|localhost|([a-zA-Z0-9\\-]+\\.)*[a-zA-Z0-9\\-]+\\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|solutions|aero|coop|museum|[a-zA-Z]{2}))(\\:[0-9]+)*(/($|[a-zA-Z0-9\\.\\,\\?\\'\\\\\\+&amp;%\\$#\\=~_\\-]+))*$"
         return self.matches(pattern: urlPattern)
     }
 }

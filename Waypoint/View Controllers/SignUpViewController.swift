@@ -8,14 +8,19 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 import FirebaseAuth
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    
+    @IBOutlet weak var errorLabel: UILabel!
     var ref: DatabaseReference!
+    
+    private var errorFound = false
     
     @IBOutlet var mainView: UIView! {
         didSet{
@@ -24,49 +29,152 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        usernameField.delegate = self
+        usernameField.addTarget(self, action: #selector(textFieldDidEndEditing(_:)), for: .editingChanged)
+        passwordField.delegate = self
+        emailField.delegate = self
+        errorLabel.isHidden = true
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         self.view = nil
     }
+    
+    
+     func textFieldDidEndEditing(_ textField: UITextField) {
+        errorLabel.isHidden = true
+
+        
+        if textField == usernameField {
+        checkUsername()
+        }else if textField == emailField {
+        checkEmail()
+        }else if textField == passwordField {
+        checkPassword()
+        }
+        
+        
+    }
+    
+    private func checkUsername(){
+        let bannedUsernameWords = ["waypoint","fractyldev","nigger"," ","$","@","#","%","*","(",")",";","\"","?","/","\\",":"]
+       
+        
+        let username = usernameField.text ?? ""
+        
+        let ref = Database.database().reference()
+        ref.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+            var takenNames = [String]()
+            for case let childSnapshot as DataSnapshot in snapshot.children {
+                //                let key = childSnapshot.key
+                if let childData = childSnapshot.value as? [String : Any] {
+                    
+                    let usernameRetrieved = childData["username"] as? String ?? ""
+                    takenNames.append(usernameRetrieved)
+                    
+                    
+                }
+            }
+            if takenNames.contains(username) {
+                //Do error
+                self.errorLabel.text = "Username taken"
+                self.errorLabel.isHidden = false
+            }
+        })
+        
+        for word in bannedUsernameWords {
+            if username.lowercased().contains(word){
+                self.errorLabel.text = "Invalid username"
+                self.errorLabel.isHidden = false
+            }
+        }
+    }
+    
+    
+    private func checkEmail(){
+        let email = emailField.text ?? ""
+        if !isValidEmail(testStr: email){
+            print("doin the set")
+            errorLabel.text = "Enter a valid email address"
+            errorLabel.isHidden = false
+        }
+    }
+    
+    
+    private func checkPassword(){
+        let password = passwordField.text ?? ""
+        if password.count < 8 {
+            errorLabel.text = "Password must be at least 8 characters"
+            errorLabel.isHidden = false
+        }
+    }
+   
+    func isValidEmail(testStr:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: testStr)
+    }
+    
+    
     @objc private func disableKeyboard(){
         mainView.endEditing(true)
     }
+    
     @IBOutlet weak var signupButton: UIButton!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
     @IBAction func signupButtonPressed(_ sender: UIButton) {
         
         guard let username = usernameField.text else {return}
         guard let email = emailField.text else {return}
         guard let password = passwordField.text else {return}
         
-        Auth.auth().createUser(withEmail: email, password: password, completion: { (authresult, error) in
-            if error != nil {
-                print("error \(String(describing: error))")
-                return
-            }
-            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-            changeRequest?.displayName = username
-            changeRequest?.commitChanges(completion: { (error) in
-                if error != nil {
-                    print("error \(String(describing: error))")
-                    return
-                }
+        
+        checkUsername()
+        checkEmail()
+        checkPassword()
+        
+             if self.errorLabel.isHidden{
+                Auth.auth().createUser(withEmail: email, password: password, completion: { (authresult, error) in
+                    if String(describing: error).contains("ERROR_EMAIL_ALREADY_IN_USE") {
+                        
+                        self.errorLabel.text = "An account with this email already exist"
+                        self.errorLabel.isHidden = false
+                    
+                    }else if error != nil {
+                        self.errorLabel.text = "Error creating account"
+                        self.errorLabel.isHidden = false
+                        print("error \(String(describing: error))")
+                        return
+                    }
+                    let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                    changeRequest?.displayName = username
+                    changeRequest?.commitChanges(completion: { (error) in
+                        if error != nil {
+                            print("error \(String(describing: error))")
+                            return
+                        }
+                    })
+                    
+                    
+                    //Upload user to database as well
+                    if let user = Auth.auth().currentUser {
+                        self.ref = Database.database().reference()
+                        self.ref.child("users").child(user.uid).setValue(["username": username, "email" : email])
+                        self.ref.child("users").child("usernames").child(user.uid).setValue(["username" : username])
+                        
+                        
+                    }
                 })
-            
-            
-                //Upload user to database as well
-            if let user = Auth.auth().currentUser {
-             self.ref = Database.database().reference()
-             self.ref.child("users").child(user.uid).setValue(["username": username])
-         
+                
             
             }
-            })
+        
+        
+        
+        
         
     }
     

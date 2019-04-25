@@ -72,6 +72,9 @@ class SettingsViewController: UIViewController {
             print ("Error signing out: %@", signOutError)
         }
         determineShownElements()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "signinNavigation")
         
     }
     

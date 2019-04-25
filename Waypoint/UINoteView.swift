@@ -346,13 +346,15 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWid
     }
     
     @objc private func titleTapped(_ sender: Any){
-    
+        if finished {
+            finished = false
         if let titleTouched = sender as? UITapGestureRecognizer {
             if let index = tapGestures.index(of: titleTouched) {
             delegate?.touchHeard(onIndex: index)
             }else{
                 print("Error title tap not in taps array")
             }
+        }
         }
     }
     func deleteWidget(_ widget : UIView) {
@@ -367,7 +369,7 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWid
         for view in scroll.subviews {
             contentRect = contentRect.union(view.frame)
         }
-        scroll.contentSize.height = contentRect.size.height //+ leway()
+        scroll.contentSize.height = contentRect.size.height + leway()
         if scroll.contentSize.height < height {
             scroll.contentSize.height = height + 1
         }
@@ -376,6 +378,7 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWid
         }
     }
     
+    var finished = true
     
     public func moveWidgets(overY setY: CGFloat, by amnt: CGFloat, down: Bool){
         var moveAmnt = amnt
@@ -407,7 +410,7 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWid
         if widgetAdderY > setY {
             widgetAdderY += moveAmnt
         }
-        
+        finished = true
     }
     
     public func removeWidgetsInRange(minY: CGFloat, maxY: CGFloat?){

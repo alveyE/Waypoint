@@ -54,6 +54,7 @@ class TitleView: UIView, UITextViewDelegate {
         if !editable {
         addSubview(timeStamp)
         addSubview(usernameLabel)
+        addSubview(menuDots)
         }
         if hasCalendarIcon{
         addSubview(calendarIcon)
@@ -61,7 +62,7 @@ class TitleView: UIView, UITextViewDelegate {
         if hasSaveButton {
         addSubview(saveButton)
         }
-        addSubview(menuDots)
+        
     }
     
     private func createShadow() -> CAShapeLayer {
@@ -128,7 +129,7 @@ class TitleView: UIView, UITextViewDelegate {
     }
     
     private func createUserText() -> UILabel {
-        let usernameLabel = UILabel(frame: CGRect(x: width/30, y: height - (height/2), width: width - width/30, height: height * 5/8))
+        let usernameLabel = UILabel(frame: CGRect(x: width/30, y: height - (height/2), width: width - width/6 - width/30, height: height * 5/8))
         usernameLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         usernameLabel.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         let userfont = UIFont(name: "Roboto-LightItalic", size: height/5)
@@ -139,8 +140,8 @@ class TitleView: UIView, UITextViewDelegate {
     }
     
     private func createDotsMenu() -> UIButton{
-        let menuButton = UIButton(frame: CGRect(x: width * 7/10, y: height/2, width: width - width * 7/10, height: height * 5/8))
-        menuButton.setImage(UIImage(named: "send"), for: UIControl.State.normal)
+        let menuButton = UIButton(frame: CGRect(x: width * 17/20, y: height * 5/8, width: width/10, height:width/10))
+        menuButton.setImage(UIImage(named: "dots"), for: UIControl.State.normal)
         menuButton.addTarget(self, action: #selector(menuTapped), for: .touchUpInside)
         return menuButton
     }
