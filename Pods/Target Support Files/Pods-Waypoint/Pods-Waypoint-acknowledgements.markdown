@@ -1,6 +1,10 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
+## Appgrades
+
+Appgrades: Copyright 2018 Appgrades. All Rights Reserved. Use of this software is subject to the terms and conditions of the Appgrades Software and Services Agreement located under https://dash.appgrades.io/terms
+
 ## Firebase
 
 Copyright 2018 Google

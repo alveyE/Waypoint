@@ -1,4 +1,5 @@
 PODS:
+  - Appgrades (1.1.4)
   - Firebase/Auth (5.13.0):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.0.5)
@@ -80,6 +81,7 @@ PODS:
   - SDWebImage/Core (4.4.2)
 
 DEPENDENCIES:
+  - Appgrades
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -88,6 +90,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Appgrades
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -105,6 +108,7 @@ SPEC REPOS:
     - SDWebImage
 
 SPEC CHECKSUMS:
+  Appgrades: e0ecf04437561e72bd2b9b3a9d12561c59654329
   Firebase: 6df9a6114bc9f106a98fe83d5438d4d9833c2019
   FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
   FirebaseAuth: 9299ab178271bec7426967b05b2718bb6fc31f17
@@ -121,6 +125,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
 
-PODFILE CHECKSUM: 4419a5179a22df9c83721f930bf675dbe339b473
+PODFILE CHECKSUM: 5be7194538193706f112a6560971513fcaa92d39
 
 COCOAPODS: 1.5.3

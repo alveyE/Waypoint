@@ -144,6 +144,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         view.addSubview(note)
         view.addSubview(topBar)
         
+        note.setStartY(to: view.frame.height/9)
         note.addTitleWidget(title: "Enter title here", timeStamp: "", username: "", yPlacement: nil)
         note.addWidgetMaker(yPlacement: nil, adderDelegate: self)
         

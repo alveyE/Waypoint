@@ -470,6 +470,10 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWid
         return savedSub.frame.maxY
     }
     
+    public func setStartY(to value: CGFloat){
+        yPosition = value
+    }
+    
     public func listOfWidgets() -> [String]{
         var widgets = [String]()
         var subCopy = scroll.subviews
