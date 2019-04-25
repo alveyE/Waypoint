@@ -250,6 +250,12 @@
                                 <color key="textColor" red="0.91180294750000002" green="0.058788990579999999" blue="0.083651017250000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cooltext" translatesAutoresizingMaskIntoConstraints="NO" id="RlF-uB-hnY">
+                                <rect key="frame" x="67" y="76" width="240" height="156"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="RlF-uB-hnY" secondAttribute="height" multiplier="20:13" id="ZYO-ft-qfP"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -266,12 +272,15 @@
                             <constraint firstItem="XMv-uv-gWE" firstAttribute="leading" secondItem="K1z-Ac-Vv4" secondAttribute="leading" constant="16" id="Xkz-hY-KAg"/>
                             <constraint firstItem="Nhq-gK-V73" firstAttribute="top" secondItem="XMv-uv-gWE" secondAttribute="bottom" constant="30" id="YrO-3t-4vu"/>
                             <constraint firstItem="yQs-3r-3qc" firstAttribute="leading" secondItem="K1z-Ac-Vv4" secondAttribute="leading" constant="236" id="Z67-wI-aJX"/>
+                            <constraint firstItem="K1z-Ac-Vv4" firstAttribute="top" secondItem="RlF-uB-hnY" secondAttribute="top" constant="-12" id="das-js-o3u"/>
+                            <constraint firstItem="RlF-uB-hnY" firstAttribute="leading" secondItem="K1z-Ac-Vv4" secondAttribute="leading" constant="67" id="j9N-Fj-krC"/>
                             <constraint firstItem="K1z-Ac-Vv4" firstAttribute="trailing" secondItem="pmZ-25-mpY" secondAttribute="trailing" constant="68" id="jgO-DM-5l3"/>
                             <constraint firstItem="XMv-uv-gWE" firstAttribute="top" secondItem="CBk-Tt-eVG" secondAttribute="bottom" constant="8" id="pHS-uW-8Y1"/>
                             <constraint firstItem="Nhq-gK-V73" firstAttribute="top" secondItem="yQs-3r-3qc" secondAttribute="bottom" constant="-1" id="pcw-l0-11Z"/>
                             <constraint firstItem="K1z-Ac-Vv4" firstAttribute="bottom" secondItem="pmZ-25-mpY" secondAttribute="bottom" constant="128" id="pxI-Kp-Im7"/>
                             <constraint firstItem="K1z-Ac-Vv4" firstAttribute="trailing" secondItem="XMv-uv-gWE" secondAttribute="trailing" constant="16" id="uMt-Z9-pRn"/>
                             <constraint firstItem="XMv-uv-gWE" firstAttribute="top" secondItem="K1z-Ac-Vv4" secondAttribute="top" constant="173" id="yt6-k8-pwU"/>
+                            <constraint firstItem="K1z-Ac-Vv4" firstAttribute="trailing" secondItem="RlF-uB-hnY" secondAttribute="trailing" constant="68" id="zzJ-Gw-lLk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="K1z-Ac-Vv4"/>
                     </view>
@@ -296,17 +305,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4i4-fu-E5D">
-                                <rect key="frame" x="32" y="370" width="311" height="52"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                <state key="normal" title="Sign Up">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="signupButtonPressed:" destination="Nko-xm-ExQ" eventType="touchUpInside" id="q55-tb-c3V"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="eJp-Sg-mVi">
                                 <rect key="frame" x="16" y="231" width="343" height="116"/>
                                 <subviews>
@@ -336,11 +334,21 @@
                                 <color key="textColor" red="0.91180294750000002" green="0.058788990579999999" blue="0.083651017250000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4i4-fu-E5D">
+                                <rect key="frame" x="32" y="421" width="311" height="52"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="signupButtonPressed:" destination="Nko-xm-ExQ" eventType="touchUpInside" id="q55-tb-c3V"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qYd-gE-ZvL" firstAttribute="trailing" secondItem="4i4-fu-E5D" secondAttribute="trailing" constant="32" id="3jK-ah-P5n"/>
-                            <constraint firstItem="4i4-fu-E5D" firstAttribute="top" secondItem="eJp-Sg-mVi" secondAttribute="bottom" constant="23" id="6mH-Dl-Qaj"/>
                             <constraint firstItem="qYd-gE-ZvL" firstAttribute="trailing" secondItem="eJp-Sg-mVi" secondAttribute="trailing" constant="16" id="8BP-Me-oBo"/>
                             <constraint firstItem="4i4-fu-E5D" firstAttribute="leading" secondItem="qYd-gE-ZvL" secondAttribute="leading" constant="32" id="Ldw-D2-glB"/>
                             <constraint firstItem="eJp-Sg-mVi" firstAttribute="leading" secondItem="qYd-gE-ZvL" secondAttribute="leading" constant="16" id="XXr-xH-hQj"/>
@@ -627,6 +635,7 @@
     </scenes>
     <resources>
         <image name="check" width="30" height="30"/>
+        <image name="cooltext" width="706" height="156"/>
         <image name="explore" width="30" height="30"/>
         <image name="map" width="30" height="30"/>
         <image name="newNote" width="30" height="30"/>
