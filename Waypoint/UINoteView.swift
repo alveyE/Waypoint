@@ -358,11 +358,45 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWid
         }
     }
     func deleteWidget(_ widget : UIView) {
+        
+            if let imageWidget = widget as? ImageFrameView {
+                delegate?.deletedImage(at: imageIndex(of: imageWidget))
+            }
+            if let drawingWidget = widget as? DrawingWidget {
+            delegate?.deletedDrawing(at: drawingIndex(of: drawingWidget))
+            }
             let totalAmnt = widget.frame.maxY - widget.frame.minY + getPadding()
             widget.removeFromSuperview()
             moveWidgets(overY: widget.frame.maxY, by: totalAmnt, down: false)
         
     }
+    
+    private func imageIndex(of imageWidget: ImageFrameView) -> Int{
+        var subCopy = scroll.subviews
+        subCopy.sort(by: {$0.frame.minY < $1.frame.minY})
+        var imagesFound = [ImageFrameView]()
+        for sub in subCopy {
+            if let ii = sub as? ImageFrameView {
+                imagesFound.append(ii)
+            }
+        }
+        return imagesFound.index(of: imageWidget) ?? -1
+    }
+    
+    private func drawingIndex(of drawingWidget: DrawingWidget) -> Int{
+        var subCopy = scroll.subviews
+        subCopy.sort(by: {$0.frame.minY < $1.frame.minY})
+        var drawingsFound = [DrawingWidget]()
+        for sub in subCopy {
+            if let dd = sub as? DrawingWidget {
+                drawingsFound.append(dd)
+            }
+        }
+        return drawingsFound.index(of: drawingWidget) ?? -1
+    }
+    
+    
+    
     private func adjustScroll(){
         var contentRect = CGRect.zero
         let offset = scroll.contentOffset
@@ -706,9 +740,13 @@ protocol UINoteViewDelegate: class {
     func refreshPulled()
     func displayImage(image: UIImage)
     func menuAppear(withID id: String)
+    func deletedImage(at index: Int)
+    func deletedDrawing(at index: Int)
 }
 
 extension UINoteViewDelegate{
     func refreshPulled(){}
     func displayImage(image: UIImage){}
+    func deletedImage(at index: Int){}
+    func deletedDrawing(at index: Int){}
 }

@@ -26,8 +26,16 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         
     }
     
-    
-    
+    func deletedImage(at index: Int) {
+        if index != -1 {
+        noteCreator.images?.remove(at: index)
+        }
+    }
+    func deletedDrawing(at index: Int) {
+        if index != -1 {
+            noteCreator.drawings?.remove(at: index)
+        }
+    }
 
     var locationManager:CLLocationManager!
     var currentLocation = CLLocation(latitude: 0, longitude: 0)

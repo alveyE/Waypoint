@@ -56,8 +56,6 @@ struct NoteCreator{
     
     public mutating func writeNote(){
         let noteToWrite = Note(widgets: widgets, title: title, timeStamp: timeStamp, text: text, images: images, links: links, drawings: drawings, creator: creator, location: (latitude: latitude, longitude: longitude))
-        
-//        //Write noteToWrite
 
         
         uploader.uploadPin(noteToWrite)
