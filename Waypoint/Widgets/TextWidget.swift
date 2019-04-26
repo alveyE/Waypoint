@@ -72,9 +72,19 @@ class TextWidget: UIView {
         text.attributedText = attributedText
       //  text.translatesAutoresizingMaskIntoConstraints = false
 //        text.sizeToFit()
+        if editable {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(activateEditing))
+            text.addGestureRecognizer(tap)
+        }
         text.addSubview(createLines())
+        
         return text
     }
+    
+    @objc private func activateEditing(){
+        textContent.becomeFirstResponder()
+    }
+    
     
     public var textHeight: CGFloat{
         return textContent.frame.height
