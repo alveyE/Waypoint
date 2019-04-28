@@ -308,6 +308,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                 var totalHeight: CGFloat = self.note.getPadding()
                 
                 var imagesC = images ?? []
+                var textC = text ?? []
                 
                 //Moves elements down
                 
@@ -319,6 +320,11 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                         let imageH = CGFloat((imageInfo["height"]! as NSString).floatValue)
                         
                         totalHeight += self.note.calculateHeight(imageWidth: imageW, imageHeight: imageH, includePadding: true)
+                        }
+                    }else if widget == "text" {
+                        if textC.count > 0{
+                            let currentText = textC.remove(at: 0)
+                            totalHeight += self.note.calculateTextHeight(of: currentText, includePadding: true)
                         }
                     }else if widget != note.widgets[0]{
                         totalHeight += self.note.calculateHeight(of: widget, includePadding: true)
@@ -341,7 +347,10 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                             break;
                         case "text":
                             if note.text != nil {
-                                self.note.addTextWidget(text: note.text!.remove(at: 0), yPlacement: yPlacing)
+                                let addedText = note.text!.remove(at: 0)
+                                self.note.addTextWidget(text: addedText, yPlacement: yPlacing)
+                            
+                                yPlacing += self.note.calculateTextHeight(of: addedText, includePadding: true)
                             }
                             break;
                         case "image":
@@ -375,7 +384,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                             
                         }
                         
-                        if widget != "image" {
+                        if widget != "image" && widget != "text" {
                             yPlacing += self.note.calculateHeight(of: widget, includePadding: true)
                         }
                         

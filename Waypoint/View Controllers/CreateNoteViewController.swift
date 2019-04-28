@@ -12,7 +12,7 @@ import FirebaseStorage
 import FirebaseAuth
 import FirebaseDatabase
 
-class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AddWidgetViewDelegate, UINoteViewDelegate {
+class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AddWidgetViewDelegate, UINoteViewDelegate, UITextViewDelegate {
     func menuAppear(withID id: String) {
         let alert = UIAlertController(title: "Please enter a valid link", message: "", preferredStyle: UIAlertController.Style.actionSheet)
         alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
@@ -50,7 +50,15 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
             note.addGestureRecognizer(tapped)
         }
     }
-
+    
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let newSize = textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+        let recommendedHeight = newSize.height
+        note.checkExpansion(for: textView, with: recommendedHeight)
+        
+        print(newSize.height)
+    }
    
    
     
@@ -134,6 +142,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         note.editable = true
         note.delegate = self
+        note.textReceiver = self
         note.hasCalanderIcon = false
         
         let topBar = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/11))

@@ -12,8 +12,12 @@ import UIKit
 @IBDesignable
 class TextWidget: UIView {
 
-    private lazy var width = bounds.width
-    private lazy var height = bounds.height
+    private var width: CGFloat{
+        return bounds.width
+    }
+    private var height: CGFloat{
+       return bounds.height
+    }
     
     public var editable = true
     public var text = ""
@@ -33,6 +37,35 @@ class TextWidget: UIView {
         }
     }
     
+    public func addLine(adding: Bool) -> CGFloat{
+        print("adding line")
+        let preHeight = frame.height
+        var lineHeight = (textFont?.lineHeight)! + (textFont?.lineHeight)!/2
+        if !adding {
+            lineHeight *= -1
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.frame = CGRect(x: self.frame.minX, y: self.frame.minY, width: self.frame.width, height: self.frame.height + lineHeight)
+            let postHeight = self.frame.height
+            let heightDifference = postHeight - preHeight
+            self.shadow.removeFromSuperlayer()
+            self.shadow = self.createShadow()
+            self.textContent.frame = CGRect(x: self.textContent.frame.minX, y: self.textContent.frame.minY, width: self.textContent.frame.width, height: self.textContent.frame.height + heightDifference)
+            
+        }
+        
+        setNeedsLayout()
+        setNeedsDisplay()
+        return lineHeight
+    }
+    
+    public func fitText(){
+        let newSize = textContent.sizeThatFits(CGSize(width: textContent.frame.width, height: CGFloat.greatestFiniteMagnitude))
+        let recommendedHeight = newSize.height
+        while textContent.frame.height < recommendedHeight {
+            let _ = addLine(adding: true)
+        }
+    }
     
     private func createShadow() -> CAShapeLayer {
         let box = UIBezierPath(rect: CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height))
@@ -46,7 +79,7 @@ class TextWidget: UIView {
         return boxShadow
     }
     
-    let textFont = UIFont(name: "Helvetica Neue", size: 16)
+    let textFont = UIFont(name: "Roboto-Regular", size: 16)
     private func createTextContent() -> UITextView {
         let text = UITextView(frame: CGRect(x: width/20, y: height/30, width: width - width/10, height: height - height/30))
         
@@ -70,8 +103,7 @@ class TextWidget: UIView {
         
         let attributedText = NSAttributedString(string: displayText, attributes: attributes)
         text.attributedText = attributedText
-      //  text.translatesAutoresizingMaskIntoConstraints = false
-//        text.sizeToFit()
+        print("making the view")
         if editable {
             let tap = UITapGestureRecognizer(target: self, action: #selector(activateEditing))
             text.addGestureRecognizer(tap)
@@ -80,6 +112,7 @@ class TextWidget: UIView {
         
         return text
     }
+    
     
     @objc private func activateEditing(){
         textContent.becomeFirstResponder()
@@ -106,7 +139,7 @@ class TextWidget: UIView {
     private func createLines() -> UIView {
         let lines = UIView(frame: CGRect(x: width/20, y: height/30 + (textFont?.lineHeight)!, width: width - width/10, height: height - height/30))
         lines.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        let linesNeeded = Int(height/(textFont?.lineHeight)!)
+        let linesNeeded = Int(height/(textFont?.lineHeight)!)*100
         var yPosition: CGFloat = height/30 
         for _ in 0..<linesNeeded {
             let line = UIView(frame: CGRect(x: -width/20, y: yPosition, width: width - width/10, height: 1))

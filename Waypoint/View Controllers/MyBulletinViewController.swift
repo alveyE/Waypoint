@@ -271,8 +271,6 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                 self.note.noteID = noteID
                 self.notesIDSInExpand.append(noteID)
                 self.note.addTitleWidget(title: title, timeStamp: timeStamp, username: username, yPlacement: nil)
-                self.note.increaseScrollSlack(by: self.note.calculateHeight(of: "title", includePadding: false) * 11/12)
-                
                 
             }else{
                 if let index = self.savedNotesIDs.index(of: noteID) {
@@ -314,6 +312,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                 var totalHeight: CGFloat = self.note.getPadding()
                 
                 var imagesC = images ?? []
+                var textC = text ?? []
                 
                 //Moves elements down
                 
@@ -325,6 +324,11 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                         let imageH = CGFloat((imageInfo["height"]! as NSString).floatValue)
                         
                         totalHeight += self.note.calculateHeight(imageWidth: imageW, imageHeight: imageH, includePadding: true)
+                        }
+                    }else if widget == "text" {
+                        if textC.count > 0{
+                            let currentText = textC.remove(at: 0)
+                            totalHeight += self.note.calculateTextHeight(of: currentText, includePadding: true)
                         }
                     }else if widget != note.widgets[0]{
                         totalHeight += self.note.calculateHeight(of: widget, includePadding: true)
@@ -346,7 +350,10 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                             break;
                         case "text":
                             if note.text != nil {
-                                self.note.addTextWidget(text: note.text!.remove(at: 0), yPlacement: yPlacing)
+                                let addedText = note.text!.remove(at: 0)
+                                self.note.addTextWidget(text: addedText, yPlacement: yPlacing)
+                                
+                                yPlacing += self.note.calculateTextHeight(of: addedText, includePadding: true)
                             }
                             break;
                         case "image":
@@ -380,7 +387,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                             
                         }
                         
-                        if widget != "image" {
+                        if widget != "image" && widget != "text" {
                             yPlacing += self.note.calculateHeight(of: widget, includePadding: true)
                         }
                         

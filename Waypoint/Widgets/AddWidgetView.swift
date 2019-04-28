@@ -14,11 +14,11 @@ class AddWidgetView: UIView {
     private lazy var height = bounds.height
     
     private lazy var shadow = createShadow()
-    private lazy var textIcon = createIcon(imageName: "addText", iconNum: 1)
-    private lazy var imageIcon = createIcon(imageName: "addImage", iconNum: 2)
-    private lazy var cameraIcon = createIcon(imageName: "camera", iconNum: 3)
-    private lazy var drawingIcon = createIcon(imageName: "addDrawing", iconNum: 4)
-    private lazy var linkIcon = createIcon(imageName: "addLink", iconNum: 5)
+    private lazy var textIcon = createIcon(imageName: "addText@6x", iconNum: 1)
+    private lazy var imageIcon = createIcon(imageName: "addImage@6x", iconNum: 2)
+    private lazy var cameraIcon = createIcon(imageName: "camera@6x", iconNum: 3)
+    private lazy var drawingIcon = createIcon(imageName: "addDrawing@6x", iconNum: 4)
+    private lazy var linkIcon = createIcon(imageName: "addLink@6x", iconNum: 5)
     
     weak var delegate: AddWidgetViewDelegate?
     
@@ -50,24 +50,24 @@ class AddWidgetView: UIView {
         
         
         let sideMargin = (width/12)
-        let widthValid = (width-2*sideMargin)/5
+        let widthValid = (width-2*sideMargin)/5 - (width * 1/20)
         let heightValid = widthValid
         let topMargin = height/2 - heightValid/2
-        let padding = (width - 2*sideMargin - 5*widthValid)/5
+        let padding = (width - 2*sideMargin - 5*widthValid)/4
         let xPosition = sideMargin + (widthValid + padding)*(CGFloat(iconNum - 1))
         
         let iconView = UIButton(frame: CGRect(x: xPosition, y: topMargin, width: widthValid, height: heightValid))
         iconView.setImage(icon, for: UIControl.State.normal)
-      //  iconView.image = icon
-        if imageName == "addText" {
+ 
+        if imageName == "addText@6x" {
             iconView.addTarget(self, action: #selector(textTapped), for: .touchUpInside)
-        }else if imageName == "addImage" {
+        }else if imageName == "addImage@6x" {
             iconView.addTarget(self, action: #selector(imageTapped), for: .touchUpInside)
-        }else if imageName == "camera" {
+        }else if imageName == "camera@6x" {
             iconView.addTarget(self, action: #selector(cameraTapped), for: .touchUpInside)
-        }else if imageName == "addDrawing" {
+        }else if imageName == "addDrawing64x" {
             iconView.addTarget(self, action: #selector(drawTapped), for: .touchUpInside)
-        }else if imageName == "addLink" {
+        }else if imageName == "addLink@6x" {
             iconView.addTarget(self, action: #selector(linkTapped), for: .touchUpInside)
         }
             

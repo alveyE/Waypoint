@@ -65,9 +65,26 @@ class FullScreenImageViewController: UIViewController, UIScrollViewDelegate {
         let scaleFactor = view.frame.width / preWidth
         let imageView = UIImageView(frame: CGRect(x: 0, y: view.frame.height/2 - (image.size.height * scaleFactor)/2, width: view.frame.width, height: image.size.height * scaleFactor))
         imageView.image = image
+        imageView.isUserInteractionEnabled = true
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(imageHeld))
+        imageView.addGestureRecognizer(longPress)
         return imageView
     }
     
+    @objc func imageHeld(){
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let save = UIAlertAction(title: "Save Photo", style: .default, handler: { action in
+            self.saveImage(self.imageView.image!)
+        })
+        alert.addAction(cancel)
+        alert.addAction(save)
+        self.present(alert, animated: true, completion: nil)
+    }
     
 
+    private func saveImage(_ image: UIImage){
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+    }
+    
 }

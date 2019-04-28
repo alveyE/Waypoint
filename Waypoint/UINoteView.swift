@@ -10,7 +10,7 @@ import UIKit
 import FirebaseStorage
 
 
-class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWidgetDelegate, LinkWidgetDelegate, TitleViewDelegate {
+class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWidgetDelegate, LinkWidgetDelegate, TitleViewDelegate {
     
     
     
@@ -38,6 +38,7 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWid
     private let noteTap = UITapGestureRecognizer(target: self, action: #selector(doNothing))
    
     weak var delegate: UINoteViewDelegate?
+    weak var textReceiver: UITextViewDelegate?
     
     override func layoutSubviews() {
         addSubview(scroll)
@@ -129,6 +130,7 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWid
             textWidget.editable = editable
             textWidget.text = text
             textWidget.delegate = self
+            textWidget.fitText()
             textWidget.alpha = 0
             scroll.addSubview(textWidget)
         UIView.animate(withDuration: animationTime) {
@@ -140,7 +142,7 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWid
             yPosition += textWidget.frame.height + verticalPadding
          //   scroll.contentSize.height += textWidget.frame.height + verticalPadding
         }
-                textWidget.textContent.delegate = self
+                textWidget.textContent.delegate = textReceiver
         textWidget.addGestureRecognizer(noteTap)
         adjustScroll()
     }
@@ -178,7 +180,7 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWid
         imageWidget.frame = CGRect(x: self.padding, y: verticalPlacing, width: self.width - 2*self.padding, height: adjustedHeight)
         
         reference.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
-            let image = UIImage(data: data!) ?? UIImage()
+            let image = UIImage(data: data ?? Data()) ?? UIImage()
             
             
             imageWidget.image = image
@@ -395,7 +397,30 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWid
         return drawingsFound.index(of: drawingWidget) ?? -1
     }
     
-    
+    private var lastValue = CGFloat.greatestFiniteMagnitude
+    public func checkExpansion(for text: UITextView, with value: CGFloat){
+        var foundTextWidget = TextWidget()
+        let shouldExpand = value > text.frame.height
+        for sub in scroll.subviews {
+            if let textWidget = sub as? TextWidget {
+                if textWidget.textContent == text {
+                    foundTextWidget = textWidget
+                    break
+                }
+            }
+        }
+        if shouldExpand {
+            
+           let amountMoved = foundTextWidget.addLine(adding: true)
+            moveWidgets(overY: foundTextWidget.frame.minY, by: amountMoved, down: true)
+          
+        }else if lastValue > value && foundTextWidget.frame.height > calculateHeight(of: "text", includePadding: false){
+            let amountMoved = foundTextWidget.addLine(adding: false)
+            moveWidgets(overY: foundTextWidget.frame.minY, by: amountMoved * -1, down: false)
+        }
+        lastValue = value
+        
+    }
     
     private func adjustScroll(){
         var contentRect = CGRect.zero
@@ -585,6 +610,22 @@ class UINoteView: UIView, UITextViewDelegate, ImageFrameViewDelegate, DrawingWid
             return heightCalc + verticalPadding
         }else{
             return heightCalc
+        }
+    }
+    
+    public func calculateTextHeight(of text: String, includePadding: Bool) -> CGFloat {
+        
+        let sampleWidget = TextWidget(frame: CGRect(x: 0, y: 0, width: width - 2*padding, height: width * 17/48))
+        sampleWidget.textContent.text = text
+        let newSize = sampleWidget.textContent.sizeThatFits(CGSize(width: sampleWidget.textContent.frame.width, height: CGFloat.greatestFiniteMagnitude))
+        let recommendedHeight = newSize.height
+        while sampleWidget.textContent.frame.height < recommendedHeight {
+            let _ = sampleWidget.addLine(adding: true)
+        }
+        if includePadding {
+            return sampleWidget.frame.height + verticalPadding
+        }else {
+            return sampleWidget.frame.height
         }
     }
     
