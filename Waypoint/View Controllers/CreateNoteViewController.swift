@@ -84,6 +84,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         super.viewWillAppear(animated)
     }
     override func viewDidAppear(_ animated: Bool) {
+        
         if shouldLoad {
         super.viewDidAppear(animated)
         
@@ -107,8 +108,9 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
             view.addSubview(blurEffectView)
             view.addSubview(notSignedInLabel)
         }
+            createNoteView()
         }
-        createNoteView()
+        
     }
     @objc func disableKeyboard(){
         note.endEditing(true)
