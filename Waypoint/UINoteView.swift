@@ -509,6 +509,14 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         adjustScroll()
     }
     
+    public func setTitle(to title: String){
+        var subCopy = scroll.subviews
+        subCopy.sort(by: {$0.frame.minY < $1.frame.minY})
+        if let titleView = subCopy.first as? TitleView {
+            titleView.title = title
+        }
+    }
+    
     public func nextYmax(overY yVal: CGFloat) -> CGFloat {
 //        var val: CGFloat = 0
         var savedSub = UIView()

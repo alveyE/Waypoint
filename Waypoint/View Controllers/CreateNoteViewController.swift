@@ -86,10 +86,8 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     override func viewDidAppear(_ animated: Bool) {
         if shouldLoad {
         super.viewDidAppear(animated)
-        createNoteView()
-//        view.bringSubviewToFront(imageButton)
-//        view.bringSubviewToFront(linkButton)
-//        view.bringSubviewToFront(createNoteButton)
+        
+
         if let user = Auth.auth().currentUser {
             noteCreator = NoteCreator(creator: user.uid, latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
             updateUsername()
@@ -110,6 +108,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
             view.addSubview(notSignedInLabel)
         }
         }
+        createNoteView()
     }
     @objc func disableKeyboard(){
         note.endEditing(true)
@@ -132,8 +131,8 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
             })
         }
     }
-    
-    private func createNoteView(){
+    lazy var topBar = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/11))
+     func createNoteView(){
         note = UINoteView()
 
         let noteWidth:CGFloat = view.frame.size.width
@@ -145,7 +144,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         note.textReceiver = self
         note.hasCalanderIcon = false
         
-        let topBar = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/11))
+        
         topBar.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9)
         topBar.addBottomBorderWithColor(color: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), width: topBar.frame.height/50)
         

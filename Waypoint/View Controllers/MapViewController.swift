@@ -209,7 +209,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let refreshSize = mapWidth/10
         let refreshPadding = mapWidth/15
         let refreshButton = UIButton(frame: CGRect(x: mapWidth - refreshPadding - refreshPadding, y: mapHeight - mapHeight/10 - refreshSize - refreshPadding, width: refreshSize, height: refreshSize))
-        refreshButton.setImage(UIImage(named: "refresh"), for: UIControl.State.normal)
+        let refreshImage = UIImage(named: "refresh")
+        refreshButton.setImage(refreshImage, for: UIControl.State.normal)
         refreshButton.addTarget(self, action: #selector(refreshPins), for: .touchUpInside)
         
         let recenterButton = UIButton(frame: CGRect(x: mapWidth - refreshPadding - refreshPadding, y: mapHeight - mapHeight/10 - refreshSize*2 - refreshPadding*2, width: refreshSize, height: refreshSize))
@@ -300,7 +301,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 if let value = snapshot.value as? [String : Any] {
                     tappedNoteUser = value["creator"] as? String ?? ""
                     if username == tappedNoteUser || user.uid == tappedNoteUser {
-                        alert.addAction(UIAlertAction(title: "Edit", style: UIAlertAction.Style.default, handler: nil))
+                        alert.addAction(UIAlertAction(title: "Edit", style: UIAlertAction.Style.default, handler: { action in
+                            let editor = EditNoteViewController()
+                            self.ref.child("notes").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+                                if let value = snapshot.value as? [String : Any] {
+                                    
+                                    
+                                    let widgets = value["widgets"] as? [String]
+                                    let title = value["title"] as? String
+                                    let timeStamp = value["timeStamp"] as? String
+                                    let text = value["text"] as? [String]
+                                    let links = value["links"] as? [String]
+                                    let drawings = value["drawings"] as? [String]
+                                    let images = value["images"] as? [[String:String]]
+                                    let creator = value["creator"] as? String
+                                    let latitude = value["latitude"] as? Double
+                                    let longitude = value["longitude"] as? Double
+                                    let note = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images , links: links ?? nil, drawings: drawings ?? nil, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
+                                    editor.noteBeingEdited = note
+                                    editor.idOfNote = snapshot.key
+                                    self.present(editor, animated: true, completion: nil)
+                                }
+                            })
+                            
+                        }))
                         alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { action in
                             self.ref.child("locations").child(id).removeValue()
                             self.ref.child("deleted").child(id).setValue(value)

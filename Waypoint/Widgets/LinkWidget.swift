@@ -11,7 +11,7 @@ import UIKit
 class LinkWidget: UIView {
 
 
-    public var url = "https://fractyldev.com"
+    public var url = ""
     public var editable = false
     public var delegate: LinkWidgetDelegate?
     
@@ -38,8 +38,8 @@ class LinkWidget: UIView {
             addSubview(deleteIcon)
         }else{
             addSubview(linkText)
+            addSubview(icon)
         }
-        addSubview(icon)
     }
     
     
@@ -74,6 +74,7 @@ class LinkWidget: UIView {
     private func createLinkField() -> UITextField{
         let text = UITextField(frame: CGRect(x: width/4, y: height/3, width: width - width/4, height: height/3))
         text.placeholder = "Enter url"
+        text.text = url
         text.autocorrectionType = .no
         text.autocapitalizationType = .none
         text.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)

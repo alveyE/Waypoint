@@ -64,6 +64,9 @@ class CreateDrawingViewController: UIViewController {
         }
     }
     
+    @IBAction func cancelPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
     func drawLine(fromPoint:CGPoint, toPoint:CGPoint){
         UIGraphicsBeginImageContext(self.imageView.frame.size)
         imageView.image?.draw(in: CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height))

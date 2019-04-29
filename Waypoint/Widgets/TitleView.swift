@@ -22,9 +22,13 @@ class TitleView: UIView, UITextViewDelegate {
     public var hasSaveButton = false
     public var hasCalendarIcon = true
     public var noteTimeStamp = "20181219101034"
-    public var title = ""
+    public var title = "" {
+        didSet{
+            titleText.text = title
+        }
+    }
     public var noteID = ""
-    public var username = "ethanalvey"
+    public var username = ""
     public var saved = false {
         didSet{
             let emptyTag = UIImage(named: "tagEmpty")

@@ -22,6 +22,8 @@ class DBManager  {
     }
     
     public var createdID = ""
+    public var preWrittenID = ""
+    
     
     func uploadPin(_ note : Note){
         
@@ -33,8 +35,18 @@ class DBManager  {
         let locationData = ["latitude" : note.latitude, "longitude" : note.longitude]
         let autoId = self.ref.childByAutoId().key
         self.createdID = autoId ?? ""
-        self.ref.child("notes").child(autoId!).setValue(data)
-        self.ref.child("locations").child(autoId!).setValue(locationData)
+            if preWrittenID == "" {
+                self.ref.child("notes").child(autoId!).setValue(data)
+                self.ref.child("locations").child(autoId!).setValue(locationData)
+            }else {
+                self.ref.child("notes").child(preWrittenID).setValue(data)
+                let utcDate = Date()
+                let formatter = DateFormatter()
+                formatter.timeZone = TimeZone(abbreviation: "UTC")
+                formatter.dateFormat = "yyyyMMddHHmmss"
+                let editedTime = formatter.string(from: utcDate)
+                self.ref.child("notes").child(preWrittenID).child("editedTimeStamp").setValue(editedTime)
+            }
         }catch{
             print("error \(error)")
         }

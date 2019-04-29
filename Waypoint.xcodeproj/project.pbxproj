@@ -17,6 +17,10 @@
 		D140339721CAF5370030BC62 /* NoteLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339621CAF5370030BC62 /* NoteLayoutViewController.swift */; };
 		D1427CA2223B016F00B7512C /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = D1427CA1223B016C00B7512C /* loading.gif */; };
 		D1427CA4223BEB8700B7512C /* CreateDrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1427CA3223BEB8600B7512C /* CreateDrawingViewController.swift */; };
+		D17A0D4722765BDC0054D6FB /* EditNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17A0D4622765BDC0054D6FB /* EditNoteViewController.swift */; };
+		D17A0D49227748D10054D6FB /* refreshGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = D17A0D48227748D00054D6FB /* refreshGif.gif */; };
+		D17A0D4B2277491C0054D6FB /* refreshGif@3x.gif in Resources */ = {isa = PBXBuildFile; fileRef = D17A0D4A2277491A0054D6FB /* refreshGif@3x.gif */; };
+		D17A0D4D227749510054D6FB /* refreshGif@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = D17A0D4C2277494F0054D6FB /* refreshGif@2x.gif */; };
 		D18862A522617E1000998F91 /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18862A422617E1000998F91 /* FullScreenImageViewController.swift */; };
 		D18BCE20226E9D30009E83DC /* ErrorBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18BCE1F226E9D2F009E83DC /* ErrorBar.swift */; };
 		D1A7998121BA631F002AF7B2 /* CustomPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */; };
@@ -65,6 +69,10 @@
 		D140339621CAF5370030BC62 /* NoteLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLayoutViewController.swift; sourceTree = "<group>"; };
 		D1427CA1223B016C00B7512C /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loading.gif; path = ../../../loading.gif; sourceTree = "<group>"; };
 		D1427CA3223BEB8600B7512C /* CreateDrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateDrawingViewController.swift; sourceTree = "<group>"; };
+		D17A0D4622765BDC0054D6FB /* EditNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewController.swift; sourceTree = "<group>"; };
+		D17A0D48227748D00054D6FB /* refreshGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = refreshGif.gif; sourceTree = "<group>"; };
+		D17A0D4A2277491A0054D6FB /* refreshGif@3x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "refreshGif@3x.gif"; sourceTree = "<group>"; };
+		D17A0D4C2277494F0054D6FB /* refreshGif@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "refreshGif@2x.gif"; sourceTree = "<group>"; };
 		D18862A422617E1000998F91 /* FullScreenImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewController.swift; sourceTree = "<group>"; };
 		D18BCE1F226E9D2F009E83DC /* ErrorBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBar.swift; sourceTree = "<group>"; };
 		D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPointAnnotation.swift; sourceTree = "<group>"; };
@@ -170,6 +178,8 @@
 				D1AE58D0219E0262003FF5DB /* LaunchScreen.storyboard */,
 				D1AE58D9219E0F5C003FF5DB /* NoteView.swift */,
 				D1AE58DB219E5183003FF5DB /* Note.swift */,
+				D17A0D4C2277494F0054D6FB /* refreshGif@2x.gif */,
+				D17A0D4A2277491A0054D6FB /* refreshGif@3x.gif */,
 				C510EFAE21ADAFE500243FA2 /* DBManager.swift */,
 				D1AE58F321ADD967003FF5DB /* NoteCreator.swift */,
 				D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */,
@@ -179,6 +189,7 @@
 				C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */,
 				D1A8EE242232F77600B308CF /* UIImage+Gif.swift */,
 				D1F8F4322237F35000C5A997 /* ImageFullScreen.swift */,
+				D17A0D48227748D00054D6FB /* refreshGif.gif */,
 				D1427CA1223B016C00B7512C /* loading.gif */,
 				D18BCE1F226E9D2F009E83DC /* ErrorBar.swift */,
 			);
@@ -225,6 +236,7 @@
 				D1DDA17421C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift */,
 				D18862A422617E1000998F91 /* FullScreenImageViewController.swift */,
 				D12A54FC2272152B00A471C2 /* ForgotPasswordViewController.swift */,
+				D17A0D4622765BDC0054D6FB /* EditNoteViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -310,10 +322,13 @@
 				D1A8EE372235C47E00B308CF /* Roboto-MediumItalic.ttf in Resources */,
 				D1A8EE332235BFB800B308CF /* Roboto-Bold.ttf in Resources */,
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
+				D17A0D4D227749510054D6FB /* refreshGif@2x.gif in Resources */,
 				D118587B226646C5001F183C /* Roboto-LightItalic.ttf in Resources */,
 				D1DBA67D222B4A56006D5728 /* Lato-Bold.ttf in Resources */,
 				D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */,
+				D17A0D49227748D10054D6FB /* refreshGif.gif in Resources */,
 				D1A8EE322235BFB800B308CF /* Roboto-Regular.ttf in Resources */,
+				D17A0D4B2277491C0054D6FB /* refreshGif@3x.gif in Resources */,
 				D1DBA67E222B4A59006D5728 /* Lato-Regular.ttf in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
 				D1427CA2223B016F00B7512C /* loading.gif in Resources */,
@@ -396,6 +411,7 @@
 				D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */,
 				D12A54FD2272152C00A471C2 /* ForgotPasswordViewController.swift in Sources */,
 				D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */,
+				D17A0D4722765BDC0054D6FB /* EditNoteViewController.swift in Sources */,
 				D1DDA17321C863EA00E3F2B0 /* DrawingWidget.swift in Sources */,
 				D18BCE20226E9D30009E83DC /* ErrorBar.swift in Sources */,
 				D1DDA16721C2C69300E3F2B0 /* TextWidget.swift in Sources */,

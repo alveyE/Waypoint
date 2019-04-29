@@ -17,10 +17,27 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
+    @IBOutlet weak var termsAndPrivacyBox: UIButton!
+    @IBOutlet weak var ageVerificationBox: UIButton!
+    @IBOutlet weak var termsAndPrivacyText: UITextView! {
+        didSet{
+            let tap = UITapGestureRecognizer(target: self, action: #selector(termsAndPrivacyPressed(_:)))
+            termsAndPrivacyText.addGestureRecognizer(tap)
+        }
+    }
+    
+    @IBOutlet weak var ageVerificationText: UITextView! {
+        didSet{
+            let tap = UITapGestureRecognizer(target: self, action: #selector(ageVerificationPressed(_:)))
+            ageVerificationText.addGestureRecognizer(tap)
+        }
+    }
     @IBOutlet weak var errorLabel: UILabel!
     var ref: DatabaseReference!
     
     private var errorFound = false
+    private var termsAndPrivacyChecked = false
+    private var ageVerificationChecked = false
     
     @IBOutlet var mainView: UIView! {
         didSet{
@@ -96,7 +113,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     private func checkEmail(){
         let email = emailField.text ?? ""
         if !isValidEmail(testStr: email){
-            print("doin the set")
             errorLabel.text = "Enter a valid email address"
             errorLabel.isHidden = false
         }
@@ -119,6 +135,24 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    @IBAction func termsAndPrivacyPressed(_ sender: UIButton) {
+        termsAndPrivacyChecked = !termsAndPrivacyChecked
+        if termsAndPrivacyChecked {
+            termsAndPrivacyBox.setImage(UIImage(named: "filledCheck"), for: .normal)
+        }else{
+            termsAndPrivacyBox.setImage(UIImage(named: "emptyCheck"), for: .normal)
+        }
+    }
+    
+    @IBAction func ageVerificationPressed(_ sender: UIButton) {
+        ageVerificationChecked = !ageVerificationChecked
+        if ageVerificationChecked {
+        ageVerificationBox.setImage(UIImage(named: "filledCheck"), for: .normal)
+        }else{
+        ageVerificationBox.setImage(UIImage(named: "emptyCheck"), for: .normal)
+        }
+    }
+    
     @objc private func disableKeyboard(){
         mainView.endEditing(true)
     }
@@ -130,7 +164,21 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         guard let username = usernameField.text else {return}
         guard let email = emailField.text else {return}
         guard let password = passwordField.text else {return}
+        print(ageVerificationChecked)
+        print(termsAndPrivacyChecked)
+        if !ageVerificationChecked {
+            errorLabel.text = "Must be over 13 to use Waypoint"
+            errorLabel.isHidden = false
+        }else{
+           // errorLabel.isHidden = true
+        }
         
+        if !termsAndPrivacyChecked{
+            errorLabel.text = "Must accept the terms of use and privacy policy"
+            errorLabel.isHidden = false
+        }else{
+          //  errorLabel.isHidden = true
+        }
         
         checkUsername()
         checkEmail()
@@ -165,6 +213,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                         self.ref.child("users").child(user.uid).setValue(["username": username, "email" : email])
                         self.ref.child("users").child("usernames").child(user.uid).setValue(["username" : username])
                         
+                        //Start at map
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        appDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
                         
                     }
                 })

@@ -63,7 +63,15 @@ struct NoteCreator{
         
     }
     
-
+    public mutating func writeNote(to id: String){
+        let noteToWrite = Note(widgets: widgets, title: title, timeStamp: timeStamp, text: text, images: images, links: links, drawings: drawings, creator: creator, location: (latitude: latitude, longitude: longitude))
+        
+        uploader.preWrittenID = id
+        uploader.uploadPin(noteToWrite)
+        submitted = true
+        
+    }
+    
 }
 
 

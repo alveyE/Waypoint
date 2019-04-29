@@ -65,7 +65,7 @@ class AddWidgetView: UIView {
             iconView.addTarget(self, action: #selector(imageTapped), for: .touchUpInside)
         }else if imageName == "camera@6x" {
             iconView.addTarget(self, action: #selector(cameraTapped), for: .touchUpInside)
-        }else if imageName == "addDrawing64x" {
+        }else if imageName == "addDrawing@6x" {
             iconView.addTarget(self, action: #selector(drawTapped), for: .touchUpInside)
         }else if imageName == "addLink@6x" {
             iconView.addTarget(self, action: #selector(linkTapped), for: .touchUpInside)

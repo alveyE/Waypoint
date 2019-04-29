@@ -334,8 +334,27 @@
                                 <color key="textColor" red="0.91180294750000002" green="0.058788990579999999" blue="0.083651017250000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4i4-fu-E5D">
-                                <rect key="frame" x="32" y="421" width="311" height="52"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kRe-CM-kIf">
+                                <rect key="frame" x="32" y="355" width="311" height="59"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6m-Ow-okx">
+                                        <rect key="frame" x="0.0" y="0.0" width="24.5" height="59"/>
+                                        <state key="normal" image="emptyCheck"/>
+                                        <connections>
+                                            <action selector="termsAndPrivacyPressed:" destination="Nko-xm-ExQ" eventType="touchUpInside" id="wf2-Gi-FcG"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="By checking this box I acknowledge that I have read and accept the terms of use and privacy policy" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lX1-9B-7G7">
+                                        <rect key="frame" x="29.5" y="0.0" width="281.5" height="59"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                    </textView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4i4-fu-E5D">
+                                <rect key="frame" x="32" y="487" width="311" height="52"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                 <state key="normal" title="Sign Up">
@@ -345,25 +364,55 @@
                                     <action selector="signupButtonPressed:" destination="Nko-xm-ExQ" eventType="touchUpInside" id="q55-tb-c3V"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1T1-eJ-gMC">
+                                <rect key="frame" x="32" y="413.5" width="311" height="45"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cv9-cn-Qtx">
+                                        <rect key="frame" x="0.0" y="0.0" width="24" height="45"/>
+                                        <state key="normal" image="emptyCheck"/>
+                                        <connections>
+                                            <action selector="ageVerificationPressed:" destination="Nko-xm-ExQ" eventType="touchUpInside" id="84d-Ph-Ur9"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="By checking this box I certify that I am over the age of 13 years old" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2n-6a-4kd">
+                                        <rect key="frame" x="32" y="0.0" width="279" height="45"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                    </textView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="qYd-gE-ZvL" firstAttribute="trailing" secondItem="1T1-eJ-gMC" secondAttribute="trailing" constant="32" id="1oN-nx-ocE"/>
                             <constraint firstItem="qYd-gE-ZvL" firstAttribute="trailing" secondItem="4i4-fu-E5D" secondAttribute="trailing" constant="32" id="3jK-ah-P5n"/>
                             <constraint firstItem="qYd-gE-ZvL" firstAttribute="trailing" secondItem="eJp-Sg-mVi" secondAttribute="trailing" constant="16" id="8BP-Me-oBo"/>
+                            <constraint firstItem="1T1-eJ-gMC" firstAttribute="top" secondItem="kRe-CM-kIf" secondAttribute="bottom" constant="-0.5" id="AmY-Tv-Fsn"/>
+                            <constraint firstItem="qYd-gE-ZvL" firstAttribute="trailing" secondItem="kRe-CM-kIf" secondAttribute="trailing" constant="32" id="CH5-OL-dM2"/>
+                            <constraint firstItem="4i4-fu-E5D" firstAttribute="top" secondItem="1T1-eJ-gMC" secondAttribute="bottom" constant="28.5" id="JC1-fX-U0J"/>
                             <constraint firstItem="4i4-fu-E5D" firstAttribute="leading" secondItem="qYd-gE-ZvL" secondAttribute="leading" constant="32" id="Ldw-D2-glB"/>
                             <constraint firstItem="eJp-Sg-mVi" firstAttribute="leading" secondItem="qYd-gE-ZvL" secondAttribute="leading" constant="16" id="XXr-xH-hQj"/>
+                            <constraint firstItem="1T1-eJ-gMC" firstAttribute="leading" secondItem="qYd-gE-ZvL" secondAttribute="leading" constant="32" id="hQM-yG-OOL"/>
                             <constraint firstItem="MIU-88-14j" firstAttribute="top" secondItem="qYd-gE-ZvL" secondAttribute="top" constant="139" id="o2t-DS-XgR"/>
                             <constraint firstItem="eJp-Sg-mVi" firstAttribute="top" secondItem="MIU-88-14j" secondAttribute="bottom" constant="8" id="p2U-oD-y9o"/>
+                            <constraint firstItem="kRe-CM-kIf" firstAttribute="top" secondItem="dfB-qN-kJV" secondAttribute="bottom" constant="8" id="qzx-b9-HBf"/>
                             <constraint firstItem="MIU-88-14j" firstAttribute="centerX" secondItem="qYd-gE-ZvL" secondAttribute="centerX" id="ve5-rf-96n"/>
+                            <constraint firstItem="kRe-CM-kIf" firstAttribute="leading" secondItem="qYd-gE-ZvL" secondAttribute="leading" constant="32" id="xRd-ct-Lli"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qYd-gE-ZvL"/>
                     </view>
                     <connections>
+                        <outlet property="ageVerificationBox" destination="cv9-cn-Qtx" id="q8R-5a-XX2"/>
+                        <outlet property="ageVerificationText" destination="X2n-6a-4kd" id="2St-b3-EY2"/>
                         <outlet property="emailField" destination="Avz-4p-6Du" id="BIZ-HH-mwf"/>
                         <outlet property="errorLabel" destination="MIU-88-14j" id="wq6-HW-ULi"/>
                         <outlet property="mainView" destination="nee-fq-gef" id="etn-Dw-4nT"/>
                         <outlet property="passwordField" destination="dfB-qN-kJV" id="UVh-lt-99y"/>
                         <outlet property="signupButton" destination="4i4-fu-E5D" id="NbK-ck-mnN"/>
+                        <outlet property="termsAndPrivacyBox" destination="w6m-Ow-okx" id="m8m-dy-IYB"/>
+                        <outlet property="termsAndPrivacyText" destination="lX1-9B-7G7" id="nkc-b0-mUX"/>
                         <outlet property="usernameField" destination="Vc8-R2-EwL" id="Fg4-cc-Tml"/>
                     </connections>
                 </viewController>
@@ -524,6 +573,13 @@
                                     <action selector="completedDrawing:" destination="ley-0A-fNT" eventType="touchUpInside" id="sDO-Sx-BpX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7I-y2-JNh">
+                                <rect key="frame" x="38" y="64" width="48" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelPressed:" destination="ley-0A-fNT" eventType="touchUpInside" id="LP2-bG-HC2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -536,12 +592,14 @@
                             <constraint firstItem="X2K-97-lvh" firstAttribute="trailing" secondItem="cgU-eu-W4z" secondAttribute="trailing" id="Yoe-eP-eSN"/>
                             <constraint firstItem="X2K-97-lvh" firstAttribute="bottom" secondItem="Eif-UI-Ug9" secondAttribute="bottom" constant="267" id="aXC-kt-xFR"/>
                             <constraint firstItem="cgU-eu-W4z" firstAttribute="leading" secondItem="X2K-97-lvh" secondAttribute="leading" id="ayu-i4-cOD"/>
+                            <constraint firstItem="V7I-y2-JNh" firstAttribute="leading" secondItem="X2K-97-lvh" secondAttribute="leading" constant="38" id="c1I-o1-92l"/>
                             <constraint firstItem="Eif-UI-Ug9" firstAttribute="top" secondItem="cgU-eu-W4z" secondAttribute="bottom" id="chV-3n-Qnp"/>
                             <constraint firstItem="X2K-97-lvh" firstAttribute="trailing" secondItem="NRY-52-9xO" secondAttribute="trailing" constant="16" id="eJq-3J-EnS"/>
                             <constraint firstItem="NRY-52-9xO" firstAttribute="top" secondItem="X2K-97-lvh" secondAttribute="top" constant="25" id="fnM-rm-FE6"/>
                             <constraint firstItem="fnK-Qb-2hO" firstAttribute="centerX" secondItem="Vr6-QF-zmh" secondAttribute="centerX" id="hKe-tv-Jbu"/>
                             <constraint firstItem="fnK-Qb-2hO" firstAttribute="leading" secondItem="X2K-97-lvh" secondAttribute="leading" constant="39" id="muh-Kk-7nt"/>
                             <constraint firstItem="Eif-UI-Ug9" firstAttribute="leading" secondItem="X2K-97-lvh" secondAttribute="leading" constant="315" id="o59-P1-Yql"/>
+                            <constraint firstItem="cgU-eu-W4z" firstAttribute="top" secondItem="V7I-y2-JNh" secondAttribute="bottom" constant="8" id="sJ5-Oa-2EG"/>
                             <constraint firstItem="cgU-eu-W4z" firstAttribute="top" secondItem="X2K-97-lvh" secondAttribute="top" constant="82" id="t8u-Ag-G2o"/>
                             <constraint firstItem="NRY-52-9xO" firstAttribute="leading" secondItem="X2K-97-lvh" secondAttribute="leading" constant="329" id="voB-Or-WnZ"/>
                         </constraints>
@@ -603,7 +661,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password reset email sent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lc7-K8-wCa">
-                                <rect key="frame" x="87" y="234" width="200" height="21"/>
+                                <rect key="frame" x="87.5" y="234" width="200" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -636,6 +694,7 @@
     <resources>
         <image name="check" width="30" height="30"/>
         <image name="cooltext" width="706" height="156"/>
+        <image name="emptyCheck" width="30" height="30"/>
         <image name="explore" width="30" height="30"/>
         <image name="map" width="30" height="30"/>
         <image name="newNote" width="30" height="30"/>
