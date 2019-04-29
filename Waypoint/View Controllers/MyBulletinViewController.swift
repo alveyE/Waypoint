@@ -126,7 +126,6 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                     if let childData = childSnapshot.value as? [String : Any] {
                         
                         if let idToAdd = childData["savedID"] as? String {
-                            print(idToAdd)
                             self.savedNotesIDs.append(idToAdd)
                         }
                         
@@ -134,7 +133,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                     }
                 }
                 
-                
+                self.savedNotesIDs.reverse()
                 for save in self.savedNotesIDs {
                     self.getNote(withID: save)
                 }
@@ -145,7 +144,6 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                     notesWillAppearLabel.text = "Notes you save will appear here"
                     notesWillAppearLabel.textAlignment = .center
                     notesWillAppearLabel.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                    print(22/backgroundBar.frame.height)
                     notesWillAppearLabel.font = UIFont(name: "Roboto-Regular", size: backgroundBar.frame.height * 3/10)
                     backgroundBar.addSubview(notesWillAppearLabel)
                     self.view.addSubview(backgroundBar)
