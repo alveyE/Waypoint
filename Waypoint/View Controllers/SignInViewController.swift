@@ -75,6 +75,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                     appDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
                 }
                 
+            }else{
+                self.incorrectLabel.isHidden = false
             }
         }
         

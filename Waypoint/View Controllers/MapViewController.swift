@@ -187,10 +187,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         note.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 0)
         
         
+        let bottomBar = NoteBar()
+        let barHeight = (mapHeight * 7/10)/30
+        bottomBar.frame = CGRect(x: mapWidth/40, y: note.frame.height - barHeight, width: mapWidth - (mapWidth/40)*2, height: barHeight)
+        bottomBar.layer.zPosition = .greatestFiniteMagnitude
+    
         note.editable = false
         note.hasSaveButton = true
         note.delegate = self
         note.hide()
+      //  note.addSubview(bottomBar)
         
         mapView.mapType = MKMapType.standard
         mapView.isZoomEnabled = true
@@ -205,7 +211,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.isPitchEnabled = false
         
         errorBar = ErrorBar(frame: CGRect(x: 0, y: 0, width: mapWidth, height: mapHeight/10))
-        
+        errorBar.layer.zPosition = .greatestFiniteMagnitude
         let refreshSize = mapWidth/10
         let refreshPadding = mapWidth/15
         let refreshButton = UIButton(frame: CGRect(x: mapWidth - refreshPadding - refreshPadding, y: mapHeight - mapHeight/10 - refreshSize - refreshPadding, width: refreshSize, height: refreshSize))
@@ -359,6 +365,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    
+    
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
         
@@ -376,15 +385,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
     }
+//
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        if annotation.title != "My Location" {
+//        let customPin = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+//            customPin.tintColor = pinT
+//        return customPin
+//        }else {
+//            return nil
+//        }
+//    }
 
+//    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+//        view.image = UIImage(named: "customPin")
+//    }
+    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-      
+        
         checkConnectionStatus()
         
         if let coordinates = view.annotation?.coordinate, view.annotation?.title != "My Location" {
          
+           // view.image = UIImage(named: "customPinDouble")
             
-            
+            view.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
 
             
             
@@ -523,6 +547,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    
    
     
     public func getNote(withID noteID: String, addingNote: Bool){
@@ -534,7 +559,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 print("DOWNLOADING \(noteID)")
                 let widgets = value["widgets"] as? [String]
                 let title = value["title"] as? String
-                let timeStamp = value["timeStamp"] as? String
+                var timeStamp = value["timeStamp"] as? String
                 let text = value["text"] as? [String]
                 let links = value["links"] as? [String]
                 let drawings = value["drawings"] as? [String]
@@ -542,6 +567,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let creator = value["creator"] as? String
                 let latitude = value["latitude"] as? Double
                 let longitude = value["longitude"] as? Double
+                let editedStamp = value["editedTimeStamp"] as? String
+                if editedStamp != nil {
+                    timeStamp = "E"+editedStamp!
+                }
                 let note = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images ?? nil, links: links ?? nil, drawings: drawings ?? nil, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
               
                 self.note.noteID = noteID
@@ -718,4 +747,19 @@ extension Array {
     }
 }
 
-
+extension UIImage {
+    func resizeImage(targetSize: CGSize) -> UIImage {
+        let size = self.size
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        let newSize = widthRatio > heightRatio ?  CGSize(width: size.width * heightRatio, height: size.height * heightRatio) : CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        self.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+}

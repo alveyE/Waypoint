@@ -126,7 +126,14 @@ class TitleView: UIView, UITextViewDelegate {
         
         time.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
 //        time.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        let timeText = calculateTimeDifference()
+        var timeText = noteTimeStamp
+        print(timeText)
+        if timeText.first == "E" {
+            noteTimeStamp.removeFirst()
+            timeText = "Edited " + calculateTimeDifference()
+        }else{
+            timeText = calculateTimeDifference()
+        }
         let attributedTime = NSMutableAttributedString(string: timeText, attributes: [.font : dateFont as Any])
         time.attributedText = attributedTime
         return time

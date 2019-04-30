@@ -46,8 +46,6 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         fetchPinLocation()
         createMapView()
         createNoteView()
-        }else{
-            checkConnectionStatus()
         }
     }
     
@@ -87,6 +85,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         mapView.isUserInteractionEnabled = false
         
         errorBar = ErrorBar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/10))
+        errorBar.layer.zPosition = .greatestFiniteMagnitude
         mapView.addSubview(errorBar)
         view.addSubview(mapView)
     }
@@ -227,8 +226,12 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                 
                 
                 let title = value["title"] as? String ?? ""
-                let timeStamp = value["timeStamp"] as? String ?? ""
+                var timeStamp = value["timeStamp"] as? String ?? ""
                 let username = value["creator"] as? String ?? ""
+                let editedStamp = value["editedTimeStamp"] as? String
+                if editedStamp != nil {
+                    timeStamp = "E"+editedStamp!
+                }
                 self.note.noteID = noteID
                 self.notesIDSInExpand.append(noteID)
                 self.note.addTitleWidget(title: title, timeStamp: timeStamp, username: username, yPlacement: nil)

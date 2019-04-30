@@ -14,7 +14,7 @@ class DrawingWidget: UIView {
     private lazy var width = bounds.width
     private lazy var height = bounds.height
     
-    public var drawingImage = UIImage.gif(name: "loading"){
+    public var drawingImage = UIImage.gif(name: "drawingGif"){
         didSet{
             UIView.animate(withDuration: 0.2, animations: {
                 self.imageView.alpha = 0

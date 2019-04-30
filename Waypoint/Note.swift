@@ -10,6 +10,7 @@ import Foundation
 
 public struct Note : Codable{
     
+    
     var widgets = ["title"]
     
     var title: String
