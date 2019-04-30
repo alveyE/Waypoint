@@ -89,12 +89,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 if let childData = childSnapshot.value as? [String : Any] {
                     
                     let usernameRetrieved = childData["username"] as? String ?? ""
-                    takenNames.append(usernameRetrieved)
+                    takenNames.append(usernameRetrieved.lowercased())
                     
                     
                 }
             }
-            if takenNames.contains(username) {
+            if username == ""{
+                self.errorLabel.text = "Enter a username"
+                self.errorLabel.isHidden = false
+            }else if takenNames.contains(username.lowercased()) {
                 //Do error
                 self.errorLabel.text = "Username taken"
                 self.errorLabel.isHidden = false

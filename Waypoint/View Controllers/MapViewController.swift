@@ -332,11 +332,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                             
                         }))
                         alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { action in
-                            self.ref.child("locations").child(id).removeValue()
-                            self.ref.child("deleted").child(id).setValue(value)
-                            self.ref.child("notes").child(id).removeValue()
-                            self.mapTapped()
-                            self.refreshPins()
+                            let confirmAlert = UIAlertController(title: "Are you sure you would like to delete this note?", message: nil, preferredStyle: UIAlertController.Style.alert)
+                            confirmAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+                            confirmAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
+                                self.ref.child("locations").child(id).removeValue()
+                                self.ref.child("deleted").child(id).setValue(value)
+                                self.ref.child("notes").child(id).removeValue()
+                                self.refreshPulled()
+                            }))
+                            self.present(confirmAlert, animated: true, completion: nil)
+
                         }))
                     }else {
                         alert.addAction(UIAlertAction(title: "Report", style: UIAlertAction.Style.destructive, handler: { action in
