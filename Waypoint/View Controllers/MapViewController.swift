@@ -188,15 +188,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         let bottomBar = NoteBar()
-        let barHeight = (mapHeight * 7/10)/30
-        bottomBar.frame = CGRect(x: mapWidth/40, y: note.frame.height - barHeight, width: mapWidth - (mapWidth/40)*2, height: barHeight)
+        let barHeight = (mapHeight * 7/10)/40
+        bottomBar.frame = CGRect(x: mapWidth/70, y: note.frame.height - barHeight, width: mapWidth - (mapWidth/70)*2, height: barHeight)
         bottomBar.layer.zPosition = .greatestFiniteMagnitude
     
         note.editable = false
         note.hasSaveButton = true
         note.delegate = self
         note.hide()
-      //  note.addSubview(bottomBar)
+        note.addSubview(bottomBar)
         
         mapView.mapType = MKMapType.standard
         mapView.isZoomEnabled = true
