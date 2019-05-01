@@ -203,7 +203,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.isScrollEnabled = true
         mapView.showsUserLocation = true
         mapView.tintColor = #colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1)
-       // mapView.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
         mapView.center = view.center
         mapView.contentMode = .scaleToFill
@@ -410,10 +409,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         checkConnectionStatus()
         
         if let coordinates = view.annotation?.coordinate, view.annotation?.title != "My Location" {
-         
-           // view.image = UIImage(named: "customPinDouble")
-            
-            view.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
 
             
             

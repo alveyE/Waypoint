@@ -19,12 +19,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var termsAndPrivacyBox: UIButton!
     @IBOutlet weak var ageVerificationBox: UIButton!
-    @IBOutlet weak var termsAndPrivacyText: UITextView! {
-        didSet{
-            let tap = UITapGestureRecognizer(target: self, action: #selector(termsAndPrivacyPressed(_:)))
-            termsAndPrivacyText.addGestureRecognizer(tap)
-        }
-    }
+    @IBOutlet weak var termsAndPrivacyText: UITextView!
     
     @IBOutlet weak var ageVerificationText: UITextView! {
         didSet{
@@ -53,7 +48,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         passwordField.delegate = self
         emailField.delegate = self
         errorLabel.isHidden = true
+        setLinks()
     }
+    
+    private func setLinks(){
+        let termsAttributedText = NSMutableAttributedString(string: termsAndPrivacyText.text)
+        let _ = termsAttributedText.setAsLink(textToFind: "terms of use", linkURL: "https://fractyldev.com/waypoint/terms")
+        let _ = termsAttributedText.setAsLink(textToFind: "privacy policy", linkURL: "https://fractyldev.com/waypoint/privacy")
+        termsAndPrivacyText.attributedText = NSAttributedString(attributedString: termsAttributedText)
+        
+    }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         self.view = nil

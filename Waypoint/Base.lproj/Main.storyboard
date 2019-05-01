@@ -338,7 +338,7 @@
                                             <action selector="termsAndPrivacyPressed:" destination="Nko-xm-ExQ" eventType="touchUpInside" id="wf2-Gi-FcG"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="By checking this box I acknowledge that I have read and accept the terms of use and privacy policy" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lX1-9B-7G7">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="By checking this box I acknowledge that I have read and accept the terms of use and privacy policy" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lX1-9B-7G7">
                                         <rect key="frame" x="29.5" y="0.0" width="281.5" height="59"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -368,7 +368,7 @@
                                             <action selector="ageVerificationPressed:" destination="Nko-xm-ExQ" eventType="touchUpInside" id="84d-Ph-Ur9"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="By checking this box I certify that I am over the age of 13 years old" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2n-6a-4kd">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="By checking this box I certify that I am 13 years of age or older" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2n-6a-4kd">
                                         <rect key="frame" x="32" y="0.0" width="279" height="45"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -648,9 +648,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abi-6J-KGY">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abi-6J-KGY">
                                 <rect key="frame" x="32" y="318" width="311" height="53"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="awi-aW-LlQ"/>
+                                </constraints>
                                 <state key="normal" title="Send Password Reset Email">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -664,8 +667,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="WaypointTextTeal" translatesAutoresizingMaskIntoConstraints="NO" id="Nca-Xe-wdZ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WaypointTextTeal" translatesAutoresizingMaskIntoConstraints="NO" id="Nca-Xe-wdZ">
                                 <rect key="frame" x="16" y="98" width="343" height="76"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Nca-Xe-wdZ" secondAttribute="height" multiplier="343:76" id="3ZY-KQ-VgX"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
