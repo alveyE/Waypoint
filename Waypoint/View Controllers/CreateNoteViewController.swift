@@ -28,12 +28,20 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     
     func deletedImage(at index: Int) {
         if index != -1 {
-        noteCreator.images?.remove(at: index)
+            if noteCreator.images?.indices.contains(index) ?? false {
+                noteCreator.images?.remove(at: index)
+            }else{
+                noteCreator.cancelImage = index
+            }
         }
     }
     func deletedDrawing(at index: Int) {
         if index != -1 {
-            noteCreator.drawings?.remove(at: index)
+            if noteCreator.drawings?.indices.contains(index) ?? false {
+                noteCreator.drawings?.remove(at: index)
+            }else{
+                noteCreator.cancelImage = index
+            }
         }
     }
 

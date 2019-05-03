@@ -518,9 +518,8 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
     }
     
     public func nextYmax(overY yVal: CGFloat) -> CGFloat {
-//        var val: CGFloat = 0
-        var savedSub = UIView()
         var subCopy = scroll.subviews
+        var maxYValues = [CGFloat]()
         subCopy.sort(by: {$0.frame.minY < $1.frame.minY})
         
         for sub in subCopy {
@@ -529,12 +528,11 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
             if let _ = sub as? TitleView {
                 break
             }else {
-                savedSub = sub
+                maxYValues.append(sub.frame.maxY)
             }
             }
         }
-      
-        return savedSub.frame.maxY
+        return maxYValues.max() ?? 0
     }
     
     public func setStartY(to value: CGFloat){

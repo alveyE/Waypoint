@@ -37,6 +37,7 @@ class DBManager  {
         self.createdID = autoId ?? ""
             if preWrittenID == "" {
                 self.ref.child("notes").child(autoId!).setValue(data)
+            //    self.ref.child("notes").child(autoId!).child("uid").setValue(<#T##value: Any?##Any?#>)
                 self.ref.child("locations").child(autoId!).setValue(locationData)
             }else {
                 self.ref.child("notes").child(preWrittenID).setValue(data)

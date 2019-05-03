@@ -86,6 +86,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         let username = usernameField.text ?? ""
         
+        if username.count > 20 {
+            self.errorLabel.text = "Username must not be more than 20 characters"
+            self.errorLabel.isHidden = false
+        }
+        
         let ref = Database.database().reference()
         ref.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
             var takenNames = [String]()
@@ -99,16 +104,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                     
                 }
             }
-            if username == ""{
-                self.errorLabel.text = "Enter a username"
-                self.errorLabel.isHidden = false
-            }else if takenNames.contains(username.lowercased()) {
+            
+            if takenNames.contains(username.lowercased()) {
                 //Do error
                 self.errorLabel.text = "Username taken"
                 self.errorLabel.isHidden = false
             }
         })
-        
+        if username == ""{
+            self.errorLabel.text = "Enter a username"
+            self.errorLabel.isHidden = false
+        }
         for word in bannedUsernameWords {
             if username.lowercased().contains(word){
                 self.errorLabel.text = "Invalid username"

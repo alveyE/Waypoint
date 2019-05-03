@@ -38,7 +38,6 @@ class TextWidget: UIView {
     }
     
     public func addLine(adding: Bool) -> CGFloat{
-        print("adding line")
         let preHeight = frame.height
         var lineHeight = (textFont?.lineHeight)! + (textFont?.lineHeight)!/2
         if !adding {
@@ -103,7 +102,6 @@ class TextWidget: UIView {
         
         let attributedText = NSAttributedString(string: displayText, attributes: attributes)
         text.attributedText = attributedText
-        print("making the view")
         if editable {
             let tap = UITapGestureRecognizer(target: self, action: #selector(activateEditing))
             text.addGestureRecognizer(tap)

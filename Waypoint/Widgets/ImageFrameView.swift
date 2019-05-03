@@ -81,7 +81,6 @@ class ImageFrameView: UIView {
             
             
         let imageCentered = UIImageView(frame: CGRect(x: width/2 - adjustedWidth/2, y: height/2 - adjustedHeight/2, width: adjustedWidth, height: adjustedHeight))
-            
             imageCentered.image = imageGiven
             imageCentered.isUserInteractionEnabled = true
             let iTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped))

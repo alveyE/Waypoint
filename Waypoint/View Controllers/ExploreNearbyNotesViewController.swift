@@ -24,12 +24,21 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     var mapView:MKMapView!
     
     private var locationManager:CLLocationManager!
-    private var currentLocation = CLLocation(latitude: 0, longitude: 0)
+    private var currentLocation = CLLocation(latitude: 0, longitude: 0) {
+        didSet{
+            if notesNeeded {
+                fetchPinLocation()
+                notesNeeded = false
+            }
+        }
+    }
     var errorBar:ErrorBar!
     
     private var locationsAndIDs = [(latitude: Double, longitude: Double, id: String)]()
     
     private var notesIDSInExpand = [String]()
+    
+    private var notesNeeded = false
     
     override func viewWillDisappear(_ animated: Bool) {
 //        self.view = nil
@@ -43,7 +52,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         super.viewDidLoad()
         determineCurrentLocation()
         if mapView == nil {
-        fetchPinLocation()
+        notesNeeded = true
         createMapView()
         createNoteView()
         }
@@ -102,6 +111,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         }
         
         if let userLocation = locationManager.location?.coordinate, mapView != nil {
+            
             let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 2000, longitudinalMeters: 2000)
             mapView.setRegion(viewRegion, animated: false)
         }
@@ -128,12 +138,19 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     
     
     private func checkConnectionStatus(){
+        var connectionFailedCount = 0
         let connectedRef = Database.database().reference(withPath: ".info/connected")
+        for _ in 0..<10 {
         connectedRef.observe(.value) { (snapshot) in
             if !(snapshot.value as? Bool ?? false) {
+                connectionFailedCount += 1
+            }
+            if connectionFailedCount >= 7 {
                 self.errorBar.show()
+                
             }
         }
+        } 
     }
     
     private func fetchPinLocation(){

@@ -37,6 +37,8 @@
 	<string>Used to determine user location to show nearby notes and pins</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Used to determine user location to show nearby notes and pins</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string></string>
 	<key>UIAppFonts</key>
@@ -61,8 +63,6 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string></string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

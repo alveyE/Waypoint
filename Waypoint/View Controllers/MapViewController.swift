@@ -239,12 +239,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     private func checkConnectionStatus(){
+        var connectionFailedCount = 0
         let connectedRef = Database.database().reference(withPath: ".info/connected")
-        connectedRef.observe(.value) { (snapshot) in
-            if !(snapshot.value as? Bool ?? false) {
-                self.errorBar.show()
+        for _ in 0..<10 {
+            connectedRef.observe(.value) { (snapshot) in
+                if !(snapshot.value as? Bool ?? false) {
+                    connectionFailedCount += 1
+                }
+                if connectionFailedCount >= 7 {
+                    self.errorBar.show()
+                    
+                }
             }
-        } 
+        }
     }
     
     func updatePins(){

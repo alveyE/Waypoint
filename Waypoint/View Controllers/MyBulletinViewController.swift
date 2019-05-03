@@ -72,10 +72,17 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
     }
     
     private func checkConnectionStatus(){
+        var connectionFailedCount = 0
         let connectedRef = Database.database().reference(withPath: ".info/connected")
-        connectedRef.observe(.value) { (snapshot) in
-            if !(snapshot.value as? Bool ?? false) {
-                self.errorBar.show()
+        for _ in 0..<10 {
+            connectedRef.observe(.value) { (snapshot) in
+                if !(snapshot.value as? Bool ?? false) {
+                    connectionFailedCount += 1
+                }
+                if connectionFailedCount >= 7 {
+                    self.errorBar.show()
+                    
+                }
             }
         }
     }
@@ -254,7 +261,6 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
             notesIDSInExpand[index] = "E" + notesIDSInExpand[index]
             
             let titleEndY = note.endYPositions[index]
-            
             expandNoteWidgets(withID: noteToBeExpanded, titleEndY: titleEndY)
             
         }else{
@@ -269,12 +275,12 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                 lastYVal = nil
             }
             var nextTitleMaxY = note.nextYmax(overY: firstYVal)
+        
             note.removeWidgetsInRange(minY: firstYVal, maxY: lastYVal)
             if nextTitleMaxY == 0 {
                 nextTitleMaxY = firstYVal
             }
             let totalAmnt = nextTitleMaxY - firstYVal + note.getPadding()
-            
             note.moveWidgets(overY: firstYVal, by: totalAmnt, down: false)
             
             

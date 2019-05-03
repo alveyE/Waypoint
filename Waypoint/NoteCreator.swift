@@ -27,6 +27,11 @@ struct NoteCreator{
                 uploader.addImageToNote(imageData: dataAdded)
                 }
             }
+            if cancelImage != -1 {
+                print("image outta here")
+                images?.remove(at: cancelImage)
+                cancelImage = -1
+            }
         }
     }
     var links: [String]? = nil
@@ -36,7 +41,10 @@ struct NoteCreator{
                 if let drawingAdded = drawings?.last {
                     uploader.addDrawingToNote(drawingURL: drawingAdded)
                 }
-                
+            }
+            if cancelDrawing != -1 {
+                drawings?.remove(at: cancelDrawing)
+                cancelDrawing = -1
             }
         }
     }
@@ -45,6 +53,8 @@ struct NoteCreator{
     var longitude: Double
     
     var submitted = false
+    var cancelImage = -1
+    var cancelDrawing = -1
     var idCreated = ""
     init(creator: String, latitude: Double, longitude: Double){
         self.creator = creator
