@@ -49,6 +49,7 @@ class TitleView: UIView, UITextViewDelegate {
     private lazy var calendarIcon = createCalendarIcon()
     private lazy var usernameLabel = createUserText()
     private lazy var menuDots = createDotsMenu()
+    private lazy var fractylLogo = createFractylLogo()
     
    var ref: DatabaseReference!
 
@@ -65,6 +66,9 @@ class TitleView: UIView, UITextViewDelegate {
         }
         if hasSaveButton {
         addSubview(saveButton)
+        }
+        if username == "FractylDev" {
+            addSubview(fractylLogo)
         }
         
     }
@@ -169,6 +173,14 @@ class TitleView: UIView, UITextViewDelegate {
         save.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         
         return save
+    }
+    
+    private func createFractylLogo() -> UIImageView {
+        let logo = UIImage(named: "fractyldevlogo")
+        let logoSize = width/12
+        let logoView = UIImageView(frame: CGRect(x: width * 11/36, y:  height - (height * 1/3), width: logoSize, height: logoSize))
+        logoView.image = logo
+        return logoView
     }
     
     private func setSavedCorrectly(){

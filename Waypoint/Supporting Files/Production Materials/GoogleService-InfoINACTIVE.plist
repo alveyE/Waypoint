@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>294832390122-pkb3s7nr9h7ourpho6d3dg9j8k1v03hl.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.294832390122-pkb3s7nr9h7ourpho6d3dg9j8k1v03hl</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAgIRvbMLHB7v1AV2YEjBugNurxLyBVZ88</string>
+	<key>GCM_SENDER_ID</key>
+	<string>294832390122</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.fractyldev.waypoint</string>
+	<key>PROJECT_ID</key>
+	<string>waypoint-production</string>
+	<key>STORAGE_BUCKET</key>
+	<string>waypoint-production.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:294832390122:ios:3801b4f498f7c267</string>
+	<key>DATABASE_URL</key>
+	<string>https://waypoint-production.firebaseio.com</string>
+</dict>
+</plist>

@@ -28,7 +28,6 @@ struct NoteCreator{
                 }
             }
             if cancelImage != -1 {
-                print("image outta here")
                 images?.remove(at: cancelImage)
                 cancelImage = -1
             }
