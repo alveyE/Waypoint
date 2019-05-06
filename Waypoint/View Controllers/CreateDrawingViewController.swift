@@ -57,6 +57,12 @@ class CreateDrawingViewController: UIViewController {
     
     }
     
+   
+    
+    @IBAction func cancelPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         swiped = false
         if let touch = touches.first {
@@ -64,11 +70,8 @@ class CreateDrawingViewController: UIViewController {
         }
     }
     
-    @IBAction func cancelPressed(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-    }
     func drawLine(fromPoint:CGPoint, toPoint:CGPoint){
-        UIGraphicsBeginImageContext(self.imageView.frame.size)
+        UIGraphicsBeginImageContextWithOptions(self.imageView.frame.size, false, UIScreen.main.scale)
         imageView.image?.draw(in: CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height))
         let context = UIGraphicsGetCurrentContext()
         
