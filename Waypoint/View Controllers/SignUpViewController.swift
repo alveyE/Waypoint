@@ -81,7 +81,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func checkUsername(){
-        let bannedUsernameWords = ["waypoint","fractyldev","nigger"," ","$","@","#","%","*","(",")",";","\"","?","/","\\",":"]
+        let bannedUsernameWords = ["waypoint","fractyldev","nigger","usernames"," ","$","@","#","%","*","(",")",";","\"","?","/","\\",":"]
        
         
         let username = usernameField.text ?? ""
