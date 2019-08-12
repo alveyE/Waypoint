@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 import FirebaseStorage
+import FirebaseAuth
 import UIKit
 
 class DBManager  {
@@ -35,10 +36,12 @@ class DBManager  {
         let locationData = ["latitude" : note.latitude, "longitude" : note.longitude]
         let autoId = self.ref.childByAutoId().key
         self.createdID = autoId ?? ""
+            if let currentUser = Auth.auth().currentUser {
             if preWrittenID == "" {
                 self.ref.child("notes").child(autoId!).setValue(data)
-            //    self.ref.child("notes").child(autoId!).child("uid").setValue(<#T##value: Any?##Any?#>)
+                self.ref.child("notes").child(autoId!).child("createdByUid").setValue(currentUser.uid)
                 self.ref.child("locations").child(autoId!).setValue(locationData)
+                self.ref.child("locations").child(autoId!).child("createdByUid").setValue(currentUser.uid)
             }else {
                 self.ref.child("notes").child(preWrittenID).setValue(data)
                 let utcDate = Date()
@@ -47,6 +50,7 @@ class DBManager  {
                 formatter.dateFormat = "yyyyMMddHHmmss"
                 let editedTime = formatter.string(from: utcDate)
                 self.ref.child("notes").child(preWrittenID).child("editedTimeStamp").setValue(editedTime)
+            }
             }
         }catch{
             print("error \(error)")

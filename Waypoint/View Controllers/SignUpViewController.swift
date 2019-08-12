@@ -183,15 +183,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         if !ageVerificationChecked {
             errorLabel.text = "Must be over 13 to use Waypoint"
             errorLabel.isHidden = false
-        }else{
-           // errorLabel.isHidden = true
+        }else if errorLabel.text == "Must be over 13 to use Waypoint"{
+            errorLabel.isHidden = true
         }
         
         if !termsAndPrivacyChecked{
             errorLabel.text = "Must accept the terms of use and privacy policy"
             errorLabel.isHidden = false
-        }else{
-          //  errorLabel.isHidden = true
+        }else if errorLabel.text == "Must accept the terms of use and privacy policy"{
+            errorLabel.isHidden = true
         }
         
         checkUsername()

@@ -10,6 +10,7 @@
 		13E6AFCA1F837775253FB43F /* Pods_Waypoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */; };
 		C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510EFAE21ADAFE500243FA2 /* DBManager.swift */; };
 		C5BD13A821DF4B9C00BE7F17 /* GeoFenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */; };
+		D117FAEC2287B3A900182B2B /* GroupManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D117FAEB2287B3A900182B2B /* GroupManagerViewController.swift */; };
 		D118587B226646C5001F183C /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D118587A226646C4001F183C /* Roboto-LightItalic.ttf */; };
 		D11924EA227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist in Resources */ = {isa = PBXBuildFile; fileRef = D11924E9227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist */; };
 		D12A54FD2272152C00A471C2 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12A54FC2272152B00A471C2 /* ForgotPasswordViewController.swift */; };
@@ -23,6 +24,7 @@
 		D17A0D4D227749510054D6FB /* refreshGif@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = D17A0D4C2277494F0054D6FB /* refreshGif@2x.gif */; };
 		D17A0D51227898290054D6FB /* NoteBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17A0D50227898280054D6FB /* NoteBar.swift */; };
 		D17A0D53227B91E90054D6FB /* drawingLoading.gif in Resources */ = {isa = PBXBuildFile; fileRef = D17A0D52227B91D20054D6FB /* drawingLoading.gif */; };
+		D17EEDE522948B31000A4018 /* activityIndicator.gif in Resources */ = {isa = PBXBuildFile; fileRef = D17EEDE422948B2F000A4018 /* activityIndicator.gif */; };
 		D18862A522617E1000998F91 /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18862A422617E1000998F91 /* FullScreenImageViewController.swift */; };
 		D18BCE20226E9D30009E83DC /* ErrorBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18BCE1F226E9D2F009E83DC /* ErrorBar.swift */; };
 		D1A7998121BA631F002AF7B2 /* CustomPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */; };
@@ -64,6 +66,7 @@
 		C510EFAE21ADAFE500243FA2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoFenceManager.swift; sourceTree = "<group>"; };
 		D105384D2239D9FA00AC5862 /* Waypoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Waypoint.entitlements; sourceTree = "<group>"; };
+		D117FAEB2287B3A900182B2B /* GroupManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagerViewController.swift; sourceTree = "<group>"; };
 		D118587A226646C4001F183C /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		D11924E9227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-InfoINACTIVE.plist"; sourceTree = "<group>"; };
 		D12A54FC2272152B00A471C2 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +80,7 @@
 		D17A0D4C2277494F0054D6FB /* refreshGif@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "refreshGif@2x.gif"; sourceTree = "<group>"; };
 		D17A0D50227898280054D6FB /* NoteBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBar.swift; sourceTree = "<group>"; };
 		D17A0D52227B91D20054D6FB /* drawingLoading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = drawingLoading.gif; sourceTree = "<group>"; };
+		D17EEDE422948B2F000A4018 /* activityIndicator.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = activityIndicator.gif; sourceTree = "<group>"; };
 		D18862A422617E1000998F91 /* FullScreenImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewController.swift; sourceTree = "<group>"; };
 		D18BCE1F226E9D2F009E83DC /* ErrorBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBar.swift; sourceTree = "<group>"; };
 		D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPointAnnotation.swift; sourceTree = "<group>"; };
@@ -193,6 +197,7 @@
 				D17A0D4C2277494F0054D6FB /* refreshGif@2x.gif */,
 				D17A0D52227B91D20054D6FB /* drawingLoading.gif */,
 				D17A0D4A2277491A0054D6FB /* refreshGif@3x.gif */,
+				D17EEDE422948B2F000A4018 /* activityIndicator.gif */,
 				C510EFAE21ADAFE500243FA2 /* DBManager.swift */,
 				D1AE58F321ADD967003FF5DB /* NoteCreator.swift */,
 				D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */,
@@ -250,6 +255,7 @@
 				D18862A422617E1000998F91 /* FullScreenImageViewController.swift */,
 				D12A54FC2272152B00A471C2 /* ForgotPasswordViewController.swift */,
 				D17A0D4622765BDC0054D6FB /* EditNoteViewController.swift */,
+				D117FAEB2287B3A900182B2B /* GroupManagerViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -353,6 +359,7 @@
 				D1427CA2223B016F00B7512C /* loading.gif in Resources */,
 				D1A8EE352235C04100B308CF /* Roboto-Medium.ttf in Resources */,
 				D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */,
+				D17EEDE522948B31000A4018 /* activityIndicator.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +443,7 @@
 				D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */,
 				D1A7998B21BB3906002AF7B2 /* SignInViewController.swift in Sources */,
 				D1F8F4352238021400C5A997 /* AddWidgetView.swift in Sources */,
+				D117FAEC2287B3A900182B2B /* GroupManagerViewController.swift in Sources */,
 				C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */,
 				D140339521CAF1890030BC62 /* UINoteView.swift in Sources */,
 				D1A7998121BA631F002AF7B2 /* CustomPointAnnotation.swift in Sources */,

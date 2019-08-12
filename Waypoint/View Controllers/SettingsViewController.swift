@@ -16,8 +16,6 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var emailLabel: UILabel!
     
-    @IBOutlet weak var signInButton: UIButton!
-    
     @IBOutlet weak var signOutButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,12 +46,10 @@ class SettingsViewController: UIViewController {
     private func determineShownElements(){
         
         if let user = Auth.auth().currentUser {
-            signInButton.isHidden = true
             displayNameLabel.text = user.displayName
             emailLabel.text = user.email
             signOutButton.isHidden = false
         }else{
-            signInButton.isHidden = false
             displayNameLabel.text = ""
             emailLabel.text = ""
             signOutButton.isHidden = true

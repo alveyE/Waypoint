@@ -724,10 +724,6 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         UIView.animate(withDuration: animationTime) {
             self.alpha = 0
         }
-//        UIView.transition(with: self, duration: 0.2, options: [.transitionCrossDissolve], animations: {
-//
-//        }, completion: nil)
-
     }
     
     public func unHide(){
@@ -749,31 +745,6 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         scroll.contentSize.height += amnt
     }
     
-    
-    
-//    func textViewDidEndEditing(_ textView: UITextView) {
-//
-//
-//        let initialHeight = textView.frame.height
-//        let adjustedSize = textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat(MAXFLOAT)))
-//        let afterHeight = adjustedSize.height
-//        let difference = afterHeight - initialHeight
-//        if let textWidget = textView.superview {
-//            textView.superview!.frame.size = CGSize(width: textWidget.frame.width, height: textWidget.frame.height + difference)
-//
-//            textView.frame.size = adjustedSize
-//            for widget in subviews {
-//                if widget.frame.minY > textView.frame.minY {
-//                    widget.frame = CGRect(x: widget.frame.minX, y: widget.frame.minY + difference, width: widget.frame.width, height: widget.frame.height)
-//                }
-//            }
-//
-//        }
-//
-//
-//    }
-    
-    
 }
 
 
@@ -781,7 +752,6 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
 
 
 protocol UINoteViewDelegate: class {
-    
     func touchHeard(onIndex index: Int)
     func doNothing()
     func refreshPulled()

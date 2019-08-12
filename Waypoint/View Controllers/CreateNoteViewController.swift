@@ -408,8 +408,9 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
             let metaDataI = StorageMetadata()
             metaDataI.contentType = "image/jpg"
           
-            imageRef.putData(data, metadata: metaDataI) { (metadata, error) in
+           let imagePlacement = imageRef.putData(data, metadata: metaDataI) { (metadata, error) in
                
+                
                 
                 imageRef.downloadURL { (url, error) in
                     guard let downloadURL = url else {
@@ -427,7 +428,50 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
                 
                 
             }
-            
+            imagePlacement.observe(.failure) { (snapshot) in
+                if let error = snapshot.error as NSError? {
+                    switch (StorageErrorCode(rawValue: error.code)!) {
+                    case .objectNotFound:
+                        // File doesn't exist
+                        break
+                    case .unauthorized:
+                        // User doesn't have permission to access file
+                        break
+                    case .cancelled:
+                        // User canceled the upload
+                        break
+                        
+                        /* ... */
+                        
+                    case .unknown:
+                        // Unknown error occurred, inspect the server response
+                        break
+                    default:
+                        // A separate error occurred. This is a good place to retry the upload.
+                        imageRef.putData(data, metadata: metaDataI) { (metadata, error) in
+                            
+                            
+                            
+                            imageRef.downloadURL { (url, error) in
+                                guard let downloadURL = url else {
+                                    // Uh-oh, an error occurred!
+                                    print("error getting download url \(String(describing: error))")
+                                    return
+                                }
+                                print(downloadURL)
+                                let urlCreated = downloadURL.absoluteString
+                                print(urlCreated)
+                                let imageDataToSave = ["width":"\(img.size.width)","height":"\(img.size.height)","url":urlCreated]
+                                self.noteCreator.images?.append(imageDataToSave)
+                                
+                            }
+                            
+                            
+                        }
+                        break
+                    }
+                }
+            }
             
             
         }

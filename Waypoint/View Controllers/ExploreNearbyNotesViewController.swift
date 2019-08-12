@@ -76,11 +76,14 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         note.hasSaveButton = true
         note.hasRefresh = true
         note.delegate = self
-        
+        errorBar = ErrorBar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/10))
+        errorBar.layer.zPosition = .greatestFiniteMagnitude
+        note.addSubview(errorBar)
         view.addSubview(note)
     }
     
     func refreshPulled() {
+        checkConnectionStatus()
         note.cleanClear()
         locationsAndIDs = []
         notesIDSInExpand = []
@@ -92,10 +95,6 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         mapView = MKMapView()
         mapView.frame = view.bounds
         mapView.isUserInteractionEnabled = false
-        
-        errorBar = ErrorBar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/10))
-        errorBar.layer.zPosition = .greatestFiniteMagnitude
-        mapView.addSubview(errorBar)
         view.addSubview(mapView)
     }
 
@@ -137,7 +136,8 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     }
     
     
-    private func checkConnectionStatus(){
+    @objc private func checkConnectionStatus(){
+        print("Checking connection")
         var connectionFailedCount = 0
         let connectedRef = Database.database().reference(withPath: ".info/connected")
         for _ in 0..<10 {
@@ -155,8 +155,8 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     
     private func fetchPinLocation(){
         
+        perform(#selector(checkConnectionStatus), with: nil, afterDelay: 5)
         
-        checkConnectionStatus()
         
         ref = Database.database().reference()
         ref.child("locations").observeSingleEvent(of: .value, with: { (snapshot) in

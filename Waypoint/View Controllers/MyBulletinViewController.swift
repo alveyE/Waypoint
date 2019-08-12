@@ -57,7 +57,9 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
         note.hasSaveButton = true
         note.hasRefresh = true
         note.delegate = self
-        
+        errorBar = ErrorBar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/10))
+        errorBar.layer.zPosition = .greatestFiniteMagnitude
+        note.addSubview(errorBar)
         view.addSubview(note)
     }
     
@@ -65,9 +67,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
         mapView = MKMapView()
         mapView.frame = view.bounds
         mapView.isUserInteractionEnabled = false
-        errorBar = ErrorBar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/10))
-        errorBar.layer.zPosition = .greatestFiniteMagnitude
-        mapView.addSubview(errorBar)
+        
         view.addSubview(mapView)
     }
     

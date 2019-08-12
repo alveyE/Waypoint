@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>Item 0</key>
 	<string>Prompt-Regular.ttf</string>
 	<key>LSApplicationCategoryType</key>
@@ -38,9 +38,9 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Used to determine user location to show nearby notes and pins</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string></string>
+	<string>Used to select photo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>Used to select photo</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-LightItalic.ttf</string>

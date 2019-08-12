@@ -222,10 +222,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         recenterButton.setImage(UIImage(named: "center"), for: UIControl.State.normal)
         recenterButton.addTarget(self, action: #selector(centerOnUser), for: .touchUpInside)
         
+        let groupsButton = UIButton(frame: CGRect(x: refreshPadding * 2, y: refreshPadding*2, width: refreshSize, height: refreshSize))
+        groupsButton.setImage(UIImage(named: "add"), for: UIControl.State.normal)
+        groupsButton.addTarget(self, action: #selector(groupsTouched), for: .touchUpInside)
+        
         
         mapView.addSubview(refreshButton)
         mapView.addSubview(recenterButton)
-        
+       // mapView.addSubview(groupsButton)
         
         updatePins()
         
@@ -234,8 +238,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.addSubview(errorBar)
         mapView.isUserInteractionEnabled = true
 
-        
-
+    }
+    
+    @objc private func groupsTouched(){
+        let groupManager = GroupManagerViewController()
+        self.present(groupManager, animated: true)
     }
     
     private func checkConnectionStatus(){
@@ -344,7 +351,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                                 self.ref.child("locations").child(id).removeValue()
                                 self.ref.child("deleted").child(id).setValue(value)
                                 self.ref.child("notes").child(id).removeValue()
-                                self.refreshPulled()
+                                self.refreshPins()
                             }))
                             self.present(confirmAlert, animated: true, completion: nil)
 

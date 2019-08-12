@@ -41,6 +41,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
         incorrectLabel.isHidden = true
         emailField.delegate = self
+        
         // Do any additional setup after loading the view.
     }
     
@@ -58,7 +59,10 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     private func login(userEmail: String, userPassword: String){
         
+        
         Auth.auth().signIn(withEmail: userEmail, password: userPassword) { (user, error) in
+            self.signinButton.setImage(nil, for: .normal)
+            self.signinButton.setTitle("Sign In", for: .normal)
             if error != nil {
                 self.incorrectLabel.isHidden = false
             }
@@ -89,7 +93,10 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         guard let email = emailField.text else {return}
         guard let password = passwordField.text else {return}
         
+        let loadingGif = UIImage.gif(name: "activityIndicator")
         
+        signinButton.setTitle(nil, for: .normal)
+      //  signinButton.setImage(loadingGif, for: .normal)
         
         if isValidEmail(testStr: email){
             login(userEmail: email, userPassword: password)
@@ -111,7 +118,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                                         let emailRetrieved = value["email"] as? String ?? ""
                                         
                                         self.login(userEmail: emailRetrieved, userPassword: password)
-        
+                                        return
                                         
                                     }
                                 })
@@ -121,6 +128,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                             
                         }
                     }
+                    self.login(userEmail: email, userPassword: password)
                     
                     
                 })
