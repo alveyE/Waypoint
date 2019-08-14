@@ -128,7 +128,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                             
                         }
                     }
-                    self.login(userEmail: email, userPassword: password)
                     
                     
                 })
