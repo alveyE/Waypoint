@@ -53,7 +53,7 @@ class ErrorBar: UIView {
         let text = UILabel(frame: CGRect(x: 0, y: self.frame.height/2, width: self.frame.width, height: self.frame.height/2))
         text.textColor = messageColor
         text.textAlignment = .center
-        text.font = UIFont(name: "Roboto-Regular", size: self.frame.height/3)
+        text.font = UIFont(name: "Roboto-Regular", size: self.frame.height/4)
         text.text = message
         return text
     }

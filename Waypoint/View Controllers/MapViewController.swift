@@ -268,9 +268,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             let waypoint = MKPointAnnotation()
             waypoint.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-            
             mapView.removeAnnotation(waypoint)
             mapView.addAnnotation(waypoint)
+            
         }
 
     }
@@ -403,20 +403,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
     }
-//
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        if annotation.title != "My Location" {
-//        let customPin = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-//            customPin.tintColor = pinT
-//        return customPin
-//        }else {
-//            return nil
-//        }
-//    }
 
-//    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-//        view.image = UIImage(named: "customPin")
-//    }
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation.title != "My Location" {
+            let reuseIdentifier = "annotationView"
+            var view = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
+            if #available(iOS 11.0, *) {
+                if view == nil {
+                    view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+                }
+                view?.displayPriority = .required
+            } else {
+                if view == nil {
+                    view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+                }
+            }
+            view?.annotation = annotation
+            view?.canShowCallout = true
+            return view
+        }else {
+            return nil
+        }
+    }
+
+
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         

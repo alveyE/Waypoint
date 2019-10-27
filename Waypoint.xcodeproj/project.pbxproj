@@ -29,7 +29,7 @@
 		D18BCE20226E9D30009E83DC /* ErrorBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18BCE1F226E9D2F009E83DC /* ErrorBar.swift */; };
 		D1A7998121BA631F002AF7B2 /* CustomPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */; };
 		D1A7998721BA6EF3002AF7B2 /* MyBulletinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */; };
-		D1A7998921BA6FE7002AF7B2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */; };
+		D1A7998921BA6FE7002AF7B2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998821BA6FE7002AF7B2 /* ProfileViewController.swift */; };
 		D1A7998B21BB3906002AF7B2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */; };
 		D1A7999121BC68DE002AF7B2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */; };
 		D1A8EE252232F77600B308CF /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A8EE242232F77600B308CF /* UIImage+Gif.swift */; };
@@ -47,6 +47,9 @@
 		D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */; };
 		D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58F321ADD967003FF5DB /* NoteCreator.swift */; };
 		D1B648FC21B6426400B74900 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D1B648FB21B6426400B74900 /* Podfile */; };
+		D1C1CFB723047A590033EB09 /* ArrowLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C1CFB623047A590033EB09 /* ArrowLines.swift */; };
+		D1C620552361F3FF005608B0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C620542361F3FF005608B0 /* SettingsViewController.swift */; };
+		D1C6205723633096005608B0 /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C6205623633096005608B0 /* SecurityViewController.swift */; };
 		D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D35D2221B7118600272F76 /* GoogleService-Info.plist */; };
 		D1DBA67D222B4A56006D5728 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1DBA67B222B4A3E006D5728 /* Lato-Bold.ttf */; };
 		D1DBA67E222B4A59006D5728 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1DBA67C222B4A40006D5728 /* Lato-Regular.ttf */; };
@@ -85,7 +88,7 @@
 		D18BCE1F226E9D2F009E83DC /* ErrorBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBar.swift; sourceTree = "<group>"; };
 		D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPointAnnotation.swift; sourceTree = "<group>"; };
 		D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBulletinViewController.swift; sourceTree = "<group>"; };
-		D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D1A7998821BA6FE7002AF7B2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D1A8EE242232F77600B308CF /* UIImage+Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
@@ -105,6 +108,9 @@
 		D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
 		D1AE58F321ADD967003FF5DB /* NoteCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCreator.swift; sourceTree = "<group>"; };
 		D1B648FB21B6426400B74900 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		D1C1CFB623047A590033EB09 /* ArrowLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowLines.swift; sourceTree = "<group>"; };
+		D1C620542361F3FF005608B0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D1C6205623633096005608B0 /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
 		D1D35D2221B7118600272F76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D1DBA67B222B4A3E006D5728 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		D1DBA67C222B4A40006D5728 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
@@ -185,6 +191,7 @@
 		D1AE58C6219E025E003FF5DB /* Waypoint */ = {
 			isa = PBXGroup;
 			children = (
+				D1C1CFB5230479DE0033EB09 /* UI Materials */,
 				D1AE58D3219E0262003FF5DB /* Info.plist */,
 				D1DBA67A222B4A22006D5728 /* Fonts */,
 				D1F8F4382238074300C5A997 /* Supporting Files */,
@@ -192,7 +199,6 @@
 				D1AE58CB219E025E003FF5DB /* Main.storyboard */,
 				D1AE58CE219E0262003FF5DB /* Assets.xcassets */,
 				D1AE58D0219E0262003FF5DB /* LaunchScreen.storyboard */,
-				D1AE58D9219E0F5C003FF5DB /* NoteView.swift */,
 				D1AE58DB219E5183003FF5DB /* Note.swift */,
 				D17A0D4C2277494F0054D6FB /* refreshGif@2x.gif */,
 				D17A0D52227B91D20054D6FB /* drawingLoading.gif */,
@@ -202,16 +208,25 @@
 				D1AE58F321ADD967003FF5DB /* NoteCreator.swift */,
 				D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */,
 				D1F8F4362238060200C5A997 /* Widgets */,
-				D140339421CAF1890030BC62 /* UINoteView.swift */,
 				C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */,
-				D1A8EE242232F77600B308CF /* UIImage+Gif.swift */,
-				D1F8F4322237F35000C5A997 /* ImageFullScreen.swift */,
 				D17A0D48227748D00054D6FB /* refreshGif.gif */,
 				D1427CA1223B016C00B7512C /* loading.gif */,
-				D18BCE1F226E9D2F009E83DC /* ErrorBar.swift */,
-				D17A0D50227898280054D6FB /* NoteBar.swift */,
 			);
 			path = Waypoint;
+			sourceTree = "<group>";
+		};
+		D1C1CFB5230479DE0033EB09 /* UI Materials */ = {
+			isa = PBXGroup;
+			children = (
+				D1AE58D9219E0F5C003FF5DB /* NoteView.swift */,
+				D140339421CAF1890030BC62 /* UINoteView.swift */,
+				D1A8EE242232F77600B308CF /* UIImage+Gif.swift */,
+				D1F8F4322237F35000C5A997 /* ImageFullScreen.swift */,
+				D18BCE1F226E9D2F009E83DC /* ErrorBar.swift */,
+				D17A0D50227898280054D6FB /* NoteBar.swift */,
+				D1C1CFB623047A590033EB09 /* ArrowLines.swift */,
+			);
+			path = "UI Materials";
 			sourceTree = "<group>";
 		};
 		D1DBA67A222B4A22006D5728 /* Fonts */ = {
@@ -248,7 +263,7 @@
 				D1427CA3223BEB8600B7512C /* CreateDrawingViewController.swift */,
 				D1AE58C9219E025E003FF5DB /* MapViewController.swift */,
 				D1A7998621BA6EF3002AF7B2 /* MyBulletinViewController.swift */,
-				D1A7998821BA6FE7002AF7B2 /* SettingsViewController.swift */,
+				D1A7998821BA6FE7002AF7B2 /* ProfileViewController.swift */,
 				D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */,
 				D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */,
 				D1DDA17421C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift */,
@@ -256,6 +271,8 @@
 				D12A54FC2272152B00A471C2 /* ForgotPasswordViewController.swift */,
 				D17A0D4622765BDC0054D6FB /* EditNoteViewController.swift */,
 				D117FAEB2287B3A900182B2B /* GroupManagerViewController.swift */,
+				D1C620542361F3FF005608B0 /* SettingsViewController.swift */,
+				D1C6205623633096005608B0 /* SecurityViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -434,12 +451,14 @@
 				D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */,
 				D1F8F4332237F35100C5A997 /* ImageFullScreen.swift in Sources */,
 				D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */,
+				D1C620552361F3FF005608B0 /* SettingsViewController.swift in Sources */,
 				D12A54FD2272152C00A471C2 /* ForgotPasswordViewController.swift in Sources */,
 				D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */,
 				D17A0D4722765BDC0054D6FB /* EditNoteViewController.swift in Sources */,
 				D1DDA17321C863EA00E3F2B0 /* DrawingWidget.swift in Sources */,
 				D18BCE20226E9D30009E83DC /* ErrorBar.swift in Sources */,
 				D1DDA16721C2C69300E3F2B0 /* TextWidget.swift in Sources */,
+				D1C1CFB723047A590033EB09 /* ArrowLines.swift in Sources */,
 				D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */,
 				D1A7998B21BB3906002AF7B2 /* SignInViewController.swift in Sources */,
 				D1F8F4352238021400C5A997 /* AddWidgetView.swift in Sources */,
@@ -451,9 +470,10 @@
 				D1A7998721BA6EF3002AF7B2 /* MyBulletinViewController.swift in Sources */,
 				D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */,
 				D1AE58DC219E5183003FF5DB /* Note.swift in Sources */,
+				D1C6205723633096005608B0 /* SecurityViewController.swift in Sources */,
 				D1427CA4223BEB8700B7512C /* CreateDrawingViewController.swift in Sources */,
 				D1DDA17521C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift in Sources */,
-				D1A7998921BA6FE7002AF7B2 /* SettingsViewController.swift in Sources */,
+				D1A7998921BA6FE7002AF7B2 /* ProfileViewController.swift in Sources */,
 				D1DDA16521C2B9ED00E3F2B0 /* TitleView.swift in Sources */,
 				D1DDA16921C45DB900E3F2B0 /* ImageFrameView.swift in Sources */,
 				D17A0D51227898290054D6FB /* NoteBar.swift in Sources */,

@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Waypoint
 //
-//  Created by Bret Alvey on 11/15/18.
+//  Created by Ethan Alvey on 11/15/18.
 //  Copyright © 2018 Ethan Alvey. All rights reserved.
 //
 
