@@ -51,6 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        if Auth.auth().currentUser?.isAnonymous ?? false{
+            do {
+                try Auth.auth().signOut()
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
+        }
+        
         let presentedController = UIApplication.topViewController()
         if Auth.auth().currentUser == nil && !(presentedController is SignUpViewController){
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

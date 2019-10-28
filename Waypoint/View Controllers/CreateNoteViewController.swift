@@ -125,9 +125,11 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     }
     
     func displayImage(image: UIImage) {
-        let imageFullScreenVC = self.storyboard!.instantiateViewController(withIdentifier: "FullScreenImage") as! FullScreenImageViewController
+        if let stry = self.storyboard {
+        let imageFullScreenVC = stry.instantiateViewController(withIdentifier: "FullScreenImage") as! FullScreenImageViewController
         imageFullScreenVC.image = image
         self.show(imageFullScreenVC, sender: self)
+        }
     }
     
     private func updateUsername(){

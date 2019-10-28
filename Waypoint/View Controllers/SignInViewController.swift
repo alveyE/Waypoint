@@ -56,9 +56,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         return emailTest.evaluate(with: testStr)
     }
     
-    
     private func login(userEmail: String, userPassword: String){
-        
         
         Auth.auth().signIn(withEmail: userEmail, password: userPassword) { (user, error) in
             self.signinButton.setImage(nil, for: .normal)
@@ -101,36 +99,45 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         if isValidEmail(testStr: email){
             login(userEmail: email, userPassword: password)
         }else{
-            let ref = Database.database().reference()
-            
-                ref.child("users").child("usernames").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    for case let childSnapshot as DataSnapshot in snapshot.children {
+            Auth.auth().signInAnonymously() { (authResult, error) in
+                if error != nil {
+                    print(error.debugDescription)
+                }else{
 
-                        if let childData = childSnapshot.value as? [String : Any] {
+                    let ref = Database.database().reference()
+                    
+                    ref.child("users").child("usernames").observeSingleEvent(of: .value, with: { (snapshot) in
+                        
+                        for case let childSnapshot as DataSnapshot in snapshot.children {
                             
-                            let username = childData["username"] as? String ?? ""
-                            
-                            if email == username {
-                            let idRetrieved = childSnapshot.key
-                                ref.child("users").child(idRetrieved).observeSingleEvent(of: .value, with: { (usersnap) in
-                                    if let value = usersnap.value as? [String : Any] {
-                                        let emailRetrieved = value["email"] as? String ?? ""
-                                        
-                                        self.login(userEmail: emailRetrieved, userPassword: password)
-                                        return
-                                        
-                                    }
-                                })
+                            if let childData = childSnapshot.value as? [String : Any] {
                                 
+                                let username = childData["username"] as? String ?? ""
+                                
+                                if email == username {
+                                    let idRetrieved = childSnapshot.key
+                                    ref.child("users").child(idRetrieved).observeSingleEvent(of: .value, with: { (usersnap) in
+                                        if let value = usersnap.value as? [String : Any] {
+                                            let emailRetrieved = value["email"] as? String ?? ""
+                                            
+                                            self.login(userEmail: emailRetrieved, userPassword: password)
+                                            return
+                                            
+                                        }
+                                    })
+                                    
+                                    
+                                }
                                 
                             }
-                            
                         }
-                    }
-                    
-                    
-                })
+                        
+                        
+                    })
+
+                }
+            }
+            
             
             
         }

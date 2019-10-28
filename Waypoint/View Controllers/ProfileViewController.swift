@@ -66,7 +66,8 @@ class ProfileViewController: UIViewController {
     }
     
     private func determineShownElements(){
-        
+        displayNameLabel.adjustsFontSizeToFitWidth = true
+        emailLabel.adjustsFontSizeToFitWidth = true
         if let user = Auth.auth().currentUser {
             displayNameLabel.text = user.displayName
             emailLabel.text = user.email
