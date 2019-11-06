@@ -87,6 +87,7 @@ class LinkWidget: UIView {
     private func createLinkText() -> UITextView{
         let text = UITextView(frame: CGRect(x: width/4, y: height/3, width: width - width/4, height: height/3))
      //   text.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        text.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         tintColor = #colorLiteral(red: 0, green: 0, blue: 0.9803921569, alpha: 1)
         text.isEditable = editable
         text.isScrollEnabled = false
@@ -138,7 +139,7 @@ class LinkWidget: UIView {
                 
                 let icon = UIImage(data: data) ?? UIImage()
                 //UI STUFF
-                
+
                 self.createImageIcon(with: icon)
                 
             }
@@ -165,9 +166,13 @@ class LinkWidget: UIView {
             
         }
         
-        
+
         self.icon = imageView
     }
+    
+    
+   
+    
     
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()

@@ -13,7 +13,6 @@ class EditNoteViewController: CreateNoteViewController {
 
     public var noteBeingEdited = Note()
     public var idOfNote = "editedID"
-    public var viewComingFrom: UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,7 +141,8 @@ class EditNoteViewController: CreateNoteViewController {
             noteCreator.longitude = noteBeingEdited.longitude
             noteCreator.timeStamp = noteBeingEdited.timeStamp
             noteCreator.writeNote(to: idOfNote)
-            viewComingFrom = nil
+            
+
             self.dismiss(animated: true, completion: nil)
             }
        

@@ -10,13 +10,19 @@
 		13E6AFCA1F837775253FB43F /* Pods_Waypoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */; };
 		C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510EFAE21ADAFE500243FA2 /* DBManager.swift */; };
 		C5BD13A821DF4B9C00BE7F17 /* GeoFenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */; };
+		C7E2AEF82372BA670043C342 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AEF72372BA670043C342 /* loading.gif */; };
+		C7E2AEFE237321530043C342 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AEF9237321530043C342 /* Roboto-Medium.ttf */; };
+		C7E2AEFF237321530043C342 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AEFA237321530043C342 /* Roboto-LightItalic.ttf */; };
+		C7E2AF00237321530043C342 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AEFB237321530043C342 /* Roboto-MediumItalic.ttf */; };
+		C7E2AF01237321530043C342 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AEFC237321530043C342 /* Roboto-Bold.ttf */; };
+		C7E2AF02237321530043C342 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AEFD237321530043C342 /* Roboto-Regular.ttf */; };
+		C7E2AF05237321F10043C342 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AF03237321F10043C342 /* Lato-Bold.ttf */; };
+		C7E2AF06237321F10043C342 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AF04237321F10043C342 /* Lato-Regular.ttf */; };
 		D117FAEC2287B3A900182B2B /* GroupManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D117FAEB2287B3A900182B2B /* GroupManagerViewController.swift */; };
-		D118587B226646C5001F183C /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D118587A226646C4001F183C /* Roboto-LightItalic.ttf */; };
 		D11924EA227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist in Resources */ = {isa = PBXBuildFile; fileRef = D11924E9227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist */; };
 		D12A54FD2272152C00A471C2 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12A54FC2272152B00A471C2 /* ForgotPasswordViewController.swift */; };
 		D140339321CA97F40030BC62 /* LinkWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339221CA97F40030BC62 /* LinkWidget.swift */; };
 		D140339521CAF1890030BC62 /* UINoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339421CAF1890030BC62 /* UINoteView.swift */; };
-		D1427CA2223B016F00B7512C /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = D1427CA1223B016C00B7512C /* loading.gif */; };
 		D1427CA4223BEB8700B7512C /* CreateDrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1427CA3223BEB8600B7512C /* CreateDrawingViewController.swift */; };
 		D17A0D4722765BDC0054D6FB /* EditNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17A0D4622765BDC0054D6FB /* EditNoteViewController.swift */; };
 		D17A0D49227748D10054D6FB /* refreshGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = D17A0D48227748D00054D6FB /* refreshGif.gif */; };
@@ -33,10 +39,6 @@
 		D1A7998B21BB3906002AF7B2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */; };
 		D1A7999121BC68DE002AF7B2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */; };
 		D1A8EE252232F77600B308CF /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A8EE242232F77600B308CF /* UIImage+Gif.swift */; };
-		D1A8EE322235BFB800B308CF /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1A8EE302235BFB800B308CF /* Roboto-Regular.ttf */; };
-		D1A8EE332235BFB800B308CF /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1A8EE312235BFB800B308CF /* Roboto-Bold.ttf */; };
-		D1A8EE352235C04100B308CF /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1A8EE342235C04100B308CF /* Roboto-Medium.ttf */; };
-		D1A8EE372235C47E00B308CF /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1A8EE362235C47E00B308CF /* Roboto-MediumItalic.ttf */; };
 		D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C7219E025E003FF5DB /* AppDelegate.swift */; };
 		D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58C9219E025E003FF5DB /* MapViewController.swift */; };
 		D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AE58CB219E025E003FF5DB /* Main.storyboard */; };
@@ -51,8 +53,6 @@
 		D1C620552361F3FF005608B0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C620542361F3FF005608B0 /* SettingsViewController.swift */; };
 		D1C6205723633096005608B0 /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C6205623633096005608B0 /* SecurityViewController.swift */; };
 		D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D35D2221B7118600272F76 /* GoogleService-Info.plist */; };
-		D1DBA67D222B4A56006D5728 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1DBA67B222B4A3E006D5728 /* Lato-Bold.ttf */; };
-		D1DBA67E222B4A59006D5728 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1DBA67C222B4A40006D5728 /* Lato-Regular.ttf */; };
 		D1DDA16521C2B9ED00E3F2B0 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */; };
 		D1DDA16721C2C69300E3F2B0 /* TextWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */; };
 		D1DDA16921C45DB900E3F2B0 /* ImageFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */; };
@@ -68,14 +68,20 @@
 		80CA2E99CF4C2788871EB08E /* Pods-Waypoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Waypoint.release.xcconfig"; path = "Pods/Target Support Files/Pods-Waypoint/Pods-Waypoint.release.xcconfig"; sourceTree = "<group>"; };
 		C510EFAE21ADAFE500243FA2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoFenceManager.swift; sourceTree = "<group>"; };
+		C7E2AEF72372BA670043C342 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loading.gif; path = ../../../Downloads/loading.gif; sourceTree = "<group>"; };
+		C7E2AEF9237321530043C342 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "../../../../Downloads/Roboto/Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		C7E2AEFA237321530043C342 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-LightItalic.ttf"; path = "../../../../Downloads/Roboto/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
+		C7E2AEFB237321530043C342 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-MediumItalic.ttf"; path = "../../../../Downloads/Roboto/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
+		C7E2AEFC237321530043C342 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "../../../../Downloads/Roboto/Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		C7E2AEFD237321530043C342 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../../../../Downloads/Roboto/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		C7E2AF03237321F10043C342 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "../../../../Downloads/Lato/Lato-Bold.ttf"; sourceTree = "<group>"; };
+		C7E2AF04237321F10043C342 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../../../../Downloads/Lato/Lato-Regular.ttf"; sourceTree = "<group>"; };
 		D105384D2239D9FA00AC5862 /* Waypoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Waypoint.entitlements; sourceTree = "<group>"; };
 		D117FAEB2287B3A900182B2B /* GroupManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagerViewController.swift; sourceTree = "<group>"; };
-		D118587A226646C4001F183C /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		D11924E9227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-InfoINACTIVE.plist"; sourceTree = "<group>"; };
 		D12A54FC2272152B00A471C2 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		D140339221CA97F40030BC62 /* LinkWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkWidget.swift; sourceTree = "<group>"; };
 		D140339421CAF1890030BC62 /* UINoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINoteView.swift; sourceTree = "<group>"; };
-		D1427CA1223B016C00B7512C /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loading.gif; path = ../../../loading.gif; sourceTree = "<group>"; };
 		D1427CA3223BEB8600B7512C /* CreateDrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateDrawingViewController.swift; sourceTree = "<group>"; };
 		D17A0D4622765BDC0054D6FB /* EditNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewController.swift; sourceTree = "<group>"; };
 		D17A0D48227748D00054D6FB /* refreshGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = refreshGif.gif; sourceTree = "<group>"; };
@@ -92,10 +98,6 @@
 		D1A7998A21BB3906002AF7B2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		D1A7999021BC68DE002AF7B2 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D1A8EE242232F77600B308CF /* UIImage+Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
-		D1A8EE302235BFB800B308CF /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../../../../../Downloads/Roboto/Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		D1A8EE312235BFB800B308CF /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "../../../../../Downloads/Roboto/Roboto-Bold.ttf"; sourceTree = "<group>"; };
-		D1A8EE342235C04100B308CF /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
-		D1A8EE362235C47E00B308CF /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
 		D1AE58C4219E025E003FF5DB /* Waypoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waypoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AE58C7219E025E003FF5DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1AE58C9219E025E003FF5DB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -112,8 +114,6 @@
 		D1C620542361F3FF005608B0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D1C6205623633096005608B0 /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
 		D1D35D2221B7118600272F76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		D1DBA67B222B4A3E006D5728 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
-		D1DBA67C222B4A40006D5728 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWidget.swift; sourceTree = "<group>"; };
 		D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFrameView.swift; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 				D1F8F4362238060200C5A997 /* Widgets */,
 				C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */,
 				D17A0D48227748D00054D6FB /* refreshGif.gif */,
-				D1427CA1223B016C00B7512C /* loading.gif */,
+				C7E2AEF72372BA670043C342 /* loading.gif */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -232,13 +232,13 @@
 		D1DBA67A222B4A22006D5728 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				D1A8EE312235BFB800B308CF /* Roboto-Bold.ttf */,
-				D1A8EE342235C04100B308CF /* Roboto-Medium.ttf */,
-				D1A8EE302235BFB800B308CF /* Roboto-Regular.ttf */,
-				D118587A226646C4001F183C /* Roboto-LightItalic.ttf */,
-				D1A8EE362235C47E00B308CF /* Roboto-MediumItalic.ttf */,
-				D1DBA67B222B4A3E006D5728 /* Lato-Bold.ttf */,
-				D1DBA67C222B4A40006D5728 /* Lato-Regular.ttf */,
+				C7E2AEFC237321530043C342 /* Roboto-Bold.ttf */,
+				C7E2AEFA237321530043C342 /* Roboto-LightItalic.ttf */,
+				C7E2AEF9237321530043C342 /* Roboto-Medium.ttf */,
+				C7E2AF03237321F10043C342 /* Lato-Bold.ttf */,
+				C7E2AF04237321F10043C342 /* Lato-Regular.ttf */,
+				C7E2AEFB237321530043C342 /* Roboto-MediumItalic.ttf */,
+				C7E2AEFD237321530043C342 /* Roboto-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -358,23 +358,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7E2AF00237321530043C342 /* Roboto-MediumItalic.ttf in Resources */,
 				D1B648FC21B6426400B74900 /* Podfile in Resources */,
-				D1A8EE372235C47E00B308CF /* Roboto-MediumItalic.ttf in Resources */,
-				D1A8EE332235BFB800B308CF /* Roboto-Bold.ttf in Resources */,
 				D1AE58D2219E0262003FF5DB /* LaunchScreen.storyboard in Resources */,
+				C7E2AF06237321F10043C342 /* Lato-Regular.ttf in Resources */,
+				C7E2AEFF237321530043C342 /* Roboto-LightItalic.ttf in Resources */,
 				D17A0D4D227749510054D6FB /* refreshGif@2x.gif in Resources */,
-				D118587B226646C5001F183C /* Roboto-LightItalic.ttf in Resources */,
-				D1DBA67D222B4A56006D5728 /* Lato-Bold.ttf in Resources */,
 				D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */,
+				C7E2AEFE237321530043C342 /* Roboto-Medium.ttf in Resources */,
+				C7E2AF05237321F10043C342 /* Lato-Bold.ttf in Resources */,
 				D17A0D49227748D10054D6FB /* refreshGif.gif in Resources */,
-				D1A8EE322235BFB800B308CF /* Roboto-Regular.ttf in Resources */,
 				D17A0D53227B91E90054D6FB /* drawingLoading.gif in Resources */,
 				D11924EA227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist in Resources */,
 				D17A0D4B2277491C0054D6FB /* refreshGif@3x.gif in Resources */,
-				D1DBA67E222B4A59006D5728 /* Lato-Regular.ttf in Resources */,
+				C7E2AEF82372BA670043C342 /* loading.gif in Resources */,
+				C7E2AF01237321530043C342 /* Roboto-Bold.ttf in Resources */,
+				C7E2AF02237321530043C342 /* Roboto-Regular.ttf in Resources */,
 				D1AE58CF219E0262003FF5DB /* Assets.xcassets in Resources */,
-				D1427CA2223B016F00B7512C /* loading.gif in Resources */,
-				D1A8EE352235C04100B308CF /* Roboto-Medium.ttf in Resources */,
 				D1AE58CD219E025E003FF5DB /* Main.storyboard in Resources */,
 				D17EEDE522948B31000A4018 /* activityIndicator.gif in Resources */,
 			);
@@ -389,30 +389,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Waypoint/Pods-Waypoint-frameworks.sh",
-				"${PODS_ROOT}/Appgrades/Appgrades/Appgrades.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Waypoint/Pods-Waypoint-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Appgrades.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Waypoint/Pods-Waypoint-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Waypoint/Pods-Waypoint-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Waypoint/Pods-Waypoint-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4B6DAA5A5D5FE6236396B449 /* [CP] Check Pods Manifest.lock */ = {

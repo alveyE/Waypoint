@@ -339,7 +339,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                                     let note = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images , links: links ?? nil, drawings: drawings ?? nil, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
                                     editor.noteBeingEdited = note
                                     editor.idOfNote = snapshot.key
-                                    editor.viewComingFrom = self
                                     self.present(editor, animated: true, completion: nil)
                                 }
                             })

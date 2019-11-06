@@ -88,18 +88,27 @@ class TitleView: UIView, UITextViewDelegate {
     
     
     private func createTitleText() -> UITextField {
+        
+        for fontFamilyName in UIFont.familyNames{
+            for fontName in UIFont.fontNames(forFamilyName: fontFamilyName){
+                print("Family: \(fontFamilyName)     Font: \(fontName)")
+            }
+        }
+        
+        
+        
         // width * 8/9
         let title = UITextField(frame: CGRect(x: width/25, y: height/50, width: width * 81/100, height: height * 3/8))
         title.isUserInteractionEnabled = editable
-    //    title.isEditable = editable
         title.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-   //     title.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
- //       title.isScrollEnabled = false
- //       title.delegate = self
+        title.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+
         let titleFont = UIFont(name: "Roboto-Medium", size: height/4)
         title.font = titleFont
         if editable {
-        title.placeholder = "Enter title here"
+        
+        title.attributedPlaceholder = NSAttributedString(string:"Enter title here", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+    
         }else {
         title.text = self.title
         }
