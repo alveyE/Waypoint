@@ -85,6 +85,12 @@ class ImageFrameView: UIView {
             imageCentered.isUserInteractionEnabled = true
             let iTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
             imageCentered.addGestureRecognizer(iTap)
+      
+            if !hasChanged {
+               // image
+           
+            }
+            
             return imageCentered
         }else{
             return UIImageView()
