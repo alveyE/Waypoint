@@ -194,6 +194,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="kcv-Uf-E5T"/>
                     <connections>
+                        <outlet property="aboutStack" destination="MGs-lo-nPQ" id="YZ0-0M-VQy"/>
                         <outlet property="displayNameLabel" destination="AcF-Jg-Up5" id="Tm0-dL-t07"/>
                         <outlet property="emailLabel" destination="Fj8-9R-t29" id="a3M-Ka-25I"/>
                         <outlet property="mainView" destination="HIf-nW-iDZ" id="1wa-Yg-AER"/>
@@ -833,20 +834,84 @@
             </objects>
             <point key="canvasLocation" x="3437.5999999999999" y="1535.9820089955024"/>
         </scene>
-        <!--View Controller-->
+        <!--About View Controller-->
         <scene sceneID="5Q1-YZ-qbg">
             <objects>
-                <viewController id="pT5-5d-b8T" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AboutViewController" id="pT5-5d-b8T" customClass="AboutViewController" customModule="Waypoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dR8-3v-1xa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cQd-kI-AVE">
+                                <rect key="frame" x="33" y="261.5" width="349" height="216.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <string key="text">Seamlessly share text, photos, links, and more with anyone and anywhere. Waypoint Communication allows you to share what and importantly where you are experiencing with those around you.</string>
+                                <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WaypointTextTeal" translatesAutoresizingMaskIntoConstraints="NO" id="i9E-CX-0Ze">
+                                <rect key="frame" x="16" y="125" width="382" height="84"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="i9E-CX-0Ze" secondAttribute="height" multiplier="191:42" id="tkM-eR-A6J"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="57" translatesAutoresizingMaskIntoConstraints="NO" id="Zgx-fF-TzT">
+                                <rect key="frame" x="33" y="486" width="350" height="175"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nte-U4-JM8">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="1"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="350" id="WOI-kY-R2g"/>
+                                            <constraint firstAttribute="height" constant="1" id="vqD-rJ-lGR"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="V5I-VY-LJp">
+                                        <rect key="frame" x="75.5" y="58" width="199" height="117"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Privacy Policy" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="e1I-Q2-6km">
+                                                <rect key="frame" x="0.0" y="0.0" width="199" height="54.5"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="textColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Terms of Use" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vu1-DZ-83w">
+                                                <rect key="frame" x="0.0" y="62.5" width="199" height="54.5"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="textColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Zgx-fF-TzT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cQd-kI-AVE" secondAttribute="bottom" constant="8" id="Acs-sL-88g"/>
+                            <constraint firstItem="Zgx-fF-TzT" firstAttribute="centerX" secondItem="SBw-jV-lQb" secondAttribute="centerX" constant="1" id="PwD-kN-fbV"/>
+                            <constraint firstItem="SBw-jV-lQb" firstAttribute="trailing" secondItem="cQd-kI-AVE" secondAttribute="trailing" constant="32" id="SfS-ce-umu"/>
+                            <constraint firstItem="cQd-kI-AVE" firstAttribute="leading" secondItem="SBw-jV-lQb" secondAttribute="leading" constant="33" id="Ss6-gI-gg0"/>
+                            <constraint firstItem="i9E-CX-0Ze" firstAttribute="top" secondItem="SBw-jV-lQb" secondAttribute="top" priority="999" constant="81" id="ma2-aF-6K5"/>
+                            <constraint firstItem="i9E-CX-0Ze" firstAttribute="leading" secondItem="SBw-jV-lQb" secondAttribute="leading" constant="16" id="rVC-Ah-LoH"/>
+                            <constraint firstItem="i9E-CX-0Ze" firstAttribute="trailing" secondItem="SBw-jV-lQb" secondAttribute="trailing" constant="-16" id="vYL-lB-qXD"/>
+                            <constraint firstItem="cQd-kI-AVE" firstAttribute="top" secondItem="i9E-CX-0Ze" secondAttribute="bottom" constant="52.5" id="zES-JC-cxU"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="SBw-jV-lQb"/>
                     </view>
+                    <connections>
+                        <outlet property="privacyText" destination="e1I-Q2-6km" id="6Jj-id-szh"/>
+                        <outlet property="termsText" destination="vu1-DZ-83w" id="WDA-oV-GXC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ao9-jB-3XG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="977" y="1620"/>
+            <point key="canvasLocation" x="976.81159420289862" y="1619.8660714285713"/>
         </scene>
     </scenes>
     <resources>

@@ -2,7 +2,7 @@
 //  SettingsViewController.swift
 //  Waypoint
 //
-//  Created by Bret Alvey on 12/7/18.
+//  Created by Ethan Alvey on 12/7/18.
 //  Copyright © 2018 Ethan Alvey. All rights reserved.
 //
 
@@ -29,6 +29,16 @@ class ProfileViewController: UIViewController {
             securityStack.addGestureRecognizer(touch)
         }
     }
+    
+    
+    @IBOutlet weak var aboutStack: UIStackView! {
+        didSet{
+             let touch = UITapGestureRecognizer(target: self, action: #selector(aboutTouched))
+                       aboutStack.addGestureRecognizer(touch)
+                   }
+    }
+    
+    
     @IBOutlet weak var signOutButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +68,11 @@ class ProfileViewController: UIViewController {
     @objc private func settingsTouched(){
         let settingsVC = self.storyboard!.instantiateViewController(withIdentifier: "SettingsViewController")
         self.show(settingsVC, sender: self)
+    }
+
+    @objc private func aboutTouched(){
+        let aboutVC = self.storyboard!.instantiateViewController(withIdentifier: "AboutViewController")
+        self.show(aboutVC, sender: self)
     }
     
     @objc private func securityTouched(){

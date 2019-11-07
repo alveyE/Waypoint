@@ -2,7 +2,7 @@
 //  SignInViewController.swift
 //  Waypoint
 //
-//  Created by Bret Alvey on 12/7/18.
+//  Created by Ethan Alvey on 12/7/18.
 //  Copyright © 2018 Ethan Alvey. All rights reserved.
 //
 

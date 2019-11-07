@@ -2,7 +2,7 @@
 //  ImageFrameView.swift
 //  Waypoint
 //
-//  Created by Bret Alvey on 12/14/18.
+//  Created by Ethan Alvey on 12/14/18.
 //  Copyright © 2018 Ethan Alvey. All rights reserved.
 //
 
@@ -66,6 +66,7 @@ class ImageFrameView: UIView {
     private func createCenteredImage() -> UIImageView {
         if let imageGiven = image {
             
+            
             var adjustedWidth = imageWidth
             var adjustedHeight = imageHeight
             if adjustedWidth == 0 {
@@ -81,6 +82,7 @@ class ImageFrameView: UIView {
             
             
         let imageCentered = UIImageView(frame: CGRect(x: width/2 - adjustedWidth/2, y: height/2 - adjustedHeight/2, width: adjustedWidth, height: adjustedHeight))
+        
             imageCentered.image = imageGiven
             imageCentered.isUserInteractionEnabled = true
             let iTap = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
@@ -88,7 +90,7 @@ class ImageFrameView: UIView {
       
             if !hasChanged {
                // image
-           
+                imageCentered.contentMode = .scaleAspectFit
             }
             
             return imageCentered
