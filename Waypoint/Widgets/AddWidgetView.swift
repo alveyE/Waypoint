@@ -2,7 +2,7 @@
 //  AddWidgetView.swift
 //  Waypoint
 //
-//  Created by Bret Alvey on 3/12/19.
+//  Created by Ethan Alvey on 3/12/19.
 //  Copyright © 2019 Ethan Alvey. All rights reserved.
 //
 

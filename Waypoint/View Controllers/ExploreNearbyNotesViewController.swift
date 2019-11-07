@@ -2,7 +2,7 @@
 //  ExploreNearbyNotesViewController.swift
 //  Waypoint
 //
-//  Created by Bret Alvey on 12/18/18.
+//  Created by Ethan Alvey on 12/18/18.
 //  Copyright © 2018 Ethan Alvey. All rights reserved.
 //
 
@@ -119,6 +119,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     func displayImage(image: UIImage) {
         let imageFullScreenVC = self.storyboard!.instantiateViewController(withIdentifier: "FullScreenImage") as! FullScreenImageViewController
         imageFullScreenVC.image = image
+        imageFullScreenVC.modalPresentationStyle = .fullScreen
         self.show(imageFullScreenVC, sender: self)
     }
     

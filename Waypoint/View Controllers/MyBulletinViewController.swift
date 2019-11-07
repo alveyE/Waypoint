@@ -2,7 +2,7 @@
 //  MyBulletinViewController.swift
 //  Waypoint
 //
-//  Created by Bret Alvey on 12/7/18.
+//  Created by Ethan Alvey on 12/7/18.
 //  Copyright © 2018 Ethan Alvey. All rights reserved.
 //
 
@@ -179,6 +179,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
     func displayImage(image: UIImage) {
         let imageFullScreenVC = self.storyboard!.instantiateViewController(withIdentifier: "FullScreenImage") as! FullScreenImageViewController
         imageFullScreenVC.image = image
+        imageFullScreenVC.modalPresentationStyle = .fullScreen
         self.show(imageFullScreenVC, sender: self)
     }
     

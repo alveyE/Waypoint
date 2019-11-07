@@ -2,8 +2,8 @@
 //  DBManager.swift
 //  Waypoint
 //
-//  Created by -Theory- on 11/27/18.
-//  Copyright © 2018 Ethan Alvey. All rights reserved.
+//  Created by Carson Cramer on 11/27/18.
+//  Copyright © 2018 Fractyl Development LLC. All rights reserved.
 //
 
 import Foundation

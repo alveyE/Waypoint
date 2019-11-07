@@ -2,7 +2,7 @@
 //  TitleView.swift
 //  Waypoint
 //
-//  Created by Bret Alvey on 12/13/18.
+//  Created by Ethan Alvey on 12/13/18.
 //  Copyright © 2018 Ethan Alvey. All rights reserved.
 //
 
@@ -88,12 +88,6 @@ class TitleView: UIView, UITextViewDelegate {
     
     
     private func createTitleText() -> UITextField {
-        
-        for fontFamilyName in UIFont.familyNames{
-            for fontName in UIFont.fontNames(forFamilyName: fontFamilyName){
-                print("Family: \(fontFamilyName)     Font: \(fontName)")
-            }
-        }
         
         
         

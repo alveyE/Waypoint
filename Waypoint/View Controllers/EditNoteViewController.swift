@@ -2,7 +2,7 @@
 //  EditNoteViewController.swift
 //  Waypoint
 //
-//  Created by Bret Alvey on 4/28/19.
+//  Created by Ethan Alvey on 4/28/19.
 //  Copyright © 2019 Ethan Alvey. All rights reserved.
 //
 

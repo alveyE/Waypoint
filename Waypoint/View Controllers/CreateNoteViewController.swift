@@ -127,6 +127,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     func displayImage(image: UIImage) {
         if let stry = self.storyboard {
         let imageFullScreenVC = stry.instantiateViewController(withIdentifier: "FullScreenImage") as! FullScreenImageViewController
+        imageFullScreenVC.modalPresentationStyle = .fullScreen
         imageFullScreenVC.image = image
         self.show(imageFullScreenVC, sender: self)
         }

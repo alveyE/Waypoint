@@ -2,7 +2,7 @@
 //  SecurityViewController.swift
 //  Waypoint
 //
-//  Created by Bret Alvey on 10/25/19.
+//  Created by Ethan Alvey on 10/25/19.
 //  Copyright © 2019 Ethan Alvey. All rights reserved.
 //
 

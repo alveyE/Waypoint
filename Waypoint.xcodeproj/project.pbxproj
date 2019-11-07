@@ -18,6 +18,8 @@
 		C7E2AF02237321530043C342 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AEFD237321530043C342 /* Roboto-Regular.ttf */; };
 		C7E2AF05237321F10043C342 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AF03237321F10043C342 /* Lato-Bold.ttf */; };
 		C7E2AF06237321F10043C342 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AF04237321F10043C342 /* Lato-Regular.ttf */; };
+		C7E2AF0A2373E5990043C342 /* ArrowLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2AF092373E5990043C342 /* ArrowLines.swift */; };
+		C7E2AF0C2374753D0043C342 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2AF0B2374753D0043C342 /* AboutViewController.swift */; };
 		D117FAEC2287B3A900182B2B /* GroupManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D117FAEB2287B3A900182B2B /* GroupManagerViewController.swift */; };
 		D11924EA227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist in Resources */ = {isa = PBXBuildFile; fileRef = D11924E9227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist */; };
 		D12A54FD2272152C00A471C2 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12A54FC2272152B00A471C2 /* ForgotPasswordViewController.swift */; };
@@ -49,7 +51,6 @@
 		D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */; };
 		D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE58F321ADD967003FF5DB /* NoteCreator.swift */; };
 		D1B648FC21B6426400B74900 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D1B648FB21B6426400B74900 /* Podfile */; };
-		D1C1CFB723047A590033EB09 /* ArrowLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C1CFB623047A590033EB09 /* ArrowLines.swift */; };
 		D1C620552361F3FF005608B0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C620542361F3FF005608B0 /* SettingsViewController.swift */; };
 		D1C6205723633096005608B0 /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C6205623633096005608B0 /* SecurityViewController.swift */; };
 		D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D35D2221B7118600272F76 /* GoogleService-Info.plist */; };
@@ -76,6 +77,8 @@
 		C7E2AEFD237321530043C342 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../../../../Downloads/Roboto/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		C7E2AF03237321F10043C342 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "../../../../Downloads/Lato/Lato-Bold.ttf"; sourceTree = "<group>"; };
 		C7E2AF04237321F10043C342 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../../../../Downloads/Lato/Lato-Regular.ttf"; sourceTree = "<group>"; };
+		C7E2AF092373E5990043C342 /* ArrowLines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowLines.swift; sourceTree = "<group>"; };
+		C7E2AF0B2374753D0043C342 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		D105384D2239D9FA00AC5862 /* Waypoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Waypoint.entitlements; sourceTree = "<group>"; };
 		D117FAEB2287B3A900182B2B /* GroupManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagerViewController.swift; sourceTree = "<group>"; };
 		D11924E9227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-InfoINACTIVE.plist"; sourceTree = "<group>"; };
@@ -110,7 +113,6 @@
 		D1AE58E3219F894E003FF5DB /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
 		D1AE58F321ADD967003FF5DB /* NoteCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCreator.swift; sourceTree = "<group>"; };
 		D1B648FB21B6426400B74900 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		D1C1CFB623047A590033EB09 /* ArrowLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowLines.swift; sourceTree = "<group>"; };
 		D1C620542361F3FF005608B0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D1C6205623633096005608B0 /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
 		D1D35D2221B7118600272F76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -222,9 +224,9 @@
 				D140339421CAF1890030BC62 /* UINoteView.swift */,
 				D1A8EE242232F77600B308CF /* UIImage+Gif.swift */,
 				D1F8F4322237F35000C5A997 /* ImageFullScreen.swift */,
+				C7E2AF092373E5990043C342 /* ArrowLines.swift */,
 				D18BCE1F226E9D2F009E83DC /* ErrorBar.swift */,
 				D17A0D50227898280054D6FB /* NoteBar.swift */,
-				D1C1CFB623047A590033EB09 /* ArrowLines.swift */,
 			);
 			path = "UI Materials";
 			sourceTree = "<group>";
@@ -273,6 +275,7 @@
 				D117FAEB2287B3A900182B2B /* GroupManagerViewController.swift */,
 				D1C620542361F3FF005608B0 /* SettingsViewController.swift */,
 				D1C6205623633096005608B0 /* SecurityViewController.swift */,
+				C7E2AF0B2374753D0043C342 /* AboutViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				D140339321CA97F40030BC62 /* LinkWidget.swift in Sources */,
 				D1A8EE252232F77600B308CF /* UIImage+Gif.swift in Sources */,
 				D1AE58CA219E025E003FF5DB /* MapViewController.swift in Sources */,
+				C7E2AF0A2373E5990043C342 /* ArrowLines.swift in Sources */,
 				D1F8F4332237F35100C5A997 /* ImageFullScreen.swift in Sources */,
 				D1AE58E4219F894E003FF5DB /* CreateNoteViewController.swift in Sources */,
 				D1C620552361F3FF005608B0 /* SettingsViewController.swift in Sources */,
@@ -443,7 +447,6 @@
 				D1DDA17321C863EA00E3F2B0 /* DrawingWidget.swift in Sources */,
 				D18BCE20226E9D30009E83DC /* ErrorBar.swift in Sources */,
 				D1DDA16721C2C69300E3F2B0 /* TextWidget.swift in Sources */,
-				D1C1CFB723047A590033EB09 /* ArrowLines.swift in Sources */,
 				D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */,
 				D1A7998B21BB3906002AF7B2 /* SignInViewController.swift in Sources */,
 				D1F8F4352238021400C5A997 /* AddWidgetView.swift in Sources */,
@@ -455,6 +458,7 @@
 				D1A7998721BA6EF3002AF7B2 /* MyBulletinViewController.swift in Sources */,
 				D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */,
 				D1AE58DC219E5183003FF5DB /* Note.swift in Sources */,
+				C7E2AF0C2374753D0043C342 /* AboutViewController.swift in Sources */,
 				D1C6205723633096005608B0 /* SecurityViewController.swift in Sources */,
 				D1427CA4223BEB8700B7512C /* CreateDrawingViewController.swift in Sources */,
 				D1DDA17521C9C73700E3F2B0 /* ExploreNearbyNotesViewController.swift in Sources */,
