@@ -202,7 +202,6 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
             notesIDSInExpand[index] = "E" + notesIDSInExpand[index]
             
             let titleEndY = note.endYPositions[index]
-            
             expandNoteWidgets(withID: noteToBeExpanded, titleEndY: titleEndY)
             
         }else{
@@ -213,7 +212,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
             let firstYVal = note.endYPositions[index]
             var lastYVal: CGFloat? = 0
             if note.endYPositions.indices.contains(index + 1) {
-                lastYVal = note.endYPositions[index + 1]
+                lastYVal = note.endYPositions[index + 1] - note.calculateHeight(of: "title", includePadding: false)
             }else {
                 lastYVal = nil
             }
@@ -225,9 +224,10 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
             }
             let totalAmnt = nextTitleMaxY - firstYVal + note.getPadding()
             
+            
             note.moveWidgets(overY: firstYVal, by: totalAmnt, down: false)
             
-            
+
             
             
             

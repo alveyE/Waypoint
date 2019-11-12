@@ -303,7 +303,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
             let firstYVal = note.endYPositions[index]
             var lastYVal: CGFloat? = 0
             if note.endYPositions.indices.contains(index + 1) {
-                lastYVal = note.endYPositions[index + 1]
+                lastYVal = note.endYPositions[index + 1] - note.calculateHeight(of: "title", includePadding: false)
             }else {
                 lastYVal = nil
             }

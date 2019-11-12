@@ -449,6 +449,8 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
             if sub.frame.minY > setY {
                 UIView.animateKeyframes(withDuration: animationTime, delay: 0.0, options: UIView.KeyframeAnimationOptions(rawValue: 7), animations: {
                     
+                    
+                    
                     sub.frame.origin.y += moveAmnt
 
                 },completion: nil)
@@ -473,6 +475,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
     }
     
     public func removeWidgetsInRange(minY: CGFloat, maxY: CGFloat?){
+        
         for sub in scroll.subviews {
             var meetsMaxReq = true
             if let maxVal = maxY {
@@ -501,7 +504,6 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
 //                        }
 //                    }
                 }
-                
                 sub.removeFromSuperview()
             }
             
