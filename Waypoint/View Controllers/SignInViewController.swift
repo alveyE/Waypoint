@@ -99,13 +99,15 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         if isValidEmail(testStr: email){
             login(userEmail: email, userPassword: password)
         }else{
+            
+            var attemptedLogin = false
+            
             Auth.auth().signInAnonymously() { (authResult, error) in
                 if error != nil {
                     print(error.debugDescription)
                 }else{
 
                     let ref = Database.database().reference()
-                    
                     ref.child("users").child("usernames").observeSingleEvent(of: .value, with: { (snapshot) in
                         
                         for case let childSnapshot as DataSnapshot in snapshot.children {
@@ -115,11 +117,12 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                                 let username = childData["username"] as? String ?? ""
                                 
                                 if email == username {
+                                    attemptedLogin = true
                                     let idRetrieved = childSnapshot.key
                                     ref.child("users").child(idRetrieved).observeSingleEvent(of: .value, with: { (usersnap) in
                                         if let value = usersnap.value as? [String : Any] {
                                             let emailRetrieved = value["email"] as? String ?? ""
-                                            
+                                            print("Going to login with \(emailRetrieved) and \(password)")
                                             self.login(userEmail: emailRetrieved, userPassword: password)
                                             return
                                             
@@ -131,8 +134,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                                 
                             }
                         }
-                        
-                        
+                        if !attemptedLogin {
+                        self.login(userEmail: email, userPassword: password)
+                        }
                     })
 
                 }

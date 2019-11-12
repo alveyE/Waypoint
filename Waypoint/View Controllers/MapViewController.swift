@@ -320,6 +320,35 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             ref.child("notes").child(id).observeSingleEvent(of: .value) { (snapshot) in
                 if let value = snapshot.value as? [String : Any] {
                     tappedNoteUser = value["creator"] as? String ?? ""
+                    
+                    alert.addAction(UIAlertAction(title: "Directions", style: .default, handler: { (action) in
+                        
+                        
+                        ref.child("notes").child(id).observeSingleEvent(of: .value) { (snapshot) in
+                            if let value = snapshot.value as? [String : Any] {
+                                let latitudeFound = value["latitude"] as? Double ?? 0.0
+                                let longitudeFound = value["longitude"] as? Double ?? 0.0
+                              
+                                
+                                let regionDistance:CLLocationDistance = 10000
+                                                       let coordinates = CLLocationCoordinate2DMake(latitudeFound, longitudeFound)
+                                                       let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+                                                       let options = [
+                                                           MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+                                                           MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+                                                       ]
+                                                       let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+                                                       let mapItem = MKMapItem(placemark: placemark)
+                                                       mapItem.name = "Place Name"
+                                                       mapItem.openInMaps(launchOptions: options)
+                            }
+                        }
+                        
+                       
+                        
+                       
+                    }))
+                    
                     if username == tappedNoteUser || user.uid == tappedNoteUser {
                         alert.addAction(UIAlertAction(title: "Edit", style: UIAlertAction.Style.default, handler: { action in
                             let editor = EditNoteViewController()

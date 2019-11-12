@@ -263,6 +263,7 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         //UPLOAD
         shouldLoad = false
         let drawVC = self.storyboard!.instantiateViewController(withIdentifier: "DrawScreen") as! CreateDrawingViewController
+        drawVC.modalPresentationStyle = .fullScreen
         self.show(drawVC, sender: self)
         drawVC.callback = { result in
             self.uploadDrawing(result)

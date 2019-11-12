@@ -24,13 +24,19 @@ class AboutViewController: UIViewController {
     @IBOutlet weak var termsText: UITextView! {
         didSet{
             let termsAttributedText = NSMutableAttributedString(string: termsText.text, attributes: [.font: UIFont.systemFont(ofSize: 32)])
-                  let _ = termsAttributedText.setAsLink(textToFind: "Terms of Use", linkURL: "https://fractyldev.com/waypoint/terms")
+                let _ = termsAttributedText.setAsLink(textToFind: "Terms of Use", linkURL: "https://fractyldev.com/waypoint/terms")
                     
                   termsText.attributedText = NSAttributedString(attributedString: termsAttributedText)
             
         }
     }
     
+    @IBOutlet weak var descriptionText: UITextView!
+    {
+        didSet{
+            
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
