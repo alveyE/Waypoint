@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let presentedController = UIApplication.topViewController()
-        if Auth.auth().currentUser == nil && !(presentedController is SignUpViewController){
+        if (Auth.auth().currentUser == nil && !(presentedController is SignUpViewController)) || !(Auth.auth().currentUser?.isEmailVerified ?? false){
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "signinNavigation")
         }

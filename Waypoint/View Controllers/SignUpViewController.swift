@@ -227,15 +227,21 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                     
                     //Upload user to database as well
                     if let user = Auth.auth().currentUser {
+                        user.sendEmailVerification(completion: nil)
+                        let alert = UIAlertController(title: "Verify Email", message: "Thank you for creating an account. To sign in please check your email for a verification email and click the link.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Continue to sign in", style: .default, handler: { (action) in
+                            self.navigationController?.popViewController(animated: true)
+                        }))
+                        self.present(alert, animated: true, completion: nil)
                         self.ref = Database.database().reference()
                         self.ref.child("users").child(user.uid).setValue(["username": username, "email" : email])
                         self.ref.child("users").child("usernames").child(user.uid).setValue(["username" : username])
                         
                         //Start at map
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        appDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
-                        
+//                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//                        appDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
+//
                     }
                 })
                 

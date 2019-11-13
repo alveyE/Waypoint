@@ -64,8 +64,16 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             if error != nil {
                 self.incorrectLabel.isHidden = false
             }
-            if user != nil {
-    
+            if user != nil  {
+                    
+                if !(Auth.auth().currentUser?.isEmailVerified ?? false) {
+                    let alert = UIAlertController(title: "Verify Email", message: "To sign in please verify your email. Please check your email for a verification email and click the link.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { (action) in
+                        Auth.auth().currentUser?.sendEmailVerification(completion: nil)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }else{
+                
                 self.navigationController?.popViewController(animated: true)
                     
                 if self.tabBarController == nil {
@@ -75,6 +83,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
+                }
                 }
                 
             }else{

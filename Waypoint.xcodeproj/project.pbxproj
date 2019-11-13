@@ -20,6 +20,7 @@
 		C7E2AF06237321F10043C342 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AF04237321F10043C342 /* Lato-Regular.ttf */; };
 		C7E2AF0A2373E5990043C342 /* ArrowLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2AF092373E5990043C342 /* ArrowLines.swift */; };
 		C7E2AF0C2374753D0043C342 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2AF0B2374753D0043C342 /* AboutViewController.swift */; };
+		C7E2AF12237B97CE0043C342 /* loadingPagePhoto (1).png in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AF11237B97CD0043C342 /* loadingPagePhoto (1).png */; };
 		D117FAEC2287B3A900182B2B /* GroupManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D117FAEB2287B3A900182B2B /* GroupManagerViewController.swift */; };
 		D11924EA227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist in Resources */ = {isa = PBXBuildFile; fileRef = D11924E9227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist */; };
 		D12A54FD2272152C00A471C2 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12A54FC2272152B00A471C2 /* ForgotPasswordViewController.swift */; };
@@ -79,6 +80,7 @@
 		C7E2AF04237321F10043C342 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../../../../Downloads/Lato/Lato-Regular.ttf"; sourceTree = "<group>"; };
 		C7E2AF092373E5990043C342 /* ArrowLines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowLines.swift; sourceTree = "<group>"; };
 		C7E2AF0B2374753D0043C342 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		C7E2AF11237B97CD0043C342 /* loadingPagePhoto (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loadingPagePhoto (1).png"; sourceTree = "<group>"; };
 		D105384D2239D9FA00AC5862 /* Waypoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Waypoint.entitlements; sourceTree = "<group>"; };
 		D117FAEB2287B3A900182B2B /* GroupManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagerViewController.swift; sourceTree = "<group>"; };
 		D11924E9227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-InfoINACTIVE.plist"; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				D1F8F4362238060200C5A997 /* Widgets */,
 				C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */,
 				D17A0D48227748D00054D6FB /* refreshGif.gif */,
+				C7E2AF11237B97CD0043C342 /* loadingPagePhoto (1).png */,
 				C7E2AEF72372BA670043C342 /* loading.gif */,
 			);
 			path = Waypoint;
@@ -371,6 +374,7 @@
 				C7E2AEFE237321530043C342 /* Roboto-Medium.ttf in Resources */,
 				C7E2AF05237321F10043C342 /* Lato-Bold.ttf in Resources */,
 				D17A0D49227748D10054D6FB /* refreshGif.gif in Resources */,
+				C7E2AF12237B97CE0043C342 /* loadingPagePhoto (1).png in Resources */,
 				D17A0D53227B91E90054D6FB /* drawingLoading.gif in Resources */,
 				D11924EA227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist in Resources */,
 				D17A0D4B2277491C0054D6FB /* refreshGif@3x.gif in Resources */,

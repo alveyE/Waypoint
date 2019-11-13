@@ -894,18 +894,18 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cQd-kI-AVE">
-                                <rect key="frame" x="32" y="142.5" width="311" height="216.5"/>
+                                <rect key="frame" x="32" y="142.5" width="311" height="171"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="216.5" id="avx-7z-ez6"/>
+                                    <constraint firstAttribute="height" constant="171" id="Bdh-YM-pOT"/>
                                 </constraints>
-                                <string key="text">Seamlessly share text, photos, links, and more with anyone and anywhere. Waypoint Communication allows you to share what and importantly where you are experiencing with those around you.</string>
+                                <string key="text">Seamlessly share text, photos, links, and more with anyone and anywhere. Waypoint Communication allows you to share what's going on around you to keep everyone in the loop.</string>
                                 <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="57" translatesAutoresizingMaskIntoConstraints="NO" id="Zgx-fF-TzT">
-                                <rect key="frame" x="12" y="336" width="350" height="175"/>
+                                <rect key="frame" x="12" y="306" width="350" height="175"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nte-U4-JM8">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="1"/>
@@ -944,10 +944,10 @@
                             <constraint firstItem="i9E-CX-0Ze" firstAttribute="top" secondItem="SBw-jV-lQb" secondAttribute="top" constant="26" id="1Mc-Fa-Zyt"/>
                             <constraint firstItem="cQd-kI-AVE" firstAttribute="leading" secondItem="SBw-jV-lQb" secondAttribute="leading" constant="32" id="82v-yp-aM3"/>
                             <constraint firstItem="Zgx-fF-TzT" firstAttribute="centerX" secondItem="SBw-jV-lQb" secondAttribute="centerX" id="CZI-Rx-QPS"/>
-                            <constraint firstItem="Zgx-fF-TzT" firstAttribute="top" secondItem="cQd-kI-AVE" secondAttribute="bottom" constant="-23" id="HJm-X7-XLE"/>
                             <constraint firstItem="i9E-CX-0Ze" firstAttribute="leading" secondItem="SBw-jV-lQb" secondAttribute="leading" constant="17" id="HTg-1V-d6K"/>
                             <constraint firstItem="cQd-kI-AVE" firstAttribute="trailing" secondItem="SBw-jV-lQb" secondAttribute="trailing" constant="-32" id="Qk5-CO-WHZ"/>
                             <constraint firstItem="i9E-CX-0Ze" firstAttribute="trailing" secondItem="SBw-jV-lQb" secondAttribute="trailing" constant="-17" id="ZKi-gU-Pf3"/>
+                            <constraint firstItem="Zgx-fF-TzT" firstAttribute="top" secondItem="cQd-kI-AVE" secondAttribute="bottom" constant="-7.5" id="mUt-EL-LKw"/>
                             <constraint firstItem="cQd-kI-AVE" firstAttribute="top" secondItem="i9E-CX-0Ze" secondAttribute="bottom" constant="41.5" id="p4u-8y-arl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SBw-jV-lQb"/>
@@ -960,7 +960,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ao9-jB-3XG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="976.81159420289862" y="1619.8660714285713"/>
+            <point key="canvasLocation" x="976.79999999999995" y="1619.6401799100452"/>
         </scene>
     </scenes>
     <resources>
