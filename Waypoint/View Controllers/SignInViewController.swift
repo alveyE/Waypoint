@@ -100,7 +100,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         guard let email = emailField.text else {return}
         guard let password = passwordField.text else {return}
         
-        let loadingGif = UIImage.gif(name: "activityIndicator")
+     
         
         signinButton.setTitle(nil, for: .normal)
       //  signinButton.setImage(loadingGif, for: .normal)

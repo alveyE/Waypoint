@@ -287,6 +287,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                         
                         ref.child("notes").child(id).observeSingleEvent(of: .value) { (snapshot) in
                             if let value = snapshot.value as? [String : Any] {
+                                let title = value["title"] as? String ?? "Waypoint"
                                 let latitudeFound = value["latitude"] as? Double ?? 0.0
                                 let longitudeFound = value["longitude"] as? Double ?? 0.0
                               
@@ -300,7 +301,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                                                        ]
                                                        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
                                                        let mapItem = MKMapItem(placemark: placemark)
-                                                       mapItem.name = "Place Name"
+                                                       mapItem.name = title
                                                        mapItem.openInMaps(launchOptions: options)
                             }
                         }
