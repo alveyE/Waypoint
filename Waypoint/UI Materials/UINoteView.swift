@@ -351,7 +351,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         if finished {
             finished = false
         if let titleTouched = sender as? UITapGestureRecognizer {
-            if let index = tapGestures.index(of: titleTouched) {
+            if let index = tapGestures.firstIndex(of: titleTouched) {
             delegate?.touchHeard(onIndex: index)
             }else{
                 print("Error title tap not in taps array")
@@ -382,7 +382,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
                 imagesFound.append(ii)
             }
         }
-        return imagesFound.index(of: imageWidget) ?? -1
+        return imagesFound.firstIndex(of: imageWidget) ?? -1
     }
     
     private func drawingIndex(of drawingWidget: DrawingWidget) -> Int{
@@ -394,7 +394,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
                 drawingsFound.append(dd)
             }
         }
-        return drawingsFound.index(of: drawingWidget) ?? -1
+        return drawingsFound.firstIndex(of: drawingWidget) ?? -1
     }
     
     private var lastValue = CGFloat.greatestFiniteMagnitude
@@ -489,7 +489,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
                 if let title = sub as? TitleView {
                     for tap in tapGestures {
                         if (title.gestureRecognizers?.contains(tap))!{
-                            if let indexOfTap = tapGestures.index(of: tap) {
+                            if let indexOfTap = tapGestures.firstIndex(of: tap) {
                             tapGestures.remove(at: indexOfTap)
                             endYPositions.remove(at: indexOfTap)
                             }

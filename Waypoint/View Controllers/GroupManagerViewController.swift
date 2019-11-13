@@ -35,7 +35,8 @@ class GroupManagerViewController: UIViewController {
 
     
     @objc private func createGroup(){
-        print(groupNameField.text)
+        //Make group GANG ACTIVITY MMM
+
     }
     
 

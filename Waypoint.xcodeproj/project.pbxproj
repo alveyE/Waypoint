@@ -22,7 +22,7 @@
 		C7E2AF0C2374753D0043C342 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2AF0B2374753D0043C342 /* AboutViewController.swift */; };
 		C7E2AF12237B97CE0043C342 /* loadingPagePhoto (1).png in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AF11237B97CD0043C342 /* loadingPagePhoto (1).png */; };
 		D117FAEC2287B3A900182B2B /* GroupManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D117FAEB2287B3A900182B2B /* GroupManagerViewController.swift */; };
-		D11924EA227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist in Resources */ = {isa = PBXBuildFile; fileRef = D11924E9227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist */; };
+		D11924EA227D19A50058B3D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D11924E9227D19A50058B3D6 /* GoogleService-Info.plist */; };
 		D12A54FD2272152C00A471C2 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12A54FC2272152B00A471C2 /* ForgotPasswordViewController.swift */; };
 		D140339321CA97F40030BC62 /* LinkWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339221CA97F40030BC62 /* LinkWidget.swift */; };
 		D140339521CAF1890030BC62 /* UINoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140339421CAF1890030BC62 /* UINoteView.swift */; };
@@ -54,7 +54,7 @@
 		D1B648FC21B6426400B74900 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D1B648FB21B6426400B74900 /* Podfile */; };
 		D1C620552361F3FF005608B0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C620542361F3FF005608B0 /* SettingsViewController.swift */; };
 		D1C6205723633096005608B0 /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C6205623633096005608B0 /* SecurityViewController.swift */; };
-		D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D35D2221B7118600272F76 /* GoogleService-Info.plist */; };
+		D1D35D2321B7118600272F76 /* GoogleService-InfoINACTIVE.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1D35D2221B7118600272F76 /* GoogleService-InfoINACTIVE.plist */; };
 		D1DDA16521C2B9ED00E3F2B0 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */; };
 		D1DDA16721C2C69300E3F2B0 /* TextWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */; };
 		D1DDA16921C45DB900E3F2B0 /* ImageFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */; };
@@ -83,7 +83,7 @@
 		C7E2AF11237B97CD0043C342 /* loadingPagePhoto (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loadingPagePhoto (1).png"; sourceTree = "<group>"; };
 		D105384D2239D9FA00AC5862 /* Waypoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Waypoint.entitlements; sourceTree = "<group>"; };
 		D117FAEB2287B3A900182B2B /* GroupManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagerViewController.swift; sourceTree = "<group>"; };
-		D11924E9227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-InfoINACTIVE.plist"; sourceTree = "<group>"; };
+		D11924E9227D19A50058B3D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D12A54FC2272152B00A471C2 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		D140339221CA97F40030BC62 /* LinkWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkWidget.swift; sourceTree = "<group>"; };
 		D140339421CAF1890030BC62 /* UINoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINoteView.swift; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		D1B648FB21B6426400B74900 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D1C620542361F3FF005608B0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D1C6205623633096005608B0 /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
-		D1D35D2221B7118600272F76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D1D35D2221B7118600272F76 /* GoogleService-InfoINACTIVE.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-InfoINACTIVE.plist"; sourceTree = "<group>"; };
 		D1DDA16421C2B9EC00E3F2B0 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		D1DDA16621C2C69300E3F2B0 /* TextWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWidget.swift; sourceTree = "<group>"; };
 		D1DDA16821C45DB900E3F2B0 /* ImageFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFrameView.swift; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 		D11924E8227D198E0058B3D6 /* Production Materials */ = {
 			isa = PBXGroup;
 			children = (
-				D11924E9227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist */,
+				D11924E9227D19A50058B3D6 /* GoogleService-Info.plist */,
 			);
 			path = "Production Materials";
 			sourceTree = "<group>";
@@ -288,7 +288,7 @@
 			children = (
 				D11924E8227D198E0058B3D6 /* Production Materials */,
 				D1AE58C7219E025E003FF5DB /* AppDelegate.swift */,
-				D1D35D2221B7118600272F76 /* GoogleService-Info.plist */,
+				D1D35D2221B7118600272F76 /* GoogleService-InfoINACTIVE.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -327,6 +327,7 @@
 				TargetAttributes = {
 					D1AE58C3219E025E003FF5DB = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1120;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -370,13 +371,13 @@
 				C7E2AF06237321F10043C342 /* Lato-Regular.ttf in Resources */,
 				C7E2AEFF237321530043C342 /* Roboto-LightItalic.ttf in Resources */,
 				D17A0D4D227749510054D6FB /* refreshGif@2x.gif in Resources */,
-				D1D35D2321B7118600272F76 /* GoogleService-Info.plist in Resources */,
+				D1D35D2321B7118600272F76 /* GoogleService-InfoINACTIVE.plist in Resources */,
 				C7E2AEFE237321530043C342 /* Roboto-Medium.ttf in Resources */,
 				C7E2AF05237321F10043C342 /* Lato-Bold.ttf in Resources */,
 				D17A0D49227748D10054D6FB /* refreshGif.gif in Resources */,
 				C7E2AF12237B97CE0043C342 /* loadingPagePhoto (1).png in Resources */,
 				D17A0D53227B91E90054D6FB /* drawingLoading.gif in Resources */,
-				D11924EA227D19A50058B3D6 /* GoogleService-InfoINACTIVE.plist in Resources */,
+				D11924EA227D19A50058B3D6 /* GoogleService-Info.plist in Resources */,
 				D17A0D4B2277491C0054D6FB /* refreshGif@3x.gif in Resources */,
 				C7E2AEF82372BA670043C342 /* loading.gif in Resources */,
 				C7E2AF01237321530043C342 /* Roboto-Bold.ttf in Resources */,
@@ -630,7 +631,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_REFLECTION_METADATA_LEVEL = all;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -654,7 +655,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_REFLECTION_METADATA_LEVEL = all;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

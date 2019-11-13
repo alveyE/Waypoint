@@ -346,7 +346,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                 self.note.addTitleWidget(title: title, timeStamp: timeStamp, username: username, yPlacement: nil)
                 
             }else{
-                if let index = self.savedNotesIDs.index(of: noteID) {
+                if let index = self.savedNotesIDs.firstIndex(of: noteID) {
                     self.savedNotesIDs.remove(at: index)
                     if let user = Auth.auth().currentUser {
                         self.ref.child("users").child(user.uid).child("saves").child(noteID).removeValue()
