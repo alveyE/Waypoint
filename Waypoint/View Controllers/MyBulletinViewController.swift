@@ -74,12 +74,12 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
     private func checkConnectionStatus(){
         var connectionFailedCount = 0
         let connectedRef = Database.database().reference(withPath: ".info/connected")
-        for _ in 0..<10 {
+        for _ in 0..<100 {
             connectedRef.observe(.value) { (snapshot) in
                 if !(snapshot.value as? Bool ?? false) {
                     connectionFailedCount += 1
                 }
-                if connectionFailedCount >= 7 {
+                if connectionFailedCount >= 99 {
                     self.errorBar.show()
                     
                 }
@@ -148,7 +148,8 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                 if self.savedNotesIDs.count == 0 {
                     let backgroundBar = UIView(frame: CGRect(x: self.view.frame.width/20, y: self.view.frame.height/6, width: self.view.frame.width - (self.view.frame.width/10), height: self.view.frame.height/9))
                     backgroundBar.backgroundColor = #colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1)
-                    let notesWillAppearLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width - (self.view.frame.width/10), height: self.view.frame.height/9))
+                    let textPadding = (self.view.frame.width/20)
+                    let notesWillAppearLabel = UILabel(frame: CGRect(x: textPadding, y: 0, width: backgroundBar.frame.width - textPadding*2, height: self.view.frame.height/9))
                     notesWillAppearLabel.text = "Notes you save will appear here"
                     notesWillAppearLabel.textAlignment = .center
                     notesWillAppearLabel.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -165,11 +166,13 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
         }else{
             let backgroundBar = UIView(frame: CGRect(x: self.view.frame.width/20, y: self.view.frame.height/6, width: self.view.frame.width - (self.view.frame.width/10), height: self.view.frame.height/9))
             backgroundBar.backgroundColor = #colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1)
-            let notSignedInLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width - (self.view.frame.width/10), height: self.view.frame.height/9))
+            let notSignedInLabel = UILabel(frame: CGRect(x: 0, y: 0, width: backgroundBar.frame.width - (backgroundBar.frame.width/10), height: self.view.frame.height/9))
             notSignedInLabel.text = "Sign in to see your saved notes"
             notSignedInLabel.textAlignment = .center
+            
             notSignedInLabel.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             notSignedInLabel.font = UIFont(name: "Roboto-Regular", size: backgroundBar.frame.height * 3/10)
+            
             backgroundBar.addSubview(notSignedInLabel)
             self.view.addSubview(backgroundBar)
         }
@@ -252,6 +255,10 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
                                     let note = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images , links: links ?? nil, drawings: drawings ?? nil, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
                                     editor.noteBeingEdited = note
                                     editor.idOfNote = snapshot.key
+                                    editor.modalPresentationStyle = .fullScreen
+                                    editor.callback = {
+                                        self.refreshPulled()
+                                    }
                                     self.present(editor, animated: true, completion: nil)
                                 }
                             })

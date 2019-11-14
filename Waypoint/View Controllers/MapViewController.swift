@@ -248,12 +248,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     private func checkConnectionStatus(){
         var connectionFailedCount = 0
         let connectedRef = Database.database().reference(withPath: ".info/connected")
-        for _ in 0..<10 {
+        for _ in 0..<100 {
             connectedRef.observe(.value) { (snapshot) in
                 if !(snapshot.value as? Bool ?? false) {
                     connectionFailedCount += 1
                 }
-                if connectionFailedCount >= 7 {
+                if connectionFailedCount >= 99 {
                     self.errorBar.show()
                     
                 }
@@ -371,6 +371,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                                     editor.noteBeingEdited = note
                                     editor.idOfNote = snapshot.key
                                     editor.modalPresentationStyle = .fullScreen
+                                    editor.callback = {
+                                        self.refreshPins()
+                                        self.mapTapped()
+                                    }
                                     self.present(editor, animated: true, completion: nil)
                                 }
                             })

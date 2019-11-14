@@ -157,9 +157,19 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         note.textReceiver = self
         note.hasCalanderIcon = false
         
+        if #available(iOS 12.0, *) {
+            if traitCollection.userInterfaceStyle == .light {
+               topBar.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9)
+               topBar.addBottomBorderWithColor(color: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), width: topBar.frame.height/50)
+            } else {
+                topBar.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.9)
+                topBar.addBottomBorderWithColor(color: #colorLiteral(red: 0.1203371659, green: 0.1203648821, blue: 0.1203334853, alpha: 1), width: topBar.frame.height/50)
+            }
+        } else {
+           topBar.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9)
+            topBar.addBottomBorderWithColor(color: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), width: topBar.frame.height/50)
+        }
         
-        topBar.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9)
-        topBar.addBottomBorderWithColor(color: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), width: topBar.frame.height/50)
         
         
         let submitSize = (view.bounds.height/11) * 3/5
@@ -217,17 +227,22 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
           
             //Makes sure user location can be determined within so many meters
         }else if currentLocation.horizontalAccuracy < 100 && (currentLocation.coordinate.latitude != 0 && currentLocation.coordinate.longitude != 0){
+            
+            if noteCreator.widgets.count > 10 {
+                let alert = UIAlertController(title: "Too many widgets", message: "Your note could not be published your note contains more than 10 widgets.", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }else{
+            
         noteCreator.latitude = currentLocation.coordinate.latitude
         noteCreator.longitude = currentLocation.coordinate.longitude
             
        
 
         noteCreator.writeNote()
-        (self.tabBarController!.viewControllers![0] as! MapViewController).mapView = nil
-        (self.tabBarController!.viewControllers![0] as! MapViewController).shouldRecenter = true
-        self.view = nil
-        shouldLoad = true
-        self.tabBarController?.selectedIndex = 0
+        goToMap()
+           
+            }
         }else{
             //Display error message that userlocation cannot accuratly be determined
             let alert = UIAlertController(title: "Cannot determine user location", message: "Your note could not be published as your device's location could not be determined accurately", preferredStyle: UIAlertController.Style.alert)
@@ -237,6 +252,14 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
     }
     
    
+    func goToMap(){
+        (self.tabBarController!.viewControllers![0] as! MapViewController).mapView = nil
+        (self.tabBarController!.viewControllers![0] as! MapViewController).shouldRecenter = true
+        self.view = nil
+        shouldLoad = true
+        self.tabBarController?.selectedIndex = 0
+    }
+    
     func addText() {
         let savedYPosition = note.widgetAdderY
         note.moveWidgets(overY: note.widgetAdderY - 1, by: note.calculateHeight(of: "text", includePadding: true), down: true)
@@ -272,7 +295,6 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
             self.note.moveWidgets(overY: self.note.widgetAdderY - 1, by: self.note.calculateHeight(of: "drawing", includePadding: true), down: true)
             self.note.addDrawingWidget(drawing: returnedDrawing, yPlacement: savedYPosition)
         }
-       // createNoteTouched(UIButton())
     }
     
     func addLink() {

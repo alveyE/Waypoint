@@ -64,7 +64,15 @@ class LinkWidget: UIView {
         boxShadow.shadowOpacity = 0.25
         boxShadow.shadowOffset = CGSize.zero
         boxShadow.shadowRadius = 5
-        boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        if #available(iOS 12.0, *) {
+            if traitCollection.userInterfaceStyle == .light {
+                boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            } else {
+                boxShadow.fillColor = #colorLiteral(red: 0.1725495458, green: 0.1713090837, blue: 0.1735036671, alpha: 1)
+            }
+        } else {
+            boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        }
         setMetaImage()
         setTitleContent()
         return boxShadow
@@ -85,7 +93,8 @@ class LinkWidget: UIView {
     
     
     private func createLinkText() -> UITextView{
-        let text = UITextView(frame: CGRect(x: width/4, y: height/3, width: width - width/4, height: height/3))
+        let textPadding = width * 5/18
+        let text = UITextView(frame: CGRect(x: textPadding, y: height/3, width: width - textPadding, height: height/3))
      //   text.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         text.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         tintColor = #colorLiteral(red: 0, green: 0, blue: 0.9803921569, alpha: 1)
@@ -93,6 +102,7 @@ class LinkWidget: UIView {
         text.isScrollEnabled = false
         text.autocorrectionType = .no
         let textFont = UIFont(name: "Roboto-MediumItalic", size: 20)
+        
         let centeredText = NSMutableParagraphStyle()
         centeredText.alignment = .center
         let attributes: [NSAttributedString.Key:Any] = [
@@ -128,6 +138,9 @@ class LinkWidget: UIView {
         while iconURL.last == " " {
             iconURL.removeLast()
         }
+        if iconURL.suffix(4) == ".svg" {
+           iconURL = "https://image.flaticon.com/icons/png/512/93/93618.png"
+        }
         print(iconURL)
         let url = URL(string: iconURL)
         print("Download Started")
@@ -135,6 +148,9 @@ class LinkWidget: UIView {
             guard let data = data, error == nil else { return }
             print(response?.suggestedFilename ?? url!.lastPathComponent)
             print("Download Finished")
+            
+            
+            
             DispatchQueue.main.async() {
                 
                 let icon = UIImage(data: data) ?? UIImage()
@@ -157,12 +173,12 @@ class LinkWidget: UIView {
         }
         let scaledWidth = icon.size.width * (adjustedHeight/originalHeight)
         let imageView = UIImageView(image: icon)
-        imageView.frame = CGRect(x: width - (width * 7/8), y: height/2 - height * 1/3, width: scaledWidth, height: adjustedHeight)
+        imageView.frame = CGRect(x: width - (width * 30/32), y: height/2 - height * 1/3, width: scaledWidth, height: adjustedHeight)
         if imageView.frame.width > height {
             let originalWidth = icon.size.width
             let adjustedWidth = height * 2/3
             let scaledHeight = icon.size.height * (adjustedWidth/originalWidth)
-            imageView.frame = CGRect(x: width - (width * 7/8), y: height/2 - scaledHeight/2, width: adjustedWidth, height: scaledHeight)
+            imageView.frame = CGRect(x: width - (width * 30/32), y: height/2 - scaledHeight/2, width: adjustedWidth, height: scaledHeight)
             
         }
         

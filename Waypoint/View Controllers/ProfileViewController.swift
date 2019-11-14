@@ -39,6 +39,10 @@ class ProfileViewController: UIViewController {
     }
     
     
+    @IBOutlet weak var settingsIcon: UIImageView!
+    @IBOutlet weak var securityIcon: UIImageView!
+    @IBOutlet weak var aboutIcon: UIImageView!
+    
     @IBOutlet weak var signOutButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()

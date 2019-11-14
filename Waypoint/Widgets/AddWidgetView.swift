@@ -40,13 +40,32 @@ class AddWidgetView: UIView {
         boxShadow.shadowOpacity = 0.25
         boxShadow.shadowOffset = CGSize.zero
         boxShadow.shadowRadius = 5
-        boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+       if #available(iOS 12.0, *) {
+            if traitCollection.userInterfaceStyle == .light {
+                boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            } else {
+                boxShadow.fillColor = #colorLiteral(red: 0.1725495458, green: 0.1713090837, blue: 0.1735036671, alpha: 1)
+            }
+        } else {
+            boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        }
         return boxShadow
     }
     
     
     private func createIcon(imageName: String, iconNum: Int) -> UIButton {
-        let icon = UIImage(named: imageName)
+        var icon = UIImage(named: imageName)
+
+        if #available(iOS 12.0, *) {
+            if traitCollection.userInterfaceStyle == .dark {
+                if let filter = CIFilter(name: "CIColorInvert") {
+                    filter.setValue(CIImage(image: UIImage(named: imageName)!), forKey: kCIInputImageKey)
+                    let invertedImage = UIImage(ciImage: filter.outputImage!)
+                    icon = invertedImage
+                }
+            }
+        }
+        
         
         
         let sideMargin = (width/12)

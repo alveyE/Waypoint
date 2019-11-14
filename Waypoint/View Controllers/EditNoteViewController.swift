@@ -135,18 +135,27 @@ class EditNoteViewController: CreateNoteViewController {
             alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
-            //Makes sure user location can be determined within so many meters
+
         }else{
+            
+            if noteCreator.widgets.count > 10 {
+                let alert = UIAlertController(title: "Too many widgets", message: "Your note could not be published your note contains more than 10 widgets.", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }else{
+            
             noteCreator.latitude = noteBeingEdited.latitude
             noteCreator.longitude = noteBeingEdited.longitude
             noteCreator.timeStamp = noteBeingEdited.timeStamp
             noteCreator.writeNote(to: idOfNote)
-            
+            callback?()
+             self.dismiss(animated: true, completion: nil)
 
-            self.dismiss(animated: true, completion: nil)
+            }
             }
        
     }
-    
+   
+    public var callback : (()->())?
     
 }

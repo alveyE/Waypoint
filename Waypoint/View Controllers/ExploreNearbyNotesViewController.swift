@@ -141,12 +141,12 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         print("Checking connection")
         var connectionFailedCount = 0
         let connectedRef = Database.database().reference(withPath: ".info/connected")
-        for _ in 0..<10 {
+        for _ in 0..<100 {
         connectedRef.observe(.value) { (snapshot) in
             if !(snapshot.value as? Bool ?? false) {
                 connectionFailedCount += 1
             }
-            if connectionFailedCount >= 7 {
+            if connectionFailedCount >= 99 {
                 self.errorBar.show()
                 
             }
@@ -330,7 +330,11 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                                     let longitude = value["longitude"] as? Double
                                     let note = Note(widgets: widgets ?? [], title: title ?? "", timeStamp: timeStamp ?? "", text: text ?? nil, images: images , links: links ?? nil, drawings: drawings ?? nil, creator: creator ?? "", location: (latitude: latitude ?? 0, longitude: longitude ?? 0))
                                     editor.noteBeingEdited = note
+                                    editor.modalPresentationStyle = .fullScreen
                                     editor.idOfNote = snapshot.key
+                                    editor.callback = {
+                                        self.refreshPulled()
+                                    }
                                     self.present(editor, animated: true, completion: nil)
                                 }
                             })

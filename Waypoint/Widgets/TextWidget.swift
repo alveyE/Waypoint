@@ -74,7 +74,15 @@ class TextWidget: UIView {
         boxShadow.shadowOpacity = 0.25
         boxShadow.shadowOffset = CGSize.zero
         boxShadow.shadowRadius = 5
-        boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        if #available(iOS 12.0, *) {
+            if traitCollection.userInterfaceStyle == .light {
+                boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            } else {
+                boxShadow.fillColor = #colorLiteral(red: 0.1725495458, green: 0.1713090837, blue: 0.1735036671, alpha: 1)
+            }
+        } else {
+            boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        }
         return boxShadow
     }
     
@@ -141,7 +149,17 @@ class TextWidget: UIView {
         var yPosition: CGFloat = height/30 
         for _ in 0..<linesNeeded {
             let line = UIView(frame: CGRect(x: -width/20, y: yPosition, width: width - width/10, height: 1))
-            line.backgroundColor = #colorLiteral(red: 0.8667220611, green: 0.8667220611, blue: 0.8667220611, alpha: 1)
+            
+            if #available(iOS 12.0, *) {
+                       if traitCollection.userInterfaceStyle == .light {
+                          line.backgroundColor = #colorLiteral(red: 0.8667220611, green: 0.8667220611, blue: 0.8667220611, alpha: 1)
+                       }else{
+                           line.backgroundColor = #colorLiteral(red: 0.1224855259, green: 0.1225136295, blue: 0.1224818304, alpha: 1)
+                       }
+                   } else {
+                       line.backgroundColor = #colorLiteral(red: 0.8667220611, green: 0.8667220611, blue: 0.8667220611, alpha: 1)
+                   }
+            
             lines.addSubview(line)
             yPosition += (textFont?.lineHeight)! + (textFont?.lineHeight)!/2
         }

@@ -81,7 +81,18 @@ class TitleView: UIView, UITextViewDelegate {
         boxShadow.shadowOpacity = 0.25
         boxShadow.shadowOffset = CGSize.zero
         boxShadow.shadowRadius = 5
-        boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        
+        if #available(iOS 12.0, *) {
+            if traitCollection.userInterfaceStyle == .light {
+                boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            } else {
+                boxShadow.fillColor = #colorLiteral(red: 0.1725495458, green: 0.1713090837, blue: 0.1735036671, alpha: 1)
+            }
+        } else {
+            boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        }
+        
+        
  //       boxShadow.fillColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         return boxShadow
     }
@@ -95,7 +106,17 @@ class TitleView: UIView, UITextViewDelegate {
         let title = UITextField(frame: CGRect(x: width/25, y: height/50, width: width * 81/100, height: height * 3/8))
         title.isUserInteractionEnabled = editable
         title.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        title.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
+        if #available(iOS 12.0, *) {
+            if traitCollection.userInterfaceStyle == .light {
+                title.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            } else {
+                title.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            }
+        } else {
+            title.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        }
+        
 
         let titleFont = UIFont(name: "Roboto-Medium", size: height/4)
         title.font = titleFont
@@ -147,7 +168,7 @@ class TitleView: UIView, UITextViewDelegate {
     private func createUserText() -> UILabel {
         let usernameLabel = UILabel(frame: CGRect(x: width/30, y: height - (height/2), width: width - width/6 - width/30, height: height * 5/8))
         usernameLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-        usernameLabel.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        
         let userfont = UIFont(name: "Roboto-LightItalic", size: height/5)
         usernameLabel.font = userfont
         usernameLabel.textAlignment = .left

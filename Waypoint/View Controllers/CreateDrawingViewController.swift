@@ -19,6 +19,25 @@ class CreateDrawingViewController: UIViewController {
 
     @IBOutlet var arrayOfButtons: [UIButton]!
     
+    @IBOutlet weak var eraseIcon: UIButton!{
+        didSet{
+            if #available(iOS 12.0, *) {
+              
+                if traitCollection.userInterfaceStyle == .dark {
+                    
+                    if let filter = CIFilter(name: "CIColorInvert") {
+                        filter.setValue(CIImage(image: eraseIcon.image(for: .normal)!), forKey: kCIInputImageKey)
+                        let invertedImage = UIImage(ciImage: filter.outputImage!)
+                        eraseIcon.setImage(invertedImage, for: .normal)
+                       
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
     @IBAction func colorPicked(_ sender: UIButton) {
         switch sender.tag {
         case 0:
