@@ -303,7 +303,9 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
             
             let titleEndY = note.endYPositions[index]
             expandNoteWidgets(withID: noteToBeExpanded, titleEndY: titleEndY)
-            
+            if titleEndY + note.calculateHeight(of: "title", includePadding: false)*2 > view.frame.maxY{
+                note.moveScroll(down: true, amount: 100)
+            }
         }else{
             //DEEXPAND
             notesIDSInExpand[index].remove(at: notesIDSInExpand[index].startIndex)

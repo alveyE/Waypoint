@@ -101,6 +101,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let titleEndY = note.endYPositions[index]
             
             expandNoteWidgets(withID: noteToBeExpanded, titleEndY: titleEndY)
+            if titleEndY + note.calculateHeight(of: "title", includePadding: false)*2 > note.frame.height{
+                note.moveScroll(down: true, amount: note.calculateHeight(of: "title", includePadding: false))
+           }
+            
             
         }else{
             //DEEXPAND

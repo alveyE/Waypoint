@@ -34,14 +34,15 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var signinButton: UIButton!
     
-    
+   
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         incorrectLabel.isHidden = true
         emailField.delegate = self
-        
+        signinButton.addSubview(indicator)
         // Do any additional setup after loading the view.
     }
     
@@ -60,6 +61,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
         Auth.auth().signIn(withEmail: userEmail, password: userPassword) { (user, error) in
             self.signinButton.setImage(nil, for: .normal)
+            self.indicator.isHidden = true
             self.signinButton.setTitle("Sign In", for: .normal)
             if error != nil {
                 self.incorrectLabel.isHidden = false
@@ -95,15 +97,19 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+   
+    
+    
     @IBAction func signinButtonPressed(_ sender: UIButton) {
         
         guard let email = emailField.text else {return}
         guard let password = passwordField.text else {return}
         
-     
+        
         
         signinButton.setTitle(nil, for: .normal)
-      //  signinButton.setImage(loadingGif, for: .normal)
+        indicator.isHidden = false
+        
         
         if isValidEmail(testStr: email){
             login(userEmail: email, userPassword: password)

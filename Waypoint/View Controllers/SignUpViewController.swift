@@ -20,7 +20,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var termsAndPrivacyBox: UIButton!
     @IBOutlet weak var ageVerificationBox: UIButton!
     @IBOutlet weak var termsAndPrivacyText: UITextView!
-    
+        
     @IBOutlet weak var ageVerificationText: UITextView! {
         didSet{
             let tap = UITapGestureRecognizer(target: self, action: #selector(ageVerificationPressed(_:)))
@@ -184,6 +184,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         guard let password = passwordField.text else {return}
         print(ageVerificationChecked)
         print(termsAndPrivacyChecked)
+                
         if !ageVerificationChecked {
             errorLabel.text = "Must be over 13 to use Waypoint"
             errorLabel.isHidden = false
@@ -201,7 +202,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         checkUsername()
         checkEmail()
         checkPassword()
-        
              if self.errorLabel.isHidden{
                 Auth.auth().createUser(withEmail: email, password: password, completion: { (authresult, error) in
                     if String(describing: error).contains("ERROR_EMAIL_ALREADY_IN_USE") {
@@ -224,6 +224,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                         }
                     })
                     
+                    
+
                     
                     //Upload user to database as well
                     if let user = Auth.auth().currentUser {

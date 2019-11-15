@@ -203,7 +203,9 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
             
             let titleEndY = note.endYPositions[index]
             expandNoteWidgets(withID: noteToBeExpanded, titleEndY: titleEndY)
-            
+            if titleEndY + note.calculateHeight(of: "title", includePadding: false)*2 > view.frame.maxY{
+                note.moveScroll(down: true, amount: 100)
+            }
         }else{
             
             //DEEXPAND
@@ -217,6 +219,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                 lastYVal = nil
             }
             var nextTitleMaxY = note.nextYmax(overY: firstYVal)
+           
             note.removeWidgetsInRange(minY: firstYVal, maxY: lastYVal)
             
             if nextTitleMaxY == 0 {

@@ -428,6 +428,8 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         for view in scroll.subviews {
             contentRect = contentRect.union(view.frame)
         }
+        
+       
         scroll.contentSize.height = contentRect.size.height + leway()
         if scroll.contentSize.height < height {
             scroll.contentSize.height = height + 1
@@ -459,7 +461,6 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
             
         }
         UIView.animate(withDuration: animationTime) {
-            //self.scroll.contentSize.height += moveAmnt
             self.adjustScroll()
         }
         
@@ -473,6 +474,17 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         }
         finished = true
     }
+    
+    public func moveScroll(down: Bool, amount: CGFloat){
+        var moveAmnt = amount
+        if !down {
+            moveAmnt *= -1
+        }
+        
+        scroll.setContentOffset(CGPoint(x: 0, y: scroll.contentOffset.y + moveAmnt), animated: true)
+    }
+    
+    
     
     public func removeWidgetsInRange(minY: CGFloat, maxY: CGFloat?){
         
@@ -508,7 +520,9 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
             }
             
         }
-        adjustScroll()
+        UIView.animateKeyframes(withDuration: animationTime, delay: 0.0, options: UIView.KeyframeAnimationOptions(rawValue: 7), animations: {
+            self.adjustScroll()
+        }, completion: nil)
     }
     
     public func setTitle(to title: String){

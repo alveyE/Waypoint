@@ -96,8 +96,7 @@ class ProfileViewController: UIViewController {
             emailLabel.text = ""
             signOutButton.isHidden = true
         }
-
-        
+       
 
     }
 
