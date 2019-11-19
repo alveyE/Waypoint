@@ -97,6 +97,17 @@ class TitleView: UIView, UITextViewDelegate {
         return boxShadow
     }
     
+    public func popAnimate(){
+        let animationTime: TimeInterval = 0.15
+        UIView.animate(withDuration: animationTime, animations: {
+            self.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+       }) { (finished) in
+        UIView.animate(withDuration: animationTime, animations: {
+               self.transform = CGAffineTransform.identity
+           })
+       }
+    }
+    
     
     private func createTitleText() -> UITextField {
         
@@ -123,9 +134,9 @@ class TitleView: UIView, UITextViewDelegate {
         if editable {
         
         title.attributedPlaceholder = NSAttributedString(string:"Enter title here", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-    
+            
         }else {
-        title.text = self.title
+            title.text = self.title
         }
         
         return title
@@ -235,6 +246,9 @@ class TitleView: UIView, UITextViewDelegate {
     @objc private func menuTapped(){
         delegate?.menuAppear(withID: noteID)
     }
+    
+    
+    
     
     @objc private func saveTapped(){
         saved = !saved
@@ -382,3 +396,4 @@ extension UIFont {
 protocol TitleViewDelegate: class {
     func menuAppear(withID id: String)
 }
+

@@ -138,6 +138,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                                         if let value = usersnap.value as? [String : Any] {
                                             let emailRetrieved = value["email"] as? String ?? ""
                                             print("Going to login with \(emailRetrieved) and \(password)")
+                                            if let anon = Auth.auth().currentUser {
+                                                anon.delete(completion: nil)
+                                            }
                                             self.login(userEmail: emailRetrieved, userPassword: password)
                                             return
                                             

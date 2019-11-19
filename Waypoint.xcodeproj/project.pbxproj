@@ -10,6 +10,7 @@
 		13E6AFCA1F837775253FB43F /* Pods_Waypoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4732C8D7DAADC2F592339DCB /* Pods_Waypoint.framework */; };
 		C510EFAF21ADAFE500243FA2 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510EFAE21ADAFE500243FA2 /* DBManager.swift */; };
 		C5BD13A821DF4B9C00BE7F17 /* GeoFenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */; };
+		C7265F832382F18500688075 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7265F822382F18500688075 /* ChangePasswordViewController.swift */; };
 		C7E2AEF82372BA670043C342 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AEF72372BA670043C342 /* loading.gif */; };
 		C7E2AEFE237321530043C342 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AEF9237321530043C342 /* Roboto-Medium.ttf */; };
 		C7E2AEFF237321530043C342 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7E2AEFA237321530043C342 /* Roboto-LightItalic.ttf */; };
@@ -70,6 +71,7 @@
 		80CA2E99CF4C2788871EB08E /* Pods-Waypoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Waypoint.release.xcconfig"; path = "Pods/Target Support Files/Pods-Waypoint/Pods-Waypoint.release.xcconfig"; sourceTree = "<group>"; };
 		C510EFAE21ADAFE500243FA2 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoFenceManager.swift; sourceTree = "<group>"; };
+		C7265F822382F18500688075 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		C7E2AEF72372BA670043C342 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loading.gif; path = ../../../Downloads/loading.gif; sourceTree = "<group>"; };
 		C7E2AEF9237321530043C342 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "../../../../Downloads/Roboto/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		C7E2AEFA237321530043C342 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-LightItalic.ttf"; path = "../../../../Downloads/Roboto/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -211,11 +213,11 @@
 				C510EFAE21ADAFE500243FA2 /* DBManager.swift */,
 				D1AE58F321ADD967003FF5DB /* NoteCreator.swift */,
 				D1A7998021BA631F002AF7B2 /* CustomPointAnnotation.swift */,
-				D1F8F4362238060200C5A997 /* Widgets */,
 				C5BD13A721DF4B9C00BE7F17 /* GeoFenceManager.swift */,
 				D17A0D48227748D00054D6FB /* refreshGif.gif */,
 				C7E2AF11237B97CD0043C342 /* loadingPagePhoto (1).png */,
 				C7E2AEF72372BA670043C342 /* loading.gif */,
+				D1F8F4362238060200C5A997 /* Widgets */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -279,6 +281,7 @@
 				D1C620542361F3FF005608B0 /* SettingsViewController.swift */,
 				D1C6205623633096005608B0 /* SecurityViewController.swift */,
 				C7E2AF0B2374753D0043C342 /* AboutViewController.swift */,
+				C7265F822382F18500688075 /* ChangePasswordViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				D1AE58C8219E025E003FF5DB /* AppDelegate.swift in Sources */,
 				D17A0D4722765BDC0054D6FB /* EditNoteViewController.swift in Sources */,
 				D1DDA17321C863EA00E3F2B0 /* DrawingWidget.swift in Sources */,
+				C7265F832382F18500688075 /* ChangePasswordViewController.swift in Sources */,
 				D18BCE20226E9D30009E83DC /* ErrorBar.swift in Sources */,
 				D1DDA16721C2C69300E3F2B0 /* TextWidget.swift in Sources */,
 				D1AE58DA219E0F5C003FF5DB /* NoteView.swift in Sources */,

@@ -94,7 +94,6 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
             titleWidget.alpha = 0
 
             self.scroll.addSubview(titleWidget)
-         //   stack.addArrangedSubview(titleWidget)
         
         UIView.animate(withDuration: animationTime) {
             titleWidget.alpha = 1
@@ -175,7 +174,8 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         
         let preAdj = adjustedWidth
         adjustedWidth = self.width - minimumPadding
-        adjustedHeight *= adjustedWidth/preAdj
+        adjustedHeight *= (adjustedWidth/preAdj)
+        adjustedHeight -= minimumPadding/2
         
         imageWidget.frame = CGRect(x: self.padding, y: verticalPlacing, width: self.width - 2*self.padding, height: adjustedHeight)
         
@@ -227,7 +227,8 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         let preAdj = adjustedWidth
         adjustedWidth = self.width - minimumPadding
         adjustedHeight *= adjustedWidth/preAdj
-        
+        adjustedHeight -= minimumPadding/2
+
         
         imageWidget.frame = CGRect(x: self.padding, y: verticalPlacing, width: self.width - 2*self.padding, height: adjustedHeight)
         imageWidget.image = image
@@ -350,15 +351,22 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
     @objc private func titleTapped(_ sender: Any){
         if finished {
             finished = false
+            
         if let titleTouched = sender as? UITapGestureRecognizer {
             if let index = tapGestures.firstIndex(of: titleTouched) {
             delegate?.touchHeard(onIndex: index)
+                    
             }else{
                 print("Error title tap not in taps array")
             }
         }
         }
     }
+    
+    public func popTitle(index: Int){
+        (tapGestures[index].view as! TitleView).popAnimate()
+    }
+    
     func deleteWidget(_ widget : UIView) {
         
             if let imageWidget = widget as? ImageFrameView {
@@ -661,6 +669,8 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         let preAdj = adjustedWidth
         adjustedWidth = self.width - minimumPadding
         adjustedHeight *= adjustedWidth/preAdj
+        adjustedHeight -= minimumPadding/2
+
         
         if includePadding {
             return adjustedHeight + verticalPadding

@@ -20,6 +20,10 @@ class SettingsViewController: UIViewController {
         displayUserInfo()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        displayUserInfo()
+    }
+
     @IBAction func cellularDataTouched(_ sender: Any) {
         
         if let url = URL(string: UIApplication.openSettingsURLString) {

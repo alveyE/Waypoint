@@ -198,8 +198,12 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     
     func touchHeard(onIndex index: Int) {
         if notesIDSInExpand[index].first != "E" {
+            
+            note.popTitle(index: index)
             let noteToBeExpanded = notesIDSInExpand[index]
             notesIDSInExpand[index] = "E" + notesIDSInExpand[index]
+            
+            
             
             let titleEndY = note.endYPositions[index]
             expandNoteWidgets(withID: noteToBeExpanded, titleEndY: titleEndY)
@@ -207,8 +211,8 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
                 note.moveScroll(down: true, amount: 100)
             }
         }else{
-            
             //DEEXPAND
+           
             notesIDSInExpand[index].remove(at: notesIDSInExpand[index].startIndex)
             
             let firstYVal = note.endYPositions[index]

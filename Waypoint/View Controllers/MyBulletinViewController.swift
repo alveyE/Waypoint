@@ -297,7 +297,10 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
     
     
     func touchHeard(onIndex index: Int) {
+        
         if notesIDSInExpand[index].first != "E" {
+            note.popTitle(index: index)
+
             let noteToBeExpanded = notesIDSInExpand[index]
             notesIDSInExpand[index] = "E" + notesIDSInExpand[index]
             
@@ -308,6 +311,7 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
             }
         }else{
             //DEEXPAND
+
             notesIDSInExpand[index].remove(at: notesIDSInExpand[index].startIndex)
             
             let firstYVal = note.endYPositions[index]

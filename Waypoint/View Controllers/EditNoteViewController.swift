@@ -129,7 +129,7 @@ class EditNoteViewController: CreateNoteViewController {
             let alert = UIAlertController(title: "Please enter a valid link", message: "", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-        }else if noteCreator.title == "" || noteCreator.widgets == ["title"] {
+        }else if noteCreator.title == "" || noteCreator.widgets == ["title"] || (noteCreator.text?.joined() == "" && noteCreator.widgets.contains("text")){
             //Display message to add content to note
             let alert = UIAlertController(title: "Please add content to your note", message: "", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))

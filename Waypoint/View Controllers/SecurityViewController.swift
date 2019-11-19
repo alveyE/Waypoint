@@ -26,6 +26,9 @@ class SecurityViewController: UIViewController {
         displayUserInfo()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        displayUserInfo()
+    }
     
    
     @IBAction func deleteTouched(_ sender: Any) {

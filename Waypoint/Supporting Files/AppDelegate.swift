@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -51,6 +52,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        if CLLocationManager.locationServicesEnabled() {
+             switch CLLocationManager.authorizationStatus() {
+                case .notDetermined, .restricted, .denied:
+                     let alert = UIAlertController(title: "Please enable loction services", message: "", preferredStyle: UIAlertController.Style.alert)
+                     alert.addAction(UIAlertAction(title: "Open Settings", style: UIAlertAction.Style.default, handler: { action in
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            if UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            }
+                        }
+                     }))
+                     UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
+             case .authorizedAlways, .authorizedWhenInUse: break
+
+            @unknown default:
+                fatalError()
+            }
+            } else {
+                let alert = UIAlertController(title: "Please enable loction services", message: "", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Open Settings", style: UIAlertAction.Style.default, handler: { action in
+                   if let url = URL(string: UIApplication.openSettingsURLString) {
+                       if UIApplication.shared.canOpenURL(url) {
+                           UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                       }
+                   }
+                }))
+                UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
+            
+        }
+        
         if Auth.auth().currentUser?.isAnonymous ?? false{
             do {
                 try Auth.auth().signOut()

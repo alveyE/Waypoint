@@ -95,6 +95,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if notesIDSInExpand.indices.contains(index){
         
         if notesIDSInExpand[index].first != "E" {
+            note.popTitle(index: index)
+
             let noteToBeExpanded = notesIDSInExpand[index]
             notesIDSInExpand[index] = "E" + notesIDSInExpand[index]
             
@@ -108,6 +110,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
         }else{
             //DEEXPAND
+
             notesIDSInExpand[index].remove(at: notesIDSInExpand[index].startIndex)
             
             let firstYVal = note.endYPositions[index]
@@ -146,7 +149,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.annotations.forEach({mapView.removeAnnotation($0)})
         fetchPinLocation()
         timeRefreshed = NSDate()
-        
+    
     }
         
         
@@ -229,6 +232,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let groupsButton = UIButton(frame: CGRect(x: refreshPadding * 2, y: refreshPadding*2, width: refreshSize, height: refreshSize))
         groupsButton.setImage(UIImage(named: "add"), for: UIControl.State.normal)
         groupsButton.addTarget(self, action: #selector(groupsTouched), for: .touchUpInside)
+        
+
+        
         
         
         mapView.addSubview(refreshButton)
@@ -445,6 +451,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        
         if annotation.title != "My Location" {
             let reuseIdentifier = "annotationView"
             var view = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
@@ -471,6 +479,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         checkConnectionStatus()
+        
+        
         
         if let coordinates = view.annotation?.coordinate, view.annotation?.title != "My Location" {
 
@@ -580,7 +590,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func fetchPinLocation(){
         ref = Database.database().reference()
-        ref.child("locations").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("locations").observe(DataEventType.value, with: { (snapshot) in
            
             for case let childSnapshot as DataSnapshot in snapshot.children {
                 //                let key = childSnapshot.key
@@ -604,6 +614,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }) { (error) in
             print(error.localizedDescription)
         }
+        
+        
+        
         
         
         

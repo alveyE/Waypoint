@@ -43,6 +43,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //SE 568
+        //11 896
+        //8 667
+        print("View SIZE \(view.frame.height)")
+        if view.frame.height < 600 {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        }else if view.frame.height < 800 {
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowHalf), name: UIResponder.keyboardWillShowNotification, object: nil)
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         usernameField.delegate = self
         usernameField.addTarget(self, action: #selector(textFieldDidEndEditing(_:)), for: .editingChanged)
         passwordField.delegate = self
@@ -50,6 +61,29 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         errorLabel.isHidden = true
         setLinks()
     }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    @objc func keyboardWillShowHalf(notification: NSNotification) {
+           if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+               if self.view.frame.origin.y == 0 {
+                   self.view.frame.origin.y -= keyboardSize.height/2
+               }
+           }
+       }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
     
     private func setLinks(){
         let termsAttributedText = NSMutableAttributedString(string: termsAndPrivacyText.text)
