@@ -37,11 +37,12 @@ class DBManager  {
         let autoId = self.ref.childByAutoId().key
         self.createdID = autoId ?? ""
             if let currentUser = Auth.auth().currentUser {
-            if preWrittenID == "" {
+                if preWrittenID == "" {
                 self.ref.child("notes").child(autoId!).setValue(data)
                 self.ref.child("notes").child(autoId!).child("createdByUid").setValue(currentUser.uid)
                 self.ref.child("locations").child(autoId!).setValue(locationData)
                 self.ref.child("locations").child(autoId!).child("createdByUid").setValue(currentUser.uid)
+                    self.ref.child("users").child(currentUser.uid).child("notesCreated").childByAutoId().child("noteID").setValue(autoId!)
             }else {
                 self.ref.child("notes").child(preWrittenID).setValue(data)
                 let utcDate = Date()

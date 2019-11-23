@@ -19,6 +19,7 @@ class TitleView: UIView, UITextViewDelegate {
     
     public var delegate: TitleViewDelegate?
     public var editable = false
+    public var hasShadow = true
     public var hasSaveButton = false
     public var hasCalendarIcon = true
     public var noteTimeStamp = "20181219101034"
@@ -77,11 +78,12 @@ class TitleView: UIView, UITextViewDelegate {
         let box = UIBezierPath(rect: CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height))
         let boxShadow = CAShapeLayer()
         boxShadow.path = box.cgPath
+        if hasShadow {
         boxShadow.shadowColor = UIColor.black.cgColor
         boxShadow.shadowOpacity = 0.25
         boxShadow.shadowOffset = CGSize.zero
         boxShadow.shadowRadius = 5
-        
+        }
         if #available(iOS 12.0, *) {
             if traitCollection.userInterfaceStyle == .light {
                 boxShadow.fillColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -151,7 +153,7 @@ class TitleView: UIView, UITextViewDelegate {
     
     private func createCalendarIcon() -> UIImageView {
         let calendar = UIImage(named: "cal")
-        let calendarIcon = UIImageView(frame: CGRect(x: width/18, y: height * 22/48, width: calendar!.size.width * 2/3, height: calendar!.size.height  * 2/3))
+        let calendarIcon = UIImageView(frame: CGRect(x: width/25, y: height * 22/48, width: calendar!.size.width * 2/3, height: calendar!.size.height  * 2/3))
         calendarIcon.image = calendar!
         return calendarIcon
         
@@ -159,7 +161,7 @@ class TitleView: UIView, UITextViewDelegate {
     
     
     private func createTimeStamp() -> UILabel {
-        let time = UILabel(frame: CGRect(x: width/8, y: height * 9/24, width: width * 7/9, height: height * 3/8))
+        let time = UILabel(frame: CGRect(x: width/9, y: height * 9/24, width: width * 7/9, height: height * 3/8))
         time.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         let dateFont = UIFont(name: "Roboto", size: height/4.3)?.italics()
         
@@ -177,7 +179,7 @@ class TitleView: UIView, UITextViewDelegate {
     }
     
     private func createUserText() -> UILabel {
-        let usernameLabel = UILabel(frame: CGRect(x: width/30, y: height - (height/2), width: width - width/6 - width/30, height: height * 5/8))
+        let usernameLabel = UILabel(frame: CGRect(x: width/25, y: height - (height/2), width: width - width/6 - width/30, height: height * 5/8))
         usernameLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         
         let userfont = UIFont(name: "Roboto-LightItalic", size: height/5)

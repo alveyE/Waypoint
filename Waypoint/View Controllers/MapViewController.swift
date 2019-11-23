@@ -199,6 +199,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         bottomBar.frame = CGRect(x: mapWidth/70, y: note.frame.height - barHeight, width: mapWidth - (mapWidth/70)*2, height: barHeight)
         bottomBar.layer.zPosition = .greatestFiniteMagnitude
     
+     //   note.listStyle = true
         note.editable = false
         note.hasSaveButton = true
         note.delegate = self
@@ -239,7 +240,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         mapView.addSubview(refreshButton)
         mapView.addSubview(recenterButton)
-       // mapView.addSubview(groupsButton)
+        mapView.addSubview(groupsButton)
         
         updatePins()
         
@@ -252,7 +253,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @objc private func groupsTouched(){
         let groupManager = GroupManagerViewController()
-        self.present(groupManager, animated: true)
+        let navController = UINavigationController(rootViewController: groupManager)
+        navController.modalPresentationStyle = .fullScreen
+        self.present(navController, animated: true)
     }
     
     private func checkConnectionStatus(){
@@ -485,7 +488,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if let coordinates = view.annotation?.coordinate, view.annotation?.title != "My Location" {
 
             
-            
+            var amountAdded = 0
             var singleAdd = true
             let otherLocations = locations.filter({$0 != (latitude: coordinates.latitude, longitude: coordinates.longitude)})
             for coord in otherLocations {
@@ -493,13 +496,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let otherCoordinate = CLLocation(latitude: coord.latitude, longitude: coord.longitude)
                 
                 let distance = locationCoordinate.distance(from: otherCoordinate)
-                
+                print("THE DISTANCE I AQUIRED IS \(distance)")
                 if distance < 110 {
                     if singleAdd {
                         getNote(withLocation: (latitude: coordinates.latitude, longitude: coordinates.longitude), addingNote: true)
                     }
                     singleAdd = false
-                    print("Adding with location \(coordinates.latitude) \(coordinates.longitude) compared to original location of ")
+                    print("Adding with location \(coordinates.latitude) \(coordinates.longitude) compared to original location of \(otherCoordinate.coordinate.latitude) \(otherCoordinate.coordinate.longitude)")
                     
                     note.unHide()
                  //   note.trimExcess()
@@ -507,6 +510,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     
                     
                     getNote(withLocation: (latitude: otherCoordinate.coordinate.latitude, longitude: otherCoordinate.coordinate.longitude), addingNote: true)
+                    amountAdded += 1
                 }
                 
                 
@@ -518,10 +522,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     
                     
                 
-            
+            print(amountAdded)
+
             
         }
-        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -546,7 +550,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             switch widget{
             case "title":
                 note.addTitleWidget(title: loadedNote.title, timeStamp: loadedNote.timeStamp, username: loadedNote.creator, yPlacement: nil)
-                print("title ADD")
                 break;
             case "text":
                 if loadedNote.text != nil {
@@ -604,13 +607,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                             
                             self.locations.append((latitude: latitude, longitude: longitude))
                             self.noteIDs.append(idRetrieved)
-                            self.updatePins()
+                            
                         }
                     }
                     
                 }
             }
-            
+            self.updatePins()
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -633,7 +636,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         ref.child("notes").child(noteID).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             if let value = snapshot.value as? [String : Any] {
-                print("DOWNLOADING \(noteID)")
                 let widgets = value["widgets"] as? [String]
                 let title = value["title"] as? String
                 var timeStamp = value["timeStamp"] as? String
@@ -653,7 +655,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 self.note.noteID = noteID
                 
                 if addingNote {
-                    print(noteID)
                     self.notesIDSInExpand.append(noteID)
                     self.note.addTitleWidget(title: note.title, timeStamp: note.timeStamp, username: note.creator, yPlacement: nil)
                  //   self.note.increaseScrollSlack(by: self.note.calculateHeight(of: "title", includePadding: false) * 11/12)

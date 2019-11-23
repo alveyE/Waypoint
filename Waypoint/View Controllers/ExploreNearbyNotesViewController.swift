@@ -50,6 +50,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         determineCurrentLocation()
         if mapView == nil {
         notesNeeded = true
@@ -72,13 +73,18 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         note.frame = CGRect(x: 0, y: 0, width: width, height: height)
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         
+        note.listStyle = true
         note.editable = false
         note.hasSaveButton = true
         note.hasRefresh = true
         note.delegate = self
+        let headerBar = UIView(frame: CGRect(x: 0, y: 0, width: note.frame.width, height: note.frame.height/25))
+        headerBar.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        headerBar.layer.zPosition = .greatestFiniteMagnitude - 0.1
         errorBar = ErrorBar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/10))
         errorBar.layer.zPosition = .greatestFiniteMagnitude
         note.addSubview(errorBar)
+        note.addSubview(headerBar)
         view.addSubview(note)
     }
     
@@ -180,6 +186,11 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
             }
             self.determineCurrentLocation()
             self.sortBasedOnNearby()
+          
+            while self.locationsAndIDs.count > 1000 {
+                self.locationsAndIDs.removeLast()
+            }
+            
             //Display notes
             for pin in self.locationsAndIDs {
                 self.getNote(withID: pin.id)
@@ -199,7 +210,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     func touchHeard(onIndex index: Int) {
         if notesIDSInExpand[index].first != "E" {
             
-            note.popTitle(index: index)
+        //    note.popTitle(index: index)
             let noteToBeExpanded = notesIDSInExpand[index]
             notesIDSInExpand[index] = "E" + notesIDSInExpand[index]
             
@@ -207,9 +218,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
             
             let titleEndY = note.endYPositions[index]
             expandNoteWidgets(withID: noteToBeExpanded, titleEndY: titleEndY)
-            if titleEndY + note.calculateHeight(of: "title", includePadding: false)*2 > view.frame.maxY{
-                note.moveScroll(down: true, amount: 100)
-            }
+            note.moveToTop(index: index)
         }else{
             //DEEXPAND
            

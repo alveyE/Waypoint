@@ -16,6 +16,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
     
     
     public var editable = false
+    public var listStyle = false
     public var hasSaveButton = false
     public var hasCalanderIcon = true
     public var noteID = ""
@@ -41,6 +42,10 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
     weak var textReceiver: UITextViewDelegate?
     
     override func layoutSubviews() {
+        if listStyle {
+        padding = 0.0
+        yPosition = 0.0
+        }
         addSubview(scroll)
     }
     
@@ -52,6 +57,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         }
         return scrollView
     }
+    
     
     
     private var refresh: UIRefreshControl {
@@ -82,6 +88,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         }
             let titleWidget = TitleView()
             titleWidget.frame = CGRect(x: padding, y: verticalPlacing, width: width - 2*padding, height: width/4)
+            titleWidget.hasShadow = !listStyle
             titleWidget.editable = editable
             titleWidget.delegate = self
             titleWidget.hasSaveButton = hasSaveButton
@@ -93,6 +100,14 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
             titleWidget.username = username
             titleWidget.alpha = 0
 
+            if listStyle {
+                let seperatorLine = UIView(frame: CGRect(x: 0, y: titleWidget.frame.height, width: titleWidget.frame.width, height: 1))
+                seperatorLine.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+                titleWidget.addSubview(seperatorLine)
+                
+            }
+        
+        
             self.scroll.addSubview(titleWidget)
         
         UIView.animate(withDuration: animationTime) {
@@ -108,7 +123,11 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
             endYPositions.append(titleWidget.frame.maxY)
         
         if yPlacement == nil {
+            if listStyle {
+                yPosition += titleWidget.frame.height + 1
+            }else {
             yPosition += titleWidget.frame.height + verticalPadding
+            }
            // scroll.contentSize.height += (titleWidget.frame.height + verticalPadding)
         }
         adjustScroll()
@@ -175,7 +194,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         let preAdj = adjustedWidth
         adjustedWidth = self.width - minimumPadding
         adjustedHeight *= (adjustedWidth/preAdj)
-        adjustedHeight -= minimumPadding/2
+        adjustedHeight += minimumPadding/2
         
         imageWidget.frame = CGRect(x: self.padding, y: verticalPlacing, width: self.width - 2*self.padding, height: adjustedHeight)
         
@@ -226,9 +245,8 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         
         let preAdj = adjustedWidth
         adjustedWidth = self.width - minimumPadding
-        adjustedHeight *= adjustedWidth/preAdj
-        adjustedHeight -= minimumPadding/2
-
+        adjustedHeight *= (adjustedWidth/preAdj)
+        adjustedHeight += minimumPadding/2
         
         imageWidget.frame = CGRect(x: self.padding, y: verticalPlacing, width: self.width - 2*self.padding, height: adjustedHeight)
         imageWidget.image = image
@@ -430,7 +448,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         
     }
     
-    private func adjustScroll(){
+        private func adjustScroll(){
         var contentRect = CGRect.zero
         let offset = scroll.contentOffset
         for view in scroll.subviews {
@@ -490,6 +508,10 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         }
         
         scroll.setContentOffset(CGPoint(x: 0, y: scroll.contentOffset.y + moveAmnt), animated: true)
+    }
+    
+    public func moveToTop(index: Int){
+        scroll.setContentOffset(CGPoint(x: 0, y: endYPositions[index] - (calculateHeight(of: "title", includePadding: true) + verticalPadding)), animated: true)
     }
     
     
@@ -669,7 +691,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         let preAdj = adjustedWidth
         adjustedWidth = self.width - minimumPadding
         adjustedHeight *= adjustedWidth/preAdj
-        adjustedHeight -= minimumPadding/2
+        adjustedHeight += minimumPadding/2
 
         
         if includePadding {
@@ -688,8 +710,11 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
     }
     
     public func cleanClear(){
-        removeWidgetsInRange(minY: 0, maxY: nil)
+        removeWidgetsInRange(minY: -1, maxY: nil)
         yPosition = height/15
+        if listStyle {
+            yPosition = 0
+        }
     }
     
     

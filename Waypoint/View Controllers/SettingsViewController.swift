@@ -34,6 +34,19 @@ class SettingsViewController: UIViewController {
         
     }
     
+    @IBAction func signOutPressed(_ sender: Any) {
+        
+        Auth.auth()
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        displayUserInfo()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "signinNavigation")
+    }
     
     private func displayUserInfo(){
        
