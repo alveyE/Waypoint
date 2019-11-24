@@ -78,7 +78,7 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         note.hasSaveButton = true
         note.hasRefresh = true
         note.delegate = self
-        let headerBar = UIView(frame: CGRect(x: 0, y: 0, width: note.frame.width, height: note.frame.height/25))
+        let headerBar = UIView(frame: CGRect(x: 0, y: 0, width: note.frame.width, height: note.frame.height/20))
         headerBar.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         headerBar.layer.zPosition = .greatestFiniteMagnitude - 0.1
         errorBar = ErrorBar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/10))
