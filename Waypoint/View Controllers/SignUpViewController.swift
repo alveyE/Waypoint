@@ -216,8 +216,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         guard let username = usernameField.text else {return}
         guard let email = emailField.text else {return}
         guard let password = passwordField.text else {return}
-        print(ageVerificationChecked)
-        print(termsAndPrivacyChecked)
+     
                 
         if !ageVerificationChecked {
             errorLabel.text = "Must be over 13 to use Waypoint"

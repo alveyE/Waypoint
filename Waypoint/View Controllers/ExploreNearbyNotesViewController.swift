@@ -79,7 +79,16 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         note.hasRefresh = true
         note.delegate = self
         let headerBar = UIView(frame: CGRect(x: 0, y: 0, width: note.frame.width, height: note.frame.height/20))
-        headerBar.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        if #available(iOS 12.0, *) {
+            if traitCollection.userInterfaceStyle == .light {
+                headerBar.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            } else {
+               headerBar.backgroundColor = #colorLiteral(red: 0.1725495458, green: 0.1713090837, blue: 0.1735036671, alpha: 1)
+            }
+        } else {
+            headerBar.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        }
+        
         headerBar.layer.zPosition = .greatestFiniteMagnitude - 0.1
         errorBar = ErrorBar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height/10))
         errorBar.layer.zPosition = .greatestFiniteMagnitude

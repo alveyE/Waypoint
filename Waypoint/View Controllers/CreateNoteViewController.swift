@@ -65,10 +65,21 @@ class CreateNoteViewController: UIViewController, CLLocationManagerDelegate, UII
         let recommendedHeight = newSize.height
         note.checkExpansion(for: textView, with: recommendedHeight)
         
-        print(newSize.height)
     }
    
-   
+   func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+       // get the current text, or use an empty string if that failed
+       let currentText = textView.text ?? ""
+
+       // attempt to read the range they are trying to change, or exit if we can't
+       guard let stringRange = Range(range, in: currentText) else { return false }
+
+       // add their new text to the existing text
+       let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
+
+       // make sure the result is under limit
+       return updatedText.count <= 1000
+   }
     
     override func viewWillDisappear(_ animated: Bool) {
         if shouldLoad {

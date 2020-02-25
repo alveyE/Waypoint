@@ -92,13 +92,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let presentedController = UIApplication.topViewController()
-        if (Auth.auth().currentUser == nil && !(presentedController is SignUpViewController)) || !(Auth.auth().currentUser?.isEmailVerified ?? false){
+        if (Auth.auth().currentUser == nil && !(presentedController is SignUpViewController || inSignUpProcess())) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "signinNavigation")
         }
         
     }
 
+    func inSignUpProcess() -> Bool {
+        var signingUp = false
+        let vc = UIApplication.topViewController()
+        if (vc is EnterEmailViewController || vc is CreatePasswordViewController || vc is CreateUsernameViewController || vc is BirthdaySelectorViewController || vc is TermsPrivacyAgreeViewController){
+            signingUp = true
+        }
+        print("Signing Up be \(signingUp)")
+        return signingUp
+    }
+    
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }

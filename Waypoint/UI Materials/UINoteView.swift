@@ -25,7 +25,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
     public var widgetAdderY: CGFloat = 0
     public var hasRefresh = false
     
-    private lazy var scroll = createScrollView()
+    public lazy var scroll = createScrollView()
     
     
     private lazy var width = bounds.width
@@ -50,12 +50,12 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
     }
     
     private func createScrollView() -> UIScrollView {
-        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        let scrollView = UIScrollView(frame: self.bounds)
         scrollView.showsVerticalScrollIndicator = false
         if hasRefresh {
         scrollView.addSubview(refresh)
         }
-        return scrollView
+         return scrollView
     }
     
     
@@ -126,9 +126,8 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
             if listStyle {
                 yPosition += titleWidget.frame.height + 1
             }else {
-            yPosition += titleWidget.frame.height + verticalPadding
+                yPosition += titleWidget.frame.height + verticalPadding
             }
-           // scroll.contentSize.height += (titleWidget.frame.height + verticalPadding)
         }
         adjustScroll()
     }
@@ -158,7 +157,6 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         
         if yPlacement == nil {
             yPosition += textWidget.frame.height + verticalPadding
-         //   scroll.contentSize.height += textWidget.frame.height + verticalPadding
         }
                 textWidget.textContent.delegate = textReceiver
         textWidget.addGestureRecognizer(noteTap)
@@ -452,9 +450,10 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         var contentRect = CGRect.zero
         let offset = scroll.contentOffset
         for view in scroll.subviews {
-            contentRect = contentRect.union(view.frame)
+            if type(of: view) == TitleView.self || type(of: view) == TextWidget.self || type(of: view) == ImageFrameView.self || type(of: view) == DrawingWidget.self || type(of: view) == LinkWidget.self || type(of: view) == AddWidgetView.self {
+                contentRect = contentRect.union(view.frame)
+            }
         }
-        
        
         scroll.contentSize.height = contentRect.size.height + leway()
         if scroll.contentSize.height < height {
@@ -514,7 +513,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         scroll.setContentOffset(CGPoint(x: 0, y: endYPositions[index] - (calculateHeight(of: "title", includePadding: true) + verticalPadding)), animated: true)
     }
     
-    
+
     
     public func removeWidgetsInRange(minY: CGFloat, maxY: CGFloat?){
         
@@ -737,7 +736,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
         
     }
     private func leway() -> CGFloat {
-        return width/4
+        return width/2
     }
     
     private func getTopMinY() -> CGFloat {
@@ -781,20 +780,7 @@ class UINoteView: UIView, ImageFrameViewDelegate, DrawingWidgetDelegate, TextWid
                self.alpha = 1
         
     }
-    
-    public func trimExcess(){
-        scroll.contentSize.height -= height
-        scroll.contentSize.height += width/4
-    }
-    
-    
-    public func correctScroll(){
-        let scrollAmnt = getBottomMaxY() - getTopMinY() + leway()
-        scroll.contentSize.height = scrollAmnt
-    }
-    public func increaseScrollSlack(by amnt: CGFloat){
-        scroll.contentSize.height += amnt
-    }
+
     
 }
 

@@ -10,8 +10,14 @@ import UIKit
 import FirebaseAuth
 import MapKit
 import FirebaseDatabase
+import FirebaseStorage
+import RSKImageCropper
 
-class ProfileViewController: UIViewController, CLLocationManagerDelegate, UINoteViewDelegate {
+class ProfileViewController: UIViewController, CLLocationManagerDelegate, UINoteViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate {
+    
+    
+    
+    
     
     
     var ref: DatabaseReference!
@@ -19,27 +25,85 @@ class ProfileViewController: UIViewController, CLLocationManagerDelegate, UINote
     private var myNoteIDs = [String]()
     private var notesIDSInExpand = [String]()
     
-    
-    @IBOutlet weak var displayNameLabel: UILabel!
-        
-    var note:UINoteView!
-    
-    @IBOutlet weak var notesGroupsLabel: UILabel!
-    @IBOutlet weak var notesGroupsStack: UIStackView!
-    @IBOutlet weak var myGroupsButton: UIButton!
-    @IBOutlet weak var myNotesButton: UIButton!
-    @IBOutlet weak var profilePicture: UIImageView! {
+    private var myNotesViewing = true {
         didSet{
-            profilePicture.layer.borderWidth=3.0
-            profilePicture.layer.masksToBounds = false
-            profilePicture.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            profilePicture.layer.cornerRadius = profilePicture.frame.size.height/2
-            profilePicture.clipsToBounds = true
+            if myNotesViewing {
+                myNotesButton.setTitleColor(#colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1), for: .normal)
+                myGroupsButton.setTitleColor(#colorLiteral(red: 0.4352941176, green: 0.4431372549, blue: 0.4745098039, alpha: 1), for: .normal)
+                note.isHidden = false
+                for ll in myGroupsButton.layer.sublayers ?? [] {
+                    if ll.isSimilar(to: createUnderline(for: myGroupsButton)) {
+                        ll.removeFromSuperlayer()
+                    }
+                }
+                myNotesButton.layer.addSublayer(createUnderline(for: myNotesButton))
+            }else{
+                myGroupsButton.setTitleColor(#colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1), for: .normal)
+                myNotesButton.setTitleColor(#colorLiteral(red: 0.4352941176, green: 0.4431372549, blue: 0.4745098039, alpha: 1), for: .normal)
+                note.isHidden = true
+                for ll in myNotesButton.layer.sublayers ?? [] {
+                    if ll.isSimilar(to: createUnderline(for: myNotesButton)) {
+                        ll.removeFromSuperlayer()
+                    }
+                }
+                myGroupsButton.layer.addSublayer(createUnderline(for: myGroupsButton))
+            }
         }
     }
     
     
+    @IBOutlet weak var displayNameLabel: UILabel!
+        
     
+    @IBOutlet weak var note: UINoteView!
+    @IBOutlet weak var notesGroupsLabel: UILabel!
+    @IBOutlet weak var notesGroupsStack: UIStackView!
+    @IBOutlet weak var myGroupsButton: UIButton!
+    {
+        didSet {
+            if #available(iOS 12.0, *) {
+                if traitCollection.userInterfaceStyle == .light {
+                    myGroupsButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                } else {
+                    myGroupsButton.backgroundColor = #colorLiteral(red: 0.1725495458, green: 0.1713090837, blue: 0.1735036671, alpha: 1)
+                }
+            } else {
+                myGroupsButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            }
+        }
+    }
+    @IBOutlet weak var myNotesButton: UIButton!
+    {
+           didSet {
+               if #available(iOS 12.0, *) {
+                   if traitCollection.userInterfaceStyle == .light {
+                       myNotesButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                   } else {
+                       myNotesButton.backgroundColor = #colorLiteral(red: 0.1725495458, green: 0.1713090837, blue: 0.1735036671, alpha: 1)
+                   }
+               } else {
+                   myNotesButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+               }
+           }
+       }
+    @IBOutlet weak var profilePicture: UIImageView! {
+        didSet{
+           
+            
+        profilePicture.layer.borderWidth=3.0
+            profilePicture.layer.masksToBounds = false
+            profilePicture.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            profilePicture.layer.cornerRadius = profilePicture.frame.size.height/2
+            profilePicture.clipsToBounds = true
+            loadProfilePicture()
+            profilePicture.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(profileTouched))
+            profilePicture.addGestureRecognizer(tap)
+            
+        }
+    }
+    
+   
     @IBOutlet weak var mapView: MKMapView! {
         didSet{
             determineCurrentLocation()
@@ -85,10 +149,10 @@ class ProfileViewController: UIViewController, CLLocationManagerDelegate, UINote
    
         override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Profile"
             navigationItem.title = "Profile"
         let settingsIcon = UIImage(named: "settings")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: settingsIcon, style: .plain, target: self, action: #selector(openSettings))
+            myNotesButton.layer.addSublayer(createUnderline(for: myNotesButton))
         determineShownElements()
         createNoteView()
         addMyNotes()
@@ -126,8 +190,7 @@ class ProfileViewController: UIViewController, CLLocationManagerDelegate, UINote
     
     
     private func createNoteView(){
-        note = UINoteView()
-        note.frame = CGRect(x: 0, y: notesGroupsStack.frame.maxY + notesGroupsStack.frame.height, width: view.frame.width, height: view.frame.height - myNotesButton.frame.maxY)
+       
         note.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         
         note.editable = false
@@ -153,34 +216,271 @@ class ProfileViewController: UIViewController, CLLocationManagerDelegate, UINote
 
     }
 
-    //111,113,121
     @IBAction func myNotesTouched(_ sender: Any) {
-        myNotesButton.setTitleColor(#colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1), for: .normal)
-        myGroupsButton.setTitleColor(#colorLiteral(red: 0.4352941176, green: 0.4431372549, blue: 0.4745098039, alpha: 1), for: .normal)
-        note.isHidden = false
+        myNotesViewing = true
         
     }
     
     @IBAction func myGroupsTouched(_ sender: Any) {
-        myGroupsButton.setTitleColor(#colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1), for: .normal)
-        myNotesButton.setTitleColor(#colorLiteral(red: 0.4352941176, green: 0.4431372549, blue: 0.4745098039, alpha: 1), for: .normal)
-        note.isHidden = true
-
+        myNotesViewing = false
+        
+        
+        
     }
+    
+    private func createUnderline(for element: UIView) -> CALayer {
+        let border = CALayer()
+        border.backgroundColor = #colorLiteral(red: 0.4352941176, green: 0.4431372549, blue: 0.4745098039, alpha: 1)
+        let borderPadding = element.frame.width/15
+        border.frame = CGRect(x: borderPadding, y: element.frame.height, width: element.frame.width - borderPadding*2, height: 1)
+        return border
+    }
+    
     
     func doNothing() {
         
     }
     
     func refreshPulled() {
-
-        print("gang gang")
+        print("STEP 1 \(note.scroll.contentSize.height)")
         note.cleanClear()
         notesIDSInExpand = []
         myNoteIDs = []
         addMyNotes()
 
     }
+    
+    @objc func profileTouched(){
+        let profileAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let removePic = UIAlertAction(title: "Remove Current Photo", style: .destructive) { (action) in
+            if let currentUser = Auth.auth().currentUser {
+                self.ref = Database.database().reference()
+                self.ref.child("users").child(currentUser.uid).child("profilePicture").removeValue()
+                self.profilePicture.image = UIImage(named: "profile icon")!
+            }
+        }
+        let takePhoto = UIAlertAction(title: "Take Photo", style: .default) { (action) in
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.allowsEditing = false
+            picker.sourceType = .camera
+            picker.cameraDevice = .front
+            self.present(picker, animated: true, completion: nil)
+        }
+        let choosePhoto = UIAlertAction(title: "Choose from Library", style: .default) { (action) in
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.allowsEditing = false
+            
+            
+            self.present(picker, animated: true, completion: nil)
+        }
+        profileAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        profileAlert.addAction(removePic)
+        profileAlert.addAction(takePhoto)
+        profileAlert.addAction(choosePhoto)
+        self.present(profileAlert, animated: true)
+    }
+    
+    func saveImage(image: UIImage) -> Bool {
+        guard let data = image.jpegData(compressionQuality: 1) ?? image.pngData() else {
+            return false
+        }
+        
+        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
+            return false
+        }
+        do {
+            try data.write(to: directory.appendingPathComponent("profilePicture.png")!)
+            return true
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
+    }
+    
+    func getSavedImage(named: String) -> UIImage? {
+               if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+                   return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
+               }
+               return nil
+           }
+    
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+          print("canceled picker")
+          dismiss(animated: true, completion: nil)
+      }
+      
+    
+      
+      func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+        let image : UIImage = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage)!
+
+            picker.dismiss(animated: false, completion: { () -> Void in
+
+             var imageCropVC : RSKImageCropViewController!
+
+            imageCropVC = RSKImageCropViewController(image: image, cropMode: RSKImageCropMode.circle)
+
+             imageCropVC.delegate = self
+
+             self.navigationController?.pushViewController(imageCropVC, animated: true)
+
+         })
+
+      }
+    
+    func imageCropViewControllerDidCancelCrop(_ controller: RSKImageCropViewController) {
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+
+    
+    func imageCropViewController(_ controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect, rotationAngle: CGFloat) {
+        profilePicture.image = croppedImage
+        _ = saveImage(image: croppedImage)
+        uploadImage(croppedImage)
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    
+    func uploadImage(_ image: UIImage?){
+           let storage = Storage.storage()
+           let storageRef = storage.reference()
+           determineCurrentLocation()
+           
+           let date = Date()
+           let calendar = Calendar.current
+           let month = calendar.component(.month, from: date)
+           let day = calendar.component(.day, from: date)
+           let year = calendar.component(.year, from: date)
+           var hour = calendar.component(.hour, from: date)
+           if hour > 12 {
+               hour -= 12
+           }
+           let minutes = calendar.component(.minute, from: date)
+           let seconds = calendar.component(.second, from: date)
+           let nanoSeconds = calendar.component(.nanosecond, from: date)
+           let timeStamp = "\(day)\(month)\(year)\(hour):\(minutes)\(seconds)\(nanoSeconds)"
+          
+        if let user = Auth.auth().currentUser {
+            let userString = user.uid
+           
+            let imageRef = storageRef.child("uploads").child("profilePictures").child(userString).child(timeStamp)
+           
+           if let img = image, let data = img.jpegData(compressionQuality: 0.5){
+               
+               let metaDataI = StorageMetadata()
+               metaDataI.contentType = "image/jpg"
+             
+              let imagePlacement = imageRef.putData(data, metadata: metaDataI) { (metadata, error) in
+                  
+                   
+                   
+                   imageRef.downloadURL { (url, error) in
+                       guard let downloadURL = url else {
+                           // Uh-oh, an error occurred!
+                           print("error getting download url \(String(describing: error))")
+                           return
+                       }
+                       let urlCreated = downloadURL.absoluteString
+                    print(urlCreated)
+                    let ref = Database.database().reference()
+                    ref.child("users").child(user.uid).child("profilePicture").setValue(urlCreated)
+                
+                    
+                        
+                       
+                   }
+                   
+                   
+               }
+               imagePlacement.observe(.failure) { (snapshot) in
+                   if let error = snapshot.error as NSError? {
+                       switch (StorageErrorCode(rawValue: error.code)!) {
+                       case .objectNotFound:
+                           // File doesn't exist
+                           break
+                       case .unauthorized:
+                           // User doesn't have permission to access file
+                           break
+                       case .cancelled:
+                           // User canceled the upload
+                           break
+                           
+                           /* ... */
+                           
+                       case .unknown:
+                           // Unknown error occurred, inspect the server response
+                           break
+                       default:
+                           // A separate error occurred. This is a good place to retry the upload.
+                           imageRef.putData(data, metadata: metaDataI) { (metadata, error) in
+                               
+    
+                               
+                               imageRef.downloadURL { (url, error) in
+                                   guard let downloadURL = url else {
+                                       // Uh-oh, an error occurred!
+                                       print("error getting download url \(String(describing: error))")
+                                       return
+                                   }
+                                
+                                   let urlCreated = downloadURL.absoluteString
+                                     let ref = Database.database().reference()
+                                   ref.child("users").child(user.uid).child("profilePicture").setValue(urlCreated)
+                                   
+                               }
+                               
+                               
+                           }
+                           break
+                       }
+                   }
+               }
+               
+            }
+           }
+           
+       }
+    
+    
+    private func loadProfilePicture() {
+        if let profileImage = getSavedImage(named: "profilePicture.png"){
+            profilePicture.image = profileImage
+        }
+        
+//        if let currentUser = Auth.auth().currentUser {
+//            let storage = Storage.storage()
+//        ref = Database.database().reference()
+//
+//            ref.child("users").child(currentUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+//                if let value = snapshot.value as? [String : Any] {
+//                    let profileURLo = value["profilePicture"] as? String
+//                    if let profileURL = profileURLo {
+//                    let imageURL = profileURL + ".jpg"
+//                    let reference = storage.reference(forURL: imageURL)
+//
+//
+//
+//                         reference.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
+//                             let image = UIImage(data: data ?? Data()) ?? UIImage()
+//
+//
+//                            self.profilePicture.image = image
+//
+//
+//                         })
+//                    }
+//                }
+//
+//        })
+//
+//
+//        }
+    }
+    
     
     func menuAppear(withID id: String) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
@@ -365,7 +665,6 @@ class ProfileViewController: UIViewController, CLLocationManagerDelegate, UINote
                print(error.localizedDescription)
            }
            
-           
        }
     
     func touchHeard(onIndex index: Int) {
@@ -377,8 +676,9 @@ class ProfileViewController: UIViewController, CLLocationManagerDelegate, UINote
             notesIDSInExpand[index] = "E" + notesIDSInExpand[index]
             
             let titleEndY = note.endYPositions[index]
-            expandNoteWidgets(withID: noteToBeExpanded, titleEndY: titleEndY)
             note.moveToTop(index: index)
+            expandNoteWidgets(withID: noteToBeExpanded, titleEndY: titleEndY)
+            
         }else{
             //DEEXPAND
 
@@ -543,3 +843,22 @@ class ProfileViewController: UIViewController, CLLocationManagerDelegate, UINote
     
 
 }
+
+extension CALayer {
+    
+    func isSimilar(to layer: CALayer) -> Bool {
+        var similar = true
+        if self.frame != layer.frame {
+            similar = false
+        }
+        if self.backgroundColor != layer.backgroundColor {
+            similar = false
+        }
+        if self.borderColor != layer.borderColor {
+            similar = false
+        }
+        return similar
+    }
+    
+}
+

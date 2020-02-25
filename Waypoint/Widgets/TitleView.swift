@@ -11,7 +11,7 @@ import Firebase
 import FirebaseAuth
 
 @IBDesignable
-class TitleView: UIView, UITextViewDelegate {
+class TitleView: UIView, UITextViewDelegate, UITextFieldDelegate {
 
     
     private lazy var width = bounds.width
@@ -74,6 +74,7 @@ class TitleView: UIView, UITextViewDelegate {
         
     }
     
+    
     private func createShadow() -> CAShapeLayer {
         let box = UIBezierPath(rect: CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height))
         let boxShadow = CAShapeLayer()
@@ -110,6 +111,14 @@ class TitleView: UIView, UITextViewDelegate {
        }
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
+        replacementString string: String) -> Bool {
+        let maxLength = 13
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+        return newString.length <= maxLength
+    }
     
     private func createTitleText() -> UITextField {
         
@@ -119,12 +128,13 @@ class TitleView: UIView, UITextViewDelegate {
         let title = UITextField(frame: CGRect(x: width/25, y: height/50, width: width * 81/100, height: height * 3/8))
         title.isUserInteractionEnabled = editable
         title.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        title.delegate = self
         
         if #available(iOS 12.0, *) {
             if traitCollection.userInterfaceStyle == .light {
                 title.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             } else {
-                title.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                title.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
             }
         } else {
             title.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -186,6 +196,17 @@ class TitleView: UIView, UITextViewDelegate {
         usernameLabel.font = userfont
         usernameLabel.textAlignment = .left
         usernameLabel.text = username
+        
+        if #available(iOS 12.0, *) {
+            if traitCollection.userInterfaceStyle == .light {
+                usernameLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            } else {
+                usernameLabel.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+            }
+        } else {
+            usernameLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        }
+        
         return usernameLabel
     }
     
