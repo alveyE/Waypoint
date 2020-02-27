@@ -25,6 +25,7 @@ class TermsPrivacyAgreeViewController: UIViewController {
     @IBOutlet weak var privacyLink: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        errorLabel.isHidden = true
         setLinks()
         // Do any additional setup after loading the view.
     }
@@ -60,25 +61,27 @@ class TermsPrivacyAgreeViewController: UIViewController {
                 return
             }
         })
+            
+            //Upload user to database as well
+                   if let user = Auth.auth().currentUser {
+                       
+                      
+                       self.ref = Database.database().reference()
+                    self.ref.child("users").child(user.uid).setValue(["username": self.usernameCreated, "email" : self.emailCreated, "first name" : self.firstName, "last name" : self.lastName, "birthday" : self.birthday])
+                    self.ref.child("users").child("usernames").child(user.uid).setValue(["username" : self.usernameCreated])
+                   
+                   
+                   }
+                           //Start at map
+                       let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                       let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                       appDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
+                   
+                   
         })
         
         
-        //Upload user to database as well
-        if let user = Auth.auth().currentUser {
-            
-           
-            self.ref = Database.database().reference()
-            self.ref.child("users").child(user.uid).setValue(["username": usernameCreated, "email" : emailCreated, "first name" : firstName, "last name" : lastName, "birthday" : birthday])
-            self.ref.child("users").child("usernames").child(user.uid).setValue(["username" : usernameCreated])
-        
-        
-        }
-                //Start at map
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = storyboard.instantiateInitialViewController()
-        
-        
+       
     }
     
 }

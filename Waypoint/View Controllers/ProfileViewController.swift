@@ -106,6 +106,11 @@ class ProfileViewController: UIViewController, CLLocationManagerDelegate, UINote
    
     @IBOutlet weak var mapView: MKMapView! {
         didSet{
+            let defaults = UserDefaults.standard
+            let satallite = defaults.bool(forKey: "satallite")
+            if satallite {
+                mapView.mapType = MKMapType.satellite
+            }
             determineCurrentLocation()
             centerOnUser()
             let blurEffect = UIBlurEffect(style: .dark)
@@ -161,6 +166,15 @@ class ProfileViewController: UIViewController, CLLocationManagerDelegate, UINote
     
     override func viewWillAppear(_ animated: Bool) {
         determineShownElements()
+        if mapView != nil{
+            let defaults = UserDefaults.standard
+            let satallite = defaults.bool(forKey: "satallite")
+            if satallite {
+                mapView.mapType = MKMapType.satellite
+            }else{
+                mapView.mapType = MKMapType.standard
+            }
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.view = nil

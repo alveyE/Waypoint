@@ -80,6 +80,11 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
         mapView = MKMapView()
         mapView.frame = view.bounds
         mapView.isUserInteractionEnabled = false
+        let defaults = UserDefaults.standard
+        let satallite = defaults.bool(forKey: "satallite")
+        if satallite {
+            mapView.mapType = MKMapType.satellite
+        }
         
         view.addSubview(mapView)
     }
@@ -133,6 +138,14 @@ class MyBulletinViewController: UIViewController, UINoteViewDelegate, CLLocation
         savedNotesIDs = []
         yPosition = 0
         addSavedNotes()
+        }else{
+            let defaults = UserDefaults.standard
+            let satallite = defaults.bool(forKey: "satallite")
+            if satallite {
+                mapView.mapType = MKMapType.satellite
+            }else{
+                mapView.mapType = MKMapType.standard
+            }
         }
     }
     

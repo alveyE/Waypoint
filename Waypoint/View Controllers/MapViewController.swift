@@ -12,6 +12,7 @@ import MapKit
 import Firebase
 import FirebaseDatabase
 import FirebaseUI
+import FirebaseAuth
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, UINoteViewDelegate{
     
@@ -76,7 +77,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         fetchPinLocation()
         createMapView()
         
+        }else{
+            let defaults = UserDefaults.standard
+            let satallite = defaults.bool(forKey: "satallite")
+            if satallite {
+                mapView.mapType = MKMapType.satellite
+            }else{
+                mapView.mapType = MKMapType.standard
+            }
         }
+        
         
     }
     
@@ -207,6 +217,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         note.addSubview(bottomBar)
         
         mapView.mapType = MKMapType.standard
+        let defaults = UserDefaults.standard
+        let satallite = defaults.bool(forKey: "satallite")
+        if satallite {
+            mapView.mapType = MKMapType.satellite
+        }
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
         mapView.showsUserLocation = true

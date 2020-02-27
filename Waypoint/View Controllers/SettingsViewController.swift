@@ -46,6 +46,16 @@ class SettingsViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "signinNavigation")
+        
+        //Delete saved profile image
+        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
+            return
+        }
+        do {
+            try FileManager.default.removeItem(at: directory.appendingPathComponent("profilePicture.png")!)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     private func displayUserInfo(){

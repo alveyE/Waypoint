@@ -14,6 +14,7 @@
 		C730D80124035CFA00D1FBF3 /* BirthdaySelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730D80024035CFA00D1FBF3 /* BirthdaySelectorViewController.swift */; };
 		C7399DC424042E1400DB1C70 /* EnterNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7399DC324042E1400DB1C70 /* EnterNameViewController.swift */; };
 		C7399DC624043A3F00DB1C70 /* TermsPrivacyAgreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7399DC524043A3F00DB1C70 /* TermsPrivacyAgreeViewController.swift */; };
+		C74B1C122406EDDA0033DE86 /* MapSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B1C112406EDDA0033DE86 /* MapSettingsViewController.swift */; };
 		C7C4CFC223A97409007D7279 /* EnterEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C4CFC123A97409007D7279 /* EnterEmailViewController.swift */; };
 		C7C4CFC423A98D8F007D7279 /* CreatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C4CFC323A98D8F007D7279 /* CreatePasswordViewController.swift */; };
 		C7C4CFC623AD3EDD007D7279 /* CreateUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C4CFC523AD3EDD007D7279 /* CreateUsernameViewController.swift */; };
@@ -77,6 +78,7 @@
 		C730D80024035CFA00D1FBF3 /* BirthdaySelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdaySelectorViewController.swift; sourceTree = "<group>"; };
 		C7399DC324042E1400DB1C70 /* EnterNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterNameViewController.swift; sourceTree = "<group>"; };
 		C7399DC524043A3F00DB1C70 /* TermsPrivacyAgreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsPrivacyAgreeViewController.swift; sourceTree = "<group>"; };
+		C74B1C112406EDDA0033DE86 /* MapSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSettingsViewController.swift; sourceTree = "<group>"; };
 		C7C4CFC123A97409007D7279 /* EnterEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterEmailViewController.swift; sourceTree = "<group>"; };
 		C7C4CFC323A98D8F007D7279 /* CreatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordViewController.swift; sourceTree = "<group>"; };
 		C7C4CFC523AD3EDD007D7279 /* CreateUsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUsernameViewController.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				C730D80024035CFA00D1FBF3 /* BirthdaySelectorViewController.swift */,
 				C7399DC324042E1400DB1C70 /* EnterNameViewController.swift */,
 				C7399DC524043A3F00DB1C70 /* TermsPrivacyAgreeViewController.swift */,
+				C74B1C112406EDDA0033DE86 /* MapSettingsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				D1A7998121BA631F002AF7B2 /* CustomPointAnnotation.swift in Sources */,
 				D1A7999121BC68DE002AF7B2 /* SignUpViewController.swift in Sources */,
 				D1A7998721BA6EF3002AF7B2 /* MyBulletinViewController.swift in Sources */,
+				C74B1C122406EDDA0033DE86 /* MapSettingsViewController.swift in Sources */,
 				C7399DC624043A3F00DB1C70 /* TermsPrivacyAgreeViewController.swift in Sources */,
 				D1AE58F421ADD967003FF5DB /* NoteCreator.swift in Sources */,
 				D1AE58DC219E5183003FF5DB /* Note.swift in Sources */,

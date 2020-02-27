@@ -60,7 +60,15 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        if mapView != nil{
+            let defaults = UserDefaults.standard
+            let satallite = defaults.bool(forKey: "satallite")
+            if satallite {
+                mapView.mapType = MKMapType.satellite
+            }else{
+                mapView.mapType = MKMapType.standard
+            }
+        }
     }
     
     private func createNoteView(){
@@ -110,6 +118,11 @@ class ExploreNearbyNotesViewController: UIViewController, CLLocationManagerDeleg
         mapView = MKMapView()
         mapView.frame = view.bounds
         mapView.isUserInteractionEnabled = false
+        let defaults = UserDefaults.standard
+        let satallite = defaults.bool(forKey: "satallite")
+        if satallite {
+            mapView.mapType = MKMapType.satellite
+        }
         view.addSubview(mapView)
     }
 
