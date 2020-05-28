@@ -11,6 +11,6 @@ pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'FirebaseUI/Storage'
 pod 'Firebase/Auth'
-pod 'Appgrades'
+pod 'Firebase/Messaging'
 pod 'RSKImageCropper'
 end

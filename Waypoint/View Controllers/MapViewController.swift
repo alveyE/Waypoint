@@ -245,8 +245,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         recenterButton.setImage(UIImage(named: "center"), for: UIControl.State.normal)
         recenterButton.addTarget(self, action: #selector(centerOnUser), for: .touchUpInside)
         
-        let groupsButton = UIButton(frame: CGRect(x: refreshPadding * 2, y: refreshPadding*2, width: refreshSize, height: refreshSize))
-        groupsButton.setImage(UIImage(named: "add"), for: UIControl.State.normal)
+        let groupsButton = UIButton(frame: CGRect(x: mapWidth - refreshPadding - refreshPadding, y: mapHeight - mapHeight/10 - refreshSize*3 - refreshPadding*3, width: refreshSize, height: refreshSize))
+        if #available(iOS 13.0, *) {
+            let boldConfig = UIImage.SymbolConfiguration(weight: .bold)
+            groupsButton.setImage(UIImage(systemName: "person.3", withConfiguration: boldConfig), for: UIControl.State.normal)
+            groupsButton.tintColor = #colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1)
+        } else {
+            // Fallback on earlier versions
+            groupsButton.setImage(UIImage(named: "add"), for: UIControl.State.normal)
+
+        }
         groupsButton.addTarget(self, action: #selector(groupsTouched), for: .touchUpInside)
         
 
@@ -267,10 +275,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     @objc private func groupsTouched(){
-        let groupManager = GroupManagerViewController()
-        let navController = UINavigationController(rootViewController: groupManager)
-        navController.modalPresentationStyle = .fullScreen
-        self.present(navController, animated: true)
+        
+            let groupsNav = self.storyboard!.instantiateViewController(withIdentifier: "groupsNav")
+        groupsNav.modalPresentationStyle = .fullScreen
+        self.present(groupsNav, animated: true)
+        
+   
     }
     
     private func checkConnectionStatus(){
@@ -477,13 +487,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             if #available(iOS 11.0, *) {
                 if view == nil {
                     view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+                    if let vv = view as? MKMarkerAnnotationView {
+                        vv.markerTintColor = #colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1)
+                    }
                 }
                 view?.displayPriority = .required
             } else {
                 if view == nil {
                     view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+                    if let vv = view as? MKPinAnnotationView {
+                        vv.pinTintColor = #colorLiteral(red: 0.1960784314, green: 0.6549019608, blue: 0.6392156863, alpha: 1)
+                    }
                 }
             }
+            
             view?.annotation = annotation
             view?.canShowCallout = true
             return view

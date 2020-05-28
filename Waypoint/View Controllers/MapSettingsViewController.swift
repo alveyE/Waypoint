@@ -31,7 +31,7 @@ class MapSettingsViewController: UIViewController {
         if satalliteSwitch.isOn {
                 defaults.set(true, forKey: "satallite")
         }else{
-//                defaults.set(false, forKey: "satallite")
+                defaults.set(false, forKey: "satallite")
         }
     }
     
